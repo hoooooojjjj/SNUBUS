@@ -1,5 +1,3 @@
-![image](https://github.com/hoooooojjjj/SNUBUS/assets/115417640/cca7f830-1def-46d2-be67-3d79ae288717)# SNUBUS
-
 - **서비스 이름**
     - SNUBUS
  
