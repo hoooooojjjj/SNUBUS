@@ -34,21 +34,17 @@ function Map() {
 
   // 카카오맵 그리기
   function printKakaomap() {
-    // window.kakao.maps가 load되면 window.kakao 객체에 접근
-    window.kakao.maps.load(() => {
-      // id가 map인 요소에 접근
-      var container = kakaoMap.current; //지도를 담을 영역의 DOM 레퍼런스
-      // option으로 위치와
-      var options = {
-        //지도를 생성할 때 필요한 기본 옵션
-        center: new window.kakao.maps.LatLng( //지도의 중심좌표.
-          37.365264512305174,
-          127.10676860117488
-        ),
-        level: 3, //지도의 레벨(확대, 축소 정도)
-      };
-      var map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-    });
+    // ref가 kakaoMap인 요소를 container에 넣기
+    const container = kakaoMap.current; //지도를 담을 영역의 DOM 레퍼런스
+    // 지도를 생성할 때 필요한 기본 옵션
+    let options = {
+      center: new window.kakao.maps.LatLng( //지도의 중심좌표.
+        37.365264512305174,
+        127.10676860117488
+      ),
+      level: 3, //지도의 레벨(확대, 축소 정도)
+    };
+    var map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
   }
 
   return <div ref={kakaoMap} style={{ width: "500px", height: "400px" }}></div>;
