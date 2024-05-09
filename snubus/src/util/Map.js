@@ -7,7 +7,7 @@ function Map({ position }) {
   useEffect(() => {
     // 현재 위치 좌표 가져오기
     getCurrentPosition(printKakaomap);
-  }, [position]);
+  }, []);
 
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = (printKakaomap) => {
@@ -31,7 +31,10 @@ function Map({ position }) {
     const container = kakaoMap.current; //지도를 담을 영역의 DOM 레퍼런스
     // 지도를 생성할 때 필요한 기본 옵션
     const options = {
-      center: new window.kakao.maps.LatLng(curLat, curLlon), //지도의 중심좌표.
+      center: new window.kakao.maps.LatLng(
+        Number(position[0]),
+        Number(position[1])
+      ), //지도의 중심좌표.
       level: 6, //지도의 레벨(확대, 축소 정도)
     };
     const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -58,6 +61,7 @@ function Map({ position }) {
       position: new window.kakao.maps.LatLng(curLat, curLlon),
     });
 
+    console.log(Number(position[0]), Number(position[1]));
     const busMarker = new window.kakao.maps.Marker({
       position: new window.kakao.maps.LatLng(
         Number(position[0]),

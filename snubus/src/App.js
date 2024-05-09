@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import Map from "./util/Map";
+import { useQuery } from "react-query";
 function App() {
-  // 현재 버스 위치 상태
-  const [position, setPosition] = useState([]);
-
-  // 버스 위치 정보 fetching
-  setInterval(() => {
+  const [d, setD] = useState();
+  useEffect(() => {
     getData();
-  }, 5000);
+  }, []);
+  // const { data, isLoading, error } = useQuery("busPos", getData, {
+  //   refetchIntervalInBackground: true,
+  //   refetchInterval: 5000,
+  // });
+  // if (data) {
+  //   console.log(
+  //     JSON.parse(data.contents).msgBody.itemList[0].dataTm,
+  //     JSON.parse(data.contents).msgBody.itemList[1].dataTm,
+  //     JSON.parse(data.contents).msgBody.itemList[2].dataTm,
+  //     JSON.parse(data.contents).msgBody.itemList[3].dataTm
+  //   );
+  // }
 
-  // 버스 위치 정보 fetching
   async function getData() {
     const response = await fetch(
       `https://api.allorigins.win/get?url=${encodeURIComponent(
@@ -17,18 +26,28 @@ function App() {
       )}`
     );
     const jsonData = await response.json();
+    setD(jsonData);
+  }
+  if (d) {
     console.log(
-      JSON.parse(jsonData.contents).msgBody.itemList[0].gpsY,
-      JSON.parse(jsonData.contents).msgBody.itemList[0].gpsX
+      JSON.parse(d.contents).msgBody.itemList[0].dataTm,
+      JSON.parse(d.contents).msgBody.itemList[1].dataTm,
+      JSON.parse(d.contents).msgBody.itemList[2].dataTm,
+      JSON.parse(d.contents).msgBody.itemList[3].dataTm
     );
-    const gpsY = JSON.parse(jsonData.contents).msgBody.itemList[0].gpsY;
-    const gpsX = JSON.parse(jsonData.contents).msgBody.itemList[0].gpsX;
-
-    setPosition((prev) => [gpsY, gpsX]);
   }
   return (
     <div>
-      <Map position={position}></Map>
+      {!d ? (
+        <> </>
+      ) : (
+        <Map
+          position={[
+            JSON.parse(d.contents).msgBody.itemList[2].gpsY,
+            JSON.parse(d.contents).msgBody.itemList[2].gpsX,
+          ]}
+        ></Map>
+      )}
     </div>
   );
 }
