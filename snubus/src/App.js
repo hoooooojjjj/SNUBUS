@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import Map from "./util/Map";
 import { useQuery } from "react-query";
 function App() {
-  const [d, setD] = useState();
-  useEffect(() => {
-    getData();
-  }, []);
-  // const { data, isLoading, error } = useQuery("busPos", getData, {
-  //   refetchIntervalInBackground: true,
-  //   refetchInterval: 5000,
-  // });
-  // if (data) {
-  //   console.log(
-  //     JSON.parse(data.contents).msgBody.itemList[0].dataTm,
-  //     JSON.parse(data.contents).msgBody.itemList[1].dataTm,
-  //     JSON.parse(data.contents).msgBody.itemList[2].dataTm,
-  //     JSON.parse(data.contents).msgBody.itemList[3].dataTm
-  //   );
-  // }
+  const { data, isLoading, error, refetch } = useQuery(["busPos"], getData, {
+    // refetchIntervalInBackground: true,
+    // refetchInterval: 10000,
+    // cacheTime: 10000,
+    // staleTime: 10000,
+  });
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 10000);
+
+  //   return () => clearInterval(interval);
+  // }, [refetch]);
+  if (data) {
+    console.log(
+      JSON.parse(data.contents).msgBody.itemList[0].dataTm,
+      JSON.parse(data.contents).msgBody.itemList[1].dataTm,
+      JSON.parse(data.contents).msgBody.itemList[2].dataTm,
+      JSON.parse(data.contents).msgBody.itemList[3].dataTm
+    );
+  }
 
   async function getData() {
     const response = await fetch(
@@ -26,25 +32,18 @@ function App() {
       )}`
     );
     const jsonData = await response.json();
-    setD(jsonData);
+    return jsonData;
   }
-  if (d) {
-    console.log(
-      JSON.parse(d.contents).msgBody.itemList[0].dataTm,
-      JSON.parse(d.contents).msgBody.itemList[1].dataTm,
-      JSON.parse(d.contents).msgBody.itemList[2].dataTm,
-      JSON.parse(d.contents).msgBody.itemList[3].dataTm
-    );
-  }
+
   return (
     <div>
-      {!d ? (
+      {isLoading && !data ? (
         <> </>
       ) : (
         <Map
           position={[
-            JSON.parse(d.contents).msgBody.itemList[2].gpsY,
-            JSON.parse(d.contents).msgBody.itemList[2].gpsX,
+            JSON.parse(data.contents).msgBody.itemList[2].gpsY,
+            JSON.parse(data.contents).msgBody.itemList[2].gpsX,
           ]}
         ></Map>
       )}
