@@ -4,7 +4,7 @@ function Map({ position }) {
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
 
-  //
+  // 마운트 되기 전 map 확대 및 이동 위치 가져오기
   const [mapInfo, setMapInfo] = useState({
     level: "",
     centerY: "",
