@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Map from "../util/Map";
 import getData from "../util/getBusPos";
+import Loading from "../util/Loading";
 
 // 5511번 버스 페이지
 function View5511Bus() {
@@ -30,7 +31,7 @@ function View5511Bus() {
     <div>
       {!pos5511Buses ? (
         // 데이터가 아직 안들어왔을 때
-        <> </>
+        <Loading />
       ) : (
         // 맵 컴포넌트에 데이터 전달
         <Map position={pos5511Buses}></Map>

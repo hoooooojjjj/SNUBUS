@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Map from "../util/Map";
 import getData from "../util/getBusPos";
+import Loading from "../util/Loading";
 
 // 관악02번 버스 페이지
-function View5513Bus() {
+function ViewGwanak02Bus() {
   const BUSROUTEID_GWANAK02 = "120900008";
   // 관악02번 버스들 좌표 데이터 저장하는 상태
   const [posGwanak02Buses, setPosGwanak02Buses] = useState(null);
@@ -30,7 +31,7 @@ function View5513Bus() {
     <div>
       {!posGwanak02Buses ? (
         // 데이터가 아직 안들어왔을 때
-        <> </>
+        <Loading />
       ) : (
         // 맵 컴포넌트에 데이터 전달
         <Map position={posGwanak02Buses}></Map>
@@ -39,4 +40,4 @@ function View5513Bus() {
   );
 }
 
-export default View5513Bus;
+export default ViewGwanak02Bus;
