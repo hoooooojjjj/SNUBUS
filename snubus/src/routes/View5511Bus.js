@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Map from "../util/Map";
 import getData from "../util/getBusPos";
 
+// 5511번 버스 페이지
 function View5511Bus() {
   const BUSROUTEID_5511 = "100100250";
   // 5511번 버스들 좌표 데이터 저장하는 상태
