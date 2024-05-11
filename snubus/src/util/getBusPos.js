@@ -15,7 +15,7 @@ export default async function getData(busRouteId) {
   const getPos5511Buses = JSON.parse(jsonData.contents).msgBody.itemList.map(
     (Pos5511Bus) => [Pos5511Bus.gpsY, Pos5511Bus.gpsX]
   );
-  console.log(getPos5511Buses);
+
   // 버스 좌표 데이터 배열 리턴
   return getPos5511Buses;
 }
