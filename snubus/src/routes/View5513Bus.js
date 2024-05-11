@@ -34,8 +34,7 @@ function View5513Bus() {
         <Loading />
       ) : (
         // 맵 컴포넌트에 데이터 전달
-        // <Map position={pos5513Buses}></Map>
-        <Loading />
+        <Map position={pos5513Buses}></Map>
       )}
     </div>
   );
