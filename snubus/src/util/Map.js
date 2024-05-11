@@ -11,13 +11,6 @@ function Map({ position }) {
     centerX: "",
   });
 
-  // 5511번 버스들 각각의 위치 좌표 배열
-  const busesPos = [
-    [37.6141, 126.910907],
-    [37.6142, 126.911007],
-    [37.6143, 126.91207],
-  ];
-
   useEffect(() => {
     // 현재 위치 좌표 가져오기
     getCurrentPosition(printKakaomap);
@@ -84,7 +77,7 @@ function Map({ position }) {
     });
 
     // 5511번 버스들 위치 좌표 배열마다 마커 만들기
-    const markers = busesPos.map(
+    const markers = position.map(
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),

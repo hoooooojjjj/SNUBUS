@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Map from "./util/Map";
 
 function App() {
-  // 버스 데이터 저장하는 상태
-  const [data, setData] = useState(null);
+  // 5511번 버스들 좌표 데이터 저장하는 상태
+  const [pos5511Buses, setPos5511Buses] = useState(null);
 
   // 버스 위치 정보 데이터 fetching
   async function getData() {
@@ -16,8 +16,11 @@ function App() {
       }
     );
     const jsonData = await response.json();
+    const getPos5511Buses = JSON.parse(jsonData.contents).msgBody.itemList.map(
+      (Pos5511Bus) => [Pos5511Bus.gpsY, Pos5511Bus.gpsX]
+    );
     // 버스 데이터 저장하는 상태에 저장
-    setData(jsonData);
+    setPos5511Buses(getPos5511Buses);
   }
 
   // 데이터 fetching
@@ -36,17 +39,12 @@ function App() {
 
   return (
     <div>
-      {!data ? (
+      {!pos5511Buses ? (
         // 데이터가 아직 안들어왔을 때
         <> </>
       ) : (
         // 맵 컴포넌트에 데이터 전달
-        <Map
-          position={[
-            JSON.parse(data.contents).msgBody.itemList[2].gpsY,
-            JSON.parse(data.contents).msgBody.itemList[2].gpsX,
-          ]}
-        ></Map>
+        <Map position={pos5511Buses}></Map>
       )}
     </div>
   );
