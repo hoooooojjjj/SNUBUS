@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 // 메인 페이지
 function Main() {
   return (

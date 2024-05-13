@@ -8,14 +8,17 @@ export default async function getData(busRouteId) {
       cache: "no-store", // 캐시 무시 옵션 추가
     }
   );
+
   // 데이터 받아서 json 형태로 저장
   const jsonData = await response.json();
 
   // 각 버스 좌표 데이터를 배열로 저장
   const getPos5511Buses = JSON.parse(jsonData.contents).msgBody.itemList.map(
-    (Pos5511Bus) => [Pos5511Bus.gpsY, Pos5511Bus.gpsX]
+    (Pos5511Bus) => {
+      return [Pos5511Bus.gpsY, Pos5511Bus.gpsX];
+    }
   );
-
+  console.log(getPos5511Buses[0]);
   // 버스 좌표 데이터 배열 리턴
   return getPos5511Buses;
 }

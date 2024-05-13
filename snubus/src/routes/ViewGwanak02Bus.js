@@ -21,7 +21,7 @@ function ViewGwanak02Bus() {
       getData(BUSROUTEID_GWANAK02).then((res) => {
         setPosGwanak02Buses(res);
       });
-    }, 10000); // 10초마다 데이터 다시 요청
+    }, 11000); // 10초마다 데이터 다시 요청
 
     // 컴포넌트가 언마운트될 때 clearInterval 호출하여 메모리 누수 방지
     return () => clearInterval(fetchDataInterval);
