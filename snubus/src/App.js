@@ -3,6 +3,7 @@ import View5511Bus from "./routes/View5511Bus";
 import View5513Bus from "./routes/View5513Bus";
 import ViewGwanak02Bus from "./routes/ViewGwanak02Bus";
 import Main from "./routes/Main";
+import "bootstrap/dist/css/bootstrap.css";
 function App() {
   return (
     <div>
