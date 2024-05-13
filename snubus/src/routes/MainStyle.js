@@ -22,6 +22,7 @@ export const Header = styled.section({
   height: "40%",
   display: "flex",
   alignItems: "center",
+  backgroundColor: "#9cb4db",
 });
 
 // 헤더 안에 nav
@@ -56,5 +57,14 @@ export const ADRight = styled.aside({
 
 export const MainWrap = styled.main({
   width: "76%",
-  height: "100%",
+  height: 600,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+});
+
+export const H2 = styled.h2({
+  width: "70%",
+  margin: "0 auto",
+  marginBottom: 20,
 });

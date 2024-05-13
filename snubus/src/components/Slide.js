@@ -4,9 +4,9 @@ import { Carousel } from "antd";
 const contentStyle = {
   margin: "0 auto",
   width: "70%",
-  height: "300px",
+  height: "400px",
   color: "#fff",
-  lineHeight: "300px",
+  lineHeight: "400px",
   textAlign: "center",
   background: "#364d79",
 };
@@ -19,16 +19,16 @@ const Slide = () => {
   return (
     <Carousel afterChange={onChange}>
       <div>
-        <h3 style={contentStyle}>1</h3>
+        <h1 style={contentStyle}>5511</h1>
       </div>
       <div>
-        <h3 style={contentStyle}>2</h3>
+        <h1 style={contentStyle}>5513</h1>
       </div>
       <div>
-        <h3 style={contentStyle}>3</h3>
+        <h1 style={contentStyle}>5515</h1>
       </div>
       <div>
-        <h3 style={contentStyle}>4</h3>
+        <h1 style={contentStyle}>5516</h1>
       </div>
     </Carousel>
   );

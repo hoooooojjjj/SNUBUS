@@ -15,16 +15,18 @@ export const LoadingWrap = styled.div({
   zIndex: 1,
 });
 export const LogoStyle = styled.img`
-bak
   width: 100px;
   height: 100px;
-  animation: spin 1.5s linear infinite;
-  @keyframes spin {
+  animation: upDown 0.8s linear infinite;
+  @keyframes upDown {
     0% {
-      transform: rotate(0deg);
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-40px);
     }
     100% {
-      transform: rotate(360deg);
+      transform: translateY(0px);
     }
   }
 `;

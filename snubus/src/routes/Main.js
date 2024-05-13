@@ -11,6 +11,7 @@ import {
   ADLeft,
   ADRight,
   MainWrap,
+  H2,
 } from "./MainStyle";
 import Navigation from "../components/Nav";
 import Slide from "../components/Slide";
@@ -33,7 +34,7 @@ function Main() {
       <FloatWrap>
         <ADLeft></ADLeft>
         <MainWrap>
-          <h3>지선 버스</h3>
+          <H2>지선 버스</H2>
           <Slide />
         </MainWrap>
         <ADRight></ADRight>
