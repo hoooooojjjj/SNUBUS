@@ -1,5 +1,5 @@
 import React from "react";
-import { LoadingContainer, LoadingWrap, LogoStyle } from "./utilStyle";
+import { LoadingContainer, LoadingWrap, LogoStyle } from "./LoadingStyle";
 
 function Loading() {
   return (
