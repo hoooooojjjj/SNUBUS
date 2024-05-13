@@ -2,10 +2,11 @@ import React from "react";
 import { Carousel } from "antd";
 
 const contentStyle = {
-  margin: 0,
-  height: "160px",
+  margin: "0 auto",
+  width: "70%",
+  height: "300px",
   color: "#fff",
-  lineHeight: "160px",
+  lineHeight: "300px",
   textAlign: "center",
   background: "#364d79",
 };

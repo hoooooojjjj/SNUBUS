@@ -33,6 +33,7 @@ function Main() {
       <FloatWrap>
         <ADLeft></ADLeft>
         <MainWrap>
+          <h3>지선 버스</h3>
           <Slide />
         </MainWrap>
         <ADRight></ADRight>

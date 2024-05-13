@@ -21,14 +21,20 @@ export const AdTop = styled.section({
 export const Header = styled.section({
   height: "40%",
   display: "flex",
+  alignItems: "center",
 });
 
 // 헤더 안에 nav
-export const NavigationWrap = styled.nav({});
+export const NavigationWrap = styled.nav({
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+});
 
 // 헤더 안 로고 이미지
 export const HeaderLogo = styled.img({
-  width: 50,
+  marginLeft: 70,
+  height: "100%",
   height: 50,
 });
 
@@ -50,6 +56,5 @@ export const ADRight = styled.aside({
 
 export const MainWrap = styled.main({
   width: "76%",
-  backgroundColor: "blue",
   height: "100%",
 });
