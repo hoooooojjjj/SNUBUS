@@ -1,7 +1,19 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AdTop, Containers, Header, HeaderWrap, HeaderLogo } from "./MainStyle";
+import {
+  AdTop,
+  Containers,
+  Header,
+  HeaderWrap,
+  HeaderLogo,
+  NavigationWrap,
+  FloatWrap,
+  ADLeft,
+  ADRight,
+  MainWrap,
+} from "./MainStyle";
 import Navigation from "../components/Nav";
+import Slide from "../components/Slide";
 
 // 메인 페이지
 function Main() {
@@ -13,14 +25,18 @@ function Main() {
         <AdTop></AdTop>
         <Header>
           <HeaderLogo src={process.env.PUBLIC_URL + "assets/Logo.png"} />
-          <nav>
+          <NavigationWrap>
             <Navigation />
-          </nav>
+          </NavigationWrap>
         </Header>
       </HeaderWrap>
-      <Link to={"/5511"}>5511</Link>
-      <Link to={"/5513"}>5513</Link>
-      <Link to={"/gwanak02"}>관악02</Link>
+      <FloatWrap>
+        <ADLeft></ADLeft>
+        <MainWrap>
+          <Slide />
+        </MainWrap>
+        <ADRight></ADRight>
+      </FloatWrap>
     </Containers>
   );
 }
