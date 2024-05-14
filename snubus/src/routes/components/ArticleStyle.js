@@ -7,10 +7,22 @@ export const Article = styled.article({
   ...flex("column", "center", "normal"),
 });
 
+export const HeaderWrap = styled.div({
+  width: "70%",
+  height: 40,
+  margin: "0 auto",
+  marginBottom: 10,
+  ...flex("row", "nomal", "center"),
+});
+
+// article img
+export const Img = styled.img({
+  width: 30,
+  height: 30,
+});
+
 // article header
 export const H2 = styled.h2({
-  paddingTop: 50,
-  width: "70%",
-  margin: "0 auto",
-  marginBottom: 20,
+  marginTop: 3,
+  marginLeft: 20,
 });

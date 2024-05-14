@@ -16,6 +16,7 @@ export const Header = styled.section({
   height: 72,
   ...flex("row", "normal", "center"),
   backgroundColor: "#9cb4db",
+  zIndex: 20,
 });
 
 // 헤더 안에 nav

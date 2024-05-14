@@ -30,5 +30,4 @@ export const ADRight = styled.aside({
 export const MainWrap = styled.main({
   width: "76%",
   ...flex("column", "center", "normal"),
-  zIndex: -1,
 });
