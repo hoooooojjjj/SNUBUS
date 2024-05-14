@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
+import { flex, container } from "../util/publicStyleComponets";
 
 // 메인 페이지 컨테이너
 export const Containers = styled.div({
-  width: "100dvw",
-  height: "100dvh",
+  ...container(),
 });
 
 /* header */
@@ -19,16 +19,14 @@ export const Header = styled.section({
   position: "fixed",
   width: "100%",
   height: 72,
-  display: "flex",
-  alignItems: "center",
+  ...flex("row", "normal", "center"),
   backgroundColor: "#9cb4db",
 });
 
 // 헤더 안에 nav
 export const NavigationWrap = styled.nav({
   height: "100%",
-  display: "flex",
-  alignItems: "center",
+  ...flex("row", "normal", "center"),
 });
 
 // 헤더 안 로고 이미지
@@ -60,18 +58,14 @@ export const ADRight = styled.aside({
 // main wrap
 export const MainWrap = styled.main({
   width: "76%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  ...flex("column", "center", "normal"),
   zIndex: -1,
 });
 
 // article wrap
 export const Article = styled.article({
   height: 600,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  ...flex("column", "center", "normal"),
 });
 
 // article header
@@ -87,4 +81,7 @@ export const Footer = styled.footer({
   width: "100%",
   height: 100,
   backgroundColor: "#9cb4db",
+  ...flex("row", "center", "center"),
 });
+
+export const FooterP = styled.p({});

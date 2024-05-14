@@ -1,18 +1,14 @@
 import styled from "@emotion/styled";
-
+import { flex, container } from "../util/publicStyleComponets";
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div({
-  width: "100dvw",
-  height: "100dvh",
+  ...container(),
   backgroundColor: "rgba(0, 0, 0, 0.2)",
 });
 
 // 로딩 wrap
 export const LoadingWrap = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  ...flex("column", "center", "center"),
   width: "100%",
   height: "100%",
   zIndex: 1,

@@ -13,6 +13,7 @@ import {
   Article,
   H2,
   Footer,
+  FooterP,
 } from "./MainStyle";
 import Navigation from "../components/Nav";
 import Slide from "../components/Slide";
@@ -68,7 +69,9 @@ function Main() {
         <ADRight></ADRight>
       </FloatWrap>{" "}
       {/* footer */}
-      <Footer></Footer>
+      <Footer>
+        <FooterP>ⓒSONO. All rights reserved.</FooterP>
+      </Footer>
       {/* footer */}
     </Containers>
   );
