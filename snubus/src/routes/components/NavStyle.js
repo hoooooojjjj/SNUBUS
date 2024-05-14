@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex } from "../util/publicStyleComponets";
+import { flex } from "../../util/publicStyleComponets";
 // ul 태그
 export const Ul = styled.ul({
   height: "100%",

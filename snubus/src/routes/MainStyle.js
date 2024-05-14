@@ -6,35 +6,6 @@ export const Containers = styled.div({
   ...container(),
 });
 
-/* header */
-
-// 헤더 wrap
-export const HeaderWrap = styled.header({
-  width: "100%",
-  height: "72px",
-});
-
-// 헤더
-export const Header = styled.section({
-  position: "fixed",
-  width: "100%",
-  height: 72,
-  ...flex("row", "normal", "center"),
-  backgroundColor: "#9cb4db",
-});
-
-// 헤더 안에 nav
-export const NavigationWrap = styled.nav({
-  height: "100%",
-  ...flex("row", "normal", "center"),
-});
-
-// 헤더 안 로고 이미지
-export const HeaderLogo = styled.img({
-  marginLeft: 70,
-  height: 50,
-  cursor: "pointer",
-});
 // ADLeft,ADRight,main,footer wrap
 export const FloatWrap = styled.div({
   display: "flex",
@@ -61,27 +32,3 @@ export const MainWrap = styled.main({
   ...flex("column", "center", "normal"),
   zIndex: -1,
 });
-
-// article wrap
-export const Article = styled.article({
-  height: 600,
-  ...flex("column", "center", "normal"),
-});
-
-// article header
-export const H2 = styled.h2({
-  paddingTop: 50,
-  width: "70%",
-  margin: "0 auto",
-  marginBottom: 20,
-});
-
-/* footer */
-export const Footer = styled.footer({
-  width: "100%",
-  height: 100,
-  backgroundColor: "#9cb4db",
-  ...flex("row", "center", "center"),
-});
-
-export const FooterP = styled.p({});

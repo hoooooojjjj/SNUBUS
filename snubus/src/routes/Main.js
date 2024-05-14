@@ -1,78 +1,24 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Containers,
-  Header,
-  HeaderWrap,
-  HeaderLogo,
-  NavigationWrap,
-  FloatWrap,
-  ADLeft,
-  ADRight,
-  MainWrap,
-  Article,
-  H2,
-  Footer,
-  FooterP,
-} from "./MainStyle";
-import Navigation from "../components/Nav";
-import Slide from "../components/Slide";
+import { Containers, FloatWrap, ADLeft, ADRight, MainWrap } from "./MainStyle";
+import Headers from "./components/Header";
+import Footers from "./components/Footer";
+import Articles from "./components/Article";
 
 // 메인 페이지
 function Main() {
-  const nav = useNavigate();
-
-  // Link 태그 클릭 시 스무스 스크롤 적용
-  const handleScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <Containers>
-      <HeaderWrap>
-        {/* heaer */}
-        <Header>
-          <HeaderLogo
-            onClick={() => {
-              nav("/");
-            }}
-            src={process.env.PUBLIC_URL + "assets/Logo.png"}
-          />
-          <NavigationWrap>
-            <Navigation handleScroll={handleScroll} />
-          </NavigationWrap>
-        </Header>
-        {/* heaer */}
-      </HeaderWrap>
+      <Headers />
       <FloatWrap>
         <ADLeft></ADLeft>
-        {/* main */}
         <MainWrap>
-          <Article id="FeederBus">
-            <H2>지선 버스</H2>
-            <Slide />
-          </Article>
-          <Article id="MainlineBus">
-            <H2>간선 버스</H2>
-            <Slide />
-          </Article>
-          <Article id="ViligeBus">
-            <H2>마을 버스</H2>
-            <Slide />
-          </Article>
+          <Articles info={{ id: "FeederBus", name: "지선 버스" }} />
+          <Articles info={{ id: "MainlineBus", name: "간선 버스" }} />
+          <Articles info={{ id: "ViligeBus", name: "마을 버스" }} />
         </MainWrap>
-        {/* main */}
-
         <ADRight></ADRight>
-      </FloatWrap>{" "}
-      {/* footer */}
-      <Footer>
-        <FooterP>ⓒSONO. All rights reserved.</FooterP>
-      </Footer>
-      {/* footer */}
+      </FloatWrap>
+      <Footers />
     </Containers>
   );
 }
