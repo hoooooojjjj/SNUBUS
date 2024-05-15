@@ -29,7 +29,7 @@ export const LogoText = styled.p({
   fontWeight: 400,
   marginLeft: 30,
   marginBottom: 0,
-  fontSize: 30,
+  fontSize: 35,
   cursor: "pointer",
 });
 

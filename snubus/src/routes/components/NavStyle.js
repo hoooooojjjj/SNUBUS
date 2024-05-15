@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
+import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
 // ul 태그
 export const Ul = styled.ul({
   height: "100%",
@@ -10,10 +10,10 @@ export const Ul = styled.ul({
 
 // li 태그
 export const Li = styled.li({
-  fontWeight: 400,
   listStyle: "none",
   marginLeft: 80,
-  fontSize: 20,
+  fontSize: 25,
   cursor: "pointer",
-  ...Font_ArchivoBlack(),
+  ...Font_BlackHanSans(),
+  fontWeight: 400,
 });
