@@ -18,3 +18,12 @@ export const flex = (flex_direction, justify_content, align_items) => {
     alignItems: align_items,
   };
 };
+
+// Archivo Black 폰트
+export const Font_ArchivoBlack = () => {
+  return {
+    fontFamily: '"Archivo Black", sans-serif',
+    fontStyle: "normal",
+    color: "white",
+  };
+};

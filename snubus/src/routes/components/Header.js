@@ -20,7 +20,6 @@ function Headers() {
           onClick={() => {
             nav("/");
           }}
-          src={process.env.PUBLIC_URL + "assets/Logo.png"}
         >
           SNUBUS
         </LogoText>

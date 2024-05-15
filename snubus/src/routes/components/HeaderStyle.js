@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex } from "../../util/publicStyleComponets";
+import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
 
 /* header */
 
@@ -19,21 +19,19 @@ export const Header = styled.section({
 
 // 헤더 안에 nav
 export const NavigationWrap = styled.nav({
-  height: "100%",
-  ...flex("row", "normal", "center"),
+  width: "100%",
+  ...flex("row", "flex-end", "nomal"),
 });
 
 // 헤더 안에 로고 폰트
-export const LogoText = styled.p`
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: white;
-  margin-left: 30px;
-  margin-bottom: 0px;
-  font-size: 30px;
-  cursor: pointer;
-`;
+export const LogoText = styled.p({
+  ...Font_ArchivoBlack(),
+  fontWeight: 400,
+  marginLeft: 30,
+  marginBottom: 0,
+  fontSize: 30,
+  cursor: "pointer",
+});
 
 // // 헤더 안 로고 이미지
 // export const HeaderLogo = styled.img({
