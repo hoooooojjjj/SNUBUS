@@ -15,8 +15,6 @@ export const Header = styled.section({
   width: "100%",
   height: 72,
   ...flex("row", "normal", "center"),
-  backgroundColor: "#9cb4db",
-  zIndex: 20,
 });
 
 // 헤더 안에 nav
@@ -25,9 +23,21 @@ export const NavigationWrap = styled.nav({
   ...flex("row", "normal", "center"),
 });
 
-// 헤더 안 로고 이미지
-export const HeaderLogo = styled.img({
-  marginLeft: 70,
-  height: 50,
-  cursor: "pointer",
-});
+// 헤더 안에 로고 폰트
+export const LogoText = styled.p`
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  margin-left: 30px;
+  margin-bottom: 0px;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
+// // 헤더 안 로고 이미지
+// export const HeaderLogo = styled.img({
+//   marginLeft: 70,
+//   height: 50,
+//   cursor: "pointer",
+// });

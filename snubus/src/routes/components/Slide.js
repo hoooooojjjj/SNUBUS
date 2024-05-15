@@ -21,8 +21,9 @@ const Slide = ({ info }) => {
 
   return (
     <Carousel afterChange={onChange} style={{ cursor: "pointer" }}>
-      {info.buslist.map((busNum) => (
+      {info.buslist.map((busNum, i) => (
         <div
+          key={i}
           onClick={() => {
             nav(`/${busNum}`);
           }}

@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderWrap, Header, HeaderLogo, NavigationWrap } from "./HeaderStyle";
+import { HeaderWrap, Header, LogoText, NavigationWrap } from "./HeaderStyle";
 import Navigation from "./Nav";
 import { useNavigate } from "react-router-dom";
 
@@ -16,12 +16,14 @@ function Headers() {
   return (
     <HeaderWrap>
       <Header>
-        <HeaderLogo
+        <LogoText
           onClick={() => {
             nav("/");
           }}
           src={process.env.PUBLIC_URL + "assets/Logo.png"}
-        />
+        >
+          SNUBUS
+        </LogoText>
         <NavigationWrap>
           <Navigation handleScroll={handleScroll} />
         </NavigationWrap>

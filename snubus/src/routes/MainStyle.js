@@ -3,26 +3,28 @@ import { flex, container } from "../util/publicStyleComponets";
 
 // 메인 페이지 컨테이너
 export const Containers = styled.div({
+  background: `url(${process.env.PUBLIC_URL + `assets/backgroundImg.jpg`})`,
+  backgroundSize: "cover",
   ...container(),
 });
 
 // ADLeft,ADRight,main,footer wrap
-export const FloatWrap = styled.div({
-  display: "flex",
-  width: "100%",
-});
+// export const FloatWrap = styled.div({
+//   display: "flex",
+//   width: "100%",
+// });
 
-// 왼쪽 사이드바 광고
-export const ADLeft = styled.aside({
-  width: "12%",
-  backgroundColor: "#D8D8D8",
-});
+// // 왼쪽 사이드바 광고
+// export const ADLeft = styled.aside({
+//   width: "12%",
+//   backgroundColor: "#D8D8D8",
+// });
 
-// 오른쪽 사이드바 광고
-export const ADRight = styled.aside({
-  width: "12%",
-  backgroundColor: "#D8D8D8",
-});
+// // 오른쪽 사이드바 광고
+// export const ADRight = styled.aside({
+//   width: "12%",
+//   backgroundColor: "#D8D8D8",
+// });
 
 /* main */
 
