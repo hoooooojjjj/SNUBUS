@@ -11,6 +11,9 @@ export const CarouselWrap = styled.header({
 
 export const SlideItem = styled.div({
   height: SlideItemWidth,
+  background:
+    "radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.0) 70%)",
+  borderRadius: 10,
 });
 
 export const SlideText = styled.p({

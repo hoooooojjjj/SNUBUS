@@ -14,7 +14,7 @@ function Main() {
     <Containers imgNum={imgNum}>
       <Headers />
       <MainWrap>
-        <Articles info={busInfo[0]} />
+        <Articles info={busInfo[imgNum]} />
       </MainWrap>
       <Footers />
     </Containers>
