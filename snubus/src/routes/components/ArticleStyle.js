@@ -1,10 +1,17 @@
 import styled from "@emotion/styled";
-import { flex } from "../../util/publicStyleComponets";
+import { Font_BlackHanSans, flex } from "../../util/publicStyleComponets";
 
 // article wrap
 export const Article = styled.article({
-  height: 600,
+  width: "50dvw",
+  height: "50dvh",
   ...flex("column", "center", "normal"),
+});
+
+// article img
+export const Img = styled.img({
+  width: 50,
+  height: 50,
 });
 
 export const HeaderWrap = styled.div({
@@ -15,14 +22,19 @@ export const HeaderWrap = styled.div({
   ...flex("row", "nomal", "center"),
 });
 
-// article img
-export const Img = styled.img({
-  width: 30,
-  height: 30,
-});
-
 // article header
 export const H2 = styled.h2({
   marginTop: 3,
   marginLeft: 20,
+  ...Font_BlackHanSans(),
+  fontSize: 50,
+});
+
+// article p
+export const P = styled.p({
+  width: "70%",
+  margin: "0 auto",
+  marginBottom: 10,
+  ...Font_BlackHanSans(),
+  fontSize: 40,
 });

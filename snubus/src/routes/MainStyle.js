@@ -3,7 +3,7 @@ import { flex, container } from "../util/publicStyleComponets";
 
 // 메인 페이지 컨테이너
 export const Containers = styled.div({
-  background: `url(${process.env.PUBLIC_URL + `assets/backgroundImg.jpg`})`,
+  background: `url(${process.env.PUBLIC_URL + `assets/backgroundImg0.jpg`})`,
   backgroundSize: "cover",
   ...container(),
 });
