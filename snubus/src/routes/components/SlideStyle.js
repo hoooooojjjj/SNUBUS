@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_BlackHanSans } from "../../util/publicStyleComponets";
+import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
 
 const SlideItemWidth = "120px";
 
@@ -21,9 +21,8 @@ export const SlideItem = styled.div({
 export const SlideText = styled.p({
   margin: "0 auto",
   width: "70%",
-  textAlign: "center",
-  ...Font_BlackHanSans(),
   lineHeight: SlideItemWidth,
-  height: SlideItemWidth,
+  ...Font_BlackHanSans(),
   fontSize: 40,
+  cursor: "pointer",
 });

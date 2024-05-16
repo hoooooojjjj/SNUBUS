@@ -23,10 +23,7 @@ const Slide = ({ info }) => {
       }}
     >
       <CarouselWrap>
-        <Carousel
-          arrows={true}
-          style={{ cursor: "pointer", width: "40%", margin: "0 auto" }}
-        >
+        <Carousel arrows={true} style={{ width: "40%", margin: "0 auto" }}>
           {info.buslist.map((busNum, i) => (
             <SlideItem key={i}>
               {/* {busNum}번 버스 보러가기 클릭시 해당 버스 view 컴포넌트로 라우팅 */}

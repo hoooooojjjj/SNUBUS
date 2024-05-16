@@ -20,7 +20,7 @@ export const HeaderWrap = styled.div({
   height: 40,
   margin: "0 auto",
   marginBottom: 10,
-  ...flex("row", "nomal", "center"),
+  ...flex("row", "nomal", "nomal"),
 });
 
 // article header
