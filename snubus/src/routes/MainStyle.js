@@ -2,11 +2,13 @@ import styled from "@emotion/styled";
 import { flex, container } from "../util/publicStyleComponets";
 
 // 메인 페이지 컨테이너
-export const Containers = styled.div({
-  background: `url(${process.env.PUBLIC_URL + `assets/backgroundImg0.jpg`})`,
+export const Containers = styled.div((props) => ({
+  background: `url(${
+    process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`
+  })`,
   backgroundSize: "cover",
   ...container(),
-});
+}));
 
 // ADLeft,ADRight,main,footer wrap
 // export const FloatWrap = styled.div({

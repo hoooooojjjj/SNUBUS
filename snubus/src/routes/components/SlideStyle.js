@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
+import { Font_BlackHanSans } from "../../util/publicStyleComponets";
 
 const SlideItemWidth = "120px";
 
