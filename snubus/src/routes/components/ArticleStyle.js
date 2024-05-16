@@ -4,7 +4,7 @@ import { Font_BlackHanSans, flex } from "../../util/publicStyleComponets";
 // article wrap
 export const Article = styled.article({
   width: "50dvw",
-  height: "50dvh",
+  height: "80%",
   ...flex("column", "center", "normal"),
 });
 

@@ -11,9 +11,7 @@ function Main() {
     <Containers>
       <Headers />
       <MainWrap>
-        {busInfo.map((info, i) => (
-          <Articles key={i} info={info} />
-        ))}
+        <Articles info={busInfo[0]} />
       </MainWrap>
       <Footers />
     </Containers>

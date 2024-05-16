@@ -4,9 +4,10 @@ import { flex } from "../../util/publicStyleComponets";
 /* footer */
 export const Footer = styled.footer({
   width: "100%",
-  height: 100,
-  backgroundColor: "#9cb4db",
-  ...flex("row", "center", "center"),
+  height: "10dvh",
+  ...flex("row", "center", "flex-end"),
 });
 
-export const FooterP = styled.p({});
+export const FooterP = styled.p({
+  color: "white",
+});

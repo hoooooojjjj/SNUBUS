@@ -30,6 +30,7 @@ export const Containers = styled.div({
 
 // main wrap
 export const MainWrap = styled.main({
-  width: "76%",
+  width: "100%",
+  height: "80dvh",
   ...flex("column", "center", "normal"),
 });

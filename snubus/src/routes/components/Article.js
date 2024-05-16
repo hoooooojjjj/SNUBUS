@@ -11,14 +11,14 @@ function Articles({ info }) {
       </HeaderWrap>
       <P>
         {info.buslist.map((busNum, i) => (
-          <span>
+          <span key={i}>
             {busNum}
             {/* 마지막에는 , 없도록 */}
             {i !== parseInt(info.buslist.length) - 1 ? ", " : ""}
           </span>
         ))}
       </P>
-      {/* <Slide info={info} /> */}
+      <Slide info={info} />
     </Article>
   );
 }

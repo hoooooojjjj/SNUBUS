@@ -6,7 +6,7 @@ import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
 // 헤더 wrap
 export const HeaderWrap = styled.header({
   width: "100%",
-  height: "72px",
+  height: "10dvh",
 });
 
 // 헤더

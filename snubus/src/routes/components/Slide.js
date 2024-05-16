@@ -1,37 +1,45 @@
 import React from "react";
-import { Carousel } from "antd";
+import { Carousel, ConfigProvider } from "antd";
 import { useNavigate } from "react-router-dom";
-
-const contentStyle = {
-  margin: "0 auto",
-  width: "70%",
-  height: "400px",
-  color: "#fff",
-  lineHeight: "400px",
-  textAlign: "center",
-  background: "#003287",
-  borderRadius: "20px",
-};
+import { CarouselWrap, SlideItem, SlideText } from "./SlideStyle";
 
 const Slide = ({ info }) => {
   const nav = useNavigate();
-  const onChange = (currentSlide) => {
-    // console.log(currentSlide);
-  };
 
   return (
-    <Carousel afterChange={onChange} style={{ cursor: "pointer" }}>
-      {info.buslist.map((busNum, i) => (
-        <div
-          key={i}
-          onClick={() => {
-            nav(`/${busNum}`);
-          }}
+    // andt 사용자 정의 스타일
+    <ConfigProvider
+      theme={{
+        components: {
+          Carousel: {
+            // 화살표 스타일
+            arrowSize: 30,
+            // dot 스타일
+            dotActiveWidth: 40,
+            dotWidth: 50,
+            dotHeight: 7,
+          },
+        },
+      }}
+    >
+      <CarouselWrap>
+        <Carousel
+          arrows={true}
+          style={{ cursor: "pointer", width: "40%", margin: "0 auto" }}
         >
-          <h1 style={contentStyle}>{busNum}</h1>
-        </div>
-      ))}
-    </Carousel>
+          {info.buslist.map((busNum, i) => (
+            <SlideItem
+              key={i}
+              onClick={() => {
+                nav(`/${busNum}`);
+              }}
+            >
+              <SlideText>{busNum}번 버스 보러가기</SlideText>
+            </SlideItem>
+          ))}
+        </Carousel>
+      </CarouselWrap>
+    </ConfigProvider>
   );
 };
 
