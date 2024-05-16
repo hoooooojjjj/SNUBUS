@@ -14,6 +14,7 @@ export const Img = styled.img({
   height: 50,
 });
 
+// // article headerwrap
 export const HeaderWrap = styled.div({
   width: "70%",
   height: 40,

@@ -6,7 +6,7 @@ import Main from "./routes/Main";
 import "bootstrap/dist/css/bootstrap.css";
 function App() {
   return (
-    <div>
+    <div style={{ backgroundColor: "black" }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}></Route>

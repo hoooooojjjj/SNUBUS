@@ -7,7 +7,7 @@ const Slide = ({ info }) => {
   const nav = useNavigate();
 
   return (
-    // andt 사용자 정의 스타일
+    // antd 사용자 정의 스타일
     <ConfigProvider
       theme={{
         components: {
@@ -28,13 +28,15 @@ const Slide = ({ info }) => {
           style={{ cursor: "pointer", width: "40%", margin: "0 auto" }}
         >
           {info.buslist.map((busNum, i) => (
-            <SlideItem
-              key={i}
-              onClick={() => {
-                nav(`/${busNum}`);
-              }}
-            >
-              <SlideText>{busNum}번 버스 보러가기</SlideText>
+            <SlideItem key={i}>
+              {/* {busNum}번 버스 보러가기 클릭시 해당 버스 view 컴포넌트로 라우팅 */}
+              <SlideText
+                onClick={() => {
+                  nav(`/${busNum}`);
+                }}
+              >
+                {busNum}번 버스 보러가기
+              </SlideText>
             </SlideItem>
           ))}
         </Carousel>

@@ -2,7 +2,7 @@ import useStore_imgNum from "../../store/imgNumStore";
 import { Li, Ul } from "./NavStyle";
 
 function Navigation() {
-  // zustand -> imgNum 상태 가져오기
+  // zustand -> imgNum 상태 변화 함수들 가져오기
   const switchToZero = useStore_imgNum().ToZero;
   const switchToOne = useStore_imgNum().ToOne;
   const switchToTwo = useStore_imgNum().ToTwo;

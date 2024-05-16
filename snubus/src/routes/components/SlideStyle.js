@@ -9,6 +9,7 @@ export const CarouselWrap = styled.header({
   height: "40%",
 });
 
+// 슬라이드 컴포넌트
 export const SlideItem = styled.div({
   height: SlideItemWidth,
   background:
@@ -16,6 +17,7 @@ export const SlideItem = styled.div({
   borderRadius: 10,
 });
 
+// 슬라이드 안에 텍스트 컴포넌트
 export const SlideText = styled.p({
   margin: "0 auto",
   width: "70%",

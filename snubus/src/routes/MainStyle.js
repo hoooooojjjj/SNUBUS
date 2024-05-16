@@ -1,14 +1,51 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 import { flex, container } from "../util/publicStyleComponets";
 
+// fadeOut 애니메이션 정의
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+    background-color: black;
+  }
+  100% {
+    opacity: 0;
+    background-color: transparent;
+  }
+`;
+
 // 메인 페이지 컨테이너
-export const Containers = styled.div((props) => ({
-  background: `url(${
-    process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`
-  })`,
-  backgroundSize: "cover",
-  ...container(),
-}));
+export const Containers = styled.div`
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  background: url(${(props) =>
+    process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`});
+  background-size: cover;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    animation: ${fadeOut} 3s forwards;
+  }
+`;
+
+// 배경 전환 시 애니메이션 재실행될 요소
+export const Overlay = styled.div`
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  animation: ${fadeOut} 3s forwards;
+`;
 
 // ADLeft,ADRight,main,footer wrap
 // export const FloatWrap = styled.div({
