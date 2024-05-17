@@ -1,11 +1,18 @@
 import React from "react";
-import { LoadingContainer, LoadingWrap, LogoStyle } from "./LoadingStyle";
+import {
+  LoadingContainer,
+  LoadingWrap,
+  LogoStyle,
+  LogoCover,
+} from "./LoadingStyle";
 
 function Loading() {
   return (
     <LoadingContainer>
       <LoadingWrap>
-        <LogoStyle src={process.env.PUBLIC_URL + "assets/Logo.png"} />
+        <LogoStyle>
+          <LogoCover></LogoCover>SNUBUS
+        </LogoStyle>
       </LoadingWrap>
     </LoadingContainer>
   );

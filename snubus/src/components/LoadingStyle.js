@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { flex, container } from "../util/publicStyleComponets";
+import { keyframes } from "@emotion/react";
+import {
+  flex,
+  container,
+  Font_ArchivoBlack,
+} from "../util/publicStyleComponets";
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div({
   ...container(),
@@ -15,19 +20,40 @@ export const LoadingWrap = styled.div({
 });
 
 // logo 스타일링
-export const LogoStyle = styled.img`
-  width: 100px;
-  height: 100px;
-  animation: upDown 0.8s linear infinite;
-  @keyframes upDown {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-40px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
+export const LogoStyle = styled.p({
+  ...Font_ArchivoBlack(),
+  fontSize: 50,
+  position: "relative",
+});
+
+// blackWave 애니메이션 정의
+const blackWave = keyframes`
+  0% {
+    width: 0%;
   }
+  20% {
+    width: 20%;
+  }
+  40% {
+    width: 40%;
+  }
+  60% {
+    width: 60%;
+  }
+  80% {
+    width: 80%;
+  }
+  100% {
+    width: 100%;
+  }
+
 `;
+
+// logo 위에 씌워질 요소
+export const LogoCover = styled.span({
+  backgroundColor: "rgb(0,0,0,0.6)",
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  animation: `${blackWave} 0.5s alternate linear infinite`,
+});
