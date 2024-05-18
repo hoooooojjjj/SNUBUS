@@ -32,7 +32,7 @@ const Slide = ({ info }) => {
                   nav(`/${busNum}`);
                 }}
               >
-                {busNum}번 버스 보러가기
+                {busNum}번 버스
               </SlideText>
             </SlideItem>
           ))}

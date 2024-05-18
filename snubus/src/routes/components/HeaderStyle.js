@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { media } from "@emotion/styled";
 import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
 
 /* header */
@@ -26,10 +27,17 @@ export const NavigationWrap = styled.nav({
 // 헤더 안에 로고 폰트
 export const LogoText = styled.p({
   ...Font_ArchivoBlack(),
-  fontWeight: 400,
   marginLeft: 30,
   marginBottom: 0,
   fontSize: 35,
+  "@media(max-width: 425px)": {
+    fontSize: 25,
+    marginLeft: 20,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 20,
+    marginLeft: 10,
+  },
   cursor: "pointer",
 });
 

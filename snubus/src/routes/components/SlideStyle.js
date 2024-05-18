@@ -19,6 +19,7 @@ export const SlideItem = styled.div({
 
 // 슬라이드 안에 텍스트 컴포넌트
 export const SlideText = styled.p({
+  ...flex("column", "center", "center"),
   margin: "0 auto",
   width: "70%",
   lineHeight: SlideItemWidth,
