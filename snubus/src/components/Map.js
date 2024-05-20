@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Maps } from "./MapStyle";
 
 function Map({ position }) {
   // kakaomap이 있는 요소의 ref
@@ -95,7 +96,7 @@ function Map({ position }) {
     });
   };
 
-  return <div ref={kakaoMap} style={{ width: "500px", height: "400px" }}></div>;
+  return <Maps ref={kakaoMap}></Maps>;
 }
 
 export default Map;

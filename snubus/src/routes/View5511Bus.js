@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Map from "../components/Map";
 import getDataInterval from "../util/getBusPos";
 import Loading from "../components/Loading";
+import { Container } from "./ViewStyle";
 
 const BUSROUTEID_5511 = "100100250";
 
@@ -16,7 +17,7 @@ function View5511Bus() {
   }, []);
 
   return (
-    <div>
+    <Container>
       {!pos5511Buses ? (
         // 데이터가 아직 안들어왔을 때
         <Loading />
@@ -24,7 +25,7 @@ function View5511Bus() {
         // 맵 컴포넌트에 데이터 전달
         <Map position={pos5511Buses}></Map>
       )}
-    </div>
+    </Container>
   );
 }
 
