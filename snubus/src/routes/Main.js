@@ -4,12 +4,14 @@ import Headers from "./components/Header";
 import Footers from "./components/Footer";
 import Articles from "./components/Article";
 import busInfo from "../busInfo";
-import useStore_imgNum from "../store/imgNumStore";
+
+// imgNum state를 전달하는 context API
+export const imgNumContext = React.createContext();
 
 // 메인 페이지
 function Main() {
-  // zustand -> imgNum 상태 가져오기
-  const imgNum = useStore_imgNum().imgNum;
+  // 배경이미지를 변경할 때 배경이미지 번호 state
+  const [imgNum, setImgNum] = useState(0);
 
   // 리렌더링시 애니메이션 재실행시키기 위한 상태
   const [key, setKey] = useState(0);
@@ -20,14 +22,16 @@ function Main() {
   }, [imgNum]);
 
   return (
-    <Containers imgNum={imgNum}>
-      <Overlay key={key}></Overlay>
-      <Headers />
-      <MainWrap>
-        <Articles info={busInfo[imgNum]} />
-      </MainWrap>
-      <Footers />
-    </Containers>
+    <imgNumContext.Provider value={[imgNum, setImgNum]}>
+      <Containers imgNum={imgNum}>
+        <Overlay key={key}></Overlay>
+        <Headers />
+        <MainWrap>
+          <Articles info={busInfo[imgNum]} />
+        </MainWrap>
+        <Footers />
+      </Containers>
+    </imgNumContext.Provider>
   );
 }
 

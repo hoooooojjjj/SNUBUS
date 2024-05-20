@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, ConfigProvider } from "antd";
+import { ConfigProvider } from "antd";
 import { useNavigate } from "react-router-dom";
 import {
   StyledCarousel,

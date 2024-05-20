@@ -1,16 +1,33 @@
-import useStore_imgNum from "../../store/imgNumStore";
+import { useContext } from "react";
 import { Li, Ul } from "./NavStyle";
+import { imgNumContext } from "../Main";
 
 function Navigation() {
-  // zustand -> imgNum 상태 변화 함수들 가져오기
-  const switchToZero = useStore_imgNum().ToZero;
-  const switchToOne = useStore_imgNum().ToOne;
-  const switchToTwo = useStore_imgNum().ToTwo;
+  // context API -> imgNum 상태 변화 함수들 가져오기
+  const [imgNum, setImgNum] = useContext(imgNumContext);
   return (
     <Ul>
-      <Li onClick={switchToZero}>지선버스</Li>
-      <Li onClick={switchToOne}>마을버스</Li>
-      <Li onClick={switchToTwo}>간선버스</Li>
+      <Li
+        onClick={() => {
+          setImgNum(0);
+        }}
+      >
+        지선버스
+      </Li>
+      <Li
+        onClick={() => {
+          setImgNum(1);
+        }}
+      >
+        마을버스
+      </Li>
+      <Li
+        onClick={() => {
+          setImgNum(2);
+        }}
+      >
+        간선버스
+      </Li>
     </Ul>
   );
 }
