@@ -11,7 +11,7 @@ function Articles({ info }) {
       </HeaderWrap>
       <P>
         {info.buslist.map((busNum, i) => (
-          <span key={i}>
+          <span key={busNum}>
             {busNum}
             {/* 마지막에는 , 없도록 */}
             {i !== parseInt(info.buslist.length) - 1 ? ", " : ""}
