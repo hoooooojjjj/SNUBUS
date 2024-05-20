@@ -13,18 +13,11 @@ function Main() {
   // 배경이미지를 변경할 때 배경이미지 번호 state
   const [imgNum, setImgNum] = useState(0);
 
-  // 리렌더링시 애니메이션 재실행시키기 위한 상태
-  const [key, setKey] = useState(0);
-
-  // imgNum이 변경되면(배경 이미지가 전환되면) key를 변경시켜 Overlay 컴포넌트를 리렌더링시킨다.
-  useEffect(() => {
-    setKey((prevKey) => prevKey + 1);
-  }, [imgNum]);
-
   return (
     <imgNumContext.Provider value={[imgNum, setImgNum]}>
       <Containers imgNum={imgNum}>
-        <Overlay key={key}></Overlay>
+        {/* imgNum이 변경되면(배경 이미지가 전환되면) key를 변경된 imgNum으로 변경시켜 Overlay 컴포넌트를 리렌더링시킨다. */}
+        <Overlay key={imgNum}></Overlay>
         <Headers />
         <MainWrap>
           <Articles info={busInfo[imgNum]} />
