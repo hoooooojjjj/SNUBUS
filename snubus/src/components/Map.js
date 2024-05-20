@@ -43,7 +43,7 @@ function Map({ position }) {
         mapInfo.centerY || curLat,
         mapInfo.centerX || curLlon
       ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
-      level: mapInfo.level || 6, //지도의 레벨(확대, 축소 정도)
+      level: mapInfo.level || 3, //지도의 레벨(확대, 축소 정도)
     };
     const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
@@ -82,6 +82,7 @@ function Map({ position }) {
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),
+          clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         })
     );
 
@@ -93,6 +94,11 @@ function Map({ position }) {
     // 5511번 버스들 위치 마커 print
     markers.forEach((marker) => {
       clusterer.addMarker(marker);
+
+      // 마커에 클릭이벤트를 등록
+      window.kakao.maps.event.addListener(marker, "click", function () {
+        console.log(marker);
+      });
     });
   };
 
