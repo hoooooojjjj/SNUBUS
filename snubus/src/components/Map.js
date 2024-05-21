@@ -96,9 +96,7 @@ function Map({ position }) {
       clusterer.addMarker(marker);
 
       // 마커에 클릭이벤트를 등록
-      window.kakao.maps.event.addListener(marker, "click", function () {
-        console.log(marker);
-      });
+      window.kakao.maps.event.addListener(marker, "click", function () {});
     });
   };
 

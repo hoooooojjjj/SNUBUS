@@ -22,6 +22,12 @@ export const Containers = styled.div`
   background: url(${(props) =>
     process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`});
   background-size: cover;
+  @media (max-width: 425px) {
+    background: url(${(props) =>
+      process.env.PUBLIC_URL +
+      `assets/backgroundImg_short${props.imgNum}.jpg`});
+    background-size: cover;
+  }
 `;
 
 // 배경 전환 시 애니메이션 재실행될 요소
