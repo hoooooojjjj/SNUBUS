@@ -3,6 +3,7 @@ import { Carousel } from "antd";
 import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
 
 const SlideItemHeight = "120px";
+const SlideItemHeight_under485 = "100px";
 const SlideItemHeight_under425 = "90px";
 
 // Carousel wrap
@@ -23,12 +24,13 @@ export const StyledCarousel = styled(Carousel)`
 // 슬라이드 컴포넌트
 export const SlideItem = styled.div({
   height: SlideItemHeight,
+  "@media(max-width: 485px)": {
+    height: SlideItemHeight_under485,
+  },
   "@media(max-width: 425px)": {
     height: SlideItemHeight_under425,
   },
-  "@media(max-width: 320px)": {
-    height: SlideItemHeight_under425,
-  },
+
   background:
     "radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.0) 70%)",
   borderRadius: 10,
@@ -45,6 +47,16 @@ export const SlideText = styled.p({
   cursor: "pointer",
   "@media(max-width: 768px)": {
     fontSize: 35,
+  },
+  "@media(max-width: 650px)": {
+    fontSize: 32,
+  },
+  "@media(max-width: 595px)": {
+    fontSize: 25,
+  },
+  "@media(max-width: 485px)": {
+    fontSize: 22,
+    lineHeight: SlideItemHeight_under485,
   },
   "@media(max-width: 425px)": {
     fontSize: 30,

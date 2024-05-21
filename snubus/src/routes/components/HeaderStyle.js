@@ -30,13 +30,17 @@ export const LogoText = styled.p({
   marginLeft: 30,
   marginBottom: 0,
   fontSize: 35,
-  "@media(max-width: 425px)": {
+  "@media(max-width: 595px)": {
+    fontSize: 30,
+    marginLeft: 20,
+  },
+  "@media(max-width: 485px)": {
     fontSize: 25,
     marginLeft: 20,
   },
-  "@media(max-width: 320px)": {
+  "@media(max-width: 358px)": {
     fontSize: 20,
-    marginLeft: 10,
+    marginLeft: 5,
   },
   cursor: "pointer",
 });

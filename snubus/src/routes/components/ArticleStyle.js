@@ -3,7 +3,7 @@ import { Font_BlackHanSans, flex } from "../../util/publicStyleComponets";
 
 // article wrap
 export const Article = styled.article({
-  width: "50dvw",
+  width: "100dvw",
   height: "80%",
   "@media(max-width: 425px)": {
     width: "100dvw",
@@ -15,7 +15,7 @@ export const Article = styled.article({
 
 // // article headerwrap
 export const HeaderWrap = styled.div({
-  width: "70%",
+  width: "90%",
   height: 40,
   margin: "0 auto",
   ...flex("row", "nomal", "nomal"),
@@ -36,7 +36,7 @@ export const Img = styled.img({
     width: 40,
     height: 40,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 595px)": {
     width: 35,
     height: 35,
   },
@@ -57,10 +57,11 @@ export const H2 = styled.h2({
     fontSize: 40,
     marginLeft: 10,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 595px)": {
     fontSize: 35,
     marginLeft: 10,
   },
+
   "@media(max-width: 320px)": {
     fontSize: 30,
     marginLeft: 10,
@@ -69,7 +70,7 @@ export const H2 = styled.h2({
 
 // article p
 export const P = styled.p({
-  width: "70%",
+  width: "90%",
   margin: "0 auto",
   marginBottom: 10,
   ...Font_BlackHanSans(),
