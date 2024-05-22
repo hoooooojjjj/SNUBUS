@@ -17,6 +17,7 @@ function Map({ position, visibility }) {
   });
 
   useEffect(() => {
+    // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
@@ -48,8 +49,9 @@ function Map({ position, visibility }) {
 
   // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
   function printKakaomap(curLat, curLlon) {
-    // ref가 kakaoMap인 요소를 container에 넣기
+    // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
+      // ref가 kakaoMap인 요소를 container에 넣기
       const container = kakaoMap.current; // 지도를 담을 영역의 DOM 레퍼런스
       // 지도를 생성할 때 필요한 기본 옵션
       const options = {

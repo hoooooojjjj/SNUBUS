@@ -9,6 +9,7 @@ export default function getDataInterval(busRouteId, setState, signal) {
         `https://api.allorigins.win/get?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busRouteId}&resultType=json`
         )}`,
+
         {
           cache: "no-cache",
           // 캐시 무시 옵션 추가
@@ -17,6 +18,7 @@ export default function getDataInterval(busRouteId, setState, signal) {
       );
       // 데이터 받아서 json 형태로 저장
       const jsonData = await response.json();
+      console.log(JSON.parse(jsonData.contents).msgBody.itemList);
 
       // 각 버스 좌표 데이터를 배열로 저장
       const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(
