@@ -12,6 +12,14 @@ export const CarouselWrap = styled.header({
   height: "40%",
 });
 
+// // Prop 필터링 함수
+// const filterProps =
+//   (Component) =>
+//   ({ currentSlide, slideCount, ...props }) =>
+//     <Component {...props} />;
+
+// const FilteredCarousel = filterProps(Carousel);
+
 export const StyledCarousel = styled(Carousel)`
   width: 40%;
   margin: 0 auto;
@@ -30,7 +38,6 @@ export const SlideItem = styled.div({
   "@media(max-width: 425px)": {
     height: SlideItemHeight_under425,
   },
-
   background:
     "radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.0) 70%)",
   borderRadius: 10,

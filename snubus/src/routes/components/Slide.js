@@ -7,19 +7,17 @@ import {
   SlideItem,
   SlideText,
 } from "./SlideStyle";
+import { Carousel } from "antd";
 
 const Slide = ({ info }) => {
   const nav = useNavigate();
 
   return (
-    // antd 사용자 정의 스타일
     <ConfigProvider
       theme={{
         components: {
           Carousel: {
-            // 화살표 스타일
             arrowSize: 30,
-            // dot 스타일
             dotActiveWidth: 40,
             dotWidth: 50,
             dotHeight: 7,
@@ -28,15 +26,10 @@ const Slide = ({ info }) => {
       }}
     >
       <CarouselWrap>
-        <StyledCarousel arrows={true}>
+        <StyledCarousel>
           {info.buslist.map((busNum) => (
             <SlideItem key={busNum}>
-              {/* {busNum}번 버스 보러가기 클릭시 해당 버스 view 컴포넌트로 라우팅 */}
-              <SlideText
-                onClick={() => {
-                  nav(`/${busNum}`);
-                }}
-              >
+              <SlideText onClick={() => nav(`/${busNum}`)}>
                 {busNum}번 버스
               </SlideText>
             </SlideItem>

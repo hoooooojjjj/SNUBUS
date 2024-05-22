@@ -17,7 +17,12 @@ function View5511Bus() {
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
-    getDataInterval(BUSROUTEID_5511, setPos5511Buses);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    getDataInterval(BUSROUTEID_5511, setPos5511Buses, signal);
+    return () => {
+      controller.abort(); // Fetch 요청 취소
+    };
   }, []);
 
   return (
