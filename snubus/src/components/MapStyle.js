@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { container, flex } from "../util/publicStyleComponets";
 
-export const Maps = styled.div({
+export const Maps = styled.div((props) => ({
+  visibility: props.visibility,
   width: "50%",
   height: "100%",
-});
+}));

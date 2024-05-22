@@ -6,9 +6,9 @@ import {
   LogoCover,
 } from "./LoadingStyle";
 
-function Loading() {
+function Loading({ display }) {
   return (
-    <LoadingContainer>
+    <LoadingContainer display={display}>
       <LoadingWrap>
         <LogoStyle>
           <LogoCover></LogoCover>SNUBUS

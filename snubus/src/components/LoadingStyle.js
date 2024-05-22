@@ -6,10 +6,12 @@ import {
   Font_ArchivoBlack,
 } from "../util/publicStyleComponets";
 // 로딩창 컨테이너
-export const LoadingContainer = styled.div({
+export const LoadingContainer = styled.div((props) => ({
+  display: props.display,
+  zIndex: 10,
   ...container(),
   backgroundColor: "rgba(0, 0, 0, 0.2)",
-});
+}));
 
 // 로딩 wrap
 export const LoadingWrap = styled.div({

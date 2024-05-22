@@ -1,7 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
+import { isMapPrintContext } from "../App";
 
-function Map({ position }) {
+function Map({ position, visibility }) {
+  // 카카오맵이 화면에 표시됐는지 판별하는 state
+  const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
+
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
 
@@ -36,7 +40,7 @@ function Map({ position }) {
   // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
   function printKakaomap(curLat, curLlon) {
     // ref가 kakaoMap인 요소를 container에 넣기
-    const container = kakaoMap.current; //지도를 담을 영역의 DOM 레퍼런스
+    const container = kakaoMap.current; // 지도를 담을 영역의 DOM 레퍼런스
     // 지도를 생성할 때 필요한 기본 옵션
     const options = {
       center: new window.kakao.maps.LatLng(
@@ -59,8 +63,12 @@ function Map({ position }) {
       // 마운트 되기 전 map 확대 및 이동 위치
       setMapInfo(newMapInfo);
     });
+
     // 마커 생성
     printMarker(map, curLat, curLlon);
+
+    // 카카오맵과 마커가 다 그려졌을 때 isMapPrint를 true로
+    setIsMapPrint(true);
   }
 
   // 마커 생성
@@ -102,7 +110,7 @@ function Map({ position }) {
     });
   };
 
-  return <Maps ref={kakaoMap}></Maps>;
+  return <Maps ref={kakaoMap} visibility={visibility}></Maps>;
 }
 
 export default Map;

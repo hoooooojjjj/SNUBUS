@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { media } from "@emotion/styled";
 import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
 
 /* header */
