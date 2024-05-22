@@ -21,6 +21,13 @@ function Map({ position, visibility }) {
     getCurrentPosition(printKakaomap);
   }, [position]);
 
+  useEffect(() => {
+    // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
+    return () => {
+      setIsMapPrint(false);
+    };
+  }, []);
+
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = (printKakaomap) => {
     // HTML5의 geolocation으로 사용할 수 있는지 확인
@@ -67,7 +74,7 @@ function Map({ position, visibility }) {
     // 마커 생성
     printMarker(map, curLat, curLlon);
 
-    // 카카오맵과 마커가 다 그려졌을 때 isMapPrint를 true로
+    // 지도가 렌더링된 후 setIsMapPrint(true) 호출
     setIsMapPrint(true);
   }
 
