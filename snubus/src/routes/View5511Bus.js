@@ -17,10 +17,14 @@ function View5511Bus() {
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
+    // 새로운 AbortController 객체 인터페이스를 생성
     const controller = new AbortController();
+    // DOM 요청과 통신하거나 취소하는데 사용되는 AbortSignal 객체 인터페이스
     const signal = controller.signal;
+    // signal을 getDataInterval의 인자로 보냄
     getDataInterval(BUSROUTEID_5511, setPos5511Buses, signal);
     return () => {
+      // DOM 요청이 완료되기 전에 취소한다. 이를 통해 fetch 요청, 모든 응답 Body 소비, 스트림을 취소할 수 있다.
       controller.abort(); // Fetch 요청 취소
     };
   }, []);

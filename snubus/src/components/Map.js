@@ -17,8 +17,10 @@ function Map({ position, visibility }) {
   });
 
   useEffect(() => {
-    // 현재 위치 좌표 가져오기
-    getCurrentPosition(printKakaomap);
+    if (kakaoMap.current) {
+      // 현재 위치 좌표 가져오기
+      getCurrentPosition(printKakaomap);
+    }
   }, [position]);
 
   useEffect(() => {
@@ -47,36 +49,37 @@ function Map({ position, visibility }) {
   // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
   function printKakaomap(curLat, curLlon) {
     // ref가 kakaoMap인 요소를 container에 넣기
-
-    const container = kakaoMap.current; // 지도를 담을 영역의 DOM 레퍼런스
-    // 지도를 생성할 때 필요한 기본 옵션
-    const options = {
-      center: new window.kakao.maps.LatLng(
-        mapInfo.centerY || curLat,
-        mapInfo.centerX || curLlon
-      ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
-      level: mapInfo.level || 3, //지도의 레벨(확대, 축소 정도)
-    };
-    const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-    // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
-    window.kakao.maps.event.addListener(map, "center_changed", function () {
-      // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
-      let newMapInfo = {
-        ...mapInfo,
-        level: map.getLevel(),
-        centerY: map.getCenter().Ma,
-        centerX: map.getCenter().La,
+    if (kakaoMap.current) {
+      const container = kakaoMap.current; // 지도를 담을 영역의 DOM 레퍼런스
+      // 지도를 생성할 때 필요한 기본 옵션
+      const options = {
+        center: new window.kakao.maps.LatLng(
+          mapInfo.centerY || curLat,
+          mapInfo.centerX || curLlon
+        ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
+        level: mapInfo.level || 3, //지도의 레벨(확대, 축소 정도)
       };
-      // 마운트 되기 전 map 확대 및 이동 위치
-      setMapInfo(newMapInfo);
-    });
+      const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-    // 마커 생성
-    printMarker(map, curLat, curLlon);
+      // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
+      window.kakao.maps.event.addListener(map, "center_changed", function () {
+        // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
+        let newMapInfo = {
+          ...mapInfo,
+          level: map.getLevel(),
+          centerY: map.getCenter().Ma,
+          centerX: map.getCenter().La,
+        };
+        // 마운트 되기 전 map 확대 및 이동 위치
+        setMapInfo(newMapInfo);
+      });
 
-    // 지도가 렌더링된 후 setIsMapPrint(true) 호출
-    setIsMapPrint(true);
+      // 마커 생성
+      printMarker(map, curLat, curLlon);
+
+      // 지도가 렌더링된 후 setIsMapPrint(true) 호출
+      setIsMapPrint(true);
+    }
   }
 
   // 마커 생성
