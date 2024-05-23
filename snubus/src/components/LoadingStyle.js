@@ -32,21 +32,27 @@ export const LogoStyle = styled.p({
 const blackWave = keyframes`
   0% {
     width: 0%;
+    border-radius: 0px;
   }
   20% {
     width: 20%;
+    border-radius: 20px;
   }
   40% {
     width: 40%;
+    border-radius: 50px;
   }
   60% {
     width: 60%;
+    border-radius: 50px;
   }
   80% {
     width: 80%;
+    border-radius: 20px;
   }
   100% {
     width: 100%;
+    border-radius: 0px;
   }
 
 `;
@@ -57,5 +63,5 @@ export const LogoCover = styled.span({
   position: "absolute",
   width: "100%",
   height: "100%",
-  animation: `${blackWave} 0.5s alternate linear infinite`,
+  animation: `${blackWave} 0.7s alternate linear infinite`,
 });
