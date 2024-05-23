@@ -7,7 +7,6 @@ import {
   SlideItem,
   SlideText,
 } from "./SlideStyle";
-import { Carousel } from "antd";
 
 const Slide = ({ info }) => {
   const nav = useNavigate();

@@ -12,18 +12,9 @@ export const CarouselWrap = styled.header({
   height: "40%",
 });
 
-// // Prop 필터링 함수
-// const filterProps =
-//   (Component) =>
-//   ({ currentSlide, slideCount, ...props }) =>
-//     <Component {...props} />;
-
-// const FilteredCarousel = filterProps(Carousel);
-
 export const StyledCarousel = styled(Carousel)`
   width: 40%;
   margin: 0 auto;
-
   @media (max-width: 425px) {
     width: 100%;
   }

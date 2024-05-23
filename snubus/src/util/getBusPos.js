@@ -18,7 +18,6 @@ export default function getDataInterval(busRouteId, setState, signal) {
       );
       // 데이터 받아서 json 형태로 저장
       const jsonData = await response.json();
-      console.log(JSON.parse(jsonData.contents).msgBody.itemList);
 
       // 각 버스 좌표 데이터를 배열로 저장
       const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(

@@ -31,21 +31,19 @@ function View5511Bus() {
 
   return (
     <Container>
+      {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
+      <Loading display={isMapPrint ? "none" : "block"} />
+      {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
+      {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
       {pos5511Buses ? (
-        // 데이터가 들어왔을 때
-        <>
-          {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
-          <Loading display={isMapPrint ? "none" : "block"} />
-          {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
-          {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
-          <Map
-            position={pos5511Buses}
-            visibility={isMapPrint ? "visible" : "hidden"}
-          ></Map>
-        </>
+        // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
+        <Map
+          position={pos5511Buses}
+          visibility={isMapPrint ? "visible" : "hidden"}
+        ></Map>
       ) : (
-        // 데이터가 들어오지 않았을 때
-        <Loading />
+        // 데이터가 안 들어왔을 때
+        <></>
       )}
     </Container>
   );
