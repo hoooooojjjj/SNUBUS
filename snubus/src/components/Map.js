@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
+import { flex } from "../util/publicStyleComponets";
 
-function Map({ position, visibility }) {
+function Map({ position }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -123,7 +124,7 @@ function Map({ position, visibility }) {
     });
   };
 
-  return <Maps ref={kakaoMap} visibility={visibility}></Maps>;
+  return <Maps ref={kakaoMap}></Maps>;
 }
 
 export default Map;

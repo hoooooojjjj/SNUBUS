@@ -37,10 +37,12 @@ function View5511Bus() {
       {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
       {pos5511Buses ? (
         // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
-        <Map
-          position={pos5511Buses}
-          visibility={isMapPrint ? "visible" : "hidden"}
-        ></Map>
+        <div style={{ display: "flex" }}>
+          <Map position={pos5511Buses}></Map>
+          <h1 style={{ color: "white" }}>
+            각 정류장 마다 남은 시간 정보 표시 예정
+          </h1>
+        </div>
       ) : (
         // 데이터가 안 들어왔을 때
         <></>
