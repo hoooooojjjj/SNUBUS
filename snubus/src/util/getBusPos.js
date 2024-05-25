@@ -25,6 +25,7 @@ export default function getDataInterval(busRouteId, setState, signal) {
           return [PosBus.gpsY, PosBus.gpsX];
         }
       );
+
       // 버스 좌표 데이터 배열 리턴
       return getPosBuses;
     } catch (error) {

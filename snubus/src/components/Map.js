@@ -3,7 +3,7 @@ import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
 import { flex } from "../util/publicStyleComponets";
 
-function Map({ position }) {
+function Map({ position, station }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -99,12 +99,23 @@ function Map({ position }) {
       position: new window.kakao.maps.LatLng(curLat, curLlon),
     });
 
-    // 5511번 버스들 위치 좌표 배열마다 마커 만들기
-    const markers = position.map(
+    // 해당 노선 모든 버스들 위치 좌표 배열마다 마커 만들기
+    const busMarkers = position.map(
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),
           clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+        })
+    );
+
+    // 해당 노선 모든 정류장 위치 좌표 배열마다 마커 만들기
+    const stationMarkers = station.map(
+      (stationPos) =>
+        new window.kakao.maps.Marker({
+          position: new window.kakao.maps.LatLng(
+            stationPos.position[0],
+            stationPos.position[1]
+          ),
         })
     );
 
@@ -113,14 +124,19 @@ function Map({ position }) {
     // 현재 위치 마커 print
     clusterer.addMarker(curMarker);
 
-    // 5511번 버스들 위치 마커 print
-    markers.forEach((marker) => {
+    // 해당 노선 모든 버스들 위치 마커 print
+    busMarkers.forEach((marker) => {
       clusterer.addMarker(marker);
 
       // 마커에 클릭이벤트를 등록
       window.kakao.maps.event.addListener(marker, "click", function () {
         console.log("12");
       });
+    });
+
+    // 해당 노선 모든 정류장들 위치 마커 print
+    stationMarkers.forEach((marker) => {
+      clusterer.addMarker(marker);
     });
   };
 
