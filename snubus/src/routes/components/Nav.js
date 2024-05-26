@@ -1,14 +1,12 @@
 import { useContext } from "react";
-import { Li, Ul } from "./NavStyle";
+import { Li, StyledMenu, Ul } from "./NavStyle";
 import { imgNumContext } from "../Main";
 import { SearchOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
 
 const busType = [
   {
     label: "버스 종류",
     key: "BusType",
-    icon: <SearchOutlined />,
     children: [
       { key: "0", label: "지선 버스" },
       { key: "1", label: "마을 버스" },
@@ -29,9 +27,12 @@ function Navigation() {
   };
   return (
     <Ul>
-      <Li>
-        <Menu mode="vertical" onClick={onClickBusType} items={busType} />
-      </Li>
+      <StyledMenu
+        mode="vertical"
+        onClick={onClickBusType}
+        items={busType}
+        expandIcon={false}
+      />
       <Li>소개</Li>
       <Li>문의</Li>
     </Ul>
