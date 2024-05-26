@@ -2,7 +2,17 @@ const busInfo = [
   {
     id: "FeederBus",
     name: "지선 버스",
-    buslist: ["5511", "5513", "5515"],
+    buslist: [
+      "5511",
+      "5513",
+      "5515",
+      "5517",
+      "6511",
+      "6512",
+      "6513",
+      "5528",
+      "6514",
+    ],
   },
   {
     id: "ViligeBus",
@@ -12,7 +22,17 @@ const busInfo = [
   {
     id: "MainlineBus",
     name: "간선 버스",
-    buslist: ["501", "750"],
+    buslist: ["705A", "705B", "501"],
+  },
+  {
+    id: "AirPortBus",
+    name: "공항 버스",
+    buslist: ["6003"],
+  },
+  {
+    id: "KTXBus",
+    name: "KTX셔틀 버스",
+    buslist: ["8507"],
   },
 ];
 
