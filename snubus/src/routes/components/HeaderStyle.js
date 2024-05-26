@@ -11,7 +11,7 @@ export const HeaderWrap = styled.header({
 
 // 헤더
 export const Header = styled.section({
-  position: "fixed",
+  // position: "fixed",
   width: "100%",
   height: 72,
   ...flex("row", "normal", "center"),

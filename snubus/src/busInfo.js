@@ -31,7 +31,7 @@ const busInfo = [
   },
   {
     id: "KTXBus",
-    name: "KTX셔틀 버스",
+    name: "KTX 셔틀 버스",
     buslist: ["8507"],
   },
 ];
