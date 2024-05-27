@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
-import { flex } from "../util/publicStyleComponets";
 
 function Map({ position, station }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state

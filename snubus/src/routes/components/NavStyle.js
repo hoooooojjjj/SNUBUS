@@ -49,10 +49,10 @@ export const Li = styled.li({
   cursor: "pointer",
   ...Font_BlackHanSans(),
   position: "relative",
-  "-webkit-user-select": "none" /* Safari */,
-  "-moz-user-select": "none" /* Firefox */,
-  "-ms-user-select": "none" /* Internet Explorer/Edge */,
-  "user-select":
+  WebkitUserSelect: "none" /* Safari */,
+  MozUserSelect: "none" /* Firefox */,
+  msUserSelect: "none" /* Internet Explorer/Edge */,
+  userSelect:
     "none" /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */,
 });
 

@@ -34,6 +34,7 @@ function Navigation() {
         <BusTypeDropDownWrap>
           {busType.map((bus) => (
             <BusTypeDropDown
+              key={bus.key}
               onClickCapture={() => {
                 selectBusType(bus);
               }}
