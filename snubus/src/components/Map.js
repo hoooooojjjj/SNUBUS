@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
 
-function Map({ position, station }) {
+function Map({ position, stations }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -108,7 +108,7 @@ function Map({ position, station }) {
     );
 
     // 해당 노선 모든 정류장 위치 좌표 배열마다 마커 만들기
-    const stationMarkers = station.map(
+    const stationMarkers = stations.map(
       (stationPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(
