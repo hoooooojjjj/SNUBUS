@@ -1,10 +1,17 @@
 import React from "react";
-import { Footer, FooterP } from "./FooterStlye";
+import { Footer, FooterP, FooterPWrap } from "./FooterStlye";
+import { Link } from "react-router-dom";
 
 function Footers() {
   return (
     <Footer>
-      <FooterP>ⓒSONO. All rights reserved.</FooterP>
+      <FooterPWrap>
+        <FooterP>ⓒSONO. All rights reserved.</FooterP>
+        <FooterP>
+          저작자 :{" "}
+          <Link to="https://www.flaticon.com/kr/free-icons/-">아이콘</Link>
+        </FooterP>
+      </FooterPWrap>
     </Footer>
   );
 }
