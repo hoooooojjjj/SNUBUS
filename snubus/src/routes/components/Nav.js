@@ -21,13 +21,24 @@ function Navigation() {
   const onClickBusType = () => {
     setShowDropDown(!showDropdown);
   };
+
+  // 버스 종류 클릭 시 드롭다운 메뉴 표시
+  const selectBusType = (bus) => {
+    setImgNum(bus.key);
+  };
+
   return (
     <Ul>
       <Li onClick={onClickBusType}>
         버스 종류
         <BusTypeDropDownWrap>
           {busType.map((bus) => (
-            <BusTypeDropDown display={showDropdown ? "block" : "none"}>
+            <BusTypeDropDown
+              onClickCapture={() => {
+                selectBusType(bus);
+              }}
+              display={showDropdown ? "block" : "none"}
+            >
               {bus.label}
             </BusTypeDropDown>
           ))}
