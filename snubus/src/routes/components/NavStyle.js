@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
-import { Menu } from "antd";
 
 // ul 태그
 export const Ul = styled.ul({
@@ -49,25 +48,17 @@ export const Li = styled.li({
   },
   cursor: "pointer",
   ...Font_BlackHanSans(),
+  position: "relative",
 });
 
-export const StyledMenu = styled(Menu)({
-  fontSize: 25,
-  "@media(max-width: 735px)": {
-    fontSize: 20,
-  },
-  "@media(max-width: 595px)": {
-    fontSize: 18,
-  },
-  "@media(max-width: 485px)": {
-    fontSize: 15,
-  },
-  "@media(max-width: 425px)": {
-    fontSize: 15,
-  },
-  "@media(max-width: 320px)": {
-    fontSize: 14,
-  },
-  cursor: "pointer",
-  ...Font_BlackHanSans(),
+export const BusTypeDropDownWrap = styled.div({
+  position: "absolute",
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
 });
+
+export const BusTypeDropDown = styled.div((props) => ({
+  display: props.display,
+  fontSize: 15,
+}));

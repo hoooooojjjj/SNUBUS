@@ -25,12 +25,6 @@ function App() {
               dotWidth: 50,
               dotHeight: 7,
             },
-            Menu: {
-              itemBg: "rgba(0,0,0,0)",
-              itemSelectedColor: "white",
-              itemColor: "white",
-              popupBg: "white",
-            },
           },
         }}
       >
