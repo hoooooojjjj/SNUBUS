@@ -3,6 +3,12 @@ import { Font_BlackHanSans, flex } from "../../util/publicStyleComponets";
 
 // article wrap
 export const Article = styled.article({
+  zIndex: 1,
+  WebkitUserSelect: "none" /* Safari */,
+  MozUserSelect: "none" /* Firefox */,
+  msUserSelect: "none" /* Internet Explorer/Edge */,
+  userSelect:
+    "none" /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */,
   width: "100dvw",
   height: "80%",
   "@media(max-width: 425px)": {
@@ -13,7 +19,7 @@ export const Article = styled.article({
   ...flex("column", "center", "normal"),
 });
 
-// // article headerwrap
+// article headerwrap
 export const HeaderWrap = styled.div({
   width: "90%",
   height: 40,
@@ -61,7 +67,6 @@ export const H2 = styled.h2({
     fontSize: 35,
     marginLeft: 10,
   },
-
   "@media(max-width: 320px)": {
     fontSize: 30,
     marginLeft: 10,

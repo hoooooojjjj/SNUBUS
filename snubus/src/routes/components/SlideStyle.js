@@ -16,7 +16,7 @@ export const StyledCarousel = styled(Carousel)`
   width: 40%;
   margin: 0 auto;
   @media (max-width: 425px) {
-    width: 100%;
+    width: 85%;
   }
 `;
 
