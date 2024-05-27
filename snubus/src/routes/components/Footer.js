@@ -8,8 +8,8 @@ function Footers() {
       <FooterPWrap>
         <FooterP>ⓒSONO. All rights reserved.</FooterP>
         <FooterP>
-          저작자 :{" "}
-          <Link to="https://www.flaticon.com/kr/free-icons/-">아이콘</Link>
+          저작자 :
+          <Link to="https://www.flaticon.com/kr/free-icons/-">마커</Link>
         </FooterP>
       </FooterPWrap>
     </Footer>

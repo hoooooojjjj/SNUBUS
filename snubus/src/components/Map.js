@@ -59,7 +59,7 @@ function Map({ position, stations }) {
           mapInfo.centerY || curLat,
           mapInfo.centerX || curLlon
         ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
-        level: mapInfo.level || 3, //지도의 레벨(확대, 축소 정도)
+        level: mapInfo.level || 1, //지도의 레벨(확대, 축소 정도)
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
@@ -93,7 +93,7 @@ function Map({ position, stations }) {
       gridSize: 35,
     });
 
-    // 마커 이미지 정보
+    // 현재 위치 마커 이미지 정보
     const CurImageSrc = process.env.PUBLIC_URL + `assets/currentMarker.png`, // 마커이미지의 주소
       CurImageSize = new window.kakao.maps.Size(40),
       CurImageOption = { offset: new window.kakao.maps.Point(20, 20) }; // 마커이미지의 크기
@@ -110,7 +110,7 @@ function Map({ position, stations }) {
       image: CurmarkerImage,
     });
 
-    // 마커 이미지 정보
+    // 버스 마커 이미지 정보
     const BusImageSrc = process.env.PUBLIC_URL + `assets/FeederBus.png`, // 마커이미지의 주소
       BusImageSize = new window.kakao.maps.Size(30),
       BusImageOption = { offset: new window.kakao.maps.Point(0, 0) }; // 마커이미지의 크기
@@ -132,6 +132,17 @@ function Map({ position, stations }) {
         })
     );
 
+    // 버스 마커 이미지 정보
+    const stationImageSrc = process.env.PUBLIC_URL + `assets/stationMarker.png`, // 마커이미지의 주소
+      stationImageSize = new window.kakao.maps.Size(30),
+      stationImageOption = { offset: new window.kakao.maps.Point(0, 0) }; // 마커이미지의 크기
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
+    const stationMarkerImage = new window.kakao.maps.MarkerImage(
+      stationImageSrc,
+      stationImageSize,
+      stationImageOption
+    );
     // 해당 노선 모든 정류장 위치 좌표 배열마다 마커 만들기
     const stationMarkers = stations.map(
       (stationPos) =>
@@ -140,6 +151,7 @@ function Map({ position, stations }) {
             stationPos.position[0],
             stationPos.position[1]
           ),
+          image: stationMarkerImage,
         })
     );
 
