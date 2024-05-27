@@ -66,4 +66,19 @@ export const BusTypeDropDownWrap = styled.div({
 export const BusTypeDropDown = styled.div((props) => ({
   display: props.display,
   fontSize: 20,
+  "@media(max-width: 735px)": {
+    fontSize: 15,
+  },
+  "@media(max-width: 595px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 485px)": {
+    fontSize: 10,
+  },
+  "@media(max-width: 425px)": {
+    fontSize: 10,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 9,
+  },
 }));
