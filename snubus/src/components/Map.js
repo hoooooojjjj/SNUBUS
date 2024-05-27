@@ -98,11 +98,24 @@ function Map({ position, stations }) {
       position: new window.kakao.maps.LatLng(curLat, curLlon),
     });
 
+    // 마커 이미지 정보
+    const imageSrc = process.env.PUBLIC_URL + `assets/FeederBus.png`, // 마커이미지의 주소
+      imageSize = new window.kakao.maps.Size(30, 30), // 마커이미지의 크기
+      imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정.
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
+    const markerImage = new window.kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    );
+
     // 해당 노선 모든 버스들 위치 좌표 배열마다 마커 만들기
     const busMarkers = position.map(
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),
+          image: markerImage,
           clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         })
     );

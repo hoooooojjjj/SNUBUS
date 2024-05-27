@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Article, H2, Img, HeaderWrap, P, Plus } from "./ArticleStyle";
+import { Article, H2, Img, HeaderWrap, P } from "./ArticleStyle";
 import Slide from "./Slide";
 
 function Articles({ info }) {
