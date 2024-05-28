@@ -24,8 +24,12 @@ function Map({
 
   const [directionsData, setDirectionsData] = useState([]);
   const [directionsData2, setDirectionsData2] = useState([]);
+  const [directionsData3, setDirectionsData3] = useState([]);
+  const [directionsData4, setDirectionsData4] = useState([]);
+  const [directionsData5, setDirectionsData5] = useState([]);
 
   useEffect(() => {
+    // 서울대학교(중앙대학교 방면) -> 제2공학관(중앙대학교 방면)
     getDirectionsData(
       "37.4667414611",
       "126.9479522861",
@@ -34,6 +38,7 @@ function Map({
     ).then((res) => {
       setDirectionsData(res);
     });
+    // 제2공학관(중앙대학교 방면)-> 서울대입구역(중앙대학교 방면)
     getDirectionsData(
       "37.4487952",
       "126.9520773",
@@ -42,9 +47,34 @@ function Map({
     ).then((res) => {
       setDirectionsData2(res);
     });
-  }, []);
+    // 서울대입구역(신림2동차고지 방면)->에너지자원연구소(신림2동차고지 방면)
+    getDirectionsData(
+      "37.48070059",
+      "126.952444",
+      "37.45359525",
+      "126.9522142"
+    ).then((res) => {
+      setDirectionsData3(res);
+    });
+    // 에너지자원연구소(신림2동차고지 방면) -> 유회진학술정보관.제1공학관(신림2동차고지 방면)
+    getDirectionsData(
+      "37.45359525",
+      "126.9522142",
+      "37.451283",
+      "126.952595"
+    ).then((res) => {
+      setDirectionsData4(res);
+    });
+    // 유회진학술정보관.제1공학관(신림2동차고지 방면) -> 신림중.삼성고.관악아트홀·도서관(신림2동차고지 방면)
+    getDirectionsData(
+      "37.451283",
+      "126.952595",
+      "37.47055199",
+      "126.944133"
+    ).then((res) => {
+      setDirectionsData5(res);
+    });
 
-  useEffect(() => {
     // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
       // 현재 위치 좌표 가져오기
@@ -130,6 +160,63 @@ function Map({
       });
       // 폴리라인 적용
       polylineForStart2.setMap(map);
+
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForStartArray3 = [
+        directionsData3.map(
+          (direction) =>
+            new window.kakao.maps.LatLng(direction[0], direction[1])
+        ),
+      ];
+      // 폴리라인 생성
+      const polylineForStart3 = new window.kakao.maps.Polyline({
+        map: map,
+        path: stationPosForStartArray3,
+        strokeWeight: 4,
+        strokeColor: "red",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+      });
+      // 폴리라인 적용
+      polylineForStart3.setMap(map);
+
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForStartArray4 = [
+        directionsData4.map(
+          (direction) =>
+            new window.kakao.maps.LatLng(direction[0], direction[1])
+        ),
+      ];
+      // 폴리라인 생성
+      const polylineForStart4 = new window.kakao.maps.Polyline({
+        map: map,
+        path: stationPosForStartArray4,
+        strokeWeight: 4,
+        strokeColor: "red",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+      });
+      // 폴리라인 적용
+      polylineForStart4.setMap(map);
+
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForStartArray5 = [
+        directionsData5.map(
+          (direction) =>
+            new window.kakao.maps.LatLng(direction[0], direction[1])
+        ),
+      ];
+      // 폴리라인 생성
+      const polylineForStart5 = new window.kakao.maps.Polyline({
+        map: map,
+        path: stationPosForStartArray5,
+        strokeWeight: 4,
+        strokeColor: "red",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+      });
+      // 폴리라인 적용
+      polylineForStart5.setMap(map);
 
       // // 버스 노선 기점-> 종점 방면 폴리라인 생성
       // const stationPosForEndArray = [
