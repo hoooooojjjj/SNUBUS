@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
+import getDirectionsData from "../util/getGoogleDirections";
 
 function Map({
   position,
@@ -21,7 +22,12 @@ function Map({
     centerX: "",
   });
 
+  const [directionsData, setDirectionsData] = useState([]);
+
   useEffect(() => {
+    getDirectionsData().then((res) => {
+      setDirectionsData(res);
+    });
     // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
       // 현재 위치 좌표 가져오기
@@ -70,18 +76,16 @@ function Map({
 
       // 버스 노선 기점-> 종점 방면 폴리라인 생성
       const stationPosForStartArray = [
-        bus_5511Stations_startForPolyLine.map(
-          (bus_5511Station_start) =>
-            new window.kakao.maps.LatLng(
-              bus_5511Station_start.position[0],
-              bus_5511Station_start.position[1]
-            )
+        directionsData.map(
+          (direction) =>
+            new window.kakao.maps.LatLng(direction[0], direction[1])
         ),
       ];
+
       // 폴리라인 생성
       const polylineForStart = new window.kakao.maps.Polyline({
         map: map,
-        path: [...stationPosForStartArray],
+        path: stationPosForStartArray,
         endArrow: true,
         strokeWeight: 4,
         strokeColor: "blue",
@@ -91,28 +95,28 @@ function Map({
       // 폴리라인 적용
       polylineForStart.setMap(map);
 
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForEndArray = [
-        bus_5511Stations_endForPolyLine.map(
-          (bus_5511Station_start) =>
-            new window.kakao.maps.LatLng(
-              bus_5511Station_start.position[0],
-              bus_5511Station_start.position[1]
-            )
-        ),
-      ];
-      // 폴리라인 생성
-      const polylineForEnd = new window.kakao.maps.Polyline({
-        map: map,
-        path: [...stationPosForEndArray],
-        endArrow: true,
-        strokeWeight: 4,
-        strokeColor: "red",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForEnd.setMap(map);
+      // // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      // const stationPosForEndArray = [
+      //   bus_5511Stations_endForPolyLine.map(
+      //     (bus_5511Station_start) =>
+      //       new window.kakao.maps.LatLng(
+      //         bus_5511Station_start.position[0],
+      //         bus_5511Station_start.position[1]
+      //       )
+      //   ),
+      // ];
+      // // 폴리라인 생성
+      // const polylineForEnd = new window.kakao.maps.Polyline({
+      //   map: map,
+      //   path: [...stationPosForEndArray],
+      //   endArrow: true,
+      //   strokeWeight: 4,
+      //   strokeColor: "red",
+      //   strokeOpacity: 1,
+      //   strokeStyle: "solid",
+      // });
+      // // 폴리라인 적용
+      // polylineForEnd.setMap(map);
 
       // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
       window.kakao.maps.event.addListener(map, "center_changed", function () {

@@ -6,7 +6,6 @@ function Articles({ info }) {
   const [showOver4, setShowOver4] = useState(false);
 
   const onClick = () => {
-    console.log("Button clicked");
     setShowOver4(!showOver4);
   };
 
