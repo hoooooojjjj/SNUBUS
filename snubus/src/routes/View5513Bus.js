@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Map from "../components/Map";
-import getDataInterval from "../util/getBusPos";
+import getBusPosDataInterval from "../util/getBusPos";
 import Loading from "../components/Loading";
 
 const BUSROUTEID_5513 = "100100251";
@@ -12,7 +12,7 @@ function View5513Bus() {
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
-    getDataInterval(BUSROUTEID_5513, setPos5513Buses);
+    getBusPosDataInterval(BUSROUTEID_5513, setPos5513Buses);
   }, []);
 
   return (

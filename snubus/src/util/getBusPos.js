@@ -1,7 +1,7 @@
 // 버스 위치 정보 데이터 주기적으로 호출
-export default function getDataInterval(busRouteId, setState, signal) {
+export default function getBusPosDataInterval(busRouteId, setState, signal) {
   // 버스 위치 정보 데이터 fetching
-  async function getData() {
+  async function getBusPosData() {
     try {
       // signal을 fetch에 옵션으로 추가
       // AbortSignal의 인스턴스를 받고 AbortController를 이용해서 원할 때 fetch 요청을 취소할 수 있음
@@ -18,6 +18,16 @@ export default function getDataInterval(busRouteId, setState, signal) {
       );
       // 데이터 받아서 json 형태로 저장
       const jsonData = await response.json();
+
+      // 만약 요청 횟수 초과 시
+      if (
+        JSON.parse(jsonData.contents).msgHeader.headerMsg ===
+        "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
+      ) {
+        console.log("데이터 요청 횟수 초과");
+        // getBusPosData() 종료
+        return null;
+      }
 
       // 각 버스 좌표 데이터를 배열로 저장
       const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(
@@ -37,35 +47,27 @@ export default function getDataInterval(busRouteId, setState, signal) {
       }
     }
   }
+
   // 처음 마운트 되었을 때 fetching
-  getData().then((res) => {
+  getBusPosData().then((res) => {
+    // 데이터가 없으면 실행 종료
+    if (!res) {
+      return null;
+    }
     setState(res);
   });
 
   // 11초 마다 데이터 업데이트
   const fetchDataInterval = setInterval(() => {
-    getData().then((res) => {
+    getBusPosData().then((res) => {
+      // 데이터가 없으면 실행 종료
+      if (!res) {
+        clearInterval(fetchDataInterval);
+      }
       setState(res);
     });
   }, 11000); // 11초마다 데이터 다시 요청
 
-  async function getData11() {
-    try {
-      // signal을 fetch에 옵션으로 추가
-      // AbortSignal의 인스턴스를 받고 AbortController를 이용해서 원할 때 fetch 요청을 취소할 수 있음
-      const response = await fetch(
-        `https://api.allorigins.win/get?url=${encodeURIComponent(
-          `https://maps.googleapis.com/maps/api/directions/json?destination=Queens&mode=transit&origin=Brooklyn&key=${process.env.REACT_APP_GOOGLEMAPS_API_KEY}`
-        )}`
-      );
-      // 데이터 받아서 json 형태로 저장
-      const jsonData = await response.json();
-      console.log(jsonData.contents);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  }
-  getData11();
   // 컴포넌트가 언마운트될 때 clearInterval 호출하여 메모리 누수 방지
   return () => clearInterval(fetchDataInterval);
 }
