@@ -39,7 +39,10 @@ function View5511Bus() {
       {pos5511Buses ? (
         // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
         <div style={{ display: "flex" }}>
-          <Map position={pos5511Buses} stations={bus_5511Stations_start}></Map>
+          <Map
+            position={pos5511Buses}
+            bus_5511Stations_start={bus_5511Stations_start}
+          ></Map>
           <h1 style={{ color: "white" }}>
             각 정류장 마다 남은 시간 정보 표시 예정
           </h1>
