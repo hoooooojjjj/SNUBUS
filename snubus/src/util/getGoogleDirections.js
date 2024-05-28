@@ -1,4 +1,7 @@
-// 버스 노선 경로 데이터 fetching
+// polyline-encoded 라이브러리 사용
+const polyUtil = require("polyline-encoded");
+
+// Google directions API에 버스 노선 경로 좌표 데이터 fetching
 async function getDirectionsData() {
   try {
     const response = await fetch(
@@ -10,14 +13,13 @@ async function getDirectionsData() {
     const jsonData = await response.json();
     const directions = JSON.parse(jsonData.contents);
 
-    // directions 데이터가 상태가 OK면
-    if (directions.status === "OK") {
-      console.log(directions.routes[0].overview_polyline.points);
-      // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
-      return directions.routes[0].overview_polyline.points;
-    } else {
-      throw new Error("Directions request failed");
-    }
+    // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
+    const decodeddirections = polyUtil.decode(
+      directions.routes[0].overview_polyline.points
+    );
+
+    // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
+    return decodeddirections;
   } catch (error) {
     console.error("Fetch error:", error);
   }
