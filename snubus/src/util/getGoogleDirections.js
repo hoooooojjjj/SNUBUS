@@ -2,11 +2,17 @@
 const polyUtil = require("polyline-encoded");
 
 // Google directions API에 버스 노선 경로 좌표 데이터 fetching
-async function getDirectionsData() {
+// 출발지 - 목적지 위도,경도 좌표를 인자로 받음
+async function getDirectionsData(
+  originLatitude,
+  originLongitude,
+  destinationLatitude,
+  destinationLongitude
+) {
   try {
     const response = await fetch(
       `https://api.allorigins.win/get?url=${encodeURIComponent(
-        `https://maps.googleapis.com/maps/api/directions/json?destination=37.4487952,126.9520773&mode=transit&origin=37.4667414611,126.9479522861&key=${process.env.REACT_APP_GOOGLEMAPS_API_KEY}`
+        `https://maps.googleapis.com/maps/api/directions/json?destination=${destinationLatitude},${destinationLongitude}&mode=transit&origin=${originLatitude},${originLongitude}&key=${process.env.REACT_APP_GOOGLEMAPS_API_KEY}`
       )}`
     );
     // 데이터 받아서 json 형태로 저장

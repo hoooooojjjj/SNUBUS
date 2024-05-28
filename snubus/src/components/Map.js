@@ -23,11 +23,28 @@ function Map({
   });
 
   const [directionsData, setDirectionsData] = useState([]);
+  const [directionsData2, setDirectionsData2] = useState([]);
 
   useEffect(() => {
-    getDirectionsData().then((res) => {
+    getDirectionsData(
+      "37.4667414611",
+      "126.9479522861",
+      "37.4487952",
+      "126.9520773"
+    ).then((res) => {
       setDirectionsData(res);
     });
+    getDirectionsData(
+      "37.4487952",
+      "126.9520773",
+      "37.48011095",
+      "126.9527298"
+    ).then((res) => {
+      setDirectionsData2(res);
+    });
+  }, []);
+
+  useEffect(() => {
     // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
       // 현재 위치 좌표 가져오기
@@ -75,7 +92,7 @@ function Map({
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
       // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray = [
+      const stationPosForStartArray1 = [
         directionsData.map(
           (direction) =>
             new window.kakao.maps.LatLng(direction[0], direction[1])
@@ -83,17 +100,36 @@ function Map({
       ];
 
       // 폴리라인 생성
-      const polylineForStart = new window.kakao.maps.Polyline({
+      const polylineForStart1 = new window.kakao.maps.Polyline({
         map: map,
-        path: stationPosForStartArray,
-        endArrow: true,
+        path: stationPosForStartArray1,
         strokeWeight: 4,
         strokeColor: "blue",
         strokeOpacity: 1,
         strokeStyle: "solid",
       });
       // 폴리라인 적용
-      polylineForStart.setMap(map);
+      polylineForStart1.setMap(map);
+
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForStartArray2 = [
+        directionsData2.map(
+          (direction) =>
+            new window.kakao.maps.LatLng(direction[0], direction[1])
+        ),
+      ];
+
+      // 폴리라인 생성
+      const polylineForStart2 = new window.kakao.maps.Polyline({
+        map: map,
+        path: stationPosForStartArray2,
+        strokeWeight: 4,
+        strokeColor: "blue",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+      });
+      // 폴리라인 적용
+      polylineForStart2.setMap(map);
 
       // // 버스 노선 기점-> 종점 방면 폴리라인 생성
       // const stationPosForEndArray = [
