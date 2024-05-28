@@ -49,6 +49,23 @@ export default function getDataInterval(busRouteId, setState, signal) {
     });
   }, 11000); // 11초마다 데이터 다시 요청
 
+  async function getData11() {
+    try {
+      // signal을 fetch에 옵션으로 추가
+      // AbortSignal의 인스턴스를 받고 AbortController를 이용해서 원할 때 fetch 요청을 취소할 수 있음
+      const response = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          `https://maps.googleapis.com/maps/api/directions/json?destination=Queens&mode=transit&origin=Brooklyn&key=${process.env.REACT_APP_GOOGLEMAPS_API_KEY}`
+        )}`
+      );
+      // 데이터 받아서 json 형태로 저장
+      const jsonData = await response.json();
+      console.log(jsonData.contents);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  }
+  getData11();
   // 컴포넌트가 언마운트될 때 clearInterval 호출하여 메모리 누수 방지
   return () => clearInterval(fetchDataInterval);
 }
