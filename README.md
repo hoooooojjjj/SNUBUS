@@ -19,6 +19,7 @@
     - 2. 백엔드 : Firebase, 서울특별시\_버스위치정보조회 API(공공데이터)
     - 3. 데이터베이스 : Cloud Firestore
     - 4. 배포 : Firebase hosting
+  - 6. OpenAPI : kakaoMaps, GoogleMaps(Google Directions API)
 - **링크**
   - 깃허브 :
   - URL :

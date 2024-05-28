@@ -12,7 +12,7 @@ const Slide = ({ info }) => {
 
   return (
     <CarouselWrap>
-      <StyledCarousel>
+      <StyledCarousel arrows={true}>
         {info.buslist.map((busNum) => (
           <SlideItem key={busNum}>
             <SlideText onClick={() => nav(`/${busNum}`)}>
