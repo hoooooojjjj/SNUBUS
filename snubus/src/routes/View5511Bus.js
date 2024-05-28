@@ -4,7 +4,11 @@ import getDataInterval from "../util/getBusPos";
 import Loading from "../components/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
-import { bus_5511Stations_start } from "../busStationPos";
+import {
+  bus_5511Stations_startForPolyLine,
+  bus_5511Stations_endForPolyLine,
+  bus_5511Stations_forMarker,
+} from "../busStationPos";
 
 const BUSROUTEID_5511 = "100100250";
 
@@ -41,7 +45,11 @@ function View5511Bus() {
         <div style={{ display: "flex" }}>
           <Map
             position={pos5511Buses}
-            bus_5511Stations_start={bus_5511Stations_start}
+            bus_5511Stations_startForPolyLine={
+              bus_5511Stations_startForPolyLine
+            }
+            bus_5511Stations_endForPolyLine={bus_5511Stations_endForPolyLine}
+            bus_5511Stations_forMarker={bus_5511Stations_forMarker}
           ></Map>
           <h1 style={{ color: "white" }}>
             각 정류장 마다 남은 시간 정보 표시 예정

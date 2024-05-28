@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
 
-function Map({ position, bus_5511Stations_start }) {
+function Map({
+  position,
+  bus_5511Stations_startForPolyLine,
+  bus_5511Stations_endForPolyLine,
+  bus_5511Stations_forMarker,
+}) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -63,9 +68,9 @@ function Map({ position, bus_5511Stations_start }) {
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      // 버스 노선 폴리라인 생성
-      const stationPosArray = [
-        bus_5511Stations_start.map(
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForStartArray = [
+        bus_5511Stations_startForPolyLine.map(
           (bus_5511Station_start) =>
             new window.kakao.maps.LatLng(
               bus_5511Station_start.position[0],
@@ -74,9 +79,9 @@ function Map({ position, bus_5511Stations_start }) {
         ),
       ];
       // 폴리라인 생성
-      const polyline = new window.kakao.maps.Polyline({
+      const polylineForStart = new window.kakao.maps.Polyline({
         map: map,
-        path: [...stationPosArray],
+        path: [...stationPosForStartArray],
         endArrow: true,
         strokeWeight: 4,
         strokeColor: "blue",
@@ -84,7 +89,30 @@ function Map({ position, bus_5511Stations_start }) {
         strokeStyle: "solid",
       });
       // 폴리라인 적용
-      polyline.setMap(map);
+      polylineForStart.setMap(map);
+
+      // 버스 노선 기점-> 종점 방면 폴리라인 생성
+      const stationPosForEndArray = [
+        bus_5511Stations_endForPolyLine.map(
+          (bus_5511Station_start) =>
+            new window.kakao.maps.LatLng(
+              bus_5511Station_start.position[0],
+              bus_5511Station_start.position[1]
+            )
+        ),
+      ];
+      // 폴리라인 생성
+      const polylineForEnd = new window.kakao.maps.Polyline({
+        map: map,
+        path: [...stationPosForEndArray],
+        endArrow: true,
+        strokeWeight: 4,
+        strokeColor: "red",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+      });
+      // 폴리라인 적용
+      polylineForEnd.setMap(map);
 
       // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
       window.kakao.maps.event.addListener(map, "center_changed", function () {
@@ -167,7 +195,7 @@ function Map({ position, bus_5511Stations_start }) {
       stationImageOption
     );
     // 해당 노선 모든 정류장 위치 좌표 배열마다 마커 만들기
-    const stationMarkers = bus_5511Stations_start.map(
+    const stationMarkers = bus_5511Stations_forMarker.map(
       (stationPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(
