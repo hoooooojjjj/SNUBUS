@@ -77,11 +77,11 @@ function Map({ position, bus_5511Stations_start }) {
       const polyline = new window.kakao.maps.Polyline({
         map: map,
         path: [...stationPosArray],
-
-        strokeWeight: 2,
-        strokeColor: "#FF00FF",
-        strokeOpacity: 0.8,
-        strokeStyle: "dashed",
+        endArrow: true,
+        strokeWeight: 4,
+        strokeColor: "blue",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
       });
       // 폴리라인 적용
       polyline.setMap(map);
@@ -133,24 +133,24 @@ function Map({ position, bus_5511Stations_start }) {
       image: CurmarkerImage,
     });
 
-    // 버스 마커 이미지 정보
-    const BusImageSrc = process.env.PUBLIC_URL + `assets/FeederBus.png`, // 마커이미지의 주소
-      BusImageSize = new window.kakao.maps.Size(30),
-      BusImageOption = { offset: new window.kakao.maps.Point(0, 0) }; // 마커이미지의 크기
+    // // 버스 마커 이미지 정보
+    // const BusImageSrc = process.env.PUBLIC_URL + `assets/FeederBus.png`, // 마커이미지의 주소
+    //   BusImageSize = new window.kakao.maps.Size(30),
+    //   BusImageOption = { offset: new window.kakao.maps.Point(5, 0) }; // 마커이미지의 크기
 
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
-    const BusMarkerImage = new window.kakao.maps.MarkerImage(
-      BusImageSrc,
-      BusImageSize,
-      BusImageOption
-    );
+    // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
+    // const BusMarkerImage = new window.kakao.maps.MarkerImage(
+    //   BusImageSrc,
+    //   BusImageSize,
+    //   BusImageOption
+    // );
 
     // 해당 노선 모든 버스들 위치 좌표 배열마다 마커 만들기
     const busMarkers = position.map(
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),
-          image: BusMarkerImage,
+          // image: BusMarkerImage,
           clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         })
     );
@@ -158,7 +158,7 @@ function Map({ position, bus_5511Stations_start }) {
     // 버스 마커 이미지 정보
     const stationImageSrc = process.env.PUBLIC_URL + `assets/stationMarker.png`, // 마커이미지의 주소
       stationImageSize = new window.kakao.maps.Size(30),
-      stationImageOption = { offset: new window.kakao.maps.Point(0, 0) }; // 마커이미지의 크기
+      stationImageOption = { offset: new window.kakao.maps.Point(15, 15) }; // 마커이미지의 크기
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
     const stationMarkerImage = new window.kakao.maps.MarkerImage(
