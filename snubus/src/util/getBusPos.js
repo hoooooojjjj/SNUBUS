@@ -9,7 +9,6 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
         `https://api.allorigins.win/get?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busRouteId}&resultType=json`
         )}`,
-
         {
           cache: "no-cache",
           // 캐시 무시 옵션 추가

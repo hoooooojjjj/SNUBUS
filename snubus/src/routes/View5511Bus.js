@@ -4,11 +4,7 @@ import getBusPosDataInterval from "../util/getBusPos";
 import Loading from "../components/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
-import {
-  bus_5511Stations_startForPolyLine,
-  bus_5511Stations_endForPolyLine,
-  bus_5511Stations_forMarker,
-} from "../busStationPos";
+import { bus_5511Stations_forMarker } from "../busStationPos";
 
 const BUSROUTEID_5511 = "100100250";
 
@@ -40,15 +36,11 @@ function View5511Bus() {
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
       {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
-      {true ? (
+      {pos5511Buses ? (
         // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
         <div style={{ display: "flex" }}>
           <Map
-            position={[37.46766096, 126.9496319]}
-            bus_5511Stations_startForPolyLine={
-              bus_5511Stations_startForPolyLine
-            }
-            bus_5511Stations_endForPolyLine={bus_5511Stations_endForPolyLine}
+            position={pos5511Buses}
             bus_5511Stations_forMarker={bus_5511Stations_forMarker}
           ></Map>
           <h1 style={{ color: "white" }}>

@@ -2,13 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
 import getDirectionsData from "../util/getGoogleDirections";
+import printPolyline from "../util/printPolyline";
 
-function Map({
-  position,
-  bus_5511Stations_startForPolyLine,
-  bus_5511Stations_endForPolyLine,
-  bus_5511Stations_forMarker,
-}) {
+function Map({ position, bus_5511Stations_forMarker }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -22,65 +18,72 @@ function Map({
     centerX: "",
   });
 
+  // 모든 DirectionsData 저장하는 상태
   const [directionsData, setDirectionsData] = useState([]);
-  const [directionsData2, setDirectionsData2] = useState([]);
-  const [directionsData3, setDirectionsData3] = useState([]);
-  const [directionsData4, setDirectionsData4] = useState([]);
-  const [directionsData5, setDirectionsData5] = useState([]);
 
-  useEffect(() => {
-    // 서울대학교(중앙대학교 방면) -> 제2공학관(중앙대학교 방면)
-    getDirectionsData(
+  // 모든 DirectionsData 호출 함수 모음
+  async function getAllDirectionsData() {
+    // 서울대학교(중앙대학교 방면) -> 제2공학관(중앙대학교 방면) 경로 좌표 fetch
+    const start_oneDirectionsData = await getDirectionsData(
       "37.4667414611",
       "126.9479522861",
       "37.4487952",
       "126.9520773"
-    ).then((res) => {
-      setDirectionsData(res);
-    });
-    // 제2공학관(중앙대학교 방면)-> 서울대입구역(중앙대학교 방면)
-    getDirectionsData(
+    );
+
+    // 제2공학관(중앙대학교 방면)-> 서울대입구역(중앙대학교 방면) 경로 좌표 fetch
+    const start_twoDirectionsData = await getDirectionsData(
       "37.4487952",
       "126.9520773",
       "37.48011095",
       "126.9527298"
-    ).then((res) => {
-      setDirectionsData2(res);
-    });
-    // 서울대입구역(신림2동차고지 방면)->에너지자원연구소(신림2동차고지 방면)
-    getDirectionsData(
+    );
+
+    // 서울대입구역(신림2동차고지 방면)->에너지자원연구소(신림2동차고지 방면) 경로 좌표 fetch
+    const end_oneDirectionsData = await getDirectionsData(
       "37.48070059",
       "126.952444",
       "37.45359525",
       "126.9522142"
-    ).then((res) => {
-      setDirectionsData3(res);
-    });
-    // 에너지자원연구소(신림2동차고지 방면) -> 유회진학술정보관.제1공학관(신림2동차고지 방면)
-    getDirectionsData(
+    );
+
+    // 에너지자원연구소(신림2동차고지 방면) -> 유회진학술정보관.제1공학관(신림2동차고지 방면) 경로 좌표 fetch
+    const end_twoDirectionsData = await getDirectionsData(
       "37.45359525",
       "126.9522142",
       "37.451283",
       "126.952595"
-    ).then((res) => {
-      setDirectionsData4(res);
-    });
-    // 유회진학술정보관.제1공학관(신림2동차고지 방면) -> 신림중.삼성고.관악아트홀·도서관(신림2동차고지 방면)
-    getDirectionsData(
+    );
+
+    // 유회진학술정보관.제1공학관(신림2동차고지 방면) -> 신림중.삼성고.관악아트홀·도서관(신림2동차고지 방면) 경로 좌표 fetchs
+    const end_threeDirectionsData = await getDirectionsData(
       "37.451283",
       "126.952595",
       "37.47055199",
       "126.944133"
-    ).then((res) => {
-      setDirectionsData5(res);
-    });
+    );
 
-    // Maps 컴포넌트가 존재할 때
-    if (kakaoMap.current) {
+    setDirectionsData([
+      start_oneDirectionsData,
+      start_twoDirectionsData,
+      end_oneDirectionsData,
+      end_twoDirectionsData,
+      end_threeDirectionsData,
+    ]);
+  }
+
+  useEffect(() => {
+    // DirectionsData 가져오기
+    getAllDirectionsData();
+  }, [position]);
+
+  useEffect(() => {
+    // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
+    if (directionsData.length === 5 && kakaoMap.current) {
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
     }
-  }, [position]);
+  }, [directionsData]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
@@ -121,126 +124,6 @@ function Map({
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray1 = [
-        directionsData.map(
-          (direction) =>
-            new window.kakao.maps.LatLng(direction[0], direction[1])
-        ),
-      ];
-
-      // 폴리라인 생성
-      const polylineForStart1 = new window.kakao.maps.Polyline({
-        map: map,
-        path: stationPosForStartArray1,
-        strokeWeight: 4,
-        strokeColor: "blue",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForStart1.setMap(map);
-
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray2 = [
-        directionsData2.map(
-          (direction) =>
-            new window.kakao.maps.LatLng(direction[0], direction[1])
-        ),
-      ];
-
-      // 폴리라인 생성
-      const polylineForStart2 = new window.kakao.maps.Polyline({
-        map: map,
-        path: stationPosForStartArray2,
-        strokeWeight: 4,
-        strokeColor: "blue",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForStart2.setMap(map);
-
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray3 = [
-        directionsData3.map(
-          (direction) =>
-            new window.kakao.maps.LatLng(direction[0], direction[1])
-        ),
-      ];
-      // 폴리라인 생성
-      const polylineForStart3 = new window.kakao.maps.Polyline({
-        map: map,
-        path: stationPosForStartArray3,
-        strokeWeight: 4,
-        strokeColor: "red",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForStart3.setMap(map);
-
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray4 = [
-        directionsData4.map(
-          (direction) =>
-            new window.kakao.maps.LatLng(direction[0], direction[1])
-        ),
-      ];
-      // 폴리라인 생성
-      const polylineForStart4 = new window.kakao.maps.Polyline({
-        map: map,
-        path: stationPosForStartArray4,
-        strokeWeight: 4,
-        strokeColor: "red",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForStart4.setMap(map);
-
-      // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      const stationPosForStartArray5 = [
-        directionsData5.map(
-          (direction) =>
-            new window.kakao.maps.LatLng(direction[0], direction[1])
-        ),
-      ];
-      // 폴리라인 생성
-      const polylineForStart5 = new window.kakao.maps.Polyline({
-        map: map,
-        path: stationPosForStartArray5,
-        strokeWeight: 4,
-        strokeColor: "red",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-      // 폴리라인 적용
-      polylineForStart5.setMap(map);
-
-      // // 버스 노선 기점-> 종점 방면 폴리라인 생성
-      // const stationPosForEndArray = [
-      //   bus_5511Stations_endForPolyLine.map(
-      //     (bus_5511Station_start) =>
-      //       new window.kakao.maps.LatLng(
-      //         bus_5511Station_start.position[0],
-      //         bus_5511Station_start.position[1]
-      //       )
-      //   ),
-      // ];
-      // // 폴리라인 생성
-      // const polylineForEnd = new window.kakao.maps.Polyline({
-      //   map: map,
-      //   path: [...stationPosForEndArray],
-      //   endArrow: true,
-      //   strokeWeight: 4,
-      //   strokeColor: "red",
-      //   strokeOpacity: 1,
-      //   strokeStyle: "solid",
-      // });
-      // // 폴리라인 적용
-      // polylineForEnd.setMap(map);
-
       // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
       window.kakao.maps.event.addListener(map, "center_changed", function () {
         // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
@@ -257,7 +140,14 @@ function Map({
       // 마커 생성
       printMarker(map, curLat, curLlon);
 
-      // 지도가 렌더링된 후 setIsMapPrint(true) 호출
+      // 모든 경로 좌표 폴리라인 생성
+      directionsData.forEach((direction, i) => {
+        printPolyline(direction, map, i < 2 ? "blue" : "red");
+        // if (i === directionsData.length - 1) {
+
+        // }
+      });
+      // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출
       setIsMapPrint(true);
     }
   }
