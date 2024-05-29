@@ -143,10 +143,8 @@ function Map({ position, bus_5511Stations_forMarker }) {
       // 모든 경로 좌표 폴리라인 생성
       directionsData.forEach((direction, i) => {
         printPolyline(direction, map, i < 2 ? "blue" : "red");
-        // if (i === directionsData.length - 1) {
-
-        // }
       });
+
       // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출
       setIsMapPrint(true);
     }
