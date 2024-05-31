@@ -152,13 +152,6 @@ function Map({ position, bus_5511Stations_forMarker }) {
 
   // 마커 생성
   const printMarker = (map, curLat, curLlon) => {
-    // 마커 클러스터 만들기
-    const clusterer = new window.kakao.maps.MarkerClusterer({
-      // 옵션
-      map: map,
-      gridSize: 35,
-    });
-
     // 현재 위치 마커 이미지 정보
     const CurImageSrc = process.env.PUBLIC_URL + `assets/currentMarker.png`, // 마커이미지의 주소
       CurImageSize = new window.kakao.maps.Size(40),
@@ -200,7 +193,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
 
     // 버스 마커 이미지 정보
     const stationImageSrc = process.env.PUBLIC_URL + `assets/stationMarker.png`, // 마커이미지의 주소
-      stationImageSize = new window.kakao.maps.Size(30),
+      stationImageSize = new window.kakao.maps.Size(20),
       stationImageOption = { offset: new window.kakao.maps.Point(15, 15) }; // 마커이미지의 크기
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
@@ -221,16 +214,16 @@ function Map({ position, bus_5511Stations_forMarker }) {
         })
     );
 
-    // 마커를 클러스터에 등록 -> 마커 print
+    // 마커 print
 
     // 현재 위치 마커 print
-    clusterer.addMarker(curMarker);
+    curMarker.setMap(map);
 
     // 해당 노선 모든 버스들 위치 마커 print
     busMarkers.forEach((marker) => {
-      clusterer.addMarker(marker);
+      marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
 
-      // 마커에 클릭이벤트를 등록
+      // 마커에 클릭 이벤트 등록
       window.kakao.maps.event.addListener(marker, "click", function () {
         console.log("12");
       });
@@ -238,7 +231,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
 
     // 해당 노선 모든 정류장들 위치 마커 print
     stationMarkers.forEach((marker) => {
-      clusterer.addMarker(marker);
+      marker.setMap(map);
     });
   };
 
