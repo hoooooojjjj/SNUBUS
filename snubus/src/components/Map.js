@@ -90,7 +90,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
     return () => {
       setIsMapPrint(false);
     };
-  }, []);
+  }, [setIsMapPrint]);
 
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = (printKakaomap) => {
@@ -154,7 +154,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
   const printMarker = (map, curLat, curLlon) => {
     // 현재 위치 마커 이미지 정보
     const CurImageSrc = process.env.PUBLIC_URL + `assets/currentMarker.png`, // 마커이미지의 주소
-      CurImageSize = new window.kakao.maps.Size(40),
+      CurImageSize = new window.kakao.maps.Size(20),
       CurImageOption = { offset: new window.kakao.maps.Point(20, 20) }; // 마커이미지의 크기
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
