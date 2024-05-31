@@ -19,24 +19,33 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
       const jsonData = await response.json();
 
       // 만약 요청 횟수 초과 시
+      // if (
+      //   JSON.parse(jsonData.contents).msgHeader.headerMsg ===
+      //   "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
+      // ) {
+      //   console.log("데이터 요청 횟수 초과");
+      //   // getBusPosData() 종료
+      //   return null;
+      // }
+
+      // 요청이 정상적으로 처리 되었으면 버스 좌표 데이터 배열 리턴
       if (
         JSON.parse(jsonData.contents).msgHeader.headerMsg ===
-        "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
+        "정상적으로 처리되었습니다."
       ) {
-        console.log("데이터 요청 횟수 초과");
-        // getBusPosData() 종료
-        return null;
+        // 각 버스 좌표 데이터를 배열로 저장
+        const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(
+          (PosBus) => {
+            return [PosBus.gpsY, PosBus.gpsX];
+          }
+        );
+
+        // 버스 좌표 데이터 배열 리턴
+        return getPosBuses;
       }
 
-      // 각 버스 좌표 데이터를 배열로 저장
-      const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(
-        (PosBus) => {
-          return [PosBus.gpsY, PosBus.gpsX];
-        }
-      );
-
-      // 버스 좌표 데이터 배열 리턴
-      return getPosBuses;
+      // 제대로 요청되지 않았으면 빈 배열 리턴
+      return [];
     } catch (error) {
       // fetch()가 취소되면 AbortError라는 DOMException을 던지기 때문에 취소된 오류와 다른 오류를 구분해서 처리할 수 있다.
       if (error.name === "AbortError") {
