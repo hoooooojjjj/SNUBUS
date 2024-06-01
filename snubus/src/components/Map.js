@@ -77,7 +77,6 @@ function Map({ position, bus_5511Stations_forMarker }) {
       endDirectionsData.length > 0 &&
       kakaoMap.current
     ) {
-      console.log(startDirectionsData);
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
     }
