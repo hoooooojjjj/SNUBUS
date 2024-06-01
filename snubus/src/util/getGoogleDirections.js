@@ -12,7 +12,13 @@ async function getDirectionsData(
   try {
     const response = await fetch(
       `https://api.allorigins.win/get?url=${encodeURIComponent(
-        `https://maps.googleapis.com/maps/api/directions/json?origin=${originLatitude},${originLongitude}&destination=${destinationLatitude},${destinationLongitude}&mode=transit&transit_mode=bus&key=${process.env.REACT_APP_GOOGLEMAPS_API_KEY}`
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${String(
+          originLatitude
+        )},${String(originLongitude)}&destination=${String(
+          destinationLatitude
+        )},${String(destinationLongitude)}&mode=transit&transit_mode=bus&key=${
+          process.env.REACT_APP_GOOGLEMAPS_API_KEY
+        }`
       )}`
     );
     // 데이터 받아서 json 형태로 저장

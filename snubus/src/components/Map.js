@@ -3,6 +3,10 @@ import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
 import getDirectionsData from "../util/getGoogleDirections";
 import printPolyline from "../util/printPolyline";
+import {
+  bus_5511Stations_forEndPolyline,
+  bus_5511Stations_forStartPolyline,
+} from "../busStationPos";
 
 function Map({ position, bus_5511Stations_forMarker }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
@@ -18,72 +22,66 @@ function Map({ position, bus_5511Stations_forMarker }) {
     centerX: "",
   });
 
-  // 모든 DirectionsData 저장하는 상태
-  const [directionsData, setDirectionsData] = useState([]);
+  // 중앙대학교 방면(기점->종점 방면) DirectionsData 저장하는 상태
+  const [startDirectionsData, setStartDirectionsData] = useState([]);
+
+  // 신림2동차고지 방면(종점->기점 방면) DirectionsData 저장하는 상태
+  const [endDirectionsData, setEndDirectionsData] = useState([]);
 
   // 모든 DirectionsData 호출 함수 모음
   async function getAllDirectionsData() {
-    // 서울대학교(중앙대학교 방면) -> 제2공학관(중앙대학교 방면) 경로 좌표 fetch
-    const start_oneDirectionsData = await getDirectionsData(
-      "37.4667414611",
-      "126.9479522861",
-      "37.4487952",
-      "126.9520773"
+    // 중앙대학교 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
+    const startDirectionsDataPromises = bus_5511Stations_forStartPolyline.map(
+      (bus_5511Station) =>
+        getDirectionsData(
+          String(bus_5511Station.origin[0]),
+          String(bus_5511Station.origin[1]),
+          String(bus_5511Station.destination[0]),
+          String(bus_5511Station.destination[1])
+        )
+    );
+    // 신림2동차고지 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
+    const endDirectionsDataPromises = bus_5511Stations_forEndPolyline.map(
+      (bus_5511Station) =>
+        getDirectionsData(
+          String(bus_5511Station.origin[0]),
+          String(bus_5511Station.origin[1]),
+          String(bus_5511Station.destination[0]),
+          String(bus_5511Station.destination[1])
+        )
     );
 
-    // 제2공학관(중앙대학교 방면)-> 서울대입구역(중앙대학교 방면) 경로 좌표 fetch
-    const start_twoDirectionsData = await getDirectionsData(
-      "37.4487952",
-      "126.9520773",
-      "37.48011095",
-      "126.9527298"
+    // 모든 중앙대학교 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
+    const startDirectionsDataArray = await Promise.all(
+      startDirectionsDataPromises
     );
 
-    // 서울대입구역(신림2동차고지 방면)->에너지자원연구소(신림2동차고지 방면) 경로 좌표 fetch
-    const end_oneDirectionsData = await getDirectionsData(
-      "37.48070059",
-      "126.952444",
-      "37.45359525",
-      "126.9522142"
-    );
+    // 모든 신림2동차고지 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
+    const endDirectionsDataArray = await Promise.all(endDirectionsDataPromises);
 
-    // 에너지자원연구소(신림2동차고지 방면) -> 유회진학술정보관.제1공학관(신림2동차고지 방면) 경로 좌표 fetch
-    const end_twoDirectionsData = await getDirectionsData(
-      "37.45359525",
-      "126.9522142",
-      "37.451283",
-      "126.952595"
-    );
-
-    // 유회진학술정보관.제1공학관(신림2동차고지 방면) -> 신림중.삼성고.관악아트홀·도서관(신림2동차고지 방면) 경로 좌표 fetchs
-    const end_threeDirectionsData = await getDirectionsData(
-      "37.451283",
-      "126.952595",
-      "37.47055199",
-      "126.944133"
-    );
-
-    setDirectionsData([
-      start_oneDirectionsData,
-      start_twoDirectionsData,
-      end_oneDirectionsData,
-      end_twoDirectionsData,
-      end_threeDirectionsData,
-    ]);
+    // 완료된 중앙대학교 방면 데이터를 상태에 업데이트
+    setStartDirectionsData(startDirectionsDataArray);
+    // 완료된 신림2동차고지 방면 데이터를 상태에 업데이트
+    setEndDirectionsData(endDirectionsDataArray);
   }
 
   useEffect(() => {
     // DirectionsData 가져오기
     getAllDirectionsData();
-  }, [position]);
+  }, []);
 
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
-    if (directionsData.length === 5 && kakaoMap.current) {
+    if (
+      startDirectionsData.length > 0 &&
+      endDirectionsData.length > 0 &&
+      kakaoMap.current
+    ) {
+      console.log(startDirectionsData);
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
     }
-  }, [directionsData]);
+  }, [startDirectionsData, endDirectionsData]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
@@ -101,7 +99,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
         const curLat = position.coords.latitude, // 위도
           curLlon = position.coords.longitude; // 경도
         // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
-        printKakaomap(curLat, curLlon);
+        printKakaomap(37.4667414611, 126.9479522861);
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
@@ -141,8 +139,12 @@ function Map({ position, bus_5511Stations_forMarker }) {
       printMarker(map, curLat, curLlon);
 
       // 모든 경로 좌표 폴리라인 생성
-      directionsData.forEach((direction, i) => {
-        printPolyline(direction, map, i < 2 ? "blue" : "red");
+      startDirectionsData.forEach((direction) => {
+        printPolyline(direction, map, "blue");
+      });
+
+      endDirectionsData.forEach((direction) => {
+        printPolyline(direction, map, "red");
       });
 
       // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출

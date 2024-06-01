@@ -18,15 +18,15 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
       // 데이터 받아서 json 형태로 저장
       const jsonData = await response.json();
 
-      // 만약 요청 횟수 초과 시
-      // if (
-      //   JSON.parse(jsonData.contents).msgHeader.headerMsg ===
-      //   "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
-      // ) {
-      //   console.log("데이터 요청 횟수 초과");
-      //   // getBusPosData() 종료
-      //   return null;
-      // }
+      //만약 요청 횟수 초과 시
+      if (
+        JSON.parse(jsonData.contents).msgHeader.headerMsg ===
+        "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
+      ) {
+        console.log("데이터 요청 횟수 초과");
+        // getBusPosData() 종료
+        return null;
+      }
 
       // 요청이 정상적으로 처리 되었으면 버스 좌표 데이터 배열 리턴
       if (
