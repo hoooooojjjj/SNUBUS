@@ -13,7 +13,7 @@ const printPolyline = (directionsData, map, strokeColor) => {
     path: stationPosArray,
     strokeWeight: 4,
     strokeColor: strokeColor,
-    strokeOpacity: 1,
+    strokeOpacity: 0.5,
     strokeStyle: "solid",
   });
 
