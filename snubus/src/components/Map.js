@@ -8,7 +8,7 @@ import {
   bus_5511Stations_forStartPolyline,
 } from "../busStationPos";
 
-function Map({ position, bus_5511Stations_forMarker }) {
+function Map({ position }) {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -98,7 +98,7 @@ function Map({ position, bus_5511Stations_forMarker }) {
         const curLat = position.coords.latitude, // 위도
           curLlon = position.coords.longitude; // 경도
         // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
-        printKakaomap(37.4667414611, 126.9479522861);
+        printKakaomap(curLat, curLlon);
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
@@ -192,29 +192,6 @@ function Map({ position, bus_5511Stations_forMarker }) {
         })
     );
 
-    // 버스 마커 이미지 정보
-    const stationImageSrc = process.env.PUBLIC_URL + `assets/stationMarker.png`, // 마커이미지의 주소
-      stationImageSize = new window.kakao.maps.Size(20),
-      stationImageOption = { offset: new window.kakao.maps.Point(15, 15) }; // 마커이미지의 크기
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
-    const stationMarkerImage = new window.kakao.maps.MarkerImage(
-      stationImageSrc,
-      stationImageSize,
-      stationImageOption
-    );
-    // 해당 노선 모든 정류장 위치 좌표 배열마다 마커 만들기
-    const stationMarkers = bus_5511Stations_forMarker.map(
-      (stationPos) =>
-        new window.kakao.maps.Marker({
-          position: new window.kakao.maps.LatLng(
-            stationPos.position[0],
-            stationPos.position[1]
-          ),
-          image: stationMarkerImage,
-        })
-    );
-
     // 마커 print
 
     // 현재 위치 마커 print
@@ -228,11 +205,6 @@ function Map({ position, bus_5511Stations_forMarker }) {
       window.kakao.maps.event.addListener(marker, "click", function () {
         console.log("12");
       });
-    });
-
-    // 해당 노선 모든 정류장들 위치 마커 print
-    stationMarkers.forEach((marker) => {
-      marker.setMap(map);
     });
   };
 
