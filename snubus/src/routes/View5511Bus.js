@@ -4,6 +4,7 @@ import getBusPosDataInterval from "../util/getBusPos";
 import Loading from "../components/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
+import StationLine from "../components/StationLine";
 
 const BUSROUTEID_5511 = "100100250";
 
@@ -39,9 +40,7 @@ function View5511Bus() {
         // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
         <div style={{ display: "flex" }}>
           <Map position={pos5511Buses}></Map>
-          <h1 style={{ color: "white" }}>
-            각 정류장 마다 남은 시간 정보 표시 예정
-          </h1>
+          <StationLine />
         </div>
       ) : (
         // 데이터가 안 들어왔을 때
