@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../App";
-import getDirectionsData from "../util/getGoogleDirections";
-import printPolyline from "../util/printPolyline";
+import polyUtil from "polyline-encoded";
 import {
   bus_5511Stations_forEndPolyline,
   bus_5511Stations_forStartPolyline,
 } from "../busStationPos";
 
 function Map({ position }) {
-  // 카카오맵이 화면에 표시됐는지 판별하는 state
-  const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
-
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
+
+  /* state 코드 */
+
+  // 카카오맵이 화면에 표시됐는지 판별하는 state
+  const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
   // 마운트 되기 전 map 확대 및 이동 위치 가져오기
   const [mapInfo, setMapInfo] = useState({
@@ -27,6 +28,46 @@ function Map({ position }) {
 
   // 신림2동차고지 방면(종점->기점 방면) DirectionsData 저장하는 상태
   const [endDirectionsData, setEndDirectionsData] = useState([]);
+
+  /* 함수 코드 */
+
+  // Google directions API에 버스 노선 경로 좌표 데이터 fetching 함수
+  // 출발지 - 목적지 위도,경도 좌표를 인자로 받음
+  async function getDirectionsData(
+    originLatitude,
+    originLongitude,
+    destinationLatitude,
+    destinationLongitude
+  ) {
+    try {
+      const response = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          `https://maps.googleapis.com/maps/api/directions/json?origin=${String(
+            originLatitude
+          )},${String(originLongitude)}&destination=${String(
+            destinationLatitude
+          )},${String(
+            destinationLongitude
+          )}&mode=transit&transit_mode=bus&key=${
+            process.env.REACT_APP_GOOGLEMAPS_API_KEY
+          }`
+        )}`
+      );
+      // 데이터 받아서 json 형태로 저장
+      const jsonData = await response.json();
+      const directions = JSON.parse(jsonData.contents);
+
+      // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
+      const decodeddirections = polyUtil.decode(
+        directions.routes[0].overview_polyline.points
+      );
+
+      // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
+      return decodeddirections;
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  }
 
   // 모든 DirectionsData 호출 함수 모음
   async function getAllDirectionsData() {
@@ -65,29 +106,28 @@ function Map({ position }) {
     setEndDirectionsData(endDirectionsDataArray);
   }
 
-  useEffect(() => {
-    // DirectionsData 가져오기
-    getAllDirectionsData();
-  }, []);
+  // 폴리라인 생성 -> 해당 경로 좌표 배열, 지도 객체, 폴리라인 색상을 인자로 받음
+  const printPolyline = (directionsData, map, strokeColor) => {
+    // 버스 노선 경로 좌표 배열
+    const stationPosArray = [
+      directionsData.map(
+        (direction) => new window.kakao.maps.LatLng(direction[0], direction[1])
+      ),
+    ];
 
-  useEffect(() => {
-    // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
-    if (
-      startDirectionsData.length > 0 &&
-      endDirectionsData.length > 0 &&
-      kakaoMap.current
-    ) {
-      // 현재 위치 좌표 가져오기
-      getCurrentPosition(printKakaomap);
-    }
-  }, [startDirectionsData, endDirectionsData]);
+    // 버스 노선 경로 좌표 배열로 폴리라인 생성
+    const polyline = new window.kakao.maps.Polyline({
+      map: map,
+      path: stationPosArray,
+      strokeWeight: 4,
+      strokeColor: strokeColor,
+      strokeOpacity: 0.5,
+      strokeStyle: "solid",
+    });
 
-  useEffect(() => {
-    // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
-    return () => {
-      setIsMapPrint(false);
-    };
-  }, [setIsMapPrint]);
+    // 폴리라인 적용
+    polyline.setMap(map);
+  };
 
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = (printKakaomap) => {
@@ -207,6 +247,32 @@ function Map({ position }) {
       });
     });
   };
+
+  /* useEffect() 코드 */
+
+  useEffect(() => {
+    // DirectionsData 가져오기
+    getAllDirectionsData();
+  }, []);
+
+  useEffect(() => {
+    // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
+    if (
+      startDirectionsData.length > 0 &&
+      endDirectionsData.length > 0 &&
+      kakaoMap.current
+    ) {
+      // 현재 위치 좌표 가져오기
+      getCurrentPosition(printKakaomap);
+    }
+  }, [startDirectionsData, endDirectionsData]);
+
+  useEffect(() => {
+    // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
+    return () => {
+      setIsMapPrint(false);
+    };
+  }, [setIsMapPrint]);
 
   return <Maps ref={kakaoMap}></Maps>;
 }
