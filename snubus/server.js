@@ -69,10 +69,14 @@ app.get("/proxy", (req, res) => {
             // 데이터 요청 횟수 초과시 429 에러
             res.status(429).send("Too many requests, please try again later.");
             break;
+          // 운행 중인 버스가 없다면 503 에러
+          case "결과가 없습니다.":
+            res.status(503).send([]);
+            break;
           case "정상적으로 처리되었습니다.":
             // 정상적으로 처리되면
             // 버스 정보들 가공해서 send
-            res.send(JSON.parse(body).msgBody.itemList);
+            res.status(200).send(JSON.parse(body).msgBody.itemList);
             break;
           default:
             break;

@@ -15,9 +15,13 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
 
       // 데이터 요청 횟수 초과 시
       if (response.status === 429) {
-        console.log("Too many requests, please try again later.");
-        return null;
-      } else {
+        console.log("데이터 요청 횟수를 초과했습니다");
+        return [];
+        // 운행 중인 버스가 없을 때
+      } else if (response.status === 503) {
+        console.log("운행 중인 버스가 없습니다.");
+        return [];
+      } else if (response.status === 200) {
         // 데이터가 정상적으로 처리되었다면
         const getPosBuses = busPosData.map((PosBus) => {
           return [PosBus.gpsY, PosBus.gpsX];
