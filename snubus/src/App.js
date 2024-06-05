@@ -25,6 +25,9 @@ function App() {
               dotWidth: 50,
               dotHeight: 7,
             },
+            Timeline: {
+              tailColor: "white",
+            },
           },
         }}
       >

@@ -40,7 +40,7 @@ function View5511Bus() {
         // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
         <div style={{ display: "flex" }}>
           <Map position={pos5511Buses}></Map>
-          <StationLine />
+          {isMapPrint ? <StationLine /> : <></>}
         </div>
       ) : (
         // 데이터가 안 들어왔을 때
