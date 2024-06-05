@@ -11,25 +11,23 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
         }
       );
 
-      const textData = await response.text(); // 응답을 텍스트로 받기
+      const busPosData = await response.json();
 
-      const jsonData = JSON.parse(textData); // 텍스트를 JSON으로 변환
+      // if (
+      //   jsonData.msgHeader.headerMsg ===
+      //   "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
+      // ) {
+      //   console.log("데이터 요청 횟수 초과");
+      //   return null;
+      // }
 
-      if (
-        jsonData.msgHeader.headerMsg ===
-        "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
-      ) {
-        console.log("데이터 요청 횟수 초과");
-        return null;
-      }
+      // if (jsonData.msgHeader.headerMsg === "정상적으로 처리되었습니다.") {
+      const getPosBuses = busPosData.map((PosBus) => {
+        return [PosBus.gpsY, PosBus.gpsX];
+      });
 
-      if (jsonData.msgHeader.headerMsg === "정상적으로 처리되었습니다.") {
-        const getPosBuses = jsonData.msgBody.itemList.map((PosBus) => {
-          return [PosBus.gpsY, PosBus.gpsX];
-        });
-
-        return getPosBuses;
-      }
+      return getPosBuses;
+      // }
 
       return [];
     } catch (error) {

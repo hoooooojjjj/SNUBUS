@@ -27,6 +27,7 @@ function App() {
             },
             Timeline: {
               tailColor: "white",
+              itemPaddingBottom: 50,
             },
           },
         }}

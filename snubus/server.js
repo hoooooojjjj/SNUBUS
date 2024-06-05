@@ -8,7 +8,10 @@ const app = express();
 const PORT = 8080;
 
 // CORS를 허용할 URL 리스트
-const allowedUrls = ["http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"];
+const allowedUrls = [
+  "http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid",
+  "https://maps.googleapis.com/maps/api/directions/json",
+];
 
 // 모든 요청에 대해 실행되는 미들웨어를 추가
 app.use((req, res, next) => {
@@ -39,7 +42,7 @@ app.get("/proxy", (req, res) => {
     return res.status(400).send("URL is required"); // 400 상태 코드와 함께 오류 메시지를 반환
   }
 
-  console.log(`Fetching URL: ${url}`); // 요청된 URL을 콘솔에 출력
+  // console.log(`Fetching URL: ${url}`); // 요청된 URL을 콘솔에 출력
 
   // request 모듈을 사용하여 원격 서버에 요청을 보내기
   request(
@@ -50,8 +53,26 @@ app.get("/proxy", (req, res) => {
         console.error("Error occurred:", error); // 오류를 콘솔에 출력하고
         return res.status(500).send("Error occurred while fetching the URL"); // 500 상태 코드와 함께 오류 메시지를 반환
       }
-      console.log("Response body:", body); // 응답 본문을 콘솔에 출력
-      res.send(body); // 응답 본문을 클라이언트에 반환
+
+      // 버스 위치 정보 요청이면
+      if (
+        req.query.url.includes(
+          "http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"
+        )
+      ) {
+        // 버스 정보들 가공해서 send
+        res.send(JSON.parse(body).msgBody.itemList);
+      }
+
+      // directions 데이터 요청이면
+      if (
+        req.query.url.includes(
+          "https://maps.googleapis.com/maps/api/directions/json"
+        )
+      ) {
+        // 경로 좌표 가공해서 send
+        res.send(JSON.parse(body).routes[0].overview_polyline.points);
+      }
     }
   );
 });

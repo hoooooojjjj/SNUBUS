@@ -54,13 +54,10 @@ function Map({ position }) {
         )}`
       );
       // 데이터 받아서 json 형태로 저장
-      const jsonData = await response.text();
-      const directions = JSON.parse(jsonData);
+      const directionData = await response.text();
 
       // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
-      const decodedDirections = polyUtil.decode(
-        directions.routes[0].overview_polyline.points
-      );
+      const decodedDirections = polyUtil.decode(directionData);
 
       // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
       return decodedDirections;
@@ -138,7 +135,7 @@ function Map({ position }) {
         const curLat = position.coords.latitude, // 위도
           curLlon = position.coords.longitude; // 경도
         // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
-        printKakaomap(curLat, curLlon);
+        printKakaomap(37.4667414611, 126.9479522861);
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
