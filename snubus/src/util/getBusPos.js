@@ -13,23 +13,18 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
 
       const busPosData = await response.json();
 
-      // if (
-      //   jsonData.msgHeader.headerMsg ===
-      //   "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
-      // ) {
-      //   console.log("데이터 요청 횟수 초과");
-      //   return null;
-      // }
+      // 데이터 요청 횟수 초과 시
+      if (response.status === 429) {
+        console.log("Too many requests, please try again later.");
+        return null;
+      } else {
+        // 데이터가 정상적으로 처리되었다면
+        const getPosBuses = busPosData.map((PosBus) => {
+          return [PosBus.gpsY, PosBus.gpsX];
+        });
 
-      // if (jsonData.msgHeader.headerMsg === "정상적으로 처리되었습니다.") {
-      const getPosBuses = busPosData.map((PosBus) => {
-        return [PosBus.gpsY, PosBus.gpsX];
-      });
-
-      return getPosBuses;
-      // }
-
-      return [];
+        return getPosBuses;
+      }
     } catch (error) {
       if (error.name === "AbortError") {
         console.log("Fetch aborted");
