@@ -1,53 +1,38 @@
-// 버스 위치 정보 데이터 주기적으로 호출
 export default function getBusPosDataInterval(busRouteId, setState, signal) {
-  // 버스 위치 정보 데이터 fetching
   async function getBusPosData() {
     try {
-      // signal을 fetch에 옵션으로 추가
-      // AbortSignal의 인스턴스를 받고 AbortController를 이용해서 원할 때 fetch 요청을 취소할 수 있음
       const response = await fetch(
-        `https://api.allorigins.win/get?url=${encodeURIComponent(
+        `http://localhost:8080/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busRouteId}&resultType=json`
         )}`,
         {
           cache: "no-cache",
-          // 캐시 무시 옵션 추가
-        },
-        { signal }
+          signal: signal, // signal 옵션 추가
+        }
       );
-      // 데이터 받아서 json 형태로 저장
-      const jsonData = await response.json();
 
-      //만약 요청 횟수 초과 시
+      const textData = await response.text(); // 응답을 텍스트로 받기
+
+      const jsonData = JSON.parse(textData); // 텍스트를 JSON으로 변환
+
       if (
-        JSON.parse(jsonData.contents).msgHeader.headerMsg ===
+        jsonData.msgHeader.headerMsg ===
         "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]"
       ) {
         console.log("데이터 요청 횟수 초과");
-        // getBusPosData() 종료
         return null;
       }
 
-      // 요청이 정상적으로 처리 되었으면 버스 좌표 데이터 배열 리턴
-      if (
-        JSON.parse(jsonData.contents).msgHeader.headerMsg ===
-        "정상적으로 처리되었습니다."
-      ) {
-        // 각 버스 좌표 데이터를 배열로 저장
-        const getPosBuses = JSON.parse(jsonData.contents).msgBody.itemList.map(
-          (PosBus) => {
-            return [PosBus.gpsY, PosBus.gpsX];
-          }
-        );
+      if (jsonData.msgHeader.headerMsg === "정상적으로 처리되었습니다.") {
+        const getPosBuses = jsonData.msgBody.itemList.map((PosBus) => {
+          return [PosBus.gpsY, PosBus.gpsX];
+        });
 
-        // 버스 좌표 데이터 배열 리턴
         return getPosBuses;
       }
 
-      // 제대로 요청되지 않았으면 빈 배열 리턴
       return [];
     } catch (error) {
-      // fetch()가 취소되면 AbortError라는 DOMException을 던지기 때문에 취소된 오류와 다른 오류를 구분해서 처리할 수 있다.
       if (error.name === "AbortError") {
         console.log("Fetch aborted");
       } else {
@@ -56,26 +41,21 @@ export default function getBusPosDataInterval(busRouteId, setState, signal) {
     }
   }
 
-  // 처음 마운트 되었을 때 fetching
   getBusPosData().then((res) => {
-    // 데이터가 없으면 실행 종료
     if (!res) {
       return null;
     }
     setState(res);
   });
 
-  // 11초 마다 데이터 업데이트
   const fetchDataInterval = setInterval(() => {
     getBusPosData().then((res) => {
-      // 데이터가 없으면 실행 종료
       if (!res) {
         clearInterval(fetchDataInterval);
       }
       setState(res);
     });
-  }, 11000); // 11초마다 데이터 다시 요청
+  }, 11000);
 
-  // 컴포넌트가 언마운트될 때 clearInterval 호출하여 메모리 누수 방지
   return () => clearInterval(fetchDataInterval);
 }

@@ -41,7 +41,7 @@ function Map({ position }) {
   ) {
     try {
       const response = await fetch(
-        `https://api.allorigins.win/get?url=${encodeURIComponent(
+        `http://localhost:8080/proxy?url=${encodeURIComponent(
           `https://maps.googleapis.com/maps/api/directions/json?origin=${String(
             originLatitude
           )},${String(originLongitude)}&destination=${String(
@@ -54,8 +54,8 @@ function Map({ position }) {
         )}`
       );
       // 데이터 받아서 json 형태로 저장
-      const jsonData = await response.json();
-      const directions = JSON.parse(jsonData.contents);
+      const jsonData = await response.text();
+      const directions = JSON.parse(jsonData);
 
       // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
       const decodedDirections = polyUtil.decode(
