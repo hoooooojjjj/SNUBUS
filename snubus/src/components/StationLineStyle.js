@@ -18,9 +18,21 @@ export const BtnWrap = styled.div({
 });
 export const StationSwitchBtn = styled.button({});
 
+export const LineWrap = styled.div({
+  overflowY: "scroll",
+  marginTop: 20,
+  paddingTop: 20,
+  position: "relative",
+});
+export const BusImg = styled.img({
+  position: "absolute",
+  top: 15,
+  left: 2,
+  width: 25,
+});
 export const TimelineStyle = styled(Timeline)`
-  margin-top: 20px;
-  padding-top: 20px;
+  padding-left: 10px;
+  padding-top: 5px;
   color: white;
   overflow-y: scroll;
   & > li:last-child {
