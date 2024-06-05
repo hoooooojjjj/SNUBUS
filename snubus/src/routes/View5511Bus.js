@@ -8,10 +8,18 @@ import StationLine from "../components/StationLine";
 
 const BUSROUTEID_5511 = "100100250";
 
+export const busStationPosContext = React.createContext();
+
 // 5511번 버스 페이지
 function View5511Bus() {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
+
+  // 버스 정류장 좌표 state -> StationLine 컴포넌트에 있는 정류장을 클릭하면 클릭한 정류장 좌표가 저장
+  const [busStationPos, setBusStationPos] = useState({
+    name: "",
+    pos: "",
+  });
 
   // 5511번 버스들 좌표 데이터 저장하는 상태
   const [pos5511Buses, setPos5511Buses] = useState(null);
@@ -37,11 +45,15 @@ function View5511Bus() {
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
       {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
       {pos5511Buses ? (
-        // 데이터가 들어왔을 때 Map 컴포넌트 렌더링
-        <div style={{ display: "flex" }}>
-          <Map position={pos5511Buses}></Map>
-          {isMapPrint ? <StationLine /> : <></>}
-        </div>
+        <busStationPosContext.Provider
+          value={[busStationPos, setBusStationPos]}
+        >
+          {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+          <div style={{ display: "flex" }}>
+            <Map position={pos5511Buses}></Map>
+            {isMapPrint ? <StationLine /> : <></>}
+          </div>
+        </busStationPosContext.Provider>
       ) : (
         // 데이터가 안 들어왔을 때
         <></>

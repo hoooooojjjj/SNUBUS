@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { DownCircleOutlined } from "@ant-design/icons";
 import {
   BtnWrap,
@@ -9,10 +9,12 @@ import {
   TimelineStyle,
   BusImg,
 } from "./StationLineStyle";
+import { busStationPosContext } from "../routes/View5511Bus";
 const stationList_start = [
   {
     children: "서울대학교(중앙대학교 방면)",
     color: "blue",
+    position: [37.4667414611, 126.9479522861],
     dot: (
       <DownCircleOutlined
         style={{
@@ -200,6 +202,7 @@ const stationList_start = [
   {
     children: "서울대학교(중앙대학교 방면)",
     color: "blue",
+    position: [37.4667414611, 126.9479522861],
     dot: (
       <DownCircleOutlined
         style={{
@@ -521,12 +524,30 @@ const stationList_end = [
 ];
 
 const StationLine = () => {
+  // 클릭한 버스 정류장 좌표 전달하는 context
+  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
+
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
 
   // 각 방면 버튼을 클릭하면 정류장 라인 전환
   const switchDirection = () => {
     setIsStart(!isStart);
+  };
+
+  // 버스 정류장 클릭 시
+  const isStationClicked = (e) => {
+    // 클릭한 버스 정류장 필터링
+    const targetStation = stationList_start.filter(
+      // 클릭한 것의 innerText가 버스 정류장 이름과 같은 것으로 필터링
+      (station) => station.children === e.target.innerText
+    );
+
+    // 클릭한 버스 정류장 좌표 전달하는 context에 정류장 이름과 좌표 전달
+    setBusStationPos({
+      name: targetStation[0].children,
+      pos: targetStation[0].position,
+    });
   };
   return (
     <Container>
@@ -542,6 +563,7 @@ const StationLine = () => {
         <LineWrap>
           <TimelineStyle
             items={isStart ? stationList_start : stationList_end}
+            onClick={isStationClicked}
           />
           <BusImg
             src={process.env.PUBLIC_URL + `assets/FeederBus.png`}

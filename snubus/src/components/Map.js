@@ -6,6 +6,7 @@ import {
   bus_5511Stations_forEndPolyline,
   bus_5511Stations_forStartPolyline,
 } from "../busStationPos";
+import { busStationPosContext } from "../routes/View5511Bus";
 
 function Map({ position }) {
   // kakaomap이 있는 요소의 ref
@@ -15,6 +16,9 @@ function Map({ position }) {
 
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
+
+  // 클릭한 버스 정류장 좌표 받아오는 context
+  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
 
   // 마운트 되기 전 map 확대 및 이동 위치 가져오기
   const [mapInfo, setMapInfo] = useState({
@@ -234,6 +238,31 @@ function Map({ position }) {
     // 현재 위치 마커 print
     curMarker.setMap(map);
 
+    // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
+    if (busStationPos.name) {
+      // 클릭한 버스 정류장 마커 만들기
+      const stationMarker = new window.kakao.maps.Marker({
+        position: new window.kakao.maps.LatLng(
+          busStationPos.pos[0],
+          busStationPos.pos[1]
+        ),
+      });
+      // 클릭한 버스 정류장 마커 print
+      stationMarker.setMap(map);
+
+      var iwContent = `<div style="padding:5px;">${busStationPos.name} </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+      // 인포윈도우를 생성합니다
+      var infowindow = new window.kakao.maps.InfoWindow({
+        position: iwPosition,
+        content: iwContent,
+      });
+
+      // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+      infowindow.open(map, stationMarker);
+    }
+
     // 해당 노선 모든 버스들 위치 마커 print
     busMarkers.forEach((marker) => {
       marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
@@ -262,7 +291,7 @@ function Map({ position }) {
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
     }
-  }, [startDirectionsData, endDirectionsData]);
+  }, [startDirectionsData, endDirectionsData, busStationPos]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
