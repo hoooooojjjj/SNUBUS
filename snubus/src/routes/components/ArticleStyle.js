@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_BlackHanSans, flex } from "../../util/publicStyleComponets";
+import { Font_BlackHanSans, flex } from "../../util/publicStyleComponents";
 
 // article wrap
 export const Article = styled.article({

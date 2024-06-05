@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Carousel } from "antd";
-import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
+import { flex, Font_BlackHanSans } from "../../util/publicStyleComponents";
 
 const SlideItemHeight = "120px";
 const SlideItemHeight_under485 = "100px";

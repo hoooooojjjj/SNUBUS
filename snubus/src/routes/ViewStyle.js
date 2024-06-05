@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import Map from "../components/Map";
-import { container, flex } from "../util/publicStyleComponets";
+import { container } from "../util/publicStyleComponents";
 
 export const Container = styled.div({
   ...container(),

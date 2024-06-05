@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponets";
+import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponents";
 
 /* header */
 
@@ -20,7 +20,7 @@ export const Header = styled.section({
 // 헤더 안에 nav
 export const NavigationWrap = styled.nav({
   width: "100%",
-  ...flex("row", "flex-end", "nomal"),
+  ...flex("row", "flex-end", "normal"),
 });
 
 // 헤더 안에 로고 폰트

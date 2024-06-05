@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, FooterP, FooterPWrap } from "./FooterStlye";
+import { Footer, FooterP, FooterPWrap } from "./FooterStyle";
 import { Link } from "react-router-dom";
 
 function Footers() {

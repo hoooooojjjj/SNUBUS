@@ -58,12 +58,12 @@ function Map({ position }) {
       const directions = JSON.parse(jsonData.contents);
 
       // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
-      const decodeddirections = polyUtil.decode(
+      const decodedDirections = polyUtil.decode(
         directions.routes[0].overview_polyline.points
       );
 
       // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
-      return decodeddirections;
+      return decodedDirections;
     } catch (error) {
       console.error("Fetch error:", error);
     }

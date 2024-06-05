@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_BlackHanSans } from "../../util/publicStyleComponets";
+import { flex, Font_BlackHanSans } from "../../util/publicStyleComponents";
 
 // ul 태그
 export const Ul = styled.ul({
@@ -12,7 +12,7 @@ export const Ul = styled.ul({
   "@media(max-width: 320px)": {
     marginRight: 10,
   },
-  ...flex("row", "nomal", "nomal"),
+  ...flex("row", "normal", "normal"),
 });
 
 // li 태그
