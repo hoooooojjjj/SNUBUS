@@ -35,6 +35,9 @@ export const TimelineStyle = styled(Timeline)`
   padding-top: 5px;
   color: white;
   overflow-y: scroll;
+  & > li > .ant-timeline-item-content {
+    cursor: pointer;
+  }
   & > li:last-child {
     padding-bottom: 0px;
   }
