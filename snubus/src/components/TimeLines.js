@@ -572,8 +572,20 @@ function TimeLines({ isStart }) {
         )}`
       );
 
-      const busStationInfo = await response.json();
-      console.log(busStationInfo);
+      const busStationInfos = await response.json();
+      const busStationName_start = busStationInfos.filter(
+        (busStationInfo, i) => {
+          if (i >= 4 && i <= 25) {
+            return busStationInfo;
+          }
+        }
+      );
+      const busStationName_end = busStationInfos.filter((busStationInfo, i) => {
+        if (i >= 51 && i <= 74) {
+          return busStationInfo;
+        }
+      });
+      console.log(busStationName_start, busStationName_end);
     } catch (error) {
       console.error("Fetch error:", error);
     }
