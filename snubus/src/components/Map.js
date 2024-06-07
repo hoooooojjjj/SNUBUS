@@ -240,6 +240,15 @@ function Map({ position }) {
 
     // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
     if (busStationPos.name) {
+      // // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
+      // let newMapInfo = {
+      //   ...mapInfo,
+      //   level: 1,
+      //   centerY: busStationPos.pos[0],
+      //   centerX: busStationPos.pos[1],
+      // };
+      // // 마운트 되기 전 map 확대 및 이동 위치
+      // setMapInfo(newMapInfo);
       // 클릭한 버스 정류장 마커 만들기
       const stationMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(

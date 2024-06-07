@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { TimelineStyle } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
 import { busStationPosContext } from "../routes/View5511Bus";
@@ -563,6 +563,25 @@ const stationList_end = [
 function TimeLines({ isStart }) {
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
+
+  const getBusStationInfo = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/proxy?url=${encodeURIComponent(
+          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=100100250&resultType=json`
+        )}`
+      );
+
+      const busStationInfo = await response.json();
+      console.log(busStationInfo);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
+  useEffect(() => {
+    getBusStationInfo();
+  }, []);
 
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {

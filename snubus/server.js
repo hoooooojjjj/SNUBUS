@@ -11,6 +11,7 @@ const PORT = 8080;
 const allowedUrls = [
   "http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid",
   "https://maps.googleapis.com/maps/api/directions/json",
+  "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll",
 ];
 
 // 모든 요청에 대해 실행되는 미들웨어를 추가
@@ -90,7 +91,18 @@ app.get("/proxy", (req, res) => {
         )
       ) {
         // 경로 좌표 가공해서 send
-        res.send(JSON.parse(body).routes[0].overview_polyline.points);
+        res
+          .status(200)
+          .send(JSON.parse(body).routes[0].overview_polyline.points);
+      }
+
+      if (
+        req.query.url.includes(
+          "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"
+        )
+      ) {
+        console.log(JSON.parse(body).msgBody.itemList[0].stNm);
+        res.status(200).send(JSON.parse(body).msgBody.itemList);
       }
     }
   );
