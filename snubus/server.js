@@ -96,12 +96,13 @@ app.get("/proxy", (req, res) => {
           .send(JSON.parse(body).routes[0].overview_polyline.points);
       }
 
+      // 버스도착정보 데이터(정류장 관련 정보 데이터) 요청이면
       if (
         req.query.url.includes(
           "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"
         )
       ) {
-        console.log(JSON.parse(body).msgBody.itemList[0].stNm);
+        // 정류장 관련 정보 배열 send
         res.status(200).send(JSON.parse(body).msgBody.itemList);
       }
     }

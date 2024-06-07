@@ -564,6 +564,7 @@ function TimeLines({ isStart }) {
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
 
+  // 버스도착정보 데이터 api -> 각 정류장 관련 정보 fetching
   const getBusStationInfo = async () => {
     try {
       const response = await fetch(
@@ -573,6 +574,8 @@ function TimeLines({ isStart }) {
       );
 
       const busStationInfos = await response.json();
+
+      // 중앙대학교 방면 정류장들 관련 정보 필터링
       const busStationName_start = busStationInfos.filter(
         (busStationInfo, i) => {
           if (i >= 4 && i <= 25) {
@@ -580,11 +583,14 @@ function TimeLines({ isStart }) {
           }
         }
       );
+
+      // 신림2동차고지 방면 정류장들 관련 정보 필터링
       const busStationName_end = busStationInfos.filter((busStationInfo, i) => {
         if (i >= 51 && i <= 74) {
           return busStationInfo;
         }
       });
+
       console.log(busStationName_start, busStationName_end);
     } catch (error) {
       console.error("Fetch error:", error);
@@ -592,6 +598,7 @@ function TimeLines({ isStart }) {
   };
 
   useEffect(() => {
+    // 각 정류장 관련 정보 fetching
     getBusStationInfo();
   }, []);
 
