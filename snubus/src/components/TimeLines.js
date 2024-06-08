@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
-import { busStationPosContext } from "../routes/View5511Bus";
+import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
 
 const stationList_start = [
   {
@@ -563,6 +563,9 @@ const stationList_end = [
 function TimeLines({ isStart }) {
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
+
+  // 버스 위치 좌표 데이터 context
+  const busStationInfos = useContext(busDataContext).busStationInfos;
 
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {

@@ -63,22 +63,14 @@ export default async function getBusDataInterval(
       const busStationInfos = await response.json();
 
       // 중앙대학교 방면 정류장들 관련 정보 필터링
-      const busStationName_start = busStationInfos.filter(
-        (busStationInfo, i) => {
-          if (i >= 4 && i <= 25) {
-            return busStationInfo;
-          }
-        }
-      );
-
-      // 신림2동차고지 방면 정류장들 관련 정보 필터링
-      const busStationName_end = busStationInfos.filter((busStationInfo, i) => {
-        if (i >= 51 && i <= 74) {
-          return busStationInfo;
-        }
+      const busStationName_start = busStationInfos.filter((i) => {
+        return i >= 4 && i <= 25;
       });
 
-      console.log(busStationName_start, busStationName_end);
+      // 신림2동차고지 방면 정류장들 관련 정보 필터링
+      const busStationName_end = busStationInfos.filter((i) => {
+        return i >= 51 && i <= 74;
+      });
 
       // 각 방면 정류장 정보 리턴
       return [busStationName_start, busStationName_end];
