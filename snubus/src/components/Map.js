@@ -288,7 +288,7 @@ function Map({ position }) {
   useEffect(() => {
     // DirectionsData 가져오기
     getAllDirectionsData();
-  }, []);
+  }, [position]);
 
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
@@ -300,7 +300,7 @@ function Map({ position }) {
       // 현재 위치 좌표 가져오기
       getCurrentPosition(printKakaomap);
     }
-  }, [startDirectionsData, endDirectionsData, busStationPos]);
+  }, [position, startDirectionsData, endDirectionsData, busStationPos]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈

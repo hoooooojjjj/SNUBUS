@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
 import { busStationPosContext } from "../routes/View5511Bus";
@@ -563,44 +563,6 @@ const stationList_end = [
 function TimeLines({ isStart }) {
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
-
-  // 버스도착정보 데이터 api -> 각 정류장 관련 정보 fetching
-  const getBusStationInfo = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=100100250&resultType=json`
-        )}`
-      );
-
-      const busStationInfos = await response.json();
-
-      // 중앙대학교 방면 정류장들 관련 정보 필터링
-      const busStationName_start = busStationInfos.filter(
-        (busStationInfo, i) => {
-          if (i >= 4 && i <= 25) {
-            return busStationInfo;
-          }
-        }
-      );
-
-      // 신림2동차고지 방면 정류장들 관련 정보 필터링
-      const busStationName_end = busStationInfos.filter((busStationInfo, i) => {
-        if (i >= 51 && i <= 74) {
-          return busStationInfo;
-        }
-      });
-
-      console.log(busStationName_start, busStationName_end);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  };
-
-  useEffect(() => {
-    // 각 정류장 관련 정보 fetching
-    getBusStationInfo();
-  }, []);
 
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {
