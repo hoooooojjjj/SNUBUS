@@ -8,7 +8,11 @@ import StationLine from "../components/StationLine";
 
 const BUSROUTEID_5511 = "100100250";
 
+// 버스 정류장 좌표 state 전달하는 contextAPI
 export const busStationPosContext = React.createContext();
+
+// 버스 관련 데이터 state 전달하는 contextAPI
+export const busDataContext = React.createContext();
 
 // 5511번 버스 페이지
 function View5511Bus() {
@@ -34,16 +38,6 @@ function View5511Bus() {
     },
   });
 
-  // 5511번 버스들 좌표 데이터 저장하는 상태
-  const [pos5511Buses, setPos5511Buses] = useState(null);
-
-  // 각 정류장 관련 정보 저장하는 state
-  // 중앙대학교 방면 정류장 정보
-  const [busStationInfo_start, setBusStationInfo_start] = useState([]);
-
-  // 신림2동차고지 방면 정류장 정보
-  const [busStationInfo_end, setBusStationInfo_end] = useState([]);
-
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
     // 새로운 AbortController 객체 인터페이스를 생성
@@ -68,11 +62,13 @@ function View5511Bus() {
         <busStationPosContext.Provider
           value={[busStationPos, setBusStationPos]}
         >
-          {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-          <div style={{ display: "flex" }}>
-            <Map position={busData.busPoses}></Map>
-            {isMapPrint ? <StationLine /> : <></>}
-          </div>
+          <busDataContext.Provider value={busData}>
+            {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+            <div style={{ display: "flex" }}>
+              <Map></Map>
+              {isMapPrint ? <StationLine /> : <></>}
+            </div>
+          </busDataContext.Provider>
         </busStationPosContext.Provider>
       ) : (
         // 데이터가 안 들어왔을 때

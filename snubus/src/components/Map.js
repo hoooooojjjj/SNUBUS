@@ -6,9 +6,9 @@ import {
   bus_5511Stations_forEndPolyline,
   bus_5511Stations_forStartPolyline,
 } from "../busStationPos";
-import { busStationPosContext } from "../routes/View5511Bus";
+import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
 
-function Map({ position }) {
+function Map() {
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
 
@@ -32,6 +32,9 @@ function Map({ position }) {
 
   // 신림2동차고지 방면(종점->기점 방면) DirectionsData 저장하는 상태
   const [endDirectionsData, setEndDirectionsData] = useState([]);
+
+  // 버스 위치 좌표 데이터 context
+  const position = useContext(busDataContext).busPoses;
 
   /* 함수 코드 */
 
