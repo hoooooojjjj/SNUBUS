@@ -76,18 +76,19 @@ app.get("/proxy", (req, res) => {
             break;
           case "정상적으로 처리되었습니다.":
             // 정상적으로 처리되면
+            // console.log(
+            //   "정류소 간 거리" +
+            //     JSON.parse(body).msgBody.itemList[1].fullSectDist
+            // );
+            // console.log(
+            //   "구간 옵셋 거리" + JSON.parse(body).msgBody.itemList[1].sectDist
+            // );
+            // const remind =
+            //   Number(JSON.parse(body).msgBody.itemList[1].fullSectDist) -
+            //   Number(JSON.parse(body).msgBody.itemList[1].sectDist);
+            // console.log("남은 거리 ", String(remind));
+            console.log(JSON.parse(body).msgBody.itemList[0]);
             // 버스 정보들 가공해서 send
-            console.log(
-              "정류소 간 거리" +
-                JSON.parse(body).msgBody.itemList[1].fullSectDist
-            );
-            console.log(
-              "구간 옵셋 거리" + JSON.parse(body).msgBody.itemList[1].sectDist
-            );
-            const remind =
-              Number(JSON.parse(body).msgBody.itemList[1].fullSectDist) -
-              Number(JSON.parse(body).msgBody.itemList[1].sectDist);
-            console.log("남은 거리 ", String(remind));
             res.status(200).send(JSON.parse(body).msgBody.itemList);
             break;
           default:
@@ -101,6 +102,8 @@ app.get("/proxy", (req, res) => {
           "https://maps.googleapis.com/maps/api/directions/json"
         )
       ) {
+        // 출발지-목적지 거리
+        // console.log(JSON.parse(body).routes[0].legs[0].distance.text);
         // 경로 좌표 가공해서 send
         res
           .status(200)

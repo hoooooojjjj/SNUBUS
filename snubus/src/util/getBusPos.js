@@ -79,6 +79,25 @@ export default async function getBusDataInterval(
     }
   };
 
+  // 실시간 버스 위치 정보 데이터 요청 함수 -> 버스가 어느 정류장을 지나고 있는지에 대한 정보 fetching
+  const getBusStationInfo1 = async () => {
+    // 데이터 요청
+    try {
+      const response = await fetch(
+        `https://api.odsay.com/v1/api/realtimeRoute?apiKey=${process.env.REACT_APP_ODSAY_API_KEY}&lang=0&output=json&busID=1103&busBase=0&lowBus=0`
+      );
+
+      // 서버에서 json으로 응답 받기
+      const busStationInfos = await response.json();
+      // 실시간 버스 정보 출력ㄴ
+      console.log(busStationInfos.result.real);
+    } catch (error) {
+      console.log("Fetch error:", error);
+    }
+  };
+
+  getBusStationInfo1();
+
   // 처음 마운트되었을 때 받은 새 버스 데이터 저장하는 객체
   const NewBusDataForFirstMount = {
     // 버스들 좌표 데이터 저장하는 상태
@@ -142,7 +161,7 @@ export default async function getBusDataInterval(
 
     // state에 NewBusDataForInterval 업데이트
     setBusData(NewBusDataForInterval);
-  }, 11000);
+  }, 10100);
 
   // 언마운트 시 Interval 종료
   return () => clearInterval(fetchDataInterval);
