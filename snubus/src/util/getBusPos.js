@@ -49,18 +49,19 @@ export default async function getBusDataInterval(
     }
   }
 
-  // 버스 위치 정보 데이터 요청 함수 -> 각 정류장 관련 정보 fetching
+  // 버스노선 상세 정보 데이터 요청 함수 -> 각 정류장 관련 정보 fetching
   const getBusStationInfo = async () => {
     // 데이터 요청
     try {
       const response = await fetch(
-        `http://localhost:8080/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=100100250&resultType=json`
-        )}`
+        `https://api.odsay.com/v1/api/busLaneDetail?apiKey=${process.env.REACT_APP_ODSAY_API_KEY}&lang=0&output=json&busID=1103`
       );
 
       // 서버에서 json으로 응답 받기
-      const busStationInfos = await response.json();
+      const data = await response.json();
+
+      // 정류장 데이터만
+      const busStationInfos = data.result.station;
 
       // 중앙대학교 방면 정류장들 관련 정보 필터링
       const busStationName_start = busStationInfos.filter((i) => {
