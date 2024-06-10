@@ -592,34 +592,28 @@ function TimeLines({ isStart }) {
 
   // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
   useEffect(() => {
+    // 어떤 방면 정류장인지
+    const stationList = isStart ? stationList_start : stationList_end;
+
     // 버스 정류장 라인 분할하는 배열 담기 위한 변수
     const newBuseStationSlice = [];
 
     // 버스 정류장 라인을 [첫번째 정류장,두번째 정류장]으로 분리
-    for (
-      let i = 0;
-      i < (isStart ? stationList_start : stationList_end).length;
-      i++
-    ) {
+    for (let i = 0; i < stationList.length; i++) {
+      if (i) {
+      }
       // 각 인덱스의 [첫번째 정류장,두번째 정류장]을 newBuseStationSlice에 담기
-      newBuseStationSlice.push([
-        (isStart ? stationList_start : stationList_end)[i],
-        (isStart ? stationList_start : stationList_end)[i + 1],
-      ]);
+      newBuseStationSlice.push([stationList[i], stationList[i + 1]]);
     }
 
     // newBuseStationSlice를 state에 업데이트
     setBusStationSlice(newBuseStationSlice);
-  }, []);
+  }, [isStart]);
 
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성
-    busStationSlice.map((busStation) => (
-      <TimelineStyle
-        key={busStation[0].position}
-        items={busStation}
-        onClick={isStationClicked}
-      />
+    busStationSlice.map((busStation, i) => (
+      <TimelineStyle key={i} items={busStation} onClick={isStationClicked} />
     ))
   ) : (
     <></>

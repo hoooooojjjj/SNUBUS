@@ -40,5 +40,6 @@ export const TimelineStyle = styled(Timeline)`
   }
   & > li:last-child {
     padding-bottom: 0px;
+    margin-bottom: 0px;
   }
 `;
