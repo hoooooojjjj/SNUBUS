@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
 import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
@@ -567,6 +567,9 @@ function TimeLines({ isStart }) {
   // 버스 위치 좌표 데이터 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
+  // 버스 정류장 라인 분할한 배열 저장하는 state
+  const [busStationSlice, setBusStationSlice] = useState([]);
+
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {
     // 정확히 버스 정류장 텍스트를 클릭했을 때만 실행
@@ -587,11 +590,39 @@ function TimeLines({ isStart }) {
     }
   };
 
-  return (
-    <TimelineStyle
-      items={isStart ? stationList_start : stationList_end}
-      onClick={isStationClicked}
-    />
+  // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
+  useEffect(() => {
+    // 버스 정류장 라인 분할하는 배열 담기 위한 변수
+    const newBuseStationSlice = [];
+
+    // 버스 정류장 라인을 [첫번째 정류장,두번째 정류장]으로 분리
+    for (
+      let i = 0;
+      i < (isStart ? stationList_start : stationList_end).length;
+      i++
+    ) {
+      // 각 인덱스의 [첫번째 정류장,두번째 정류장]을 newBuseStationSlice에 담기
+      newBuseStationSlice.push([
+        (isStart ? stationList_start : stationList_end)[i],
+        (isStart ? stationList_start : stationList_end)[i + 1],
+      ]);
+    }
+
+    // newBuseStationSlice를 state에 업데이트
+    setBusStationSlice(newBuseStationSlice);
+  }, []);
+
+  return busStationSlice ? (
+    // 각 분할한 정류장마다 정류장 라인 생성
+    busStationSlice.map((busStation) => (
+      <TimelineStyle
+        key={busStation[0].position}
+        items={busStation}
+        onClick={isStationClicked}
+      />
+    ))
+  ) : (
+    <></>
   );
 }
 

@@ -84,7 +84,7 @@ export default async function getBusDataInterval(
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://api.odsay.com/v1/api/realtimeRoute?apiKey=${process.env.REACT_APP_ODSAY_API_KEY}&lang=0&output=json&busID=1103&busBase=0&lowBus=0`
+        `https://api.odsay.com/v1/api/realtimeRoute?apiKey=${process.env.REACT_APP_ODSAY_API_KEY}&lang=0&output=json&busID=1103&busBase=1&lowBus=0`
       );
 
       // 서버에서 json으로 응답 받기
