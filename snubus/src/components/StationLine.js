@@ -5,7 +5,6 @@ import {
   StationLineWrap,
   StationSwitchBtn,
   LineWrap,
-  BusImg,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLines";
 
@@ -30,9 +29,6 @@ const StationLine = () => {
           </StationSwitchBtn>
         </BtnWrap>
         <LineWrap>
-          <BusImg
-            src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
-          ></BusImg>
           <TimeLines isStart={isStart} />
         </LineWrap>
       </StationLineWrap>

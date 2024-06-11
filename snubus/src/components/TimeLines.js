@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TimelineStyle } from "./StationLineStyle";
+import { TimelineStyle, BusImg, TimeLinesWrap } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
 import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
 
@@ -703,7 +703,10 @@ function TimeLines({ isStart }) {
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성
     busStationSlice.map((busStation, i) => (
-      <TimelineStyle key={i} items={busStation} onClick={isStationClicked} />
+      <TimeLinesWrap key={i}>
+        <TimelineStyle items={busStation} onClick={isStationClicked} />
+        <BusImg src={process.env.PUBLIC_URL + `assets/FeederBus.png`}></BusImg>
+      </TimeLinesWrap>
     ))
   ) : (
     <></>

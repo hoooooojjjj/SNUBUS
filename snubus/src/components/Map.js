@@ -145,13 +145,17 @@ function Map() {
       printMarker(map, curLat, curLlon);
 
       // 모든 경로 좌표 폴리라인 생성
-      startDirectionsData.forEach((direction) => {
-        printPolyline(direction, map, "blue");
-      });
+      if (startDirectionsData) {
+        startDirectionsData.forEach((direction) => {
+          printPolyline(direction, map, "blue");
+        });
+      }
 
-      endDirectionsData.forEach((direction) => {
-        printPolyline(direction, map, "red");
-      });
+      if (endDirectionsData) {
+        endDirectionsData.forEach((direction) => {
+          printPolyline(direction, map, "red");
+        });
+      }
 
       // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출
       setIsMapPrint(true);

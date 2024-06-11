@@ -172,6 +172,7 @@ export default async function getBusDataInterval(
     const BusPosData = await getBusPosData();
     if (!BusPosData) {
       clearInterval(fetchDataInterval);
+      return null;
     }
     // 버스 좌표 배열 BusPosData에 state 업데이트
     NewBusDataForInterval.busPoses.busPositionXY = BusPosData.busPos;
@@ -186,6 +187,7 @@ export default async function getBusDataInterval(
     const BusStationInfo = await getBusStationInfo();
     if (BusStationInfo.length < 2) {
       clearInterval(fetchDataInterval);
+      return null;
     }
     NewBusDataForInterval.busStationInfos.DirectionToStart = BusStationInfo[0];
     NewBusDataForInterval.busStationInfos.DirectionToEnd = BusStationInfo[1];

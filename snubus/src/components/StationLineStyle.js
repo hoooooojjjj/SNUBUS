@@ -22,11 +22,10 @@ export const LineWrap = styled.div({
   overflowY: "scroll",
   marginTop: 20,
   paddingTop: 20,
-  position: "relative",
 });
 export const BusImg = styled.img({
   position: "absolute",
-  top: 15,
+  top: -5,
   left: 2,
   width: 25,
 });
@@ -43,3 +42,6 @@ export const TimelineStyle = styled(Timeline)`
     margin-bottom: 0px;
   }
 `;
+export const TimeLinesWrap = styled.div({
+  position: "relative",
+});
