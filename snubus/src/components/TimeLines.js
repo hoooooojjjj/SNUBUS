@@ -620,6 +620,12 @@ function TimeLines({ isStart }) {
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);
 
+  //  현재 운행 중인 버스가 위치한 snubus 정류장의 id state
+  const [passingBusStationId, setPassingBusStationId] = useState({
+    startDirection: [],
+    endDirection: [],
+  });
+
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {
     // 정확히 버스 정류장 텍스트를 클릭했을 때만 실행
@@ -683,7 +689,13 @@ function TimeLines({ isStart }) {
       stationList_end,
       busStationInStation.DirectionToEnd
     );
-    console.log(passingBus_start, passingBus_end);
+    // console.log(passingBus_start, passingBus_end);
+
+    // 현재 운행 중인 버스가 위치한 snubus 정류장의 id state 업데이트
+    setPassingBusStationId({
+      startDirection: passingBus_start.map((passingBus) => passingBus.id),
+      endDirection: passingBus_end.map((passingBus) => passingBus.id),
+    });
 
     // 중앙대학교 방면 지나가고 있는 버스들의 다음 정류장까지 남은 거리
     console.log(
@@ -705,7 +717,28 @@ function TimeLines({ isStart }) {
     busStationSlice.map((busStation, i) => (
       <TimeLinesWrap key={i}>
         <TimelineStyle items={busStation} onClick={isStationClicked} />
-        <BusImg src={process.env.PUBLIC_URL + `assets/FeederBus.png`}></BusImg>
+        {/* 정류장 라인에 버스 위치 정보 표시하기 */}
+        {isStart ? (
+          // 중앙대학교 방면 일 때
+          // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
+          passingBusStationId.startDirection.includes(busStation[0].id) ? (
+            <BusImg
+              src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
+            ></BusImg>
+          ) : (
+            <></>
+          )
+        ) : // 신림2동차고지 방면 일 때
+        // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
+        passingBusStationId.endDirection.includes(busStation[0].id) ? (
+          <>
+            <BusImg
+              src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
+            ></BusImg>
+          </>
+        ) : (
+          <></>
+        )}
       </TimeLinesWrap>
     ))
   ) : (
