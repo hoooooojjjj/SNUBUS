@@ -87,7 +87,7 @@ app.get("/proxy", (req, res) => {
             //   Number(JSON.parse(body).msgBody.itemList[1].fullSectDist) -
             //   Number(JSON.parse(body).msgBody.itemList[1].sectDist);
             // console.log("남은 거리 ", String(remind));
-            console.log(JSON.parse(body).msgBody.itemList[0]);
+            console.log(JSON.parse(body).msgBody.itemList[0].plainNo);
             // 버스 정보들 가공해서 send
             res.status(200).send(JSON.parse(body).msgBody.itemList);
             break;

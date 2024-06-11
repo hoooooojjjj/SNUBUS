@@ -33,6 +33,21 @@ export default async function getBusDataInterval(
         return [];
         // 데이터가 정상적으로 처리되었다면
       } else if (response.status === 200) {
+        // 중앙대학교 방면 snubus 정류장 지나는 버스만 출력
+        console.log(
+          busPosData.filter(
+            (busPos) =>
+              parseInt(busPos.sectOrd) >= 4 && parseInt(busPos.sectOrd) <= 25
+          )
+        );
+
+        // 신림2동차고지 방면 snubus 정류장 지나는 버스만 출력
+        console.log(
+          busPosData.filter(
+            (busPos) =>
+              parseInt(busPos.sectOrd) >= 51 && parseInt(busPos.sectOrd) <= 74
+          )
+        );
         // 각 버스의 위치 좌표 리턴
         const getPosBuses = busPosData.map((PosBus) => {
           return [PosBus.gpsY, PosBus.gpsX];
@@ -89,8 +104,9 @@ export default async function getBusDataInterval(
 
       // 서버에서 json으로 응답 받기
       const busStationInfos = await response.json();
-      // 실시간 버스 정보 출력ㄴ
-      console.log(busStationInfos.result.real);
+
+      // 실시간 버스 정보 출력
+      // console.log(busStationInfos.result.real);
     } catch (error) {
       console.log("Fetch error:", error);
     }
