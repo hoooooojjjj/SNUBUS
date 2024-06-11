@@ -76,17 +76,6 @@ app.get("/proxy", (req, res) => {
             break;
           case "정상적으로 처리되었습니다.":
             // 정상적으로 처리되면
-            // console.log(
-            //   "정류소 간 거리" +
-            //     JSON.parse(body).msgBody.itemList[1].fullSectDist
-            // );
-            // console.log(
-            //   "구간 옵셋 거리" + JSON.parse(body).msgBody.itemList[1].sectDist
-            // );
-            // const remind =
-            //   Number(JSON.parse(body).msgBody.itemList[1].fullSectDist) -
-            //   Number(JSON.parse(body).msgBody.itemList[1].sectDist);
-            // console.log("남은 거리 ", String(remind));
             // 버스 정보들 가공해서 send
             res.status(200).send(JSON.parse(body).msgBody.itemList);
             break;
