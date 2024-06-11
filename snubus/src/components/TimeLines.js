@@ -677,7 +677,6 @@ function TimeLines({ isStart }) {
       stationList_start,
       busStationInStation.DirectionToStart
     );
-    console.log(passingBus_start);
 
     // 신림2동차고지 방면 지나가고 있는 버스의 현재 어떤 snubus 정류장에 위치하는지 찾기
     const passingBus_end = findPassingBusWithStationId(
@@ -685,7 +684,21 @@ function TimeLines({ isStart }) {
       busStationInStation.DirectionToEnd
     );
     console.log(passingBus_start, passingBus_end);
-  }, []);
+
+    // 중앙대학교 방면 지나가고 있는 버스들의 다음 정류장까지 남은 거리
+    console.log(
+      busStationInStation.DirectionToStart.map(
+        (bus) => Number(bus.fullSectDist) - Number(bus.sectDist)
+      )
+    );
+
+    // 신림2동차고지 방면 지나가고 있는 버스들의 다음 정류장까지 남은 거리
+    console.log(
+      busStationInStation.DirectionToEnd.map(
+        (bus) => Number(bus.fullSectDist) - Number(bus.sectDist)
+      )
+    );
+  }, [busStationInStation]);
 
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성
