@@ -106,7 +106,7 @@ export default async function getBusDataInterval(
       const busStationInfos = await response.json();
 
       // 실시간 버스 정보 출력
-      // console.log(busStationInfos.result.real);
+      console.log(busStationInfos.result);
     } catch (error) {
       console.log("Fetch error:", error);
     }
