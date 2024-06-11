@@ -613,6 +613,7 @@ function TimeLines({ isStart }) {
   // 버스 위치 좌표 데이터 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
+  // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
   const busStationInStation =
     useContext(busDataContext).busPoses.busPositionInStation;
 
@@ -641,7 +642,6 @@ function TimeLines({ isStart }) {
 
   // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
   useEffect(() => {
-    console.log(busStationInStation);
     // 어떤 방면 정류장인지
     const stationList = isStart ? stationList_start : stationList_end;
 
@@ -650,8 +650,6 @@ function TimeLines({ isStart }) {
 
     // 버스 정류장 라인을 [첫번째 정류장,두번째 정류장]으로 분리
     for (let i = 0; i < stationList.length; i++) {
-      if (i) {
-      }
       // 각 인덱스의 [첫번째 정류장,두번째 정류장]을 newBuseStationSlice에 담기
       newBuseStationSlice.push([stationList[i], stationList[i + 1]]);
     }
@@ -659,6 +657,35 @@ function TimeLines({ isStart }) {
     // newBuseStationSlice를 state에 업데이트
     setBusStationSlice(newBuseStationSlice);
   }, [isStart]);
+
+  // 현재 운행 중인 버스가 어느 snubus 정류장에 위치하고 있는지(지나가고 있는지) 찾기
+  useEffect(() => {
+    // 정류장 리스트와 각 방면을 지나고 있는 버스 배열 인자로 받아서
+    function findPassingBusWithStationId(stations, passingBusArr) {
+      // 각 방면을 지나고 있는 버스 배열 요소들의 sectOrd(정류장 순번)과 정류장 리스트 배열 요소의 id(정류장 순번)이 일치하는 요소만 필터링
+      return passingBusArr
+        .map((passingBus) => {
+          return stations.find(
+            (station) => station.id === parseInt(passingBus.sectOrd)
+          );
+        })
+        .filter((bus) => bus !== undefined);
+    }
+
+    // 중앙대학교 방면 지나가고 있는 버스가 현재 어떤 snubus 정류장에 위치하는지 찾기
+    const passingBus_start = findPassingBusWithStationId(
+      stationList_start,
+      busStationInStation.DirectionToStart
+    );
+    console.log(passingBus_start);
+
+    // 신림2동차고지 방면 지나가고 있는 버스의 현재 어떤 snubus 정류장에 위치하는지 찾기
+    const passingBus_end = findPassingBusWithStationId(
+      stationList_end,
+      busStationInStation.DirectionToEnd
+    );
+    console.log(passingBus_start, passingBus_end);
+  }, []);
 
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성

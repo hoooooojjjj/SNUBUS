@@ -34,7 +34,7 @@ export const TimelineStyle = styled(Timeline)`
   padding-left: 10px;
   padding-top: 5px;
   color: white;
-  overflow-y: scroll;
+
   & > li > .ant-timeline-item-content {
     cursor: pointer;
   }
