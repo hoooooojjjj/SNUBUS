@@ -613,6 +613,9 @@ function TimeLines({ isStart }) {
   // 버스 위치 좌표 데이터 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
+  const busStationInStation =
+    useContext(busDataContext).busPoses.busPositionInStation;
+
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);
 
@@ -638,6 +641,7 @@ function TimeLines({ isStart }) {
 
   // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
   useEffect(() => {
+    console.log(busStationInStation);
     // 어떤 방면 정류장인지
     const stationList = isStart ? stationList_start : stationList_end;
 

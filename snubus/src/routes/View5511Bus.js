@@ -27,9 +27,17 @@ function View5511Bus() {
 
   // 버스 관련 데이터 저장하는 상태
   const [busData, setBusData] = useState({
-    // 버스들 좌표 데이터 저장하는 상태
-    busPoses: null,
-    // 각 정류장 관련 정보 저장하는 state
+    // 버스들 데이터 저장하는 상태(버스 위치 정보 api 응답)
+    busPoses: {
+      // 버스 좌표 데이터 저장하는 상태
+      busPositionXY: null,
+      // 버스가 어느 정류장에 있는지 저장하는 상태
+      busPositionInStation: {
+        DirectionToStart: [],
+        DirectionToEnd: [],
+      },
+    },
+    // 각 정류장 관련 정보 저장하는 state(버스 도착 정보 api 응답)
     busStationInfos: {
       // 중앙대학교 방면 정류장 정보
       DirectionToStart: [],
@@ -58,7 +66,7 @@ function View5511Bus() {
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
       {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
-      {busData.busPoses ? (
+      {busData.busPoses.busPositionXY ? (
         <busStationPosContext.Provider
           value={[busStationPos, setBusStationPos]}
         >

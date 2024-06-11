@@ -34,7 +34,7 @@ function Map() {
   const [endDirectionsData, setEndDirectionsData] = useState([]);
 
   // 버스 위치 좌표 데이터 context
-  const position = useContext(busDataContext).busPoses;
+  const position = useContext(busDataContext).busPoses.busPositionXY;
 
   /* 함수 코드 */
 
