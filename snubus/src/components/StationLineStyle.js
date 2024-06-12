@@ -23,12 +23,12 @@ export const LineWrap = styled.div({
   marginTop: 20,
   paddingTop: 20,
 });
-export const BusImg = styled.img({
+export const BusImg = styled.img((props) => ({
   position: "absolute",
-  top: -5,
+  top: props.remainingDist,
   left: 2,
   width: 25,
-});
+}));
 export const TimelineStyle = styled(Timeline)`
   padding-left: 10px;
   padding-top: 5px;

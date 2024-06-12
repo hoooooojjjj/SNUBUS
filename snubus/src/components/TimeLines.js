@@ -614,16 +614,28 @@ function TimeLines({ isStart }) {
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
   // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
-  const busStationInStation =
+  const busesInStation =
     useContext(busDataContext).busPoses.busPositionInStation;
 
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);
 
-  //  현재 운행 중인 버스가 위치한 snubus 정류장의 id state
-  const [passingBusStationId, setPassingBusStationId] = useState({
-    startDirection: [],
-    endDirection: [],
+  //  현재 운행 중인 버스가 위치한 snubus 정류장 관련 state
+  const [passingBusStation, setPassingBusStation] = useState({
+    // 중앙대학교 방면
+    startDirection: {
+      // 정류장 순번
+      id: [],
+      // 남은 거리
+      remainingDist: [],
+    },
+    // 신림2동차고지 방면
+    endDirection: {
+      // 정류장 순번
+      id: [],
+      // 남은 거리
+      remainingDist: [],
+    },
   });
 
   // 버스 정류장 클릭 시
@@ -681,36 +693,42 @@ function TimeLines({ isStart }) {
     // 중앙대학교 방면 지나가고 있는 버스가 현재 어떤 snubus 정류장에 위치하는지 찾기
     const passingBus_start = findPassingBusWithStationId(
       stationList_start,
-      busStationInStation.DirectionToStart
+      busesInStation.DirectionToStart
     );
 
     // 신림2동차고지 방면 지나가고 있는 버스의 현재 어떤 snubus 정류장에 위치하는지 찾기
     const passingBus_end = findPassingBusWithStationId(
       stationList_end,
-      busStationInStation.DirectionToEnd
+      busesInStation.DirectionToEnd
     );
     // console.log(passingBus_start, passingBus_end);
 
-    // 현재 운행 중인 버스가 위치한 snubus 정류장의 id state 업데이트
-    setPassingBusStationId({
-      startDirection: passingBus_start.map((passingBus) => passingBus.id),
-      endDirection: passingBus_end.map((passingBus) => passingBus.id),
+    // 중앙대학교 방면 지나가고 있는 버스들의 다음 정류장까지 간 비율 계산(몇 % 왔는지)
+    const remainingDist_start = busesInStation.DirectionToStart.map((bus) =>
+      Math.round((Number(bus.sectDist) / Number(bus.fullSectDist)) * 100)
+    );
+
+    // 신림2동차고지 방면 지나가고 있는 버스들의 다음 정류장까지 간 비율 계산(몇 % 왔는지)
+    const remainingDist_end = busesInStation.DirectionToEnd.map((bus) =>
+      Math.round((Number(bus.sectDist) / Number(bus.fullSectDist)) * 100)
+    );
+
+    // 현재 운행 중인 버스가 위치한 snubus 정류장 관련 state 업데이트
+    setPassingBusStation({
+      startDirection: passingBus_start.map((passingBus, i) => {
+        return {
+          id: passingBus.id,
+          remainingDist: remainingDist_start[i],
+        };
+      }),
+      endDirection: passingBus_end.map((passingBus, i) => {
+        return {
+          id: passingBus.id,
+          remainingDist: remainingDist_end[i],
+        };
+      }),
     });
-
-    // 중앙대학교 방면 지나가고 있는 버스들의 다음 정류장까지 남은 거리
-    console.log(
-      busStationInStation.DirectionToStart.map(
-        (bus) => Number(bus.fullSectDist) - Number(bus.sectDist)
-      )
-    );
-
-    // 신림2동차고지 방면 지나가고 있는 버스들의 다음 정류장까지 남은 거리
-    console.log(
-      busStationInStation.DirectionToEnd.map(
-        (bus) => Number(bus.fullSectDist) - Number(bus.sectDist)
-      )
-    );
-  }, [busStationInStation]);
+  }, [busesInStation]);
 
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성
@@ -718,27 +736,41 @@ function TimeLines({ isStart }) {
       <TimeLinesWrap key={i}>
         <TimelineStyle items={busStation} onClick={isStationClicked} />
         {/* 정류장 라인에 버스 위치 정보 표시하기 */}
-        {isStart ? (
-          // 중앙대학교 방면 일 때
-          // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
-          passingBusStationId.startDirection.includes(busStation[0].id) ? (
-            <BusImg
-              src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
-            ></BusImg>
-          ) : (
-            <></>
-          )
-        ) : // 신림2동차고지 방면 일 때
-        // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
-        passingBusStationId.endDirection.includes(busStation[0].id) ? (
-          <>
-            <BusImg
-              src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
-            ></BusImg>
-          </>
-        ) : (
-          <></>
-        )}
+        {isStart
+          ? // 중앙대학교 방면 일 때
+            // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
+            passingBusStation.startDirection.map((passingBus) => {
+              if (passingBus.id === busStation[0].id) {
+                return (
+                  <BusImg
+                    key={passingBus.id}
+                    remainingDist={passingBus.remainingDist}
+                    src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
+                  ></BusImg>
+                );
+              } else {
+                return null;
+              }
+            })
+          : // 신림2동차고지 방면 일 때
+            // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
+            passingBusStation.endDirection.map((passingBus) => {
+              if (passingBus.id === busStation[0].id) {
+                // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
+                // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
+                const remainingDistMatchingCSS =
+                  -5 + 70 * (passingBus.remainingDist * 0.01);
+                return (
+                  <BusImg
+                    key={passingBus.id}
+                    remainingDist={remainingDistMatchingCSS}
+                    src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
+                  ></BusImg>
+                );
+              } else {
+                return null;
+              }
+            })}
       </TimeLinesWrap>
     ))
   ) : (
