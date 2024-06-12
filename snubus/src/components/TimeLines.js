@@ -717,13 +717,13 @@ function TimeLines({ isStart }) {
     setPassingBusStation({
       startDirection: passingBus_start.map((passingBus, i) => {
         return {
-          id: passingBus.id,
+          id: passingBus.id - 1,
           remainingDist: remainingDist_start[i],
         };
       }),
       endDirection: passingBus_end.map((passingBus, i) => {
         return {
-          id: passingBus.id,
+          id: passingBus.id - 1,
           remainingDist: remainingDist_end[i],
         };
       }),
