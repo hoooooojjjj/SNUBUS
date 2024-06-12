@@ -741,10 +741,14 @@ function TimeLines({ isStart }) {
             // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
             passingBusStation.startDirection.map((passingBus) => {
               if (passingBus.id === busStation[0].id) {
+                // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
+                // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
+                const remainingDistMatchingCSS =
+                  -5 + 70 * (passingBus.remainingDist * 0.01);
                 return (
                   <BusImg
                     key={passingBus.id}
-                    remainingDist={passingBus.remainingDist}
+                    remainingDist={remainingDistMatchingCSS}
                     src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
                   ></BusImg>
                 );
