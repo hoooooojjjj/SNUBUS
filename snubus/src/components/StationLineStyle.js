@@ -30,10 +30,10 @@ export const BusImg = styled.img((props) => ({
   width: 25,
 }));
 export const TimelineStyle = styled(Timeline)`
+  height: 72px;
   padding-left: 10px;
   padding-top: 5px;
   color: white;
-
   & > li > .ant-timeline-item-content {
     cursor: pointer;
   }
