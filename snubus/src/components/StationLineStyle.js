@@ -4,6 +4,7 @@ import { flex } from "../util/publicStyleComponents";
 
 export const Container = styled.div({
   margin: "0 auto",
+  width: "30dvw",
   height: "100dvh",
   ...flex("row", "center", "center"),
 });

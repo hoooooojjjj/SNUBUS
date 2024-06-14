@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
 export const Maps = styled.div({
-  width: "50dvw",
+  width: "70dvw",
   height: "100dvh",
 });
