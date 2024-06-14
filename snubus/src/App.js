@@ -27,6 +27,7 @@ function App() {
             },
             Timeline: {
               tailColor: "white",
+              tailWidth: 3,
               itemPaddingBottom: 50,
               dotBg: "black",
             },
