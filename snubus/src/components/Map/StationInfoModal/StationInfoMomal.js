@@ -6,7 +6,7 @@ const StationInfoModal = ({ stationName }) => {
   return (
     // Add your JSX code here
     <div>
-      <h2>{stationName}</h2>
+      {stationName}
       {/* Add your content here */}
     </div>
   );
