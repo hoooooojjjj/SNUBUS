@@ -5,7 +5,7 @@ export default async function getBusDataInterval(
   signal
 ) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
-  async function getBusPosData() {
+  const getBusPosData = async () => {
     // 데이터 요청
     try {
       const response = await fetch(
@@ -58,6 +58,8 @@ export default async function getBusDataInterval(
           // 신림2동차고지 방면 snubus 정류장에 위치한 버스들 배열
           DirectionToEnd: busStationDirectionToEnd,
         };
+      } else {
+        return [];
       }
     } catch (error) {
       if (error.name === "AbortError") {
@@ -66,7 +68,7 @@ export default async function getBusDataInterval(
         console.error("Fetch error:", error);
       }
     }
-  }
+  };
 
   // 버스 도착 정보 데이터 요청 함수 -> 각 정류장 관련 정보 fetching
   const getBusStationInfo = async () => {
@@ -81,18 +83,22 @@ export default async function getBusDataInterval(
       // 서버에서 json으로 응답 받기
       const busStationInfos = await response.json();
 
-      // 중앙대학교 방면 정류장들 관련 정보 필터링
-      const busStationName_start = busStationInfos.filter((i) => {
-        return i >= 4 && i <= 25;
-      });
+      if (response.status === 200) {
+        // 중앙대학교 방면 정류장들 관련 정보 필터링
+        const busStationName_start = busStationInfos.filter((i) => {
+          return i >= 4 && i <= 25;
+        });
 
-      // 신림2동차고지 방면 정류장들 관련 정보 필터링
-      const busStationName_end = busStationInfos.filter((i) => {
-        return i >= 51 && i <= 74;
-      });
+        // 신림2동차고지 방면 정류장들 관련 정보 필터링
+        const busStationName_end = busStationInfos.filter((i) => {
+          return i >= 51 && i <= 74;
+        });
 
-      // 각 방면 정류장 정보 리턴
-      return [busStationName_start, busStationName_end];
+        // 각 방면 정류장 정보 리턴
+        return [busStationName_start, busStationName_end];
+      } else {
+        return [];
+      }
     } catch (error) {
       console.error("Fetch error:", error);
     }
