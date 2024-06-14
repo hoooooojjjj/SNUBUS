@@ -38,6 +38,9 @@ function Map() {
   // 버스 위치 좌표 데이터 context
   const position = useContext(busDataContext).busPoses.busPositionXY;
 
+  // 버스 정류장 관련 정보 context
+  const busStationInfos = useContext(busDataContext).busStationInfos;
+
   /* 함수 코드 */
 
   // Google directions API에 버스 노선 경로 좌표 데이터 fetching 함수
@@ -235,7 +238,12 @@ function Map() {
       // createRoot를 사용하여 StationInfoModal 컴포넌트를 iwContent div DOM에 마운트(렌더링)
       const iwContent = document.createElement("div");
       const root = createRoot(iwContent);
-      root.render(<StationInfoModal stationName={busStationPos.name} />);
+      root.render(
+        <StationInfoModal
+          curStation={busStationPos}
+          busStationInfos={busStationInfos}
+        />
+      );
 
       // 인포윈도우 표시 위치
       const iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);

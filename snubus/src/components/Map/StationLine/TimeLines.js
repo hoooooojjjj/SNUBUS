@@ -657,6 +657,7 @@ function TimeLines({ isStart }) {
       setBusStationPos({
         name: targetStation[0].children,
         pos: targetStation[0].position,
+        Direction: isStart,
       });
     }
   };

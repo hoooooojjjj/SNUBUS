@@ -25,12 +25,20 @@ export default async function getBusDataInterval(
       if (response.status === 429) {
         console.log("데이터 요청 횟수를 초과했습니다");
         // 빈 배열 리턴
-        return [];
+        return {
+          busPos: [],
+          DirectionToStart: [],
+          DirectionToEnd: [],
+        };
         // 운행 중인 버스가 없을 때
       } else if (response.status === 503) {
         console.log("운행 중인 버스가 없습니다.");
         //빈 배열 리턴
-        return [];
+        return {
+          busPos: [],
+          DirectionToStart: [],
+          DirectionToEnd: [],
+        };
         // 데이터가 정상적으로 처리되었다면
       } else if (response.status === 200) {
         // 중앙대학교 방면 snubus 정류장 지나는 버스만 추출
@@ -85,14 +93,14 @@ export default async function getBusDataInterval(
 
       if (response.status === 200) {
         // 중앙대학교 방면 정류장들 관련 정보 필터링
-        const busStationName_start = busStationInfos.filter((i) => {
-          return i >= 4 && i <= 25;
-        });
+        const busStationName_start = busStationInfos.filter(
+          (busStationInfo, i) => i >= 4 && i <= 25
+        );
 
         // 신림2동차고지 방면 정류장들 관련 정보 필터링
-        const busStationName_end = busStationInfos.filter((i) => {
-          return i >= 51 && i <= 74;
-        });
+        const busStationName_end = busStationInfos.filter(
+          (busStationInfo, i) => i >= 51 && i <= 74
+        );
 
         // 각 방면 정류장 정보 리턴
         return [busStationName_start, busStationName_end];

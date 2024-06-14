@@ -11,7 +11,6 @@ import {
   MoreBtn,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLines";
-import { useParams } from "react-router-dom";
 
 const StationLine = () => {
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)

@@ -23,6 +23,7 @@ function View5511Bus() {
   const [busStationPos, setBusStationPos] = useState({
     name: "",
     pos: "",
+    Direction: true,
   });
 
   // 버스 관련 데이터 저장하는 상태
