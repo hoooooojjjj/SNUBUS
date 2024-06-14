@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Map from "../components/Map";
-import getBusPosDataInterval from "../util/getBusPos";
-import Loading from "../components/Loading";
+import Map from "../components/Map/Map";
+import getBusPosDataInterval from "../api/getBusPos";
+import Loading from "../components/Loading/Loading";
 
 const BUSROUTEID_5513 = "100100251";
 

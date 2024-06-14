@@ -4,7 +4,7 @@ import {
   flex,
   container,
   Font_ArchivoBlack,
-} from "../util/publicStyleComponents";
+} from "../../util/publicStyleComponents";
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div((props) => ({
   display: props.display,

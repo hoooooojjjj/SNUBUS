@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import Map from "../components/Map";
-import getBusDataInterval from "../util/getBusPos";
-import Loading from "../components/Loading";
+import Map from "../components/Map/Map";
+import getBusDataInterval from "../api/getBusPos";
+import Loading from "../components/Loading/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
-import StationLine from "../components/StationLine";
+import StationLine from "../components/Map/StationLine/StationLine";
 
 const BUSROUTEID_5511 = "100100250";
 

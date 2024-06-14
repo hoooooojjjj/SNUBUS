@@ -3,7 +3,7 @@ import { Containers, Overlay, MainWrap } from "./MainStyle";
 import Headers from "./components/Header";
 import Footers from "./components/Footer";
 import Articles from "./components/Article";
-import busInfo from "../busInfo";
+import busInfo from "../util/busInfo";
 
 // imgNum state를 전달하는 context API
 export const imgNumContext = React.createContext();

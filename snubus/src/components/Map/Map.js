@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Maps } from "./MapStyle";
-import { isMapPrintContext } from "../App";
+import { isMapPrintContext } from "../../App";
 import polyUtil from "polyline-encoded";
 import {
   bus_5511Stations_forEndPolyline,
   bus_5511Stations_forStartPolyline,
-} from "../busStationPos";
-import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
+} from "../../util/busStationPos";
+import { busDataContext, busStationPosContext } from "../../routes/View5511Bus";
 
 function Map() {
   // kakaomap이 있는 요소의 ref

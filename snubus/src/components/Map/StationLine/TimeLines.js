@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle, BusImg, TimeLinesWrap } from "./StationLineStyle";
 import { DownCircleOutlined } from "@ant-design/icons";
-import { busDataContext, busStationPosContext } from "../routes/View5511Bus";
+import {
+  busDataContext,
+  busStationPosContext,
+} from "../../../routes/View5511Bus";
 
 const stationList_start = [
   {
