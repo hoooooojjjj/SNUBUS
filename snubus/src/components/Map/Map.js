@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
 import polyUtil from "polyline-encoded";
@@ -7,6 +8,7 @@ import {
   bus_5511Stations_forStartPolyline,
 } from "../../util/busStationPos";
 import { busDataContext, busStationPosContext } from "../../routes/View5511Bus";
+import StationInfoModal from "./StationInfoModal/StationInfoMomal";
 
 function Map() {
   // kakaomap이 있는 요소의 ref
@@ -229,8 +231,14 @@ function Map() {
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
 
-      var iwContent = `<div style="padding:5px;">${busStationPos.name} </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+      // 인포윈도우 컨텐츠
+      // createRoot를 사용하여 StationInfoModal 컴포넌트를 iwContent div DOM에 마운트(렌더링)
+      const iwContent = document.createElement("div");
+      const root = createRoot(iwContent);
+      root.render(<StationInfoModal stationName={busStationPos.name} />);
+
+      // 인포윈도우 표시 위치
+      const iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
 
       // 인포윈도우를 생성합니다
       var infowindow = new window.kakao.maps.InfoWindow({
