@@ -695,9 +695,11 @@ function TimeLines({ isStart }) {
       const targetStation = (
         isStart ? stationList_start : stationList_end
       ).filter(
-        // 클릭한 요소의 innerText가 버스 정류장 이름과 같은 것으로 필터링
-        (station) => station.children === e.target.innerText
+        // 버스 정류장 리스트 중 클릭한 요소의 stid와 stid와 같은 것으로 필터링
+        (station) =>
+          station.stid === parseInt(e.target.parentNode.attributes.stid.value)
       );
+
       // 클릭한 버스 정류장 좌표 전달하는 context에 정류장 이름과 좌표, 방향 전달
       setBusStationPos({
         name: targetStation[0].children,

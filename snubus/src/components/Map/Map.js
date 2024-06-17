@@ -235,12 +235,13 @@ function Map() {
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
 
-      // 정류장 id를 통해 현재 클릭한 정류장 도착 관련 정보 배열 필터링
+      // 정류장 id를 통해 현재 클릭한 정류장 '도착 관련 정보' 배열 필터링
       // 중앙대학교 방면인지 신림2동차고지 방면인지에 따라 다른 방면의 busStationInfos를 가져옴
       const Direction = busStationPos.Direction
         ? busStationInfos.DirectionToStart
         : busStationInfos.DirectionToEnd;
-      // 클릭한 정류장의 정보만 필터링
+
+      // 클릭한 정류장의 도착 정보만 필터링
       const curStation = Direction.filter(
         (busStationInfo) => parseInt(busStationInfo.stId) === busStationPos.stId
       );
