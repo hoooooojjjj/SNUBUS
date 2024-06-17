@@ -225,6 +225,7 @@ function Map() {
       // // 마운트 되기 전 map 확대 및 이동 위치
       // setMapInfo(newMapInfo);
       // 클릭한 버스 정류장 마커 만들기
+
       const stationMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(
           busStationPos.pos[0],
@@ -234,16 +235,21 @@ function Map() {
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
 
+      // 정류장 id를 통해 현재 클릭한 정류장 도착 관련 정보 배열 필터링
+      // 중앙대학교 방면인지 신림2동차고지 방면인지에 따라 다른 방면의 busStationInfos를 가져옴
+      const Direction = busStationPos.Direction
+        ? busStationInfos.DirectionToStart
+        : busStationInfos.DirectionToEnd;
+      // 클릭한 정류장의 정보만 필터링
+      const curStation = Direction.filter(
+        (busStationInfo) => parseInt(busStationInfo.stId) === busStationPos.stId
+      );
+
       // 인포윈도우 컨텐츠
       // createRoot를 사용하여 StationInfoModal 컴포넌트를 iwContent div DOM에 마운트(렌더링)
       const iwContent = document.createElement("div");
       const root = createRoot(iwContent);
-      root.render(
-        <StationInfoModal
-          curStation={busStationPos}
-          busStationInfos={busStationInfos}
-        />
-      );
+      root.render(<StationInfoModal curStation={curStation} />);
 
       // 인포윈도우 표시 위치
       const iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
