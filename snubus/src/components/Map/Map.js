@@ -16,6 +16,8 @@ function Map() {
 
   /* state 코드 */
 
+  const [curPos, setCurPos] = useState([]);
+
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -24,6 +26,12 @@ function Map() {
 
   // 마운트 되기 전 map 확대 및 이동 위치 가져오기
   const [mapInfo, setMapInfo] = useState({
+    level: "",
+    centerY: "",
+    centerX: "",
+  });
+
+  const [clickedStationPos, setClickedStationPos] = useState({
     level: "",
     centerY: "",
     centerX: "",
@@ -102,15 +110,15 @@ function Map() {
   // };
 
   // 현재 위치 좌표 가져오기
-  const getCurrentPosition = (printKakaomap) => {
+  const getCurrentPosition = () => {
     // HTML5의 geolocation으로 사용할 수 있는지 확인
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옴
       navigator.geolocation.getCurrentPosition(function (position) {
         const curLat = position.coords.latitude, // 위도
           curLlon = position.coords.longitude; // 경도
-        // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
-        printKakaomap(37.4667414611, 126.9479522861);
+
+        setCurPos([curLat, curLlon]);
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
@@ -218,12 +226,14 @@ function Map() {
       // // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
       // let newMapInfo = {
       //   ...mapInfo,
-      //   level: 1,
+      //   level: 5,
       //   centerY: busStationPos.pos[0],
       //   centerX: busStationPos.pos[1],
       // };
       // // 마운트 되기 전 map 확대 및 이동 위치
       // setMapInfo(newMapInfo);
+      // console.log(busStationPos);
+      // console.log(newMapInfo);
       // 클릭한 버스 정류장 마커 만들기
 
       const stationMarker = new window.kakao.maps.Marker({
@@ -322,6 +332,12 @@ function Map() {
   //   getAllDirectionsData();
   // }, [position]);
 
+  // 현재 위치 좌표 가져오기
+  useEffect(() => {
+    getCurrentPosition();
+  }, []);
+
+  // 카카오맵 및 마커 프린트
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
     if (
@@ -329,10 +345,13 @@ function Map() {
       // endDirectionsData.length > 0 &&
       kakaoMap.current
     ) {
-      // 현재 위치 좌표 가져오기
-      getCurrentPosition(printKakaomap);
+      printKakaomap(curPos[0], curPos[1]);
     }
-  }, [position, /* startDirectionsData, endDirectionsData, */ busStationPos]);
+  }, [
+    position,
+    /* startDirectionsData, endDirectionsData, */ busStationPos,
+    curPos,
+  ]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
