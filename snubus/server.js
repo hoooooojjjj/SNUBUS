@@ -10,7 +10,6 @@ const PORT = 8080;
 // CORS를 허용할 URL 리스트
 const allowedUrls = [
   "http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid",
-  "https://maps.googleapis.com/maps/api/directions/json",
   "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll",
 ];
 
@@ -82,20 +81,6 @@ app.get("/proxy", (req, res) => {
           default:
             break;
         }
-      }
-
-      // directions 데이터 요청이면
-      if (
-        req.query.url.includes(
-          "https://maps.googleapis.com/maps/api/directions/json"
-        )
-      ) {
-        // 출발지-목적지 거리
-        // console.log(JSON.parse(body).routes[0].legs[0].distance.text);
-        // 경로 좌표 가공해서 send
-        res
-          .status(200)
-          .send(JSON.parse(body).routes[0].overview_polyline.points);
       }
 
       // 버스도착정보 데이터(정류장 관련 정보 데이터) 요청이면
