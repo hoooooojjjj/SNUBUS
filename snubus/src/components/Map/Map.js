@@ -2,11 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Maps } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
-import polyUtil from "polyline-encoded";
-import {
-  bus_5511Stations_forEndPolyline,
-  bus_5511Stations_forStartPolyline,
-} from "../../util/busStationPos";
 import { busDataContext, busStationPosContext } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoMomal";
 
@@ -31,18 +26,6 @@ function Map() {
     centerX: "",
   });
 
-  const [clickedStationPos, setClickedStationPos] = useState({
-    level: "",
-    centerY: "",
-    centerX: "",
-  });
-
-  // // 중앙대학교 방면(기점->종점 방면) DirectionsData 저장하는 상태
-  // const [startDirectionsData, setStartDirectionsData] = useState([]);
-
-  // // 신림2동차고지 방면(종점->기점 방면) DirectionsData 저장하는 상태
-  // const [endDirectionsData, setEndDirectionsData] = useState([]);
-
   // 버스 위치 좌표 데이터 context
   const position = useContext(busDataContext).busPoses.busPositionXY;
 
@@ -50,41 +33,6 @@ function Map() {
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
   /* 함수 코드 */
-
-  // // Google directions API에 버스 노선 경로 좌표 데이터 fetching 함수
-  // // 출발지 - 목적지 위도,경도 좌표를 인자로 받음
-  // async function getDirectionsData(
-  //   originLatitude,
-  //   originLongitude,
-  //   destinationLatitude,
-  //   destinationLongitude
-  // ) {
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8080/proxy?url=${encodeURIComponent(
-  //         `https://maps.googleapis.com/maps/api/directions/json?origin=${String(
-  //           originLatitude
-  //         )},${String(originLongitude)}&destination=${String(
-  //           destinationLatitude
-  //         )},${String(
-  //           destinationLongitude
-  //         )}&mode=transit&transit_mode=bus&key=${
-  //           process.env.REACT_APP_GOOGLEMAPS_API_KEY
-  //         }`
-  //       )}`
-  //     );
-  //     // 데이터 받아서 json 형태로 저장
-  //     const directionData = await response.text();
-
-  //     // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
-  //     const decodedDirections = polyUtil.decode(directionData);
-
-  //     // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
-  //     return decodedDirections;
-  //   } catch (error) {
-  //     console.error("Fetch error:", error);
-  //   }
-  // }
 
   // // 폴리라인 생성 -> 해당 경로 좌표 배열, 지도 객체, 폴리라인 색상을 인자로 받음
   // const printPolyline = (directionsData, map, strokeColor) => {
@@ -194,18 +142,6 @@ function Map() {
       image: CurmarkerImage,
     });
 
-    // // 버스 마커 이미지 정보
-    // const BusImageSrc = process.env.PUBLIC_URL + `assets/FeederBus.png`, // 마커이미지의 주소
-    //   BusImageSize = new window.kakao.maps.Size(30),
-    //   BusImageOption = { offset: new window.kakao.maps.Point(5, 0) }; // 마커이미지의 크기
-
-    // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
-    // const BusMarkerImage = new window.kakao.maps.MarkerImage(
-    //   BusImageSrc,
-    //   BusImageSize,
-    //   BusImageOption
-    // );
-
     // 해당 노선 모든 버스들 위치 좌표 배열마다 마커 만들기
     const busMarkers = position.map(
       (busPos) =>
@@ -288,50 +224,6 @@ function Map() {
 
   /* useEffect() 코드 */
 
-  // useEffect(() => {
-  //   // 모든 DirectionsData 호출 함수 모음
-  //   async function getAllDirectionsData() {
-  //     // 중앙대학교 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
-  //     const startDirectionsDataPromises = bus_5511Stations_forStartPolyline.map(
-  //       (bus_5511Station) =>
-  //         getDirectionsData(
-  //           String(bus_5511Station.origin[0]),
-  //           String(bus_5511Station.origin[1]),
-  //           String(bus_5511Station.destination[0]),
-  //           String(bus_5511Station.destination[1])
-  //         )
-  //     );
-  //     // 신림2동차고지 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
-  //     const endDirectionsDataPromises = bus_5511Stations_forEndPolyline.map(
-  //       (bus_5511Station) =>
-  //         getDirectionsData(
-  //           String(bus_5511Station.origin[0]),
-  //           String(bus_5511Station.origin[1]),
-  //           String(bus_5511Station.destination[0]),
-  //           String(bus_5511Station.destination[1])
-  //         )
-  //     );
-
-  //     // 모든 중앙대학교 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
-  //     const startDirectionsDataArray = await Promise.all(
-  //       startDirectionsDataPromises
-  //     );
-
-  //     // 모든 신림2동차고지 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
-  //     const endDirectionsDataArray = await Promise.all(
-  //       endDirectionsDataPromises
-  //     );
-
-  //     // 완료된 중앙대학교 방면 데이터를 상태에 업데이트
-  //     setStartDirectionsData(startDirectionsDataArray);
-  //     // 완료된 신림2동차고지 방면 데이터를 상태에 업데이트
-  //     setEndDirectionsData(endDirectionsDataArray);
-  //   }
-
-  //   // DirectionsData 가져오기
-  //   getAllDirectionsData();
-  // }, [position]);
-
   // 현재 위치 좌표 가져오기
   useEffect(() => {
     getCurrentPosition();
@@ -340,18 +232,10 @@ function Map() {
   // 카카오맵 및 마커 프린트
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
-    if (
-      // startDirectionsData.length > 0 &&
-      // endDirectionsData.length > 0 &&
-      kakaoMap.current
-    ) {
+    if (kakaoMap.current) {
       printKakaomap(curPos[0], curPos[1]);
     }
-  }, [
-    position,
-    /* startDirectionsData, endDirectionsData, */ busStationPos,
-    curPos,
-  ]);
+  }, [position, busStationPos, curPos]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
