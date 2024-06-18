@@ -34,29 +34,6 @@ function Map() {
 
   /* 함수 코드 */
 
-  // // 폴리라인 생성 -> 해당 경로 좌표 배열, 지도 객체, 폴리라인 색상을 인자로 받음
-  // const printPolyline = (directionsData, map, strokeColor) => {
-  //   // 버스 노선 경로 좌표 배열
-  //   const stationPosArray = [
-  //     directionsData.map(
-  //       (direction) => new window.kakao.maps.LatLng(direction[0], direction[1])
-  //     ),
-  //   ];
-
-  //   // 버스 노선 경로 좌표 배열로 폴리라인 생성
-  //   const polyline = new window.kakao.maps.Polyline({
-  //     map: map,
-  //     path: stationPosArray,
-  //     strokeWeight: 4,
-  //     strokeColor: strokeColor,
-  //     strokeOpacity: 0.5,
-  //     strokeStyle: "solid",
-  //   });
-
-  //   // 폴리라인 적용
-  //   polyline.setMap(map);
-  // };
-
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = () => {
     // HTML5의 geolocation으로 사용할 수 있는지 확인
@@ -105,57 +82,64 @@ function Map() {
       // 마커 생성
       printMarker(map, curLat, curLlon);
 
-      // // 모든 경로 좌표 폴리라인 생성
-      // if (startDirectionsData.length > 0) {
-      //   startDirectionsData.forEach((direction) => {
-      //     printPolyline(direction, map, "blue");
-      //   });
-      // }
-
-      // if (endDirectionsData.length > 0) {
-      //   endDirectionsData.forEach((direction) => {
-      //     printPolyline(direction, map, "red");
-      //   });
-      // }
-
       // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출
       setIsMapPrint(true);
     }
   }
 
-  // 마커 생성
-  const printMarker = (map, curLat, curLlon) => {
-    // 현재 위치 마커 이미지 정보
-    const CurImageSrc = process.env.PUBLIC_URL + `assets/currentMarker.png`, // 마커이미지의 주소
-      CurImageSize = new window.kakao.maps.Size(20),
-      CurImageOption = { offset: new window.kakao.maps.Point(20, 20) }; // 마커이미지의 크기
+  // 마커 이미지 커스터마이징
+  const MakeMarkerImage = (imageUrl) => {
+    //  마커 이미지 정보
+    const ImageSrc = process.env.PUBLIC_URL + `assets/${imageUrl}.png`, // 마커이미지의 주소
+      ImageSize = new window.kakao.maps.Size(40),
+      ImageOption = { offset: new window.kakao.maps.Point(20, 20) }; // 마커이미지의 크기
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
-    const CurmarkerImage = new window.kakao.maps.MarkerImage(
-      CurImageSrc,
-      CurImageSize,
-      CurImageOption
+    const markerImage = new window.kakao.maps.MarkerImage(
+      ImageSrc,
+      ImageSize,
+      ImageOption
     );
+
+    // 마커 이미지 리턴
+    return markerImage;
+  };
+
+  // 마커 생성 및 print
+  const printMarker = (map, curLat, curLlon) => {
+    // 1. 현재 위치 마커
+
     // 현재 위치 마커 만들기
     const curMarker = new window.kakao.maps.Marker({
       position: new window.kakao.maps.LatLng(curLat, curLlon),
-      image: CurmarkerImage,
+      image: MakeMarkerImage("currentMarker"),
     });
 
-    // 해당 노선 모든 버스들 위치 좌표 배열마다 마커 만들기
+    // 현재 위치 마커 print
+    curMarker.setMap(map);
+
+    // 2. 해당 노선 모든 버스들 위치 마커
+
+    // 모든 버스 마커 만들기
     const busMarkers = position.map(
       (busPos) =>
         new window.kakao.maps.Marker({
           position: new window.kakao.maps.LatLng(busPos[0], busPos[1]),
-          // image: BusMarkerImage,
           clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         })
     );
 
-    // 마커 print
+    // 해당 노선 모든 버스들 위치 마커 print
+    busMarkers.forEach((marker) => {
+      marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
 
-    // 현재 위치 마커 print
-    curMarker.setMap(map);
+      // 마커에 클릭 이벤트 등록
+      window.kakao.maps.event.addListener(marker, "click", function () {
+        console.log("12");
+      });
+    });
+
+    // 3. 클릭한 버스 정류장 위치 마커
 
     // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
     if (busStationPos.name) {
@@ -170,18 +154,19 @@ function Map() {
       // setMapInfo(newMapInfo);
       // console.log(busStationPos);
       // console.log(newMapInfo);
-      // 클릭한 버스 정류장 마커 만들기
 
+      // 클릭한 정류장 버스 마커 만들기
       const stationMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(
           busStationPos.pos[0],
           busStationPos.pos[1]
         ),
+        image: MakeMarkerImage("stationMarker"),
       });
-      // 클릭한 버스 정류장 마커 print
-      stationMarker.setMap(map);
 
+      // StationInfoModal에 정류장 도착 관련 정보 전달을 위해
       // 정류장 id를 통해 현재 클릭한 정류장 '도착 관련 정보' 배열 필터링
+
       // 중앙대학교 방면인지 신림2동차고지 방면인지에 따라 다른 방면의 busStationInfos를 가져옴
       const Direction = busStationPos.Direction
         ? busStationInfos.DirectionToStart
@@ -201,25 +186,18 @@ function Map() {
       // 인포윈도우 표시 위치
       const iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
 
-      // 인포윈도우를 생성합니다
+      // 인포윈도우를 생성
       var infowindow = new window.kakao.maps.InfoWindow({
         position: iwPosition,
         content: iwContent,
       });
 
-      // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+      // 마커 위에 인포윈도우를 표시
       infowindow.open(map, stationMarker);
+
+      // 클릭한 버스 정류장 마커 print
+      stationMarker.setMap(map);
     }
-
-    // 해당 노선 모든 버스들 위치 마커 print
-    busMarkers.forEach((marker) => {
-      marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
-
-      // 마커에 클릭 이벤트 등록
-      window.kakao.maps.event.addListener(marker, "click", function () {
-        console.log("12");
-      });
-    });
   };
 
   /* useEffect() 코드 */
