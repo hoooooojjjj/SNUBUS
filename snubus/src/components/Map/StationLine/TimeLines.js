@@ -656,11 +656,10 @@ const stationList_end = [
 ];
 
 function TimeLines({ isStart }) {
+  /* state 코드 */
+
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
-
-  // 버스 위치 좌표 데이터 context
-  const busStationInfos = useContext(busDataContext).busStationInfos;
 
   // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
   const busesInStation =
@@ -687,6 +686,8 @@ function TimeLines({ isStart }) {
     },
   });
 
+  /* 함수 코드 */
+
   // 버스 정류장 클릭 시
   const isStationClicked = (e) => {
     // 정확히 버스 정류장 텍스트를 클릭했을 때만 실행
@@ -709,6 +710,31 @@ function TimeLines({ isStart }) {
       });
     }
   };
+
+  // 해당 정류장 라인을 지나고 있는 버스 이미지 프린트
+  const printPassingBusOnThisStation = (passingBusStation, busStation) => {
+    // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
+    const busImages = passingBusStation.map((passingBus) => {
+      if (passingBus.id === busStation[0].id) {
+        // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
+        // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
+        const remainingDistMatchingCSS =
+          -5 + 70 * (passingBus.remainingDist * 0.01);
+        return (
+          <BusImg
+            key={passingBus.id}
+            remainingDist={remainingDistMatchingCSS}
+            src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
+          ></BusImg>
+        );
+      } else {
+        return null;
+      }
+    });
+    return busImages;
+  };
+
+  /* useEffect 코드 */
 
   // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
   useEffect(() => {
@@ -753,7 +779,6 @@ function TimeLines({ isStart }) {
       stationList_end,
       busesInStation.DirectionToEnd
     );
-    // console.log(passingBus_start, passingBus_end);
 
     // 중앙대학교 방면 지나가고 있는 버스들의 다음 정류장까지 간 비율 계산(몇 % 왔는지)
     const remainingDist_start = busesInStation.DirectionToStart.map((bus) =>
@@ -787,46 +812,18 @@ function TimeLines({ isStart }) {
     busStationSlice.map((busStation, i) => (
       <TimeLinesWrap key={i}>
         <TimelineStyle items={busStation} onClick={isStationClicked} />
-        {/* 정류장 라인에 버스 위치 정보 표시하기 */}
+        {/* 정류장 라인에 버스 표시하기 */}
         {isStart
           ? // 중앙대학교 방면 일 때
-            // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
-            passingBusStation.startDirection.map((passingBus) => {
-              if (passingBus.id === busStation[0].id) {
-                // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
-                // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
-                const remainingDistMatchingCSS =
-                  -5 + 70 * (passingBus.remainingDist * 0.01);
-                return (
-                  <BusImg
-                    key={passingBus.id}
-                    remainingDist={remainingDistMatchingCSS}
-                    src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
-                  ></BusImg>
-                );
-              } else {
-                return null;
-              }
-            })
+            printPassingBusOnThisStation(
+              passingBusStation.startDirection,
+              busStation
+            )
           : // 신림2동차고지 방면 일 때
-            // 분할한 정류장에서 정류장 id가 현재 버스가 지나고 있는 정류장 id와 같으면 버스 이미지 표시
-            passingBusStation.endDirection.map((passingBus) => {
-              if (passingBus.id === busStation[0].id) {
-                // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
-                // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
-                const remainingDistMatchingCSS =
-                  -5 + 70 * (passingBus.remainingDist * 0.01);
-                return (
-                  <BusImg
-                    key={passingBus.id}
-                    remainingDist={remainingDistMatchingCSS}
-                    src={process.env.PUBLIC_URL + `assets/FeederBus.png`}
-                  ></BusImg>
-                );
-              } else {
-                return null;
-              }
-            })}
+            printPassingBusOnThisStation(
+              passingBusStation.endDirection,
+              busStation
+            )}
       </TimeLinesWrap>
     ))
   ) : (
