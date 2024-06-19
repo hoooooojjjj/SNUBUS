@@ -50,6 +50,21 @@ function Map() {
     }
   };
 
+  const listenIdleEvent_AndSetMapInfo = (map) => {
+    // 지도의 중심 좌표나 확대 수준이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
+    window.kakao.maps.event.addListener(map, "idle", function () {
+      // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
+      let newMapInfo = {
+        ...mapInfo,
+        level: map.getLevel(),
+        centerY: map.getCenter().Ma,
+        centerX: map.getCenter().La,
+      };
+      // 마운트 되기 전 map 확대 및 이동 위치
+      setMapInfo(newMapInfo);
+    });
+  };
+
   // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
   function printKakaomap(curLat, curLlon) {
     // Maps 컴포넌트가 존재할 때
@@ -66,18 +81,7 @@ function Map() {
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      // 지도의 중심 좌표나 확대 수준이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
-      window.kakao.maps.event.addListener(map, "idle", function () {
-        // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
-        let newMapInfo = {
-          ...mapInfo,
-          level: map.getLevel(),
-          centerY: map.getCenter().Ma,
-          centerX: map.getCenter().La,
-        };
-        // 마운트 되기 전 map 확대 및 이동 위치
-        setMapInfo(newMapInfo);
-      });
+      listenIdleEvent_AndSetMapInfo(map);
 
       // 마커 생성
       printMarker(map, curLat, curLlon);
@@ -143,15 +147,7 @@ function Map() {
 
     // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
     if (busStationPos.name) {
-      // 클릭한 정류장 좌표를 가져옴
-      let newMapInfo = {
-        ...mapInfo,
-        level: 5,
-        centerY: busStationPos.pos[0],
-        centerX: busStationPos.pos[1],
-      };
-      // 마운트 되기 전 map 확대 및 이동 위치
-      setMapInfo(newMapInfo);
+      // !이렇게 하면 리렌더링될 때 무조건 클릭한 정류장 좌표로 중심좌표가 돌아가는 문제 생김!
 
       // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
       map.setCenter(
@@ -161,6 +157,7 @@ function Map() {
       map.setLevel(5);
 
       // 클릭한 정류장 버스 마커 만들기
+
       const stationMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(
           busStationPos.pos[0],
@@ -199,6 +196,14 @@ function Map() {
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
     }
+    // if (mapInfo.centerY && mapInfo.centerY === busStationPos.pos[0]) {
+    //   // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
+    //   map.setCenter(
+    //     new window.kakao.maps.LatLng(mapInfo.centerY, mapInfo.centerX)
+    //   );
+    //   //  정류장을 클릭하면 지도 레벨 5로
+    //   map.setLevel(mapInfo.level);
+    // }
   };
 
   /* useEffect() 코드 */
@@ -221,9 +226,13 @@ function Map() {
     return () => {
       setIsMapPrint(false);
     };
-  }, [setIsMapPrint]);
+  }, []);
 
-  return <Maps ref={kakaoMap}></Maps>;
+  return (
+    <>
+      <Maps ref={kakaoMap}></Maps>
+    </>
+  );
 }
 
 export default Map;
