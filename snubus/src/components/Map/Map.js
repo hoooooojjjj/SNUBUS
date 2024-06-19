@@ -62,7 +62,7 @@ function Map() {
           mapInfo.centerY || curLat,
           mapInfo.centerX || curLlon
         ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
-        level: mapInfo.level || 1, //지도의 레벨(확대, 축소 정도)
+        level: mapInfo.level || 5, //지도의 레벨(확대, 축소 정도)
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
