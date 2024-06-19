@@ -66,8 +66,8 @@ function Map() {
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
-      window.kakao.maps.event.addListener(map, "center_changed", function () {
+      // 지도의 중심 좌표나 확대 수준이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
+      window.kakao.maps.event.addListener(map, "idle", function () {
         // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
         let newMapInfo = {
           ...mapInfo,
