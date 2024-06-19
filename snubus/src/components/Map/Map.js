@@ -183,12 +183,8 @@ function Map() {
       const root = createRoot(iwContent);
       root.render(<StationInfoModal curStation={curStation} />);
 
-      // 인포윈도우 표시 위치
-      const iwPosition = new window.kakao.maps.LatLng(33.450701, 126.570667);
-
       // 인포윈도우를 생성
       var infowindow = new window.kakao.maps.InfoWindow({
-        position: iwPosition,
         content: iwContent,
       });
 
