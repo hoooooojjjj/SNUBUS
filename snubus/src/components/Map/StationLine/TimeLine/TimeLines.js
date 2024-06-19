@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TimelineStyle, BusImg, TimeLinesWrap } from "./StationLineStyle";
+import { TimelineStyle, BusImg, TimeLinesWrap } from "../StationLineStyle";
 import {
   busDataContext,
   busStationPosContext,
-} from "../../../routes/View5511Bus";
+} from "../../../../routes/View5511Bus";
 import { stationList_end, stationList_start } from "./StationList";
 
 function TimeLines({ isStart }) {

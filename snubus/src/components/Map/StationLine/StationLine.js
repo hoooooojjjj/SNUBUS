@@ -10,7 +10,7 @@ import {
   InfoText,
   MoreBtn,
 } from "./StationLineStyle";
-import TimeLines from "./TimeLines";
+import TimeLines from "./TimeLine/TimeLines";
 
 const StationLine = () => {
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
