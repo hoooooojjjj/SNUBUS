@@ -143,17 +143,22 @@ function Map() {
 
     // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
     if (busStationPos.name) {
-      // // 사용자가 지정한 지도의 레벨, 좌표를 얻어옴
-      // let newMapInfo = {
-      //   ...mapInfo,
-      //   level: 5,
-      //   centerY: busStationPos.pos[0],
-      //   centerX: busStationPos.pos[1],
-      // };
-      // // 마운트 되기 전 map 확대 및 이동 위치
-      // setMapInfo(newMapInfo);
-      // console.log(busStationPos);
-      // console.log(newMapInfo);
+      // 클릭한 정류장 좌표를 가져옴
+      let newMapInfo = {
+        ...mapInfo,
+        level: 5,
+        centerY: busStationPos.pos[0],
+        centerX: busStationPos.pos[1],
+      };
+      // 마운트 되기 전 map 확대 및 이동 위치
+      setMapInfo(newMapInfo);
+
+      // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
+      map.setCenter(
+        new window.kakao.maps.LatLng(busStationPos.pos[0], busStationPos.pos[1])
+      );
+      //  정류장을 클릭하면 지도 레벨 5로
+      map.setLevel(5);
 
       // 클릭한 정류장 버스 마커 만들기
       const stationMarker = new window.kakao.maps.Marker({
