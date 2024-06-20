@@ -23,6 +23,7 @@ export default async function getBusData(busRouteId, setBusData, signal) {
         // 빈 배열 리턴
         return {
           busPos: [],
+          busInfo: [],
           DirectionToStart: [],
           DirectionToEnd: [],
         };
@@ -32,6 +33,7 @@ export default async function getBusData(busRouteId, setBusData, signal) {
         //빈 배열 리턴
         return {
           busPos: [],
+          busInfo: [],
           DirectionToStart: [],
           DirectionToEnd: [],
         };
@@ -74,7 +76,12 @@ export default async function getBusData(busRouteId, setBusData, signal) {
           DirectionToEnd: busStationDirectionToEnd,
         };
       } else {
-        return [];
+        return {
+          busPos: [],
+          busInfo: [],
+          DirectionToStart: [],
+          DirectionToEnd: [],
+        };
       }
     } catch (error) {
       if (error.name === "AbortError") {

@@ -293,11 +293,13 @@ function Map({ getData }) {
       return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
     };
 
-    const avgDate = getAverageTime(busInfo.map((bus) => bus.dataTm));
+    if (busInfo.length > 0) {
+      const avgDate = getAverageTime(busInfo.map((bus) => bus.dataTm));
 
-    const avgTimeString = formatDate(avgDate);
+      const avgTimeString = formatDate(avgDate);
 
-    setDataTm(avgTimeString);
+      setDataTm(avgTimeString);
+    }
   };
 
   // 업데이트 버튼 클릭 시 UpdateBtnAnimate를 0.5초동안 true로
