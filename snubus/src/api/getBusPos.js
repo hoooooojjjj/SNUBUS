@@ -1,9 +1,5 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusDataInterval(
-  busRouteId,
-  setBusData,
-  signal
-) {
+export default async function getBusData(busRouteId, setBusData, signal) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
   const getBusPosData = async () => {
     // 데이터 요청
@@ -113,7 +109,7 @@ export default async function getBusDataInterval(
   };
 
   // 처음 마운트되었을 때 받은 새 버스 데이터 저장하는 객체
-  const NewBusDataForFirstMount = {
+  const NewBusData = {
     // 버스들 데이터 저장하는 상태
     busPoses: {
       // 버스 좌표 데이터 저장하는 상태
@@ -140,12 +136,12 @@ export default async function getBusDataInterval(
   }
 
   // 버스 좌표 배열 BusPosData에 state 업데이트
-  NewBusDataForFirstMount.busPoses.busPositionXY = BusPosData.busPos;
+  NewBusData.busPoses.busPositionXY = BusPosData.busPos;
 
   // snubus 정류장에 위치한 버스 배열 BusPosData에 state 업데이트
-  NewBusDataForFirstMount.busPoses.busPositionInStation.DirectionToStart =
+  NewBusData.busPoses.busPositionInStation.DirectionToStart =
     BusPosData.DirectionToStart;
-  NewBusDataForFirstMount.busPoses.busPositionInStation.DirectionToEnd =
+  NewBusData.busPoses.busPositionInStation.DirectionToEnd =
     BusPosData.DirectionToEnd;
 
   // 처음 마운트되었을 때 버스 도착 정보 데이터 요청
@@ -153,63 +149,9 @@ export default async function getBusDataInterval(
   if (BusStationInfo.length < 2) {
     return null;
   }
-  NewBusDataForFirstMount.busStationInfos.DirectionToStart = BusStationInfo[0];
-  NewBusDataForFirstMount.busStationInfos.DirectionToEnd = BusStationInfo[1];
+  NewBusData.busStationInfos.DirectionToStart = BusStationInfo[0];
+  NewBusData.busStationInfos.DirectionToEnd = BusStationInfo[1];
 
-  // state에 NewBusDataForFirstMount 업데이트
-  setBusData(NewBusDataForFirstMount);
-
-  // 주기적으로 데이터 요청
-  const fetchDataInterval = setInterval(async () => {
-    //  주기적으로 받은 새 버스 데이터 저장하는 객체
-    const NewBusDataForInterval = {
-      // 버스들 데이터 저장하는 상태
-      busPoses: {
-        // 버스 좌표 데이터 저장하는 상태
-        busPositionXY: null,
-        // 버스가 어느 정류장에 있는지 저장하는 상태
-        busPositionInStation: {
-          DirectionToStart: [],
-          DirectionToEnd: [],
-        },
-      },
-      // 각 정류장 관련 정보 저장하는 state
-      busStationInfos: {
-        // 중앙대학교 방면 정류장 정보
-        DirectionToStart: [],
-        // 신림2동차고지 방면 정류장 정보
-        DirectionToEnd: [],
-      },
-    };
-
-    // 주기적으로 버스 위치 정보 데이터 요청
-    const BusPosData = await getBusPosData();
-    if (!BusPosData) {
-      clearInterval(fetchDataInterval);
-      return null;
-    }
-    // 버스 좌표 배열 BusPosData에 state 업데이트
-    NewBusDataForInterval.busPoses.busPositionXY = BusPosData.busPos;
-
-    // snubus 정류장에 위치한 버스 배열 BusPosData에 state 업데이트
-    NewBusDataForInterval.busPoses.busPositionInStation.DirectionToStart =
-      BusPosData.DirectionToStart;
-    NewBusDataForInterval.busPoses.busPositionInStation.DirectionToEnd =
-      BusPosData.DirectionToEnd;
-
-    // 주기적으로 버스 도착 정보 데이터 요청
-    const BusStationInfo = await getBusStationInfo();
-    if (BusStationInfo.length < 2) {
-      clearInterval(fetchDataInterval);
-      return null;
-    }
-    NewBusDataForInterval.busStationInfos.DirectionToStart = BusStationInfo[0];
-    NewBusDataForInterval.busStationInfos.DirectionToEnd = BusStationInfo[1];
-
-    // state에 NewBusDataForInterval 업데이트
-    setBusData(NewBusDataForInterval);
-  }, 10100);
-
-  // 언마운트 시 Interval 종료
-  return () => clearInterval(fetchDataInterval);
+  // state에 NewBusData 업데이트
+  setBusData(NewBusData);
 }

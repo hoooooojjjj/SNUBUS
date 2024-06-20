@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Map from "../components/Map/Map";
-import getBusDataInterval from "../api/getBusPos";
+import getBusData from "../api/getBusPos";
 import Loading from "../components/Loading/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
@@ -47,18 +47,23 @@ function View5511Bus() {
     },
   });
 
-  // 버스 위치 정보 데이터 fetching
-  useEffect(() => {
+  // 버스 위치 정보 데이터 fetching 함수
+  const getData = () => {
     // 새로운 AbortController 객체 인터페이스를 생성
     const controller = new AbortController();
     // DOM 요청과 통신하거나 취소하는데 사용되는 AbortSignal 객체 인터페이스
     const signal = controller.signal;
     // signal을 getBusPosDataInterval의 인자로 보냄
-    getBusDataInterval(BUSROUTEID_5511, setBusData, signal);
+    getBusData(BUSROUTEID_5511, setBusData, signal);
     return () => {
       // DOM 요청이 완료되기 전에 취소한다. 이를 통해 fetch 요청, 모든 응답 Body 소비, 스트림을 취소할 수 있다.
       controller.abort(); // Fetch 요청 취소
     };
+  };
+
+  // 버스 위치 정보 데이터 fetching
+  useEffect(() => {
+    getData();
   }, []);
 
   return (
@@ -74,7 +79,7 @@ function View5511Bus() {
           <busDataContext.Provider value={busData}>
             {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
             <div style={{ display: "flex" }}>
-              <Map></Map>
+              <Map getData={getData}></Map>
               {isMapPrint ? <StationLine /> : <></>}
             </div>
           </busDataContext.Provider>
