@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { BusInfo, Container, Maps, UpdateBtn } from "./MapStyle";
+import {
+  BusInfo,
+  Container,
+  DataTm,
+  Maps,
+  UpdateBtn,
+  UpdateWrap,
+} from "./MapStyle";
 import { isMapPrintContext } from "../../App";
 import {
   busDataContext,
@@ -7,6 +14,7 @@ import {
   isInfoWindowVisibleContext,
 } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoMomal";
+import { RedoOutlined } from "@ant-design/icons";
 
 function Map({ getData }) {
   // kakaomap이 있는 요소의 ref
@@ -49,6 +57,12 @@ function Map({ getData }) {
   const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
     isInfoWindowVisibleContext
   );
+
+  // 버스 데이터 제공 시각
+  const [dataTm, setDataTm] = useState(0);
+
+  // 업데이트 버튼 클릭 여부 state
+  const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
 
   /* 함수 코드 */
 
@@ -224,7 +238,7 @@ function Map({ getData }) {
       // 마커 위에 인포윈도우를 표시
       infowindow.open(map, stationMarker);
 
-      // 아래 코드는 인포윈도우를 지도에서 제거합니다
+      // 모달에서 X버튼 클릭시 모달과 인포윈도우 닫힘
       if (!isInfoWindowVisible) {
         infowindow.close();
       }
@@ -234,11 +248,73 @@ function Map({ getData }) {
     }
   };
 
+  // 버스제공시간 평균 계산 함수
+  const calculateAvgDataTm = () => {
+    // 버스제공시간(예. '20240620205039')을 Date 객체로 변환하는 함수
+    const parseTimeString = (timeString) => {
+      const year = parseInt(timeString.slice(0, 4));
+      const month = parseInt(timeString.slice(4, 6)) - 1;
+      const day = parseInt(timeString.slice(6, 8));
+      const hour = parseInt(timeString.slice(8, 10));
+      const minute = parseInt(timeString.slice(10, 12));
+      const second = parseInt(timeString.slice(12, 14));
+      return new Date(year, month, day, hour, minute, second);
+    };
+
+    // 버스 제공시간 평균 계산
+    const getAverageTime = (timeStrings) => {
+      // 모든 시간 문자열을 Date 객체로 변환
+      const dates = timeStrings.map(parseTimeString);
+
+      // 모든 초 단위 값을 더하고, 그 합을 배열의 길이로 나누어 평균 초 값을 계산
+      const totalSeconds = dates.reduce(
+        (total, date) => total + date.getTime() / 1000,
+        0
+      );
+      const avgSeconds = totalSeconds / dates.length;
+
+      // 평균 초 값을 다시 Date 객체로 변환
+      const avgDate = new Date(avgSeconds * 1000);
+      return avgDate;
+    };
+
+    // 평균 버스제공시간 Date 객체를 'YYYY/MM/DD HH:MM:SS'형식의 문자열로 변환
+    const formatDate = (date) => {
+      // 무조건 두 자릿수로 표현되도록
+      const pad = (num) => num.toString().padStart(2, "0");
+
+      // YYYY/MM/DD HH:MM:SS'형식의 문자열로 변환
+      const year = date.getFullYear();
+      const month = pad(date.getMonth() + 1);
+      const day = pad(date.getDate());
+      const hour = pad(date.getHours());
+      const minute = pad(date.getMinutes());
+      const second = pad(date.getSeconds());
+      return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+    };
+
+    const avgDate = getAverageTime(busInfo.map((bus) => bus.dataTm));
+
+    const avgTimeString = formatDate(avgDate);
+
+    setDataTm(avgTimeString);
+  };
+
+  // 업데이트 버튼 클릭 시 UpdateBtnAnimate를 0.5초동안 true로
+  const handleUpdateBtnClick = () => {
+    setUpdateBtnAnimate(true);
+    // 애니메이션 리셋
+    setTimeout(() => setUpdateBtnAnimate(false), 500);
+  };
+
   /* useEffect() 코드 */
 
-  // 현재 위치 좌표 가져오기
+  // 맵 컴포넌트가 처음 마운트 되었을 때
   useEffect(() => {
+    // 현재 위치 좌표 가져오기
     getCurrentPosition();
+    // 버스 제공시간 평균 계산
+    calculateAvgDataTm();
   }, []);
 
   // 카카오맵 및 마커 프린트
@@ -258,16 +334,24 @@ function Map({ getData }) {
 
   return (
     <Container>
-      <UpdateBtn
-        onClick={() => {
-          // 클릭하면 버스 관련 정보 요청
-          getData();
-          // 현재 위치 다시 가져오기
-          getCurrentPosition();
-        }}
-      >
-        업데이트
-      </UpdateBtn>
+      <UpdateWrap>
+        <UpdateBtn
+          animate={updateBtnAnimate}
+          onClick={() => {
+            // 클릭하면 버스 관련 정보 요청
+            getData();
+            // 현재 위치 다시 가져오기
+            getCurrentPosition();
+            // 제공 시간 계산
+            calculateAvgDataTm();
+            // 클릭 시 updateBtnAnimate가 0.5초 동안 true로 바뀌어 0.5초 간 애니메이션 실행
+            handleUpdateBtnClick();
+          }}
+        >
+          <RedoOutlined />
+        </UpdateBtn>
+        <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
+      </UpdateWrap>
       {clickedBusInfo.vehId ? (
         <BusInfo>
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
