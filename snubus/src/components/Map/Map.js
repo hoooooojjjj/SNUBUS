@@ -11,6 +11,7 @@ function Map({ getData }) {
 
   /* state 코드 */
 
+  // 현재 위치
   const [curPos, setCurPos] = useState([]);
 
   // 카카오맵이 화면에 표시됐는지 판별하는 state
@@ -222,7 +223,16 @@ function Map({ getData }) {
 
   return (
     <>
-      <button onClick={getData}>업데이트</button>
+      <button
+        onClick={() => {
+          // 클릭하면 버스 관련 정보 요청
+          getData();
+          // 현재 위치 다시 가져오기
+          getCurrentPosition();
+        }}
+      >
+        업데이트
+      </button>
       <Maps ref={kakaoMap}></Maps>
     </>
   );
