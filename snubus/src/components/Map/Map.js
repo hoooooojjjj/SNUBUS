@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { BusInfo, Container, Maps, UpdateBtn } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
-import { busDataContext, busStationPosContext } from "../../routes/View5511Bus";
+import {
+  busDataContext,
+  busStationPosContext,
+  isInfoWindowVisibleContext,
+} from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoMomal";
 
 function Map({ getData }) {
@@ -38,6 +41,14 @@ function Map({ getData }) {
 
   // 버스 정류장 관련 정보 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
+
+  // 버스 정류장 관련 정보 state
+  const [busStationInfo, setBusStationInfo] = useState([]);
+
+  // infoWindow 열고 닫는 context
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
+    isInfoWindowVisibleContext
+  );
 
   /* 함수 코드 */
 
@@ -200,11 +211,10 @@ function Map({ getData }) {
         (busStationInfo) => parseInt(busStationInfo.stId) === busStationPos.stId
       );
 
+      setBusStationInfo(curStation);
+
       // 인포윈도우 컨텐츠
-      // createRoot를 사용하여 StationInfoModal 컴포넌트를 iwContent div DOM에 마운트(렌더링)
-      const iwContent = document.createElement("div");
-      const root = createRoot(iwContent);
-      root.render(<StationInfoModal curStation={curStation} />);
+      const iwContent = `<div style="padding:5px;">${curStation[0].stNm}</div>`;
 
       // 인포윈도우를 생성
       var infowindow = new window.kakao.maps.InfoWindow({
@@ -213,6 +223,11 @@ function Map({ getData }) {
 
       // 마커 위에 인포윈도우를 표시
       infowindow.open(map, stationMarker);
+
+      // 아래 코드는 인포윈도우를 지도에서 제거합니다
+      if (!isInfoWindowVisible) {
+        infowindow.close();
+      }
 
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
@@ -223,7 +238,6 @@ function Map({ getData }) {
 
   // 현재 위치 좌표 가져오기
   useEffect(() => {
-    console.log(busInfo);
     getCurrentPosition();
   }, []);
 
@@ -233,7 +247,7 @@ function Map({ getData }) {
     if (kakaoMap.current && curPos.length) {
       printKakaomap();
     }
-  }, [position, curPos, busStationPos]);
+  }, [position, curPos, busStationPos, isInfoWindowVisible]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
@@ -259,6 +273,11 @@ function Map({ getData }) {
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
           {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
         </BusInfo>
+      ) : (
+        <></>
+      )}
+      {busStationInfo.length > 0 ? (
+        <StationInfoModal curStation={busStationInfo} />
       ) : (
         <></>
       )}

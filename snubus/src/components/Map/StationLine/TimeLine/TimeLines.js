@@ -3,6 +3,7 @@ import { TimelineStyle, BusImg, TimeLinesWrap } from "../StationLineStyle";
 import {
   busDataContext,
   busStationPosContext,
+  isInfoWindowVisibleContext,
 } from "../../../../routes/View5511Bus";
 import { stationList_end, stationList_start } from "./StationList";
 
@@ -37,6 +38,11 @@ function TimeLines({ isStart }) {
     },
   });
 
+  // infoWindow 열고 닫는 context
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
+    isInfoWindowVisibleContext
+  );
+
   /* 함수 코드 */
 
   // 버스 정류장 클릭 시
@@ -59,6 +65,9 @@ function TimeLines({ isStart }) {
         Direction: isStart,
         stId: targetStation[0].stid,
       });
+
+      // 인포윈도우 열기
+      setIsInfoWindowVisible(true);
     }
   };
 

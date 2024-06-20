@@ -14,6 +14,9 @@ export const busStationPosContext = React.createContext();
 // 버스 관련 데이터 state 전달하는 contextAPI
 export const busDataContext = React.createContext();
 
+// InfoWindow 열고 닫는 state 전달하는 contextAPI
+export const isInfoWindowVisibleContext = React.createContext();
+
 // 5511번 버스 페이지
 function View5511Bus() {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
@@ -49,6 +52,9 @@ function View5511Bus() {
     },
   });
 
+  // InfoWindow 열고 닫는 state
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = useState(false);
+
   // 버스 위치 정보 데이터 fetching 함수
   const getData = () => {
     // 새로운 AbortController 객체 인터페이스를 생성
@@ -79,11 +85,15 @@ function View5511Bus() {
           value={[busStationPos, setBusStationPos]}
         >
           <busDataContext.Provider value={busData}>
-            {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-            <div style={{ display: "flex" }}>
-              <Map getData={getData}></Map>
-              {isMapPrint ? <StationLine /> : <></>}
-            </div>
+            <isInfoWindowVisibleContext.Provider
+              value={[isInfoWindowVisible, setIsInfoWindowVisible]}
+            >
+              {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+              <div style={{ display: "flex" }}>
+                <Map getData={getData}></Map>
+                {isMapPrint ? <StationLine /> : <></>}
+              </div>
+            </isInfoWindowVisibleContext.Provider>
           </busDataContext.Provider>
         </busStationPosContext.Provider>
       ) : (
