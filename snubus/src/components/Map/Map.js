@@ -66,7 +66,7 @@ function Map() {
   };
 
   // 카카오맵 그리기(현재 위치 위도, 경도 인자로)
-  function printKakaomap(curLat, curLlon) {
+  function printKakaomap() {
     // Maps 컴포넌트가 존재할 때
     if (kakaoMap.current) {
       // ref가 kakaoMap인 요소를 container에 넣기
@@ -74,8 +74,8 @@ function Map() {
       // 지도를 생성할 때 필요한 기본 옵션
       const options = {
         center: new window.kakao.maps.LatLng(
-          mapInfo.centerY || curLat,
-          mapInfo.centerX || curLlon
+          mapInfo.centerY || curPos[0],
+          mapInfo.centerX || curPos[1]
         ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
         level: mapInfo.level || 5, //지도의 레벨(확대, 축소 정도)
       };
@@ -84,7 +84,7 @@ function Map() {
       listenIdleEvent_AndSetMapInfo(map);
 
       // 마커 생성
-      printMarker(map, curLat, curLlon);
+      printMarker(map);
 
       // 지도가 모두 렌더링된 후 setIsMapPrint(true) 호출
       setIsMapPrint(true);
@@ -110,12 +110,12 @@ function Map() {
   };
 
   // 마커 생성 및 print
-  const printMarker = (map, curLat, curLlon) => {
+  const printMarker = (map) => {
     // 1. 현재 위치 마커
 
     // 현재 위치 마커 만들기
     const curMarker = new window.kakao.maps.Marker({
-      position: new window.kakao.maps.LatLng(curLat, curLlon),
+      position: new window.kakao.maps.LatLng(curPos[0], curPos[1]),
       image: MakeMarkerImage("currentMarker"),
     });
 
@@ -149,12 +149,12 @@ function Map() {
     if (busStationPos.name) {
       // !이렇게 하면 리렌더링될 때 무조건 클릭한 정류장 좌표로 중심좌표가 돌아가는 문제 생김!
 
-      // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
-      map.setCenter(
-        new window.kakao.maps.LatLng(busStationPos.pos[0], busStationPos.pos[1])
-      );
-      //  정류장을 클릭하면 지도 레벨 5로
-      map.setLevel(5);
+      // // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
+      // map.setCenter(
+      //   new window.kakao.maps.LatLng(  )
+      // );
+      // //  정류장을 클릭하면 지도 레벨 5로
+      // map.setLevel(5);
 
       // 클릭한 정류장 버스 마커 만들기
 
@@ -216,10 +216,10 @@ function Map() {
   // 카카오맵 및 마커 프린트
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
-    if (kakaoMap.current) {
-      printKakaomap(curPos[0], curPos[1]);
+    if (kakaoMap.current && curPos.length) {
+      printKakaomap();
     }
-  }, [position, busStationPos, curPos]);
+  }, [position, curPos, busStationPos]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
