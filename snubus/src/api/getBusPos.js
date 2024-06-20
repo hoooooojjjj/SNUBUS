@@ -37,6 +37,21 @@ export default async function getBusData(busRouteId, setBusData, signal) {
         };
         // 데이터가 정상적으로 처리되었다면
       } else if (response.status === 200) {
+        // 각 버스의 위치 좌표 리턴
+        const getPosBuses = busPosData.map((bus) => {
+          return [bus.gpsY, bus.gpsX];
+        });
+
+        // 각 버스의 정보 (버스 ID, 차량번호, 차량유형, 제공시간)
+        const getBusInfo = busPosData.map((bus) => {
+          return {
+            vehId: bus.vehId,
+            plainNo: bus.plainNo,
+            busType: bus.busType,
+            dataTm: bus.dataTm,
+          };
+        });
+
         // 중앙대학교 방면 snubus 정류장 지나는 버스만 추출
         const busStationDirectionToStart = busPosData.filter(
           (busPos) =>
@@ -49,14 +64,10 @@ export default async function getBusData(busRouteId, setBusData, signal) {
             parseInt(busPos.sectOrd) >= 51 && parseInt(busPos.sectOrd) <= 74
         );
 
-        // 각 버스의 위치 좌표 리턴
-        const getPosBuses = busPosData.map((PosBus) => {
-          return [PosBus.gpsY, PosBus.gpsX];
-        });
-
         return {
           // 버스 좌표 배열
           busPos: getPosBuses,
+          busInfo: getBusInfo,
           // 중앙대학교 방면 snubus 정류장에 위치한 버스들 배열
           DirectionToStart: busStationDirectionToStart,
           // 신림2동차고지 방면 snubus 정류장에 위치한 버스들 배열
@@ -111,9 +122,11 @@ export default async function getBusData(busRouteId, setBusData, signal) {
   // 처음 마운트되었을 때 받은 새 버스 데이터 저장하는 객체
   const NewBusData = {
     // 버스들 데이터 저장하는 상태
-    busPoses: {
+    busInfos: {
       // 버스 좌표 데이터 저장하는 상태
       busPositionXY: null,
+      // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간)
+      busInfo: {},
       // 버스가 어느 정류장에 있는지 저장하는 상태
       busPositionInStation: {
         DirectionToStart: [],
@@ -136,12 +149,15 @@ export default async function getBusData(busRouteId, setBusData, signal) {
   }
 
   // 버스 좌표 배열 BusPosData에 state 업데이트
-  NewBusData.busPoses.busPositionXY = BusPosData.busPos;
+  NewBusData.busInfos.busPositionXY = BusPosData.busPos;
+
+  // 각 버스 관련 정보 BusPosData에 state 업데이트
+  NewBusData.busInfos.busInfo = BusPosData.busInfo;
 
   // snubus 정류장에 위치한 버스 배열 BusPosData에 state 업데이트
-  NewBusData.busPoses.busPositionInStation.DirectionToStart =
+  NewBusData.busInfos.busPositionInStation.DirectionToStart =
     BusPosData.DirectionToStart;
-  NewBusData.busPoses.busPositionInStation.DirectionToEnd =
+  NewBusData.busInfos.busPositionInStation.DirectionToEnd =
     BusPosData.DirectionToEnd;
 
   // 처음 마운트되었을 때 버스 도착 정보 데이터 요청

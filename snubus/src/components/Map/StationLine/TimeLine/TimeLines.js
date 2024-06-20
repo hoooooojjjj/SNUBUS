@@ -14,7 +14,7 @@ function TimeLines({ isStart }) {
 
   // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
   const busesInStation =
-    useContext(busDataContext).busPoses.busPositionInStation;
+    useContext(busDataContext).busInfos.busPositionInStation;
 
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);

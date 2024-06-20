@@ -28,7 +28,13 @@ function Map({ getData }) {
   });
 
   // 버스 위치 좌표 데이터 context
-  const position = useContext(busDataContext).busPoses.busPositionXY;
+  const position = useContext(busDataContext).busInfos.busPositionXY;
+
+  // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) context
+  const busInfo = useContext(busDataContext).busInfos.busInfo;
+
+  // 클릭한 버스의 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
+  const [clickedBusInfo, setClickedBusInfo] = useState({});
 
   // 버스 정류장 관련 정보 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
@@ -135,12 +141,26 @@ function Map({ getData }) {
     );
 
     // 해당 노선 모든 버스들 위치 마커 print
-    busMarkers.forEach((marker) => {
+    busMarkers.forEach((marker, i) => {
       marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
 
       // 마커에 클릭 이벤트 등록
       window.kakao.maps.event.addListener(marker, "click", function () {
-        console.log("12");
+        // busType(차량 유형)은 데이터 전처리 후
+        // 클릭한 버스의 정보 state update
+        switch (busInfo[i].busType) {
+          case "0":
+            setClickedBusInfo({ ...busInfo[i], busType: "일반버스" });
+            break;
+          case "1":
+            setClickedBusInfo({ ...busInfo[i], busType: "저상버스" });
+            break;
+          case "2":
+            setClickedBusInfo({ ...busInfo[i], busType: "굴절버스" });
+            break;
+          default:
+            break;
+        }
       });
     });
 
@@ -203,6 +223,7 @@ function Map({ getData }) {
 
   // 현재 위치 좌표 가져오기
   useEffect(() => {
+    console.log(busInfo);
     getCurrentPosition();
   }, []);
 
@@ -233,6 +254,14 @@ function Map({ getData }) {
       >
         업데이트
       </button>
+      {clickedBusInfo.vehId ? (
+        <div>
+          버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
+          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
+        </div>
+      ) : (
+        <></>
+      )}
       <Maps ref={kakaoMap}></Maps>
     </>
   );
