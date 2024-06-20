@@ -147,6 +147,15 @@ function Map({ getData }) {
 
     // 정류장을 클릭했다면(busStationPos에 데이터가 할당되었다면)
     if (busStationPos.name) {
+      // !이렇게 하면 리렌더링될 때 무조건 클릭한 정류장 좌표로 중심좌표가 돌아가는 문제 생김!
+
+      // 정류장을 클릭하면 클릭한 정류장 좌표로 중심좌표 이동
+      map.setCenter(
+        new window.kakao.maps.LatLng(busStationPos.pos[0], busStationPos.pos[1])
+      );
+      //  정류장을 클릭하면 지도 레벨 5로
+      map.setLevel(5);
+
       // 클릭한 정류장 버스 마커 만들기
 
       const stationMarker = new window.kakao.maps.Marker({
