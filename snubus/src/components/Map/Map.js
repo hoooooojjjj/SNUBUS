@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Maps } from "./MapStyle";
+import { BusInfo, Container, Maps, UpdateBtn } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
 import { busDataContext, busStationPosContext } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoMomal";
@@ -243,8 +243,8 @@ function Map({ getData }) {
   }, []);
 
   return (
-    <>
-      <button
+    <Container>
+      <UpdateBtn
         onClick={() => {
           // 클릭하면 버스 관련 정보 요청
           getData();
@@ -253,17 +253,17 @@ function Map({ getData }) {
         }}
       >
         업데이트
-      </button>
+      </UpdateBtn>
       {clickedBusInfo.vehId ? (
-        <div>
-          버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
+        <BusInfo>
+          차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
           {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
-        </div>
+        </BusInfo>
       ) : (
         <></>
       )}
       <Maps ref={kakaoMap}></Maps>
-    </>
+    </Container>
   );
 }
 
