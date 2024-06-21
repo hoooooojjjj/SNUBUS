@@ -7,7 +7,7 @@ export const stationList_start = [
     children: "서울대학교",
     stid: 120000028,
     color: "blue",
-    position: [37.4667414611, 126.9479522861],
+    position: [37.46674146, 126.9479523],
     dot: (
       <DownCircleOutlined
         style={{
@@ -513,7 +513,7 @@ export const stationList_end = [
   {
     id: 65,
     children: "제2공학관",
-    stid: 120000173,
+    stid: 120000238,
     color: "blue",
     position: [37.4487952, 126.9520773],
     dot: (

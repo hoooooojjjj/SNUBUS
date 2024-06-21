@@ -15,6 +15,13 @@ import {
 } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoMomal";
 import { RedoOutlined } from "@ant-design/icons";
+import {
+  route_start,
+  route_end,
+  bus_5511Stations_forEndPolyline,
+  bus_5511Stations_forStartPolyline,
+  route_start,
+} from "../../util/busStationPos";
 
 function Map({ getData }) {
   // kakaomap이 있는 요소의 ref
@@ -64,7 +71,37 @@ function Map({ getData }) {
   // 업데이트 버튼 클릭 여부 state
   const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
 
+  // 중앙대학교 방면(기점->종점 방면) DirectionsData 저장하는 상태
+  const [startDirectionsData, setStartDirectionsData] = useState([]);
+
+  // 신림2동차고지 방면(종점->기점 방면) DirectionsData 저장하는 상태
+  const [endDirectionsData, setEndDirectionsData] = useState([]);
+
   /* 함수 코드 */
+  // Google directions API에 버스 노선 경로 좌표 데이터 fetching 함수
+  // 출발지 - 목적지 위도,경도 좌표를 인자로 받음
+  async function getDirectionsData(
+    originLatitude,
+    originLongitude,
+    destinationLatitude,
+    destinationLongitude
+  ) {
+    try {
+      const response = await fetch(
+        `http://router.project-osrm.org/route/v1/driving/${originLongitude},${originLatitude};${destinationLongitude},${destinationLatitude}?overview=full&geometries=geojson`
+      );
+      // 데이터 받아서 json 형태로 저장
+      const Data = await response.json();
+
+      // polyline-encoded 라이브러리를 통해 버스 노선 경로 좌표 디코딩
+      const DirectionsData = Data.routes[0].geometry.coordinates;
+
+      // 데이터의 overview_polyline.points 데이터(경로 데이터) 추출 후 리턴
+      return DirectionsData;
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  }
 
   // 현재 위치 좌표 가져오기
   const getCurrentPosition = () => {
@@ -127,8 +164,8 @@ function Map({ getData }) {
   const MakeMarkerImage = (imageUrl) => {
     //  마커 이미지 정보
     const ImageSrc = process.env.PUBLIC_URL + `assets/${imageUrl}.png`, // 마커이미지의 주소
-      ImageSize = new window.kakao.maps.Size(40),
-      ImageOption = { offset: new window.kakao.maps.Point(20, 20) }; // 마커이미지의 크기
+      ImageSize = new window.kakao.maps.Size(40), // 마커이미지의 크기
+      ImageOption = { offset: new window.kakao.maps.Point(0, 0) };
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
     const markerImage = new window.kakao.maps.MarkerImage(
@@ -139,6 +176,28 @@ function Map({ getData }) {
 
     // 마커 이미지 리턴
     return markerImage;
+  };
+
+  const printPolyline = (directionsData, map, strokeColor) => {
+    // 버스 노선 경로 좌표 배열
+    const stationPosArray = [
+      directionsData.map(
+        (direction) => new window.kakao.maps.LatLng(direction[1], direction[0])
+      ),
+    ];
+
+    // 버스 노선 경로 좌표 배열로 폴리라인 생성
+    const polyline = new window.kakao.maps.Polyline({
+      map: map,
+      path: stationPosArray,
+      strokeWeight: 8,
+      strokeColor: strokeColor,
+      strokeOpacity: 1,
+      strokeStyle: "solid",
+    });
+
+    // 폴리라인 적용
+    polyline.setMap(map);
   };
 
   // 마커 생성 및 print
@@ -209,7 +268,7 @@ function Map({ getData }) {
           busStationPos.pos[0],
           busStationPos.pos[1]
         ),
-        image: MakeMarkerImage("stationMarker"),
+        // image: MakeMarkerImage("stationMarker"),
       });
 
       // StationInfoModal에 정류장 도착 관련 정보 전달을 위해
@@ -245,6 +304,19 @@ function Map({ getData }) {
 
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
+    }
+
+    // 모든 경로 좌표 폴리라인 생성
+    if (startDirectionsData.length > 0) {
+      startDirectionsData.forEach((direction) => {
+        printPolyline(direction, map, "blue");
+      });
+    }
+
+    if (endDirectionsData.length > 0) {
+      endDirectionsData.forEach((direction) => {
+        printPolyline(direction, map, "red");
+      });
     }
   };
 
@@ -319,13 +391,95 @@ function Map({ getData }) {
     calculateAvgDataTm();
   }, []);
 
+  useEffect(() => {
+    // 모든 DirectionsData 호출 함수 모음
+    async function getAllDirectionsData() {
+      // 중앙대학교 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
+      const startDirectionsDataPromises = bus_5511Stations_forStartPolyline.map(
+        (bus_5511Station) =>
+          getDirectionsData(
+            String(bus_5511Station.origin[0]),
+            String(bus_5511Station.origin[1]),
+            String(bus_5511Station.destination[0]),
+            String(bus_5511Station.destination[1])
+          )
+      );
+      // 신림2동차고지 방면 폴리라인 좌표 데이터를 비동기로 호출하여 프로미스 배열 생성
+      const endDirectionsDataPromises = bus_5511Stations_forEndPolyline.map(
+        (bus_5511Station) =>
+          getDirectionsData(
+            String(bus_5511Station.origin[0]),
+            String(bus_5511Station.origin[1]),
+            String(bus_5511Station.destination[0]),
+            String(bus_5511Station.destination[1])
+          )
+      );
+
+      // 모든 중앙대학교 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
+      const startDirectionsDataArray = await Promise.all(
+        startDirectionsDataPromises
+      );
+
+      // 모든 신림2동차고지 방면 데이터의 프로미스를 완료하고 결과를 배열로 저장
+      const endDirectionsDataArray = await Promise.all(
+        endDirectionsDataPromises
+      );
+
+      // 완료된 중앙대학교 방면 데이터를 상태에 업데이트
+      setStartDirectionsData(startDirectionsDataArray);
+      // 완료된 신림2동차고지 방면 데이터를 상태에 업데이트
+      setEndDirectionsData(endDirectionsDataArray);
+    }
+
+    // DirectionsData 가져오기
+    getAllDirectionsData();
+  }, [position]);
+
   // 카카오맵 및 마커 프린트
   useEffect(() => {
     // directionsData에 데이터가 할당되고 Maps 컴포넌트가 존재할 때
-    if (kakaoMap.current && curPos.length) {
+    if (
+      startDirectionsData.length > 0 &&
+      endDirectionsData.length > 0 &&
+      kakaoMap.current &&
+      curPos.length
+    ) {
+      console.log(startDirectionsData);
+      console.log(endDirectionsData);
+      console.log(route_start);
+      console.log(route_end);
+      const saveToJsonFile = (DirectionsData) => {
+        const jsonData = JSON.stringify(DirectionsData);
+
+        // fetch를 사용하여 서버로 POST 요청을 보냅니다.
+        fetch(`http://localhost:5001/api/save-json`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: jsonData }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("서버 응답이 실패했습니다.");
+            }
+            console.log("JSON 데이터가 성공적으로 저장되었습니다.");
+          })
+          .catch((error) => {
+            console.error("JSON 데이터 저장 중 오류가 발생했습니다.", error);
+          });
+      };
+      saveToJsonFile(startDirectionsData);
       printKakaomap();
     }
-  }, [position, curPos, busStationPos, isInfoWindowVisible]);
+  }, [
+    position,
+    curPos,
+    busStationPos,
+    isInfoWindowVisible,
+    startDirectionsData,
+    endDirectionsData,
+  ]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈
