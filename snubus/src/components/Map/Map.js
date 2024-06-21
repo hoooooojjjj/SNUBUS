@@ -48,6 +48,9 @@ function Map({ getData }) {
   // 클릭한 버스의 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
   const [clickedBusInfo, setClickedBusInfo] = useState({});
 
+  // 버스 관련 정보 열고 닫는 state
+  const [isBusInfoVisible, setIsBusInfoVisible] = useState(false);
+
   // 버스 정류장 관련 정보 context
   const busStationInfos = useContext(busDataContext).busStationInfos;
 
@@ -192,10 +195,12 @@ function Map({ getData }) {
     busMarkers.forEach((marker, i) => {
       marker.setMap(map); // 클러스터러를 만들지 않고 마커 생성
 
-      // 마커에 클릭 이벤트 등록
-      window.kakao.maps.event.addListener(marker, "click", function () {
+      // 마커에 마우스 오버 이벤트 등록
+      window.kakao.maps.event.addListener(marker, "mouseover", function () {
+        // 마우스 오버한 동안 버스 정보 보이게
+        setIsBusInfoVisible(true);
         // busType(차량 유형)은 데이터 전처리 후
-        // 클릭한 버스의 정보 state update
+        // 마우스 오버한 버스의 정보 state update
         switch (busInfo[i].busType) {
           case "0":
             setClickedBusInfo({ ...busInfo[i], busType: "일반버스" });
@@ -209,6 +214,12 @@ function Map({ getData }) {
           default:
             break;
         }
+      });
+
+      // 마커에 마우스 아웃 이벤트 등록
+      window.kakao.maps.event.addListener(marker, "mouseout", function () {
+        // 마우스 아웃하면 버스 정보 제거
+        setIsBusInfoVisible(false);
       });
     });
 
@@ -392,7 +403,7 @@ function Map({ getData }) {
         </UpdateBtn>
         <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
       </UpdateWrap>
-      {clickedBusInfo.vehId ? (
+      {clickedBusInfo.vehId && isBusInfoVisible ? (
         <BusInfo>
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
           {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
