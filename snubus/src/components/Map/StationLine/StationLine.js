@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   BtnWrap,
   Container,
@@ -11,8 +11,12 @@ import {
   MoreBtn,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
+import { busDataContext } from "../../../routes/View5511Bus";
 
 const StationLine = () => {
+  // 버스 개수 state
+  const busLength = useContext(busDataContext).busInfos.busInfo.length;
+
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
 
@@ -41,7 +45,10 @@ const StationLine = () => {
           <InfoTextWrap>
             <InfoText>신림2동차고지 ↔️ 중앙대학교</InfoText>
             <InfoText>첫차 05:30 | 막차 23:30</InfoText>
-            <InfoText>배차간격 7분 | 현재 13대 운행중</InfoText>
+            <InfoText>
+              배차간격 7분 |{" "}
+              {busLength > 0 ? `현재 ${busLength}대 운행중` : "운행종료"}
+            </InfoText>
           </InfoTextWrap>
           <MoreBtn onClick={onMoreBtnClick}>더보기⬇️</MoreBtn>
         </StationLineInfoWrap>
