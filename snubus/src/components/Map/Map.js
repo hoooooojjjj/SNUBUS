@@ -268,6 +268,10 @@ function Map({ getData }) {
       if (!isInfoWindowVisible) {
         infowindow.close();
         stationMarker.setMap(null);
+        // 클릭한 정류장 좌표로 중심좌표 이동 풀기
+        map.setCenter(
+          new window.kakao.maps.LatLng(mapInfo.centerY, mapInfo.centerX)
+        );
       }
     }
 
