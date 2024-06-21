@@ -110,7 +110,7 @@ function Map({ getData }) {
           mapInfo.centerY || curPos[0],
           mapInfo.centerX || curPos[1]
         ), //지도의 중심좌표. -> 마운트 되기 전 map 확대 및 이동 위치가 있으면 그걸 중심좌표로 , 없으면 현재 위치를 중심좌표로
-        level: mapInfo.level || 5, //지도의 레벨(확대, 축소 정도)
+        level: mapInfo.level || 3, //지도의 레벨(확대, 축소 정도)
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
@@ -129,7 +129,7 @@ function Map({ getData }) {
     //  마커 이미지 정보
     const ImageSrc = process.env.PUBLIC_URL + `assets/${imageUrl}.png`, // 마커이미지의 주소
       ImageSize = new window.kakao.maps.Size(40), // 마커이미지의 크기
-      ImageOption = { offset: new window.kakao.maps.Point(0, 0) };
+      ImageOption = { offset: new window.kakao.maps.Point(20, 35) };
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
     const markerImage = new window.kakao.maps.MarkerImage(
@@ -222,8 +222,8 @@ function Map({ getData }) {
       map.setCenter(
         new window.kakao.maps.LatLng(busStationPos.pos[0], busStationPos.pos[1])
       );
-      //  정류장을 클릭하면 지도 레벨 5로
-      map.setLevel(5);
+      //  정류장을 클릭하면 지도 레벨 3으로
+      map.setLevel(3);
 
       // 클릭한 정류장 버스 마커 만들기
 
@@ -232,7 +232,7 @@ function Map({ getData }) {
           busStationPos.pos[0],
           busStationPos.pos[1]
         ),
-        // image: MakeMarkerImage("stationMarker"),
+        image: MakeMarkerImage("stationMarker"),
       });
 
       // StationInfoModal에 정류장 도착 관련 정보 전달을 위해
