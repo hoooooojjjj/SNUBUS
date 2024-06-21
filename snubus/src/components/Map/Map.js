@@ -261,13 +261,14 @@ function Map({ getData }) {
       // 마커 위에 인포윈도우를 표시
       infowindow.open(map, stationMarker);
 
-      // 모달에서 X버튼 클릭시 모달과 인포윈도우 닫힘
-      if (!isInfoWindowVisible) {
-        infowindow.close();
-      }
-
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
+
+      // 모달에서 X버튼 클릭시 모달과 인포윈도우, 마커 닫힘
+      if (!isInfoWindowVisible) {
+        infowindow.close();
+        stationMarker.setMap(null);
+      }
     }
 
     // 모든 경로 좌표 폴리라인 생성
