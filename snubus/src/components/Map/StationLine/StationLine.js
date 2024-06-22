@@ -9,8 +9,10 @@ import {
   InfoTextWrap,
   InfoText,
   MoreBtn,
+  InfoTextHeader,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
+import { CheckOutlined } from "@ant-design/icons";
 import { busDataContext } from "../../../routes/View5511Bus";
 
 const StationLine = () => {
@@ -43,7 +45,7 @@ const StationLine = () => {
       <StationLineWrap>
         <StationLineInfoWrap>
           <InfoTextWrap>
-            <InfoText>신림2동차고지 ↔️ 중앙대학교</InfoText>
+            <InfoTextHeader>신림2동차고지 ↔️ 중앙대학교</InfoTextHeader>
             <InfoText>첫차 05:30 | 막차 23:30</InfoText>
             <InfoText>
               배차간격 7분 |{" "}
@@ -62,16 +64,12 @@ const StationLine = () => {
         )}
 
         <BtnWrap>
-          <StationSwitchBtn
-            onClick={switchDirectionToStart}
-            isStart={isStart ? "#0c8ce9" : "white"}
-          >
+          <StationSwitchBtn onClick={switchDirectionToStart}>
+            {isStart ? <CheckOutlined style={{ marginRight: 10 }} /> : <></>}
             중앙대학교 방면
           </StationSwitchBtn>
-          <StationSwitchBtn
-            onClick={switchDirectionToEnd}
-            isStart={isStart ? "white" : "#0c8ce9"}
-          >
+          <StationSwitchBtn onClick={switchDirectionToEnd}>
+            {isStart ? <></> : <CheckOutlined style={{ marginRight: 10 }} />}
             신림2동차고지 방면
           </StationSwitchBtn>
         </BtnWrap>

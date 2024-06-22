@@ -34,9 +34,15 @@ export const InfoTextWrap = styled.div((props) => ({
   paddingTop: props.isMore ? 10 : 0,
 }));
 
+// 노선 정보 text header
+export const InfoTextHeader = styled.p({
+  fontSize: 20,
+  color: "white",
+});
+
 // 노선 정보 text
 export const InfoText = styled.p({
-  fontSize: 18,
+  fontSize: 16,
   color: "white",
 });
 
@@ -45,7 +51,7 @@ export const MoreBtn = styled.button({
   fontSize: 12,
   height: 20,
   position: "absolute",
-  bottom: 20,
+  bottom: 17,
   right: 0,
   color: "white",
   background: "none",
@@ -59,27 +65,26 @@ export const MoreBtn = styled.button({
 // 방면 전환 버튼 wrap
 export const BtnWrap = styled.div({
   ...flex("row", "space-around", "center"),
-  paddingBottom: 15,
-  borderBottom: "2px solid white",
 });
 
 // 방면 전환 버튼
-export const StationSwitchBtn = styled.button((props) => ({
-  color: props.isStart,
+export const StationSwitchBtn = styled.button({
+  fontSize: 18,
   background: "none",
+  color: "white",
   "&:hover": {
-    border: "1px solid #999999",
+    color: "#0c8ce9",
   },
-  border: "1px solid white",
-  borderRadius: 5,
-  padding: "5px 10px",
-}));
+  border: "none",
+  borderRadius: 10,
+});
 
 // StationLine wrap
 export const LineWrap = styled.div({
-  width: "90%",
+  width: "100%",
+  borderTop: "1px solid white",
   overflowY: "scroll",
-  marginTop: 20,
+  marginTop: 10,
   paddingTop: 20,
 });
 
@@ -99,12 +104,17 @@ export const TimeLinesWrap = styled.div({
 // 각 정류장 별 라인
 export const TimelineStyle = styled(Timeline)`
   height: 78px;
+
   padding-left: 10px;
   color: white;
   & > li > .ant-timeline-item-content {
+    height: 28px;
     cursor: pointer;
     font-size: 18px;
     font-family: "Black Han Sans", sans-serif;
+    &:hover {
+      color: #0c8ce9;
+    }
   }
   & > li:last-child {
     padding-bottom: 0px;
