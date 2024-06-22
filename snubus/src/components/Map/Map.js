@@ -392,24 +392,28 @@ function Map({ getData }) {
 
   return (
     <Container>
-      <UpdateWrap>
-        <UpdateBtn
-          animate={updateBtnAnimate}
-          onClick={() => {
-            // 클릭하면 버스 관련 정보 요청
-            getData();
-            // 현재 위치 다시 가져오기
-            getCurrentPosition();
-            // 제공 시간 계산
-            calculateAvgDataTm();
-            // 클릭 시 updateBtnAnimate가 0.5초 동안 true로 바뀌어 0.5초 간 애니메이션 실행
-            handleUpdateBtnClick();
-          }}
-        >
-          <RedoOutlined />
-        </UpdateBtn>
-        <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
-      </UpdateWrap>
+      {isMapPrint ? (
+        <UpdateWrap>
+          <UpdateBtn
+            animate={updateBtnAnimate}
+            onClick={() => {
+              // 클릭하면 버스 관련 정보 요청
+              getData();
+              // 현재 위치 다시 가져오기
+              getCurrentPosition();
+              // 제공 시간 계산
+              calculateAvgDataTm();
+              // 클릭 시 updateBtnAnimate가 0.5초 동안 true로 바뀌어 0.5초 간 애니메이션 실행
+              handleUpdateBtnClick();
+            }}
+          >
+            <RedoOutlined />
+          </UpdateBtn>
+          <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
+        </UpdateWrap>
+      ) : (
+        <></>
+      )}
       {clickedBusInfo.vehId && isBusInfoVisible ? (
         <BusInfo>
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
@@ -423,6 +427,7 @@ function Map({ getData }) {
       ) : (
         <></>
       )}
+
       <Maps ref={kakaoMap}></Maps>
     </Container>
   );

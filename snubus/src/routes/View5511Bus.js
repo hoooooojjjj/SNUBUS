@@ -75,7 +75,7 @@ function View5511Bus() {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ overflow: "hidden" }}>
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}

@@ -20,9 +20,8 @@ const StationInfoModal = ({ curStation }) => {
         X
       </button>
       <h1>{curStation[0].stNm}</h1>
-      <p>
-        {curStation[0].arrmsg1} |{curStation[0].arrmsg2}
-      </p>
+      <p>첫번째 버스 : {curStation[0].arrmsg1}</p>
+      <p> 두번째 버스 : {curStation[0].arrmsg2}</p>
     </Container>
   );
 };
