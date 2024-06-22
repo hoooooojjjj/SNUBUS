@@ -62,10 +62,16 @@ const StationLine = () => {
         )}
 
         <BtnWrap>
-          <StationSwitchBtn onClick={switchDirectionToStart}>
+          <StationSwitchBtn
+            onClick={switchDirectionToStart}
+            isStart={isStart ? "#0c8ce9" : "white"}
+          >
             중앙대학교 방면
           </StationSwitchBtn>
-          <StationSwitchBtn onClick={switchDirectionToEnd}>
+          <StationSwitchBtn
+            onClick={switchDirectionToEnd}
+            isStart={isStart ? "white" : "#0c8ce9"}
+          >
             신림2동차고지 방면
           </StationSwitchBtn>
         </BtnWrap>

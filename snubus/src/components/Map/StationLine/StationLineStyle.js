@@ -15,7 +15,8 @@ export const Container = styled.div({
 export const StationLineWrap = styled.div({
   width: "90%",
   ...flex("column", "normal", "normal"),
-  border: "1px solid white",
+  border: "3px solid white",
+  borderRadius: 15,
   padding: "15px 25px",
   height: "90%",
 });
@@ -41,20 +42,38 @@ export const InfoText = styled.p({
 
 // 노선 정보 더보기 버튼
 export const MoreBtn = styled.button({
-  fontSize: 10,
+  fontSize: 12,
   height: 20,
   position: "absolute",
   bottom: 20,
   right: 0,
+  color: "white",
+  background: "none",
+  "&:hover": {
+    color: "#999999",
+  },
+  border: "none",
+  borderRadius: 5,
 });
 
 // 방면 전환 버튼 wrap
 export const BtnWrap = styled.div({
-  ...flex("row", "center", "center"),
+  ...flex("row", "space-around", "center"),
+  paddingBottom: 15,
+  borderBottom: "2px solid white",
 });
 
 // 방면 전환 버튼
-export const StationSwitchBtn = styled.button({});
+export const StationSwitchBtn = styled.button((props) => ({
+  color: props.isStart,
+  background: "none",
+  "&:hover": {
+    border: "1px solid #999999",
+  },
+  border: "1px solid white",
+  borderRadius: 5,
+  padding: "5px 10px",
+}));
 
 // StationLine wrap
 export const LineWrap = styled.div({
