@@ -261,23 +261,30 @@ function Map({ getData }) {
 
       setBusStationInfo(curStation);
 
-      // 인포윈도우 컨텐츠
-      const iwContent = `<div style="padding:5px;">${curStation[0].stNm}</div>`;
+      // 커스텀 오버레이 컨텐츠
+      const content = `<span style="display: inline-block; text-align: center; height: auto; width: auto; padding: 5px; margin-bottom: 90px; font-size: 20px;">${curStation[0].stNm}</span>`;
 
-      // 인포윈도우를 생성
-      var infowindow = new window.kakao.maps.InfoWindow({
-        content: iwContent,
+      // 커스텀 오버레이가 표시될 위치
+      const OverlayPosition = new window.kakao.maps.LatLng(
+        busStationPos.pos[0],
+        busStationPos.pos[1]
+      );
+
+      // 커스텀 오버레이를 생성
+      var customOverlay = new window.kakao.maps.CustomOverlay({
+        position: OverlayPosition,
+        content: content,
       });
 
-      // 마커 위에 인포윈도우를 표시
-      infowindow.open(map, stationMarker);
+      // 마커 위에 커스텀 오버레이를 표시
+      customOverlay.setMap(map, stationMarker);
 
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
 
-      // 모달에서 X버튼 클릭시 모달과 인포윈도우, 마커 닫힘
+      // 모달에서 X버튼 클릭시 모달과 커스텀 오버레이, 마커 닫힘
       if (!isInfoWindowVisible) {
-        infowindow.close();
+        customOverlay.setMap(null);
         stationMarker.setMap(null);
         // 클릭한 정류장 좌표로 중심좌표 이동 풀기
         map.setCenter(
