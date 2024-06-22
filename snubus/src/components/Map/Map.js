@@ -392,7 +392,7 @@ function Map({ getData }) {
 
   return (
     <Container>
-      {isMapPrint ? (
+      {isMapPrint && dataTm > 0 ? (
         <UpdateWrap>
           <UpdateBtn
             animate={updateBtnAnimate}
@@ -417,7 +417,8 @@ function Map({ getData }) {
       {clickedBusInfo.vehId && isBusInfoVisible ? (
         <BusInfo>
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
-          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
+          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType} |{" "}
+          {clickedBusInfo.congetion}
         </BusInfo>
       ) : (
         <></>

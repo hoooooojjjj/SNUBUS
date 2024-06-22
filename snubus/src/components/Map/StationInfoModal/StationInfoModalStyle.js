@@ -5,8 +5,8 @@ export const Container = styled.div({
   position: "absolute",
   top: "30%",
   left: 10,
-  width: 200,
+  width: 300,
   height: 200,
-  border: "1px solid white",
+  border: "1px solid black",
   backgroundColor: "white",
 });

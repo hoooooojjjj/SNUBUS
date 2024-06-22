@@ -51,6 +51,7 @@ export default async function getBusData(busRouteId, setBusData, signal) {
             plainNo: bus.plainNo,
             busType: bus.busType,
             dataTm: bus.dataTm,
+            congetion: bus.congetion,
           };
         });
 
