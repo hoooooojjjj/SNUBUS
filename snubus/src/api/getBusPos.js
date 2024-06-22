@@ -1,5 +1,5 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusData(busRouteId, setBusData, signal) {
+export default async function getBusData(busRouteId, signal) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
   const getBusPosData = async () => {
     // 데이터 요청
@@ -127,55 +127,36 @@ export default async function getBusData(busRouteId, setBusData, signal) {
     }
   };
 
-  // 처음 마운트되었을 때 받은 새 버스 데이터 저장하는 객체
-  const NewBusData = {
-    // 버스들 데이터 저장하는 상태
-    busInfos: {
-      // 버스 좌표 데이터 저장하는 상태
-      busPositionXY: null,
-      // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간)
-      busInfo: {},
-      // 버스가 어느 정류장에 있는지 저장하는 상태
-      busPositionInStation: {
-        DirectionToStart: [],
-        DirectionToEnd: [],
-      },
-    },
-    // 각 정류장 관련 정보 저장하는 state
-    busStationInfos: {
-      // 중앙대학교 방면 정류장 정보
-      DirectionToStart: [],
-      // 신림2동차고지 방면 정류장 정보
-      DirectionToEnd: [],
-    },
-  };
-
-  // 처음 마운트되었을 때 버스 위치 정보 데이터 요청
+  // 버스 위치 정보 데이터 요청
   const BusPosData = await getBusPosData();
   if (!BusPosData) {
     return null;
   }
 
-  // 버스 좌표 배열 BusPosData에 state 업데이트
-  NewBusData.busInfos.busPositionXY = BusPosData.busPos;
+  // 응답 받은 새 버스 데이터 저장하는 객체
+  const NewBusData = {
+    busPositionXY: BusPosData.busPos,
+    busInfo: BusPosData.busInfo,
+    busPositionInStation: {
+      DirectionToStart: BusPosData.DirectionToStart,
+      DirectionToEnd: BusPosData.DirectionToEnd,
+    },
+  };
 
-  // 각 버스 관련 정보 BusPosData에 state 업데이트
-  NewBusData.busInfos.busInfo = BusPosData.busInfo;
-
-  // snubus 정류장에 위치한 버스 배열 BusPosData에 state 업데이트
-  NewBusData.busInfos.busPositionInStation.DirectionToStart =
-    BusPosData.DirectionToStart;
-  NewBusData.busInfos.busPositionInStation.DirectionToEnd =
-    BusPosData.DirectionToEnd;
-
-  // 처음 마운트되었을 때 버스 도착 정보 데이터 요청
+  //  정류장 정보 데이터 요청
   const BusStationInfo = await getBusStationInfo();
   if (BusStationInfo.length < 2) {
     return null;
   }
-  NewBusData.busStationInfos.DirectionToStart = BusStationInfo[0];
-  NewBusData.busStationInfos.DirectionToEnd = BusStationInfo[1];
 
-  // state에 NewBusData 업데이트
-  setBusData(NewBusData);
+  // 응답 받은 새 정류장 데이터 저장하는 객체
+  const NewStationData = {
+    DirectionToStart: BusStationInfo[0],
+    DirectionToEnd: BusStationInfo[1],
+  };
+
+  return {
+    busData: NewBusData,
+    stationData: NewStationData,
+  };
 }
