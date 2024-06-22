@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container } from "./StationInfoMomalStyle";
+import { Container } from "./StationInfoModalStyle";
 import { isInfoWindowVisibleContext } from "../../../routes/View5511Bus";
 
 const StationInfoModal = ({ curStation }) => {

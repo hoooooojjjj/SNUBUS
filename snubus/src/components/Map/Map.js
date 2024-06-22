@@ -13,7 +13,7 @@ import {
   busStationPosContext,
   isInfoWindowVisibleContext,
 } from "../../routes/View5511Bus";
-import StationInfoModal from "./StationInfoModal/StationInfoMomal";
+import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { route_start, route_end } from "../../util/busStationPos";
 
