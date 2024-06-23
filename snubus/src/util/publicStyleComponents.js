@@ -29,24 +29,6 @@ export const Font_ArchivoBlack = () => {
   };
 };
 
-// Bebas Neue 폰트
-export const Font_BebasNeue = () => {
-  return {
-    fontFamily: '"Bebas Neue", sans-serif',
-    color: "white",
-    fontStyle: "normal",
-  };
-};
-
-// Poetsen One 폰트
-export const Font_PoetsenOne = () => {
-  return {
-    fontFamily: "'Poetsen One', sans-serif",
-    fontStyle: "normal",
-    color: "white",
-  };
-};
-
 // 한국어
 export const Font_BlackHanSans = () => {
   return {
@@ -56,9 +38,9 @@ export const Font_BlackHanSans = () => {
   };
 };
 
-export const Font_GasoekOne = () => {
+export const Font_DoHyeon = () => {
   return {
-    fontFamily: "'Gasoek One', sans-serif",
+    fontFamily: "'Do Hyeon', sans-serif",
     fontStyle: "normal",
     color: "white",
   };

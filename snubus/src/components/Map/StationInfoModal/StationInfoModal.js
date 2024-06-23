@@ -60,7 +60,9 @@ const StationInfoModal = ({ curStation }) => {
         도착예정
         <CaretDownOutlined />
       </Text>
-      <Text style={{ color: "#0c8ce9" }}>1. {curStation[0].arrmsg1}</Text>
+      <Text>
+        1. <span style={{ color: "#0c8ce9" }}>{curStation[0].arrmsg1}</span>
+      </Text>
       <Text style={{ color: "#545252" }}>
         {curStation[0].arrmsg1 !== "출발대기"
           ? `(${switchBusType(curStation[0].busType1)}, ${switchReride_Num(
@@ -68,7 +70,9 @@ const StationInfoModal = ({ curStation }) => {
             )})`
           : ""}
       </Text>
-      <Text style={{ color: "#0c8ce9" }}>2. {curStation[0].arrmsg2}</Text>
+      <Text>
+        2. <span style={{ color: "#0c8ce9" }}>{curStation[0].arrmsg2}</span>
+      </Text>
       <Text style={{ color: "#545252" }}>
         {curStation[0].arrmsg2 !== "출발대기"
           ? `(${switchBusType(curStation[0].busType2)}, ${switchReride_Num(

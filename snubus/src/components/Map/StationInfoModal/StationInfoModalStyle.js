@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import { Font_DoHyeon } from "../../../util/publicStyleComponents";
 export const Container = styled.div({
   zIndex: 2,
   position: "absolute",
@@ -33,4 +33,6 @@ export const Header = styled.h1({
 export const Text = styled.p({
   padding: 0,
   margin: "0px 0px",
+  ...Font_DoHyeon(),
+  color: "black",
 });

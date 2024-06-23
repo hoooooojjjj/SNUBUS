@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { Timeline } from "antd";
-import { flex, Font_BlackHanSans } from "../../../util/publicStyleComponents";
+import {
+  flex,
+  Font_BlackHanSans,
+  Font_DoHyeon,
+} from "../../../util/publicStyleComponents";
 
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({
@@ -8,7 +12,7 @@ export const Container = styled.div({
   width: "30dvw",
   height: "100dvh",
   ...flex("row", "center", "center"),
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
 });
 
 // StationLine 전체 Box Wrap
@@ -38,6 +42,7 @@ export const InfoTextWrap = styled.div((props) => ({
 export const InfoTextHeader = styled.p({
   fontSize: 20,
   color: "white",
+  ...Font_BlackHanSans(),
 });
 
 // 노선 정보 text
@@ -65,6 +70,7 @@ export const MoreBtn = styled.button({
 // 방면 전환 버튼 wrap
 export const BtnWrap = styled.div({
   ...flex("row", "space-around", "center"),
+  ...Font_BlackHanSans(),
 });
 
 // 방면 전환 버튼
@@ -111,7 +117,7 @@ export const TimelineStyle = styled(Timeline)`
     height: 28px;
     cursor: pointer;
     font-size: 18px;
-    font-family: "Black Han Sans", sans-serif;
+    font-family: "Do Hyeon", sans-serif;
     &:hover {
       color: #0c8ce9;
     }

@@ -261,8 +261,10 @@ function Map({ getData, bus_stationData }) {
 
       setBusStationInfo(curStation);
 
+      const contentStyle =
+        "display: inline-block; text-align: center; height: auto; width: auto; padding: 4px 10px 2px 10px; margin-bottom: 110px; font-size: 20px; background-color:white; border:1px solid black; border-radius: 10px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);";
       // 커스텀 오버레이 컨텐츠
-      const content = `<span style="display: inline-block; text-align: center; height: auto; width: auto; padding: 5px; margin-bottom: 90px; font-size: 20px;">${curStation[0].stNm}</span>`;
+      const content = `<span style="${contentStyle}">${curStation[0].stNm}</span>`;
 
       // 커스텀 오버레이가 표시될 위치
       const OverlayPosition = new window.kakao.maps.LatLng(
