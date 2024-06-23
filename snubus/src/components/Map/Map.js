@@ -417,8 +417,7 @@ function Map({ getData, bus_stationData }) {
       {clickedBusInfo.vehId && isBusInfoVisible ? (
         <BusInfo>
           차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
-          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType} |{" "}
-          {clickedBusInfo.congetion}
+          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
         </BusInfo>
       ) : (
         <></>
