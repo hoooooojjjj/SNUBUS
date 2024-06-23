@@ -14,7 +14,7 @@ function App() {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useState(false);
   return (
-    <div style={{ backgroundColor: "black" }}>
+    <div style={{ backgroundColor: "#1a1919" }}>
       {/* antd 커스터마이징 */}
       <ConfigProvider
         theme={{
@@ -29,7 +29,7 @@ function App() {
               tailColor: "white",
               tailWidth: 3,
               itemPaddingBottom: 50,
-              dotBg: "black",
+              dotBg: "#1a1919",
             },
           },
         }}
