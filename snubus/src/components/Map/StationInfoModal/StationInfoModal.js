@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, CloseBtn, Header, Text } from "./StationInfoModalStyle";
 import { isInfoWindowVisibleContext } from "../../../routes/View5511Bus";
 import { CaretDownOutlined } from "@ant-design/icons";
@@ -35,6 +35,11 @@ const StationInfoModal = ({ curStation }) => {
     }
   };
 
+  // 버스 도착 예정 시간이 "출발대기"나 "운행종료"가 아닌지 확인
+  const isBusComing =
+    curStation[0].arrmsg1 !== "출발대기" &&
+    curStation[0].arrmsg1 !== "운행종료";
+
   if (!isInfoWindowVisible) {
     return null;
   }
@@ -61,20 +66,26 @@ const StationInfoModal = ({ curStation }) => {
         <CaretDownOutlined />
       </Text>
       <Text>
-        1. <span style={{ color: "#0c8ce9" }}>{curStation[0].arrmsg1}</span>
+        1.{" "}
+        <span style={isBusComing ? { color: "#0c8ce9" } : { color: "#545252" }}>
+          {curStation[0].arrmsg1}
+        </span>
       </Text>
       <Text style={{ color: "#545252" }}>
-        {curStation[0].arrmsg1 !== "출발대기"
+        {isBusComing
           ? `(${switchBusType(curStation[0].busType1)}, ${switchReride_Num(
               curStation[0].reride_Num1
             )})`
           : ""}
       </Text>
       <Text>
-        2. <span style={{ color: "#0c8ce9" }}>{curStation[0].arrmsg2}</span>
+        2.{" "}
+        <span style={isBusComing ? { color: "#0c8ce9" } : { color: "#545252" }}>
+          {curStation[0].arrmsg2}
+        </span>
       </Text>
       <Text style={{ color: "#545252" }}>
-        {curStation[0].arrmsg2 !== "출발대기"
+        {isBusComing
           ? `(${switchBusType(curStation[0].busType2)}, ${switchReride_Num(
               curStation[0].reride_Num2
             )})`
