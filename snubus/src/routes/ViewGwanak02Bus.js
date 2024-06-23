@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Map from "../components/Map/Map";
-import getBusPosDataInterval from "../api/getBusPos";
+import getBusPosDataInterval from "../api/busAndStationDataFetch";
 import Loading from "../components/Loading/Loading";
 
 const BUSROUTEID_GWANAK02 = "120900008";

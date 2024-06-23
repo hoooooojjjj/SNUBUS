@@ -9,15 +9,15 @@ import {
 } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
 import {
-  busDataContext,
   busStationPosContext,
   isInfoWindowVisibleContext,
 } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { route_start, route_end } from "../../util/busStationPos";
+import { connect } from "react-redux";
 
-function Map({ getData }) {
+function Map({ getData, bus_stationData }) {
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
 
@@ -40,10 +40,10 @@ function Map({ getData }) {
   });
 
   // 버스 위치 좌표 데이터 context
-  const position = useContext(busDataContext).busInfos.busPositionXY;
+  const position = bus_stationData.busDataReducer.busPositionXY;
 
   // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) context
-  const busInfo = useContext(busDataContext).busInfos.busInfo;
+  const busInfo = bus_stationData.busDataReducer.busInfo;
 
   // 클릭한 버스의 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
   const [clickedBusInfo, setClickedBusInfo] = useState({});
@@ -52,7 +52,7 @@ function Map({ getData }) {
   const [isBusInfoVisible, setIsBusInfoVisible] = useState(false);
 
   // 버스 정류장 관련 정보 context
-  const busStationInfos = useContext(busDataContext).busStationInfos;
+  const busStationInfos = bus_stationData.stationDataReducer;
 
   // 버스 정류장 관련 정보 state
   const [busStationInfo, setBusStationInfo] = useState([]);
@@ -392,7 +392,7 @@ function Map({ getData }) {
 
   return (
     <Container>
-      {isMapPrint && dataTm > 0 ? (
+      {isMapPrint ? (
         <UpdateWrap>
           <UpdateBtn
             animate={updateBtnAnimate}
@@ -434,4 +434,9 @@ function Map({ getData }) {
   );
 }
 
-export default Map;
+// 상태를 props로 매핑
+function mapStateToProps(state) {
+  return { bus_stationData: state };
+}
+
+export default connect(mapStateToProps)(Map);

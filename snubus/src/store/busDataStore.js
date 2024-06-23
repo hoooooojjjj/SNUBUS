@@ -36,7 +36,6 @@ function busDataReducer(state = busData, action) {
           DirectionToEnd: action.data.end,
         },
       };
-
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusData(busRouteId, signal) {
+export default async function getBusAndStationData(busRouteId, signal) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
-  const getBusPosData = async () => {
+  const getBusData = async () => {
     // 데이터 요청
     try {
       const response = await fetch(
@@ -94,7 +94,7 @@ export default async function getBusData(busRouteId, signal) {
   };
 
   // 버스 도착 정보 데이터 요청 함수 -> 각 정류장 관련 정보 fetching
-  const getBusStationInfo = async () => {
+  const getStationData = async () => {
     // 데이터 요청
     try {
       const response = await fetch(
@@ -128,31 +128,31 @@ export default async function getBusData(busRouteId, signal) {
   };
 
   // 버스 위치 정보 데이터 요청
-  const BusPosData = await getBusPosData();
-  if (!BusPosData) {
+  const BusData = await getBusData();
+  if (!BusData) {
     return null;
   }
 
   // 응답 받은 새 버스 데이터 저장하는 객체
   const NewBusData = {
-    busPositionXY: BusPosData.busPos,
-    busInfo: BusPosData.busInfo,
+    busPositionXY: BusData.busPos,
+    busInfo: BusData.busInfo,
     busPositionInStation: {
-      DirectionToStart: BusPosData.DirectionToStart,
-      DirectionToEnd: BusPosData.DirectionToEnd,
+      DirectionToStart: BusData.DirectionToStart,
+      DirectionToEnd: BusData.DirectionToEnd,
     },
   };
 
   //  정류장 정보 데이터 요청
-  const BusStationInfo = await getBusStationInfo();
-  if (BusStationInfo.length < 2) {
+  const StationData = await getStationData();
+  if (StationData.length < 2) {
     return null;
   }
 
   // 응답 받은 새 정류장 데이터 저장하는 객체
   const NewStationData = {
-    DirectionToStart: BusStationInfo[0],
-    DirectionToEnd: BusStationInfo[1],
+    DirectionToStart: StationData[0],
+    DirectionToEnd: StationData[1],
   };
 
   return {

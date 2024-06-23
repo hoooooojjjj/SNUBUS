@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Map from "../components/Map/Map";
-import getBusData from "../api/getBusPos";
+import getBusAndStationData from "../api/busAndStationDataFetch";
 import Loading from "../components/Loading/Loading";
 import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
@@ -45,17 +45,20 @@ function View5511Bus({
     const signal = controller.signal;
 
     // getBusData로 버스/정류장 데이터 요청
-    getBusData(BUSROUTEID_5511, signal).then((res) => {
-      // 버스/정류장 데이터를 받아와서 Redux에 저장
-      getBuspostionXY(res.busData.busPositionXY);
-      getBusInfo(res.busData.busInfo);
+    const getData = async () => {
+      const busData = await getBusAndStationData(BUSROUTEID_5511, signal);
+      // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
+      getBuspostionXY(busData.busData.busPositionXY);
+      getBusInfo(busData.busData.busInfo);
       getBuses(
-        res.busData.busPositionInStation.DirectionToStart,
-        res.busData.busPositionInStation.DirectionToEnd
+        busData.busData.busPositionInStation.DirectionToStart,
+        busData.busData.busPositionInStation.DirectionToEnd
       );
-      getStationToStart(res.stationData.DirectionToStart);
-      getStationToEnd(res.stationData.DirectionToEnd);
-    });
+      getStationToStart(busData.stationData.DirectionToStart);
+      getStationToEnd(busData.stationData.DirectionToEnd);
+    };
+
+    getData();
 
     return () => {
       // DOM 요청이 완료되기 전에 취소한다. 이를 통해 fetch 요청, 모든 응답 Body 소비, 스트림을 취소할 수 있다.
@@ -70,6 +73,7 @@ function View5511Bus({
 
   return (
     <Container style={{ overflow: "hidden" }}>
+      {" "}
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}

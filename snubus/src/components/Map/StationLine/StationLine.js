@@ -13,11 +13,11 @@ import {
 } from "./StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
 import { CheckOutlined } from "@ant-design/icons";
-import { busDataContext } from "../../../routes/View5511Bus";
+import { connect } from "react-redux";
 
-const StationLine = () => {
+const StationLine = ({ bus_stationData }) => {
   // 버스 개수 state
-  const busLength = useContext(busDataContext).busInfos.busInfo.length;
+  const busLength = bus_stationData.busDataReducer.busInfo.length;
 
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
@@ -80,4 +80,9 @@ const StationLine = () => {
     </Container>
   );
 };
-export default StationLine;
+
+// 상태를 props로 매핑
+function mapStateToProps(state) {
+  return { bus_stationData: state };
+}
+export default connect(mapStateToProps)(StationLine);

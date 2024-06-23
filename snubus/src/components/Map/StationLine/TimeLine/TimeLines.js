@@ -1,21 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle, BusImg, TimeLinesWrap } from "../StationLineStyle";
 import {
-  busDataContext,
   busStationPosContext,
   isInfoWindowVisibleContext,
 } from "../../../../routes/View5511Bus";
 import { stationList_end, stationList_start } from "./StationList";
+import { connect } from "react-redux";
 
-function TimeLines({ isStart }) {
+function TimeLines({ isStart, bus_stationData }) {
   /* state 코드 */
 
   // 클릭한 버스 정류장 좌표 전달하는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
 
   // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
-  const busesInStation =
-    useContext(busDataContext).busInfos.busPositionInStation;
+  const busesInStation = bus_stationData.busDataReducer.busPositionInStation;
 
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);
@@ -191,4 +190,9 @@ function TimeLines({ isStart }) {
   );
 }
 
-export default TimeLines;
+// 상태를 props로 매핑
+function mapStateToProps(state) {
+  return { bus_stationData: state };
+}
+
+export default connect(mapStateToProps)(TimeLines);
