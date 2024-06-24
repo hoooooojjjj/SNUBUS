@@ -26,12 +26,6 @@ function Map({ getData, bus_stationData }) {
   // 현재 위치
   const [curPos, setCurPos] = useState([]);
 
-  // 카카오맵이 화면에 표시됐는지 판별하는 state
-  const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
-
-  // 클릭한 버스 정류장 좌표 받아오는 context
-  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
-
   // 마운트 되기 전 map 확대 및 이동 위치 가져오기
   const [mapInfo, setMapInfo] = useState({
     level: "",
@@ -39,34 +33,44 @@ function Map({ getData, bus_stationData }) {
     centerX: "",
   });
 
-  // 버스 위치 좌표 데이터 context
-  const position = bus_stationData.busDataReducer.busPositionXY;
-
-  // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) context
-  const busInfo = bus_stationData.busDataReducer.busInfo;
-
   // 클릭한 버스의 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
   const [clickedBusInfo, setClickedBusInfo] = useState({});
 
   // 버스 관련 정보 열고 닫는 state
   const [isBusInfoVisible, setIsBusInfoVisible] = useState(false);
 
-  // 버스 정류장 관련 정보 context
-  const busStationInfos = bus_stationData.stationDataReducer;
-
   // 버스 정류장 관련 정보 state
   const [busStationInfo, setBusStationInfo] = useState([]);
-
-  // infoWindow 열고 닫는 context
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
-    isInfoWindowVisibleContext
-  );
 
   // 버스 데이터 제공 시각
   const [dataTm, setDataTm] = useState(0);
 
   // 업데이트 버튼 클릭 여부 state
   const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
+
+  // 카카오맵이 화면에 표시됐는지 판별하는 state
+  const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
+
+  /* Context API 코드 */
+
+  // 클릭한 버스 정류장 좌표 받아오는 context
+  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
+
+  // infoWindow 열고 닫는 context
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
+    isInfoWindowVisibleContext
+  );
+
+  /* redux 코드 */
+
+  // 버스 위치 좌표 데이터 state
+  const position = bus_stationData.busDataReducer.busPositionXY;
+
+  // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
+  const busInfo = bus_stationData.busDataReducer.busInfo;
+
+  // 버스 정류장 관련 정보 state
+  const busStationInfos = bus_stationData.stationDataReducer;
 
   /* 함수 코드 */
 
@@ -159,8 +163,8 @@ function Map({ getData, bus_stationData }) {
       path: stationPosArray,
       strokeWeight: 8,
       strokeColor: strokeColor,
-      strokeOpacity: 1,
-      strokeStyle: "solid",
+      strokeOpacity: 0.5,
+      strokeStyle: "shortdash",
     });
 
     // 폴리라인 적용
