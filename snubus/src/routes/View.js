@@ -6,12 +6,11 @@ import { Container, ViewWrap } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
 import StationLine from "../components/Map/StationLine/StationLine";
 import { connect } from "react-redux";
-
-const BUSROUTEID_5511 = "100100250";
+import { useParams } from "react-router-dom";
 
 export const ViewContext = React.createContext();
 
-// 5511번 버스 페이지
+// view 페이지
 function View5511Bus({
   bus_stationData,
   getBuspostionXY,
@@ -20,6 +19,12 @@ function View5511Bus({
   getStationToStart,
   getStationToEnd,
 }) {
+  // 현재 파라미터 받아와서 버스 번호 확인
+  const { id } = useParams();
+
+  // 버스 노선 ID state
+  const [busRouteId, setBusRouteId] = useState("");
+
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
@@ -36,6 +41,24 @@ function View5511Bus({
   // 클릭한 정류장의 도착 정보 state
   const [clickedStationInfo, setclickedStationInfo] = useState([]);
 
+  // 현재 라우트에 따라 버스 노선 ID 설정
+  useEffect(() => {
+    switch (id) {
+      case "5511":
+        setBusRouteId("100100250");
+        break;
+      case "5513":
+        setBusRouteId("100100251");
+        break;
+      case "5516":
+        setBusRouteId("100100253");
+        break;
+      case "관악02":
+        setBusRouteId("120900008");
+        break;
+    }
+  }, []);
+
   // 버스 / 정류장 정보 데이터 fetching 함수
   const getData = () => {
     // 새로운 AbortController 객체 인터페이스를 생성
@@ -45,7 +68,7 @@ function View5511Bus({
 
     // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
     const getBSData = async () => {
-      const busData = await getBusAndStationData(BUSROUTEID_5511, signal);
+      const busData = await getBusAndStationData(busRouteId, signal);
       // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
       getBuspostionXY(busData.busData.busPositionXY);
       getBusInfo(busData.busData.busInfo);
@@ -68,8 +91,10 @@ function View5511Bus({
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
-    getData();
-  }, []);
+    if (busRouteId) {
+      getData();
+    }
+  }, [busRouteId]);
 
   return (
     <Container>

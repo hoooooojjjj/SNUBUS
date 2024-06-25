@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Container, CloseBtn, Header, Text } from "./StationInfoModalStyle";
-import { ViewContext } from "../../../routes/View5511Bus";
+import { ViewContext } from "../../../routes/View";
 import { CaretDownOutlined } from "@ant-design/icons";
 
 const StationInfoModal = ({ curStation }) => {

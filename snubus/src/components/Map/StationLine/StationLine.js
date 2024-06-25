@@ -15,7 +15,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
 import { useLocation } from "react-router-dom";
-import { ViewContext } from "../../../routes/View5511Bus";
+import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
 const StationLine = ({ bus_stationData }) => {

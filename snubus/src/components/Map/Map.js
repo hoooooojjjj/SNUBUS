@@ -8,7 +8,7 @@ import {
   UpdateWrap,
 } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
-import { ViewContext } from "../../routes/View5511Bus";
+import { ViewContext } from "../../routes/View";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { route_start, route_end } from "../../util/busStationPos";
