@@ -12,6 +12,14 @@ export const Container = styled.div({
   borderRadius: 10,
   backgroundColor: "white",
   padding: 15,
+  "@media(max-width: 1024px)": {
+    top: "30%",
+    left: 30,
+    width: 200,
+    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
+    borderRadius: 10,
+    padding: 15,
+  },
 });
 
 export const CloseBtn = styled.button({
@@ -22,12 +30,18 @@ export const CloseBtn = styled.button({
   background: "none",
   border: "none",
   cursor: "pointer",
+  "@media(max-width: 1024px)": {
+    fontSize: 18,
+  },
 });
 
 export const Header = styled.h1({
   fontSize: 25,
   padding: 0,
   margin: "15px 0px",
+  "@media(max-width: 1024px)": {
+    fontSize: 23,
+  },
 });
 
 export const Text = styled.p({
@@ -35,4 +49,7 @@ export const Text = styled.p({
   margin: "0px 0px",
   ...Font_DoHyeon(),
   color: "black",
+  "@media(max-width: 1024px)": {
+    fontSize: 15,
+  },
 });

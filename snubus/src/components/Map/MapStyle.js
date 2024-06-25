@@ -23,6 +23,10 @@ export const BusInfo = styled.div({
   top: 10,
   left: 10,
   zIndex: 2,
+  fontSize: 15,
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
+  },
 });
 
 // 업데이트 관련 컴포넌트 wrap
@@ -54,7 +58,16 @@ export const UpdateBtn = styled.button`
   animation-name: ${(props) => (props.animate ? rotateOnce : "none")};
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+  font-size: 20px;
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
 `;
 
 // 데이터 제공 시간
-export const DataTm = styled.p({});
+export const DataTm = styled.p({
+  fontSize: 15,
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
+  },
+});

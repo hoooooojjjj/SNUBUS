@@ -39,6 +39,9 @@ export const InfoTextWrap = styled.div(() => ({
 // 노선 정보 text header
 export const InfoTextHeader = styled.p({
   fontSize: 20,
+  "@media(max-width: 1024px)": {
+    fontSize: 18,
+  },
   color: "white",
   ...Font_BlackHanSans(),
 });
@@ -46,23 +49,10 @@ export const InfoTextHeader = styled.p({
 // 노선 정보 text
 export const InfoText = styled.p({
   fontSize: 16,
-  color: "white",
-});
-
-// 노선 정보 더보기 버튼
-export const MoreBtn = styled.button({
-  fontSize: 12,
-  height: 20,
-  position: "absolute",
-  bottom: 17,
-  right: 0,
-  color: "white",
-  background: "none",
-  "&:hover": {
-    color: "#999999",
+  "@media(max-width: 1024px)": {
+    fontSize: 15,
   },
-  border: "none",
-  borderRadius: 5,
+  color: "white",
 });
 
 // 방면 전환 버튼 wrap
@@ -74,6 +64,9 @@ export const BtnWrap = styled.div({
 // 방면 전환 버튼
 export const StationSwitchBtn = styled.button({
   fontSize: 18,
+  "@media(max-width: 1024px)": {
+    fontSize: 16,
+  },
   background: "none",
   color: "white",
   "&:hover": {
@@ -98,6 +91,10 @@ export const BusImg = styled.img((props) => ({
   top: props.remainingDist,
   left: 2,
   width: 25,
+  "@media(max-width: 1024px)": {
+    left: 3,
+    width: 23,
+  },
 }));
 
 // 각 정류장 별 라인 wrap
@@ -108,7 +105,6 @@ export const TimeLinesWrap = styled.div({
 // 각 정류장 별 라인
 export const TimelineStyle = styled(Timeline)`
   height: 78px;
-
   padding-left: 10px;
   color: white;
   & > li > .ant-timeline-item-content {
@@ -116,6 +112,9 @@ export const TimelineStyle = styled(Timeline)`
     cursor: pointer;
     font-size: 18px;
     font-family: "Do Hyeon", sans-serif;
+    @media (max-width: 1024px) {
+      font-size: 16px;
+    }
     &:hover {
       color: #0c8ce9;
     }
