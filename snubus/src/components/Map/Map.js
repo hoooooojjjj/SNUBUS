@@ -268,10 +268,14 @@ function Map({ getData, bus_stationData }) {
       let contentStyle =
         "display: inline-block; text-align: center; height: auto; width: auto; padding: 4px 10px 2px 10px; margin-bottom: 110px; font-size: 20px; background-color:white; border:1px solid black; border-radius: 10px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);";
 
-      // Apply media query for smaller screens
+      // 반응형 스타일링
       if (window.matchMedia("(max-width: 1024px)").matches) {
         contentStyle += "font-size: 16px;";
       }
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        contentStyle += "font-size: 14px; margin-bottom: 100px;";
+      }
+
       // 커스텀 오버레이 컨텐츠
       const content = `<span style="${contentStyle}">${curStation[0].stNm}</span>`;
 

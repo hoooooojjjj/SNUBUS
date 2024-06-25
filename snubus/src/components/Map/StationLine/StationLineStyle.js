@@ -42,6 +42,9 @@ export const InfoTextHeader = styled.p({
   "@media(max-width: 1024px)": {
     fontSize: 18,
   },
+  "@media(max-width: 768px)": {
+    fontSize: 16,
+  },
   color: "white",
   ...Font_BlackHanSans(),
 });
@@ -52,12 +55,18 @@ export const InfoText = styled.p({
   "@media(max-width: 1024px)": {
     fontSize: 15,
   },
+  "@media(max-width: 768px)": {
+    fontSize: 14,
+  },
   color: "white",
 });
 
 // 방면 전환 버튼 wrap
 export const BtnWrap = styled.div({
   ...flex("row", "space-around", "center"),
+  "@media(max-width: 768px)": {
+    ...flex("column", "center", "center"),
+  },
   ...Font_BlackHanSans(),
 });
 
@@ -66,6 +75,10 @@ export const StationSwitchBtn = styled.button({
   fontSize: 18,
   "@media(max-width: 1024px)": {
     fontSize: 16,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 14,
+    marginBottom: 5,
   },
   background: "none",
   color: "white",
@@ -95,6 +108,10 @@ export const BusImg = styled.img((props) => ({
     left: 3,
     width: 23,
   },
+  "@media(max-width: 768px)": {
+    left: 4,
+    width: 21,
+  },
 }));
 
 // 각 정류장 별 라인 wrap
@@ -107,6 +124,12 @@ export const TimelineStyle = styled(Timeline)`
   height: 78px;
   padding-left: 10px;
   color: white;
+  @media (max-width: 1024px) {
+    height: 68px;
+  }
+  @media (max-width: 768px) {
+    height: 58px;
+  }
   & > li > .ant-timeline-item-content {
     height: 28px;
     cursor: pointer;
@@ -114,6 +137,11 @@ export const TimelineStyle = styled(Timeline)`
     font-family: "Do Hyeon", sans-serif;
     @media (max-width: 1024px) {
       font-size: 16px;
+      height: 18px;
+    }
+    @media (max-width: 768px) {
+      font-size: 14px;
+      height: 8px;
     }
     &:hover {
       color: #0c8ce9;

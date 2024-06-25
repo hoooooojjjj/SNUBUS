@@ -16,9 +16,15 @@ export const Container = styled.div({
     top: "30%",
     left: 30,
     width: 200,
-    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
     borderRadius: 10,
     padding: 15,
+  },
+  "@media(max-width: 768px)": {
+    top: "30%",
+    left: 10,
+    width: 150,
+    borderRadius: 10,
+    padding: 10,
   },
 });
 
@@ -32,6 +38,13 @@ export const CloseBtn = styled.button({
   cursor: "pointer",
   "@media(max-width: 1024px)": {
     fontSize: 18,
+    top: 3,
+    right: 3,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 16,
+    top: 1,
+    right: 1,
   },
 });
 
@@ -42,6 +55,9 @@ export const Header = styled.h1({
   "@media(max-width: 1024px)": {
     fontSize: 23,
   },
+  "@media(max-width: 768px)": {
+    fontSize: 18,
+  },
 });
 
 export const Text = styled.p({
@@ -51,5 +67,8 @@ export const Text = styled.p({
   color: "black",
   "@media(max-width: 1024px)": {
     fontSize: 15,
+  },
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
   },
 });
