@@ -32,10 +32,8 @@ export const StationLineInfoWrap = styled.div({
 });
 
 // 노선 정보 text wrap
-export const InfoTextWrap = styled.div((props) => ({
+export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
-  borderTop: props.isMore ? "1px solid white" : "none",
-  paddingTop: props.isMore ? 10 : 0,
 }));
 
 // 노선 정보 text header
