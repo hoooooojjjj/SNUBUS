@@ -164,7 +164,7 @@ function Map({ getData, bus_stationData }) {
       strokeWeight: 8,
       strokeColor: strokeColor,
       strokeOpacity: 0.5,
-      strokeStyle: "shortdash",
+      strokeStyle: "solid",
     });
 
     // 폴리라인 적용
@@ -299,7 +299,6 @@ function Map({ getData, bus_stationData }) {
       }
     }
 
-    // 모든 경로 좌표 폴리라인 생성
     route_start.forEach((direction) => {
       printPolyline(direction, map, "blue");
     });
@@ -307,6 +306,8 @@ function Map({ getData, bus_stationData }) {
     route_end.forEach((direction) => {
       printPolyline(direction, map, "red");
     });
+
+    // 모든 경로 좌표 폴리라인 생성
   };
 
   // 버스제공시간 평균 계산 함수

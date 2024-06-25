@@ -5,9 +5,6 @@ import { imgNumContext } from "../Main";
 const busType = [
   { key: "0", label: "지선 버스" },
   { key: "1", label: "마을 버스" },
-  { key: "2", label: "간선 버스" },
-  { key: "3", label: "공항 버스" },
-  { key: "4", label: "KTX 셔틀 버스" },
 ];
 
 function Navigation() {

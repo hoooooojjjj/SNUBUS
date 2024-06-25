@@ -16,19 +16,9 @@ function Articles({ info }) {
         <H2>{info.name}</H2>
       </HeaderWrap>
       <P>
-        {info.buslist.map((busNum, i) => (
-          <span key={busNum} onClick={onClick}>
-            {showOver4
-              ? busNum +
-                (i !== parseInt(info.buslist.length) - 1 ? ", " : " (닫기)")
-              : i > 3
-              ? ""
-              : busNum +
-                (i < 3
-                  ? i !== parseInt(info.buslist.length) - 1
-                    ? ", "
-                    : ""
-                  : " . . . (더 보기)")}
+        {info.buslist.map((bus, i) => (
+          <span key={bus.num} onClick={onClick}>
+            {bus.num + (i !== parseInt(info.buslist.length) - 1 ? ", " : "")}
           </span>
         ))}
       </P>

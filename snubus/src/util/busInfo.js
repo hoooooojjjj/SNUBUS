@@ -3,36 +3,41 @@ const busInfo = [
     id: "FeederBus",
     name: "지선 버스",
     buslist: [
-      "5511",
-      "5513",
-      "5515",
-      "5517",
-      "6511",
-      "6512",
-      "6513",
-      "5528",
-      "6514",
+      {
+        num: "5511",
+        route: "신림2동차고지 ↔️ 중앙대학교",
+        firstTm: "05:30",
+        lastTm: "23:30",
+        interval: "7분",
+      },
+      {
+        num: "5513",
+        route: "서울대학교 ↔️ 벽산블루밍아파트",
+        firstTm: "05:30",
+        lastTm: "23:30",
+        interval: "11분",
+      },
+      {
+        num: "5516",
+        route: "신림2동차고지 ↔️ 노량진역",
+        firstTm: "05:00",
+        lastTm: "23:00",
+        interval: "8분",
+      },
     ],
   },
   {
     id: "ViligeBus",
     name: "마을 버스",
-    buslist: ["관악02"],
-  },
-  {
-    id: "MainlineBus",
-    name: "간선 버스",
-    buslist: ["705A", "705B", "501"],
-  },
-  {
-    id: "AirPortBus",
-    name: "공항 버스",
-    buslist: ["6003"],
-  },
-  {
-    id: "KTXBus",
-    name: "KTX 셔틀 버스",
-    buslist: ["8507"],
+    buslist: [
+      {
+        num: "관악02",
+        route: "낙성대역 ↔️ 서울대신공학관",
+        firstTm: "06:00",
+        lastTm: "23:55",
+        interval: "5분",
+      },
+    ],
   },
 ];
 
