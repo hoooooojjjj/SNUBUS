@@ -14,13 +14,13 @@ import TimeLines from "./TimeLine/TimeLines";
 import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
 const StationLine = ({ bus_stationData }) => {
-  // 현재 페이지 경로 (버스 번호)
-  const location = useLocation().pathname.split("/")[1];
+  // 현재 파라미터 받아와서 버스 번호 확인
+  const { id } = useParams();
 
   /* state 코드 */
 
@@ -53,9 +53,10 @@ const StationLine = ({ bus_stationData }) => {
   };
 
   // 현재 페이지의 버스 정보만 필터링
+
   const curBusInfo = busInfo.map((bus) => {
-    return bus.buslist.filter((bus) => bus.num === location);
-  })[0][0];
+    return bus.buslist.filter((bus) => bus.num === id);
+  })[id === "관악02" ? 1 : 0][0];
 
   if (window.matchMedia("(max-width: 425px)").matches && isInfoWindowVisible) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;
