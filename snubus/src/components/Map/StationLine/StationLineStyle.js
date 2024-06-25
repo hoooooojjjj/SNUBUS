@@ -11,6 +11,9 @@ export const Container = styled.div({
   margin: "0 auto",
   width: "30dvw",
   height: "100dvh",
+  "@media(max-width: 425px)": {
+    width: "100dvw",
+  },
   ...flex("row", "center", "center"),
   ...Font_DoHyeon(),
 });
@@ -19,6 +22,9 @@ export const Container = styled.div({
 export const StationLineWrap = styled.div({
   width: "90%",
   ...flex("column", "normal", "normal"),
+  "@media(max-width: 425px)": {
+    ...flex("column", "center", "center"),
+  },
   border: "3px solid white",
   borderRadius: 15,
   padding: "15px 25px",
@@ -34,6 +40,9 @@ export const StationLineInfoWrap = styled.div({
 // 노선 정보 text wrap
 export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
+  "@media(max-width: 425px)": {
+    ...flex("column", "center", "center"),
+  },
 }));
 
 // 노선 정보 text header
@@ -44,6 +53,14 @@ export const InfoTextHeader = styled.p({
   },
   "@media(max-width: 768px)": {
     fontSize: 16,
+  },
+  "@media(max-width: 425px)": {
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 18,
+    marginBottom: 5,
   },
   color: "white",
   ...Font_BlackHanSans(),
@@ -58,6 +75,14 @@ export const InfoText = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 14,
   },
+  "@media(max-width: 425px)": {
+    fontSize: 15,
+    margin: 0,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 14,
+    margin: 0,
+  },
   color: "white",
 });
 
@@ -66,6 +91,9 @@ export const BtnWrap = styled.div({
   ...flex("row", "space-around", "center"),
   "@media(max-width: 768px)": {
     ...flex("column", "center", "center"),
+  },
+  "@media(max-width: 425px)": {
+    ...flex("row", "space-around", "center"),
   },
   ...Font_BlackHanSans(),
 });
@@ -78,7 +106,11 @@ export const StationSwitchBtn = styled.button({
   },
   "@media(max-width: 768px)": {
     fontSize: 14,
-    marginBottom: 5,
+    marginTop: 5,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 13,
+    marginTop: 5,
   },
   background: "none",
   color: "white",

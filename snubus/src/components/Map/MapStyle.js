@@ -3,13 +3,17 @@ import { Font_BlackHanSans, flex } from "../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
 // Map 컴포넌트 컨테이너
-export const Container = styled.div({
+export const Container = styled.div((props) => ({
   width: "70dvw",
   height: "100dvh",
+  "@media(max-width: 425px)": {
+    width: "100dvw",
+    height: props.isInfoWindowVisible ? "70dvh" : "40dvh",
+  },
   position: "relative",
   ...Font_BlackHanSans(),
   color: "black",
-});
+}));
 
 // 지도
 export const Maps = styled.div({
@@ -32,7 +36,12 @@ export const BusInfo = styled.div({
 // 업데이트 관련 컴포넌트 wrap
 export const UpdateWrap = styled.div({
   position: "absolute",
-  top: 10,
+  "@media(min-width: 426px)": {
+    top: 10,
+  },
+  "@media(max-width: 425px)": {
+    bottom: -12,
+  },
   right: 10,
   zIndex: 2,
   ...flex("column", "normal", "flex-end"),
@@ -62,6 +71,9 @@ export const UpdateBtn = styled.button`
   @media (max-width: 1024px) {
     font-size: 18px;
   }
+  @media (max-width: 425px) {
+    font-size: 15px;
+  }
 `;
 
 // 데이터 제공 시간
@@ -69,5 +81,8 @@ export const DataTm = styled.p({
   fontSize: 15,
   "@media(max-width: 1024px)": {
     fontSize: 13,
+  },
+  "@media(max-width: 425px)": {
+    fontSize: 12,
   },
 });

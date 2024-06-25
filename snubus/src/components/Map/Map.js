@@ -10,6 +10,7 @@ import {
 import { isMapPrintContext } from "../../App";
 import {
   busStationPosContext,
+  clickedStationInfoContext,
   isInfoWindowVisibleContext,
 } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
@@ -39,19 +40,16 @@ function Map({ getData, bus_stationData }) {
   // 버스 관련 정보 열고 닫는 state
   const [isBusInfoVisible, setIsBusInfoVisible] = useState(false);
 
-  // 버스 정류장 관련 정보 state
-  const [busStationInfo, setBusStationInfo] = useState([]);
-
   // 버스 데이터 제공 시각
   const [dataTm, setDataTm] = useState(0);
 
   // 업데이트 버튼 클릭 여부 state
   const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
 
+  /* Context API 코드 */
+
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
-
-  /* Context API 코드 */
 
   // 클릭한 버스 정류장 좌표 받아오는 context
   const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
@@ -59,6 +57,10 @@ function Map({ getData, bus_stationData }) {
   // infoWindow 열고 닫는 context
   const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
     isInfoWindowVisibleContext
+  );
+
+  const [clickedStationInfo, setclickedStationInfo] = useContext(
+    clickedStationInfoContext
   );
 
   /* redux 코드 */
@@ -263,7 +265,7 @@ function Map({ getData, bus_stationData }) {
         (busStationInfo) => parseInt(busStationInfo.stId) === busStationPos.stId
       );
 
-      setBusStationInfo(curStation);
+      setclickedStationInfo(curStation);
 
       let contentStyle =
         "display: inline-block; text-align: center; height: auto; width: auto; padding: 4px 10px 2px 10px; margin-bottom: 110px; font-size: 20px; background-color:white; border:1px solid black; border-radius: 10px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);";
@@ -407,7 +409,7 @@ function Map({ getData, bus_stationData }) {
   }, []);
 
   return (
-    <Container>
+    <Container isInfoWindowVisible={isInfoWindowVisible}>
       {isMapPrint ? (
         <UpdateWrap>
           <UpdateBtn
@@ -438,12 +440,12 @@ function Map({ getData, bus_stationData }) {
       ) : (
         <></>
       )}
-      {busStationInfo.length > 0 ? (
-        <StationInfoModal curStation={busStationInfo} />
+      {clickedStationInfo.length > 0 &&
+      !window.matchMedia("(max-width: 425px)").matches ? (
+        <StationInfoModal curStation={clickedStationInfo} />
       ) : (
         <></>
       )}
-
       <Maps ref={kakaoMap}></Maps>
     </Container>
   );

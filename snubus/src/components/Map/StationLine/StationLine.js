@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   BtnWrap,
   Container,
@@ -15,6 +15,11 @@ import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
 import { useLocation } from "react-router-dom";
+import {
+  clickedStationInfoContext,
+  isInfoWindowVisibleContext,
+} from "../../../routes/View5511Bus";
+import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
 const StationLine = ({ bus_stationData }) => {
   // 현재 페이지 경로 (버스 번호)
@@ -25,6 +30,15 @@ const StationLine = ({ bus_stationData }) => {
 
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
+
+  const [clickedStationInfo, setclickedStationInfo] = useContext(
+    clickedStationInfoContext
+  );
+
+  // infoWindow 열고 닫는 context
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
+    isInfoWindowVisibleContext
+  );
 
   // 중앙대학교 방면 버튼을 클릭하면 중앙대학교 방면 정류장 라인으로 전환
   const switchDirectionToStart = () => {
@@ -41,24 +55,44 @@ const StationLine = ({ bus_stationData }) => {
     return bus.buslist.filter((bus) => bus.num === location);
   })[0][0];
 
+  if (window.matchMedia("(max-width: 425px)").matches && isInfoWindowVisible) {
+    return <MobileStationInfoModal curStation={clickedStationInfo} />;
+  }
+
   return (
     <Container>
       <StationLineWrap>
         <StationLineInfoWrap>
-          <InfoTextWrap>
-            <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-            <InfoText>
-              첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
-            </InfoText>
-            <InfoText>
-              <strong>배차간격</strong> : {curBusInfo.interval}
-            </InfoText>
-            <InfoText>
-              <strong>
-                {busLength > 0 ? `현재 ${busLength}대 운행중` : "운행종료"}
-              </strong>
-            </InfoText>
-          </InfoTextWrap>
+          {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+          {!window.matchMedia("(max-width: 425px)").matches ? (
+            <InfoTextWrap>
+              <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
+              <InfoText>
+                첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
+              </InfoText>
+              <InfoText>
+                <strong>배차간격</strong> : {curBusInfo.interval}
+              </InfoText>
+              <InfoText>
+                <strong>
+                  {busLength > 0 ? `현재 ${busLength}대 운행중` : "운행종료"}
+                </strong>
+              </InfoText>
+            </InfoTextWrap>
+          ) : (
+            <InfoTextWrap>
+              <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
+              <InfoText>
+                {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
+                <strong>
+                  {busLength > 0 ? `  현재 ${busLength}대 운행중` : "운행종료"}
+                </strong>
+              </InfoText>
+              <InfoText>
+                <strong>배차간격</strong> : {curBusInfo.interval}
+              </InfoText>
+            </InfoTextWrap>
+          )}
         </StationLineInfoWrap>
         <BtnWrap>
           <StationSwitchBtn onClick={switchDirectionToStart}>

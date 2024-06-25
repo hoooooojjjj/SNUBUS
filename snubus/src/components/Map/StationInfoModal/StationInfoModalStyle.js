@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_DoHyeon } from "../../../util/publicStyleComponents";
+import { Font_DoHyeon, flex } from "../../../util/publicStyleComponents";
 export const Container = styled.div({
   zIndex: 2,
   position: "absolute",
@@ -25,6 +25,11 @@ export const Container = styled.div({
     width: 150,
     borderRadius: 10,
     padding: 10,
+  },
+  "@media(max-width: 425px)": {
+    margin: "0 auto",
+    width: "100dvw",
+    height: "30dvh",
   },
 });
 

@@ -1,6 +1,15 @@
 import styled from "@emotion/styled";
-import { container } from "../util/publicStyleComponents";
+import { flex } from "../util/publicStyleComponents";
 
 export const Container = styled.div({
-  ...container(),
+  width: "100dvw",
+  height: "auto",
+  overflow: "hidden",
+});
+
+export const ViewWrap = styled.div({
+  ...flex("row", "center", "center"),
+  "@media(max-width: 425px)": {
+    flexDirection: "column",
+  },
 });

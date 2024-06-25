@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Map from "../components/Map/Map";
 import getBusAndStationData from "../api/busAndStationDataFetch";
 import Loading from "../components/Loading/Loading";
-import { Container } from "./ViewStyle";
+import { Container, ViewWrap } from "./ViewStyle";
 import { isMapPrintContext } from "../App";
 import StationLine from "../components/Map/StationLine/StationLine";
 import { connect } from "react-redux";
@@ -14,6 +14,9 @@ export const busStationPosContext = React.createContext();
 
 // InfoWindow 열고 닫는 state 전달하는 contextAPI
 export const isInfoWindowVisibleContext = React.createContext();
+
+// // 클릭한 정류장의 도착 정보 state 전달하는 contextAPI
+export const clickedStationInfoContext = React.createContext();
 
 // 5511번 버스 페이지
 function View5511Bus({
@@ -36,6 +39,9 @@ function View5511Bus({
 
   // InfoWindow 열고 닫는 state
   const [isInfoWindowVisible, setIsInfoWindowVisible] = useState(false);
+
+  // 클릭한 정류장의 도착 정보 state
+  const [clickedStationInfo, setclickedStationInfo] = useState([]);
 
   // 버스 위치 정보 데이터 fetching 함수
   const getData = () => {
@@ -72,7 +78,7 @@ function View5511Bus({
   }, []);
 
   return (
-    <Container style={{ overflow: "hidden" }}>
+    <Container>
       {" "}
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
       <Loading display={isMapPrint ? "none" : "block"} />
@@ -85,11 +91,16 @@ function View5511Bus({
           <isInfoWindowVisibleContext.Provider
             value={[isInfoWindowVisible, setIsInfoWindowVisible]}
           >
-            {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-            <div style={{ display: "flex" }}>
-              <Map getData={getData}></Map>
-              {isMapPrint ? <StationLine /> : <></>}
-            </div>
+            <clickedStationInfoContext.Provider
+              value={[clickedStationInfo, setclickedStationInfo]}
+            >
+              {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+              <ViewWrap>
+                <Map getData={getData}></Map>
+                {isMapPrint ? <StationLine /> : <></>}
+                {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+              </ViewWrap>
+            </clickedStationInfoContext.Provider>
           </isInfoWindowVisibleContext.Provider>
         </busStationPosContext.Provider>
       ) : (

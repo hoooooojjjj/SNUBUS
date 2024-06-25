@@ -32,6 +32,9 @@ export const LogoStyle = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 40,
   },
+  "@media(max-width: 425px)": {
+    fontSize: 30,
+  },
 });
 
 // blackWave 애니메이션 정의
