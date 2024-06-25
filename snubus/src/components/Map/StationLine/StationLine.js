@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   BtnWrap,
   Container,
@@ -14,8 +14,13 @@ import {
 import TimeLines from "./TimeLine/TimeLines";
 import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
+import busInfo from "../../../util/busInfo";
+import { useLocation } from "react-router-dom";
 
 const StationLine = ({ bus_stationData }) => {
+  // 현재 페이지 경로 (버스 번호)
+  const location = useLocation().pathname.split("/")[1];
+
   // 버스 개수 state
   const busLength = bus_stationData.busDataReducer.busInfo.length;
 
@@ -40,15 +45,22 @@ const StationLine = ({ bus_stationData }) => {
     setIsMoreBtnClicked(!isMoreBtnClicked);
   };
 
+  // 현재 페이지의 버스 정보만 필터링
+  const curBusInfo = busInfo.map((bus) => {
+    return bus.buslist.filter((bus) => bus.num === location);
+  })[0][0];
+
   return (
     <Container>
       <StationLineWrap>
         <StationLineInfoWrap>
           <InfoTextWrap>
-            <InfoTextHeader>신림2동차고지 ↔️ 중앙대학교</InfoTextHeader>
-            <InfoText>첫차 05:30 | 막차 23:30</InfoText>
+            <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
             <InfoText>
-              배차간격 7분 |{" "}
+              첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
+            </InfoText>
+            <InfoText>
+              배차간격 {curBusInfo.inteval} |{" "}
               {busLength > 0 ? `현재 ${busLength}대 운행중` : "운행종료"}
             </InfoText>
           </InfoTextWrap>
