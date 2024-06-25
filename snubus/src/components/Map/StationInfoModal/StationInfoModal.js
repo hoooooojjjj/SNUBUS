@@ -35,10 +35,15 @@ const StationInfoModal = ({ curStation }) => {
     }
   };
 
-  // 버스 도착 예정 시간이 "출발대기"나 "운행종료"가 아닌지 확인
-  const isBusComing =
+  // 첫번째 버스 도착 예정 시간이 "출발대기"나 "운행종료"가 아닌지 확인
+  const isFirstBusComing =
     curStation[0].arrmsg1 !== "출발대기" &&
     curStation[0].arrmsg1 !== "운행종료";
+
+  // 첫번째 버스 도착 예정 시간이 "출발대기"나 "운행종료"가 아닌지 확인
+  const isSecondBusComing =
+    curStation[0].arrmsg2 !== "출발대기" &&
+    curStation[0].arrmsg2 !== "운행종료";
 
   if (!isInfoWindowVisible) {
     return null;
@@ -67,12 +72,14 @@ const StationInfoModal = ({ curStation }) => {
       </Text>
       <Text>
         1.{" "}
-        <span style={isBusComing ? { color: "#0c8ce9" } : { color: "#545252" }}>
+        <span
+          style={isFirstBusComing ? { color: "#0c8ce9" } : { color: "#545252" }}
+        >
           {curStation[0].arrmsg1}
         </span>
       </Text>
       <Text style={{ color: "#545252" }}>
-        {isBusComing
+        {isFirstBusComing
           ? `(${switchBusType(curStation[0].busType1)}, ${switchReride_Num(
               curStation[0].reride_Num1
             )})`
@@ -80,12 +87,16 @@ const StationInfoModal = ({ curStation }) => {
       </Text>
       <Text>
         2.{" "}
-        <span style={isBusComing ? { color: "#0c8ce9" } : { color: "#545252" }}>
+        <span
+          style={
+            isSecondBusComing ? { color: "#0c8ce9" } : { color: "#545252" }
+          }
+        >
           {curStation[0].arrmsg2}
         </span>
       </Text>
       <Text style={{ color: "#545252" }}>
-        {isBusComing
+        {isSecondBusComing
           ? `(${switchBusType(curStation[0].busType2)}, ${switchReride_Num(
               curStation[0].reride_Num2
             )})`
