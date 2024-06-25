@@ -9,14 +9,7 @@ import { connect } from "react-redux";
 
 const BUSROUTEID_5511 = "100100250";
 
-// 버스 정류장 좌표 state 전달하는 contextAPI
-export const busStationPosContext = React.createContext();
-
-// InfoWindow 열고 닫는 state 전달하는 contextAPI
-export const isInfoWindowVisibleContext = React.createContext();
-
-// // 클릭한 정류장의 도착 정보 state 전달하는 contextAPI
-export const clickedStationInfoContext = React.createContext();
+export const ViewContext = React.createContext();
 
 // 5511번 버스 페이지
 function View5511Bus({
@@ -43,15 +36,15 @@ function View5511Bus({
   // 클릭한 정류장의 도착 정보 state
   const [clickedStationInfo, setclickedStationInfo] = useState([]);
 
-  // 버스 위치 정보 데이터 fetching 함수
+  // 버스 / 정류장 정보 데이터 fetching 함수
   const getData = () => {
     // 새로운 AbortController 객체 인터페이스를 생성
     const controller = new AbortController();
     // DOM 요청과 통신하거나 취소하는데 사용되는 AbortSignal 객체 인터페이스
     const signal = controller.signal;
 
-    // getBusData로 버스/정류장 데이터 요청
-    const getData = async () => {
+    // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
+    const getBSData = async () => {
       const busData = await getBusAndStationData(BUSROUTEID_5511, signal);
       // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
       getBuspostionXY(busData.busData.busPositionXY);
@@ -64,7 +57,8 @@ function View5511Bus({
       getStationToEnd(busData.stationData.DirectionToEnd);
     };
 
-    getData();
+    // 데이터 요청 함수 실행
+    getBSData();
 
     return () => {
       // DOM 요청이 완료되기 전에 취소한다. 이를 통해 fetch 요청, 모든 응답 Body 소비, 스트림을 취소할 수 있다.
@@ -85,24 +79,23 @@ function View5511Bus({
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
       {/* 이렇게 해서 완전히 카카오맵이 다 그려지기 전까지는 로딩창을 띄우게 만듬 */}
       {bus_stationData.busDataReducer.busPositionXY ? (
-        <busStationPosContext.Provider
-          value={[busStationPos, setBusStationPos]}
+        <ViewContext.Provider
+          value={{
+            busStationPos,
+            setBusStationPos,
+            isInfoWindowVisible,
+            setIsInfoWindowVisible,
+            clickedStationInfo,
+            setclickedStationInfo,
+          }}
         >
-          <isInfoWindowVisibleContext.Provider
-            value={[isInfoWindowVisible, setIsInfoWindowVisible]}
-          >
-            <clickedStationInfoContext.Provider
-              value={[clickedStationInfo, setclickedStationInfo]}
-            >
-              {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-              <ViewWrap>
-                <Map getData={getData}></Map>
-                {isMapPrint ? <StationLine /> : <></>}
-                {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
-              </ViewWrap>
-            </clickedStationInfoContext.Provider>
-          </isInfoWindowVisibleContext.Provider>
-        </busStationPosContext.Provider>
+          {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+          <ViewWrap>
+            <Map getData={getData}></Map>
+            {isMapPrint ? <StationLine /> : <></>}
+            {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+          </ViewWrap>
+        </ViewContext.Provider>
       ) : (
         // 데이터가 안 들어왔을 때
         <></>

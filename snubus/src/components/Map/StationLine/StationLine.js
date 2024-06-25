@@ -15,30 +15,32 @@ import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
 import { useLocation } from "react-router-dom";
-import {
-  clickedStationInfoContext,
-  isInfoWindowVisibleContext,
-} from "../../../routes/View5511Bus";
+import { ViewContext } from "../../../routes/View5511Bus";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
 const StationLine = ({ bus_stationData }) => {
   // 현재 페이지 경로 (버스 번호)
   const location = useLocation().pathname.split("/")[1];
 
-  // 버스 개수 state
-  const busLength = bus_stationData.busDataReducer.busInfo.length;
+  /* state 코드 */
 
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
 
-  const [clickedStationInfo, setclickedStationInfo] = useContext(
-    clickedStationInfoContext
-  );
+  /* Context API 코드 */
 
-  // infoWindow 열고 닫는 context
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
-    isInfoWindowVisibleContext
-  );
+  // view 페이지에서 받아온 context
+  const {
+    // infoWindow 열고 닫는 context
+    isInfoWindowVisible,
+    // 클릭한 버스 정류장 정류 받아오는 context
+    clickedStationInfo,
+  } = useContext(ViewContext);
+
+  /* redux 코드 */
+
+  // 버스 개수 state
+  const busLength = bus_stationData.busDataReducer.busInfo.length;
 
   // 중앙대학교 방면 버튼을 클릭하면 중앙대학교 방면 정류장 라인으로 전환
   const switchDirectionToStart = () => {

@@ -1,20 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle, BusImg, TimeLinesWrap } from "../StationLineStyle";
-import {
-  busStationPosContext,
-  isInfoWindowVisibleContext,
-} from "../../../../routes/View5511Bus";
+import { ViewContext } from "../../../../routes/View5511Bus";
 import { stationList_end, stationList_start } from "./StationList";
 import { connect } from "react-redux";
 
 function TimeLines({ isStart, bus_stationData }) {
   /* state 코드 */
-
-  // 클릭한 버스 정류장 좌표 전달하는 context
-  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
-
-  // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
-  const busesInStation = bus_stationData.busDataReducer.busPositionInStation;
 
   // 버스 정류장 라인 분할한 배열 저장하는 state
   const [busStationSlice, setBusStationSlice] = useState([]);
@@ -37,10 +28,19 @@ function TimeLines({ isStart, bus_stationData }) {
     },
   });
 
-  // infoWindow 열고 닫는 context
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
-    isInfoWindowVisibleContext
-  );
+  /* Context API 코드 */
+
+  // view 페이지에서 받아온 context
+  const {
+    // 클릭한 버스 정류장 좌표 전달하는 context
+    setBusStationPos,
+    // infoWindow 열고 닫는 context
+    setIsInfoWindowVisible,
+  } = useContext(ViewContext);
+
+  /* redux 코드 */
+  // snubus 정류장 라인에 걸쳐 있는(정류장 지나고 있는) 버스들 배열
+  const busesInStation = bus_stationData.busDataReducer.busPositionInStation;
 
   /* 함수 코드 */
 

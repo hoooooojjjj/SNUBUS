@@ -8,11 +8,7 @@ import {
   UpdateWrap,
 } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
-import {
-  busStationPosContext,
-  clickedStationInfoContext,
-  isInfoWindowVisibleContext,
-} from "../../routes/View5511Bus";
+import { ViewContext } from "../../routes/View5511Bus";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { route_start, route_end } from "../../util/busStationPos";
@@ -48,20 +44,19 @@ function Map({ getData, bus_stationData }) {
 
   /* Context API 코드 */
 
-  // 카카오맵이 화면에 표시됐는지 판별하는 state
+  // 카카오맵이 화면에 표시됐는지 판별하는 context
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
-  // 클릭한 버스 정류장 좌표 받아오는 context
-  const [busStationPos, setBusStationPos] = useContext(busStationPosContext);
-
-  // infoWindow 열고 닫는 context
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
-    isInfoWindowVisibleContext
-  );
-
-  const [clickedStationInfo, setclickedStationInfo] = useContext(
-    clickedStationInfoContext
-  );
+  // view 페이지에서 받아온 context
+  const {
+    // 클릭한 버스 정류장 좌표 받아오는 context
+    busStationPos,
+    // infoWindow 열고 닫는 context
+    isInfoWindowVisible,
+    // 클릭한 버스 정류장 정류 받아오는 context
+    clickedStationInfo,
+    setclickedStationInfo,
+  } = useContext(ViewContext);
 
   /* redux 코드 */
 

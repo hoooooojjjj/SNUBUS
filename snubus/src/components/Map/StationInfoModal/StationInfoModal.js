@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Container, CloseBtn, Header, Text } from "./StationInfoModalStyle";
-import { isInfoWindowVisibleContext } from "../../../routes/View5511Bus";
+import { ViewContext } from "../../../routes/View5511Bus";
 import { CaretDownOutlined } from "@ant-design/icons";
 
 const StationInfoModal = ({ curStation }) => {
-  // infoWindow 열고 닫는 context
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useContext(
-    isInfoWindowVisibleContext
-  );
+  // view 페이지에서 받아온 context
+  const {
+    // infoWindow 열고 닫는 context
+    isInfoWindowVisible,
+    setIsInfoWindowVisible,
+  } = useContext(ViewContext);
 
   const switchBusType = (busType) => {
     switch (busType) {
