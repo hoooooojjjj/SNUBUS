@@ -78,7 +78,11 @@ const StationLine = ({ bus_stationData }) => {
               </InfoText>
               <InfoText>
                 <strong>
-                  {busLength > 0 ? `현재 ${busLength}대 운행중` : "운행종료"}
+                  {busLength > 0 ? (
+                    `현재 ${busLength}대 운행중`
+                  ) : (
+                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                  )}
                 </strong>
               </InfoText>
             </InfoTextWrap>
@@ -88,7 +92,11 @@ const StationLine = ({ bus_stationData }) => {
               <InfoText>
                 {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
                 <strong>
-                  {busLength > 0 ? `  현재 ${busLength}대 운행중` : "운행종료"}
+                  {busLength > 0 ? (
+                    `  현재 ${busLength}대 운행중`
+                  ) : (
+                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                  )}
                 </strong>
               </InfoText>
               <InfoText>

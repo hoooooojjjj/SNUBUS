@@ -193,7 +193,7 @@ function Map({ getData, bus_stationData }) {
     const polyline = new window.kakao.maps.Polyline({
       map: map,
       path: stationPosArray,
-      strokeWeight: 8,
+      strokeWeight: 10,
       strokeColor: strokeColor,
       strokeOpacity: 0.5,
       strokeStyle: "solid",
