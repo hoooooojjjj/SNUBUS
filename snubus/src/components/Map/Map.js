@@ -13,8 +13,12 @@ import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { route_start, route_end } from "../../util/busStationPos";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 function Map({ getData, bus_stationData }) {
+  // 현재 파라미터 받아와서 버스 번호 확인
+  const { id } = useParams();
+
   // kakaomap이 있는 요소의 ref
   const kakaoMap = useRef();
 
@@ -305,11 +309,11 @@ function Map({ getData, bus_stationData }) {
       }
     }
 
-    route_start.forEach((direction) => {
+    route_start[id].forEach((direction) => {
       printPolyline(direction, map, "blue");
     });
 
-    route_end.forEach((direction) => {
+    route_end[id].forEach((direction) => {
       printPolyline(direction, map, "red");
     });
 

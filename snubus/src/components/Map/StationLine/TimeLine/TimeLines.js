@@ -3,8 +3,12 @@ import { TimelineStyle, BusImg, TimeLinesWrap } from "../StationLineStyle";
 import { ViewContext } from "../../../../routes/View";
 import { stationList_end, stationList_start } from "./StationList";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 function TimeLines({ isStart, bus_stationData }) {
+  // 현재 파라미터 받아와서 버스 번호 확인
+  const { id } = useParams();
+
   /* state 코드 */
 
   // 버스 정류장 라인 분할한 배열 저장하는 state
@@ -50,7 +54,7 @@ function TimeLines({ isStart, bus_stationData }) {
     if (e.target.className === "ant-timeline-item-content") {
       // 클릭한 버스 정류장 필터링
       const targetStation = (
-        isStart ? stationList_start : stationList_end
+        isStart ? stationList_start[id] : stationList_end[id]
       ).filter(
         // 버스 정류장 리스트 중 클릭한 요소의 stid와 stid와 같은 것으로 필터링
         (station) =>
@@ -98,7 +102,7 @@ function TimeLines({ isStart, bus_stationData }) {
   // 정류장 라인을 두 개씩 쪼개서 버스 위치를 표시
   useEffect(() => {
     // 어떤 방면 정류장인지
-    const stationList = isStart ? stationList_start : stationList_end;
+    const stationList = isStart ? stationList_start[id] : stationList_end[id];
 
     // 버스 정류장 라인 분할하는 배열 담기 위한 변수
     const newBuseStationSlice = [];
@@ -129,13 +133,13 @@ function TimeLines({ isStart, bus_stationData }) {
 
     // 중앙대학교 방면 지나가고 있는 버스가 현재 어떤 snubus 정류장에 위치하는지 찾기
     const passingBus_start = findPassingBusWithStationId(
-      stationList_start,
+      stationList_start[id],
       busesInStation.DirectionToStart
     );
 
     // 신림2동차고지 방면 지나가고 있는 버스의 현재 어떤 snubus 정류장에 위치하는지 찾기
     const passingBus_end = findPassingBusWithStationId(
-      stationList_end,
+      stationList_end[id],
       busesInStation.DirectionToEnd
     );
 

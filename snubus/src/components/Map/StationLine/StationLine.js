@@ -14,7 +14,7 @@ import TimeLines from "./TimeLine/TimeLines";
 import { CheckOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
