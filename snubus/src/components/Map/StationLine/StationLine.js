@@ -100,11 +100,11 @@ const StationLine = ({ bus_stationData }) => {
         <BtnWrap>
           <StationSwitchBtn onClick={switchDirectionToStart}>
             {isStart ? <CheckOutlined style={{ marginRight: 10 }} /> : <></>}
-            중앙대학교 방면
+            {curBusInfo.btnName.start} 방면
           </StationSwitchBtn>
           <StationSwitchBtn onClick={switchDirectionToEnd}>
             {isStart ? <></> : <CheckOutlined style={{ marginRight: 10 }} />}
-            신림2동차고지 방면
+            {curBusInfo.btnName.end} 방면
           </StationSwitchBtn>
         </BtnWrap>
         <LineWrap>

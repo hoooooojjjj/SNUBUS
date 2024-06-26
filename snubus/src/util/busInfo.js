@@ -9,6 +9,10 @@ const busInfo = [
         firstTm: "05:30",
         lastTm: "23:30",
         interval: "평일 7분, 토요일 11분, 휴일 13분",
+        btnName: {
+          start: "중앙대학교",
+          end: "신림2동차고지",
+        },
       },
       {
         num: "5513",
@@ -16,6 +20,10 @@ const busInfo = [
         firstTm: "05:30",
         lastTm: "23:30",
         interval: "평일 11분, 토요일 11분, 휴일 11분",
+        btnName: {
+          start: "벽산블루밍아파트",
+          end: "서울대학교",
+        },
       },
       {
         num: "5516",
@@ -23,6 +31,10 @@ const busInfo = [
         firstTm: "05:00",
         lastTm: "23:00",
         interval: "평일 5분, 토요일 6분, 휴일 6분",
+        btnName: {
+          start: "노량진역",
+          end: "신림2동차고지",
+        },
       },
     ],
   },
@@ -36,6 +48,10 @@ const busInfo = [
         firstTm: "06:00",
         lastTm: "23:55",
         interval: "5분",
+        btnName: {
+          start: "서울대신공학관",
+          end: "낙성대역",
+        },
       },
     ],
   },
