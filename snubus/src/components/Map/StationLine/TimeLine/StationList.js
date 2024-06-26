@@ -106,7 +106,7 @@ export const stationList_start = {
       children: "건설환경종합연구소앞",
       stid: 110000654,
       color: "blue",
-      position: [37.44720025, 126.9496964],
+      position: [37.44716916, 126.9497987],
       dot: (
         <DownCircleOutlined
           style={{
@@ -416,7 +416,7 @@ export const stationList_start = {
       children: "경영대.행정대학원",
       stid: 120000180,
       color: "blue",
-      position: [37.466135, 126.952053],
+      position: [37.46603, 126.952132],
       dot: (
         <DownCircleOutlined
           style={{
@@ -428,9 +428,9 @@ export const stationList_start = {
     {
       id: 8,
       children: "서울대학교",
-      stid: 120000400,
+      stid: 120000029,
       color: "blue",
-      position: [37.46685724, 126.9489516],
+      position: [37.46685391, 126.9488427043],
       dot: (
         <DownCircleOutlined
           style={{
@@ -470,7 +470,7 @@ export const stationList_start = {
     {
       id: 11,
       children: "관악구청",
-      stid: 120000398,
+      stid: 120000031,
       color: "blue",
       position: [37.47825141, 126.9524998],
       dot: (
@@ -688,7 +688,7 @@ export const stationList_end = {
       children: "건설환경종합연구소앞",
       stid: 110000654,
       color: "blue",
-      position: [37.44720025, 126.9496964],
+      position: [37.44716916, 126.9497987],
       dot: (
         <DownCircleOutlined
           style={{
@@ -996,7 +996,7 @@ export const stationList_end = {
     {
       id: 42,
       children: "건설환경종합연구소",
-      stid: 120900165,
+      stid: 110000654,
       color: "blue",
       position: [37.44716916, 126.9497987],
       dot: (
