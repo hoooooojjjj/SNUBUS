@@ -1,12 +1,12 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusAndStationData(busRouteId, signal) {
+export default async function getBusAndStationData(busClassification, signal) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
   const getBusData = async () => {
     // 데이터 요청
     try {
       const response = await fetch(
         `http://localhost:8080/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busRouteId}&resultType=json`
+          `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`,
         {
           cache: "no-cache",
@@ -15,7 +15,7 @@ export default async function getBusAndStationData(busRouteId, signal) {
       );
 
       // 서버에서 json으로 응답 받기
-      const busPosData = await response.json();
+      const busData = await response.json();
 
       // 데이터 요청 횟수 초과 시
       if (response.status === 429) {
@@ -40,12 +40,12 @@ export default async function getBusAndStationData(busRouteId, signal) {
         // 데이터가 정상적으로 처리되었다면
       } else if (response.status === 200) {
         // 각 버스의 위치 좌표 리턴
-        const getPosBuses = busPosData.map((bus) => {
+        const getPosBuses = busData.map((bus) => {
           return [bus.gpsY, bus.gpsX];
         });
 
         // 각 버스의 정보 (버스 ID, 차량번호, 차량유형, 제공시간)
-        const getBusInfo = busPosData.map((bus) => {
+        const getBusInfo = busData.map((bus) => {
           return {
             vehId: bus.vehId,
             plainNo: bus.plainNo,
@@ -55,15 +55,21 @@ export default async function getBusAndStationData(busRouteId, signal) {
         });
 
         // 중앙대학교 방면 snubus 정류장 지나는 버스만 추출
-        const busStationDirectionToStart = busPosData.filter(
+        const busStationDirectionToStart = busData.filter(
           (busPos) =>
-            parseInt(busPos.sectOrd) >= 4 && parseInt(busPos.sectOrd) <= 25
+            parseInt(busPos.sectOrd) >=
+              busClassification.NumberOfStations.start[0] &&
+            parseInt(busPos.sectOrd) <=
+              busClassification.NumberOfStations.start[1]
         );
 
         // 신림2동차고지 방면 snubus 정류장 지나는 버스만 출력
-        const busStationDirectionToEnd = busPosData.filter(
+        const busStationDirectionToEnd = busData.filter(
           (busPos) =>
-            parseInt(busPos.sectOrd) >= 51 && parseInt(busPos.sectOrd) <= 74
+            parseInt(busPos.sectOrd) >=
+              busClassification.NumberOfStations.end[0] &&
+            parseInt(busPos.sectOrd) <=
+              busClassification.NumberOfStations.end[1]
         );
 
         return {
@@ -98,22 +104,26 @@ export default async function getBusAndStationData(busRouteId, signal) {
     try {
       const response = await fetch(
         `http://localhost:8080/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=100100250&resultType=json`
+          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`
       );
 
       // 서버에서 json으로 응답 받기
-      const busStationInfos = await response.json();
+      const busStationData = await response.json();
 
       if (response.status === 200) {
         // 중앙대학교 방면 정류장들 관련 정보 필터링
-        const busStationName_start = busStationInfos.filter(
-          (busStationInfo, i) => i >= 4 && i <= 25
+        const busStationName_start = busStationData.filter(
+          (busStationInfo, i) =>
+            i >= busClassification.NumberOfStations.start[0] &&
+            i <= busClassification.NumberOfStations.start[1]
         );
 
         // 신림2동차고지 방면 정류장들 관련 정보 필터링
-        const busStationName_end = busStationInfos.filter(
-          (busStationInfo, i) => i >= 51 && i <= 74
+        const busStationName_end = busStationData.filter(
+          (busStationInfo, i) =>
+            i >= busClassification.NumberOfStations.end[0] &&
+            i <= busClassification.NumberOfStations.end[1]
         );
 
         // 각 방면 정류장 정보 리턴

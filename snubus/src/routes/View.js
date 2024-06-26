@@ -22,8 +22,11 @@ function View5511Bus({
   // 현재 파라미터 받아와서 버스 번호 확인
   const { id } = useParams();
 
-  // 버스 노선 ID state
-  const [busRouteId, setBusRouteId] = useState("");
+  // 버스 분류 state
+  const [busClassification, setBusClassification] = useState({
+    routeId: "",
+    NumberOfStations: [],
+  });
 
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
@@ -41,20 +44,44 @@ function View5511Bus({
   // 클릭한 정류장의 도착 정보 state
   const [clickedStationInfo, setclickedStationInfo] = useState([]);
 
-  // 현재 라우트에 따라 버스 노선 ID 설정
+  // 현재 라우트에 따라 버스 분류해서 해당 버스 번호 정보 요청
   useEffect(() => {
     switch (id) {
       case "5511":
-        setBusRouteId("100100250");
+        setBusClassification({
+          routeId: "100100250",
+          NumberOfStations: {
+            start: [4, 25],
+            end: [51, 74],
+          },
+        });
         break;
       case "5513":
-        setBusRouteId("100100251");
+        setBusClassification({
+          routeId: "100100251",
+          NumberOfStations: {
+            start: [0, 12],
+            end: [31, 43],
+          },
+        });
         break;
       case "5516":
-        setBusRouteId("100100253");
+        setBusClassification({
+          routeId: "100100253",
+          NumberOfStations: {
+            start: [3, 18],
+            end: [55, 72],
+          },
+        });
         break;
       case "관악02":
-        setBusRouteId("120900008");
+        setBusClassification({
+          routeId: "120900008",
+          NumberOfStations: {
+            start: [0, 21],
+            end: [2, 38],
+          },
+        });
         break;
     }
   }, []);
@@ -68,7 +95,7 @@ function View5511Bus({
 
     // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
     const getBSData = async () => {
-      const busData = await getBusAndStationData(busRouteId, signal);
+      const busData = await getBusAndStationData(busClassification, signal);
       // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
       getBuspostionXY(busData.busData.busPositionXY);
       getBusInfo(busData.busData.busInfo);
@@ -91,10 +118,10 @@ function View5511Bus({
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
-    if (busRouteId) {
+    if (busClassification.routeId) {
       getData();
     }
-  }, [busRouteId]);
+  }, [busClassification]);
 
   return (
     <Container>
