@@ -43,12 +43,22 @@ export const Label = styled.label({
 export const Input = styled.input({
   fontSize: 18,
   width: "70%",
+  backgroundColor: "#ededed",
+  "&::placeholder": {
+    color: "#999999",
+    paddingLeft: 5,
+  },
 });
 
 export const Textarea = styled.textarea({
   fontSize: 18,
   width: "80%",
   height: 300,
+  backgroundColor: "#ededed",
+  "&::placeholder": {
+    color: "#999999",
+    paddingLeft: 5,
+  },
 });
 
 export const ImgInput = styled.input({
