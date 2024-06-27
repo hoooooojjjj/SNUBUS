@@ -90,6 +90,7 @@ function Map({ getData, bus_stationData }) {
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
+      alert("현재 위치를 표시하기 위해 위치 정보 제공을 허용해주세요");
     }
   };
 
@@ -329,7 +330,7 @@ function Map({ getData, bus_stationData }) {
       if (isPolylinVisible.visible) {
         //   좌표 폴리라인 생성
         route_start[id].forEach((direction) => {
-          printPolyline(direction, map, "blue");
+          printPolyline(direction, map, "#0c8ce9");
         });
       }
     } else {
@@ -337,7 +338,7 @@ function Map({ getData, bus_stationData }) {
       if (isPolylinVisible.visible) {
         //  폴리라인 생성
         route_end[id].forEach((direction) => {
-          printPolyline(direction, map, "red");
+          printPolyline(direction, map, "#5D56E3");
         });
       }
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LoadingContainer,
   LoadingWrap,
@@ -19,6 +19,9 @@ const SNUTMI = [
 ];
 
 function Loading({ display }) {
+  const [randomIndex, setRandomIndex] = useState(
+    Math.floor(Math.random() * (SNUTMI.length - 1))
+  );
   return (
     <LoadingContainer display={display}>
       <LoadingWrap>
@@ -29,7 +32,7 @@ function Loading({ display }) {
         <TMI>
           <strong>알고 계셨나요 ?</strong>
         </TMI>
-        <TMI>"{SNUTMI[Math.floor(Math.random() * (SNUTMI.length - 1))]}"</TMI>
+        <TMI>"{SNUTMI[randomIndex]}"</TMI>
       </LoadingWrap>
     </LoadingContainer>
   );
