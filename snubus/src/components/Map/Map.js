@@ -124,6 +124,19 @@ function Map({ getData, bus_stationData }) {
       };
       const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+      // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+      const mapTypeControl = new window.kakao.maps.MapTypeControl();
+
+      // 지도에 지도타입 컨트롤을 추가
+      // window.kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+      map.addControl(mapTypeControl, window.kakao.maps.ControlPosition.TOPLEFT);
+
+      // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
+      const zoomControl = new window.kakao.maps.ZoomControl();
+
+      // 지도에 줌 컨트롤을 추가
+      map.addControl(zoomControl, window.kakao.maps.ControlPosition.LEFT);
+
       listenIdleEvent_AndSetMapInfo(map);
 
       // 마커 생성
@@ -289,7 +302,7 @@ function Map({ getData, bus_stationData }) {
       );
 
       // 커스텀 오버레이를 생성
-      var customOverlay = new window.kakao.maps.CustomOverlay({
+      const customOverlay = new window.kakao.maps.CustomOverlay({
         position: OverlayPosition,
         content: content,
       });
