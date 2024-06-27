@@ -29,7 +29,9 @@ export default async function getBusAndStationData(
 
       // 데이터 요청 횟수 초과 시
       if (response.status === 429) {
-        console.log("데이터 요청 횟수를 초과했습니다");
+        alert(
+          "금일 데이터 요청 횟수를 초과했습니다. 내일 다시 이용해주세요. 죄송합니다."
+        );
         // 빈 배열 리턴
         return {
           busPos: [],
@@ -39,7 +41,6 @@ export default async function getBusAndStationData(
         };
         // 운행 중인 버스가 없을 때
       } else if (response.status === 503) {
-        console.log("운행 중인 버스가 없습니다.");
         //빈 배열 리턴
         return {
           busPos: [],
@@ -92,6 +93,9 @@ export default async function getBusAndStationData(
           DirectionToEnd: busStationDirectionToEnd,
         };
       } else {
+        alert(
+          "예기치못한 오류로 인해 버스 정보가 들어오지 못했습니다. 다시 시도해주세요."
+        );
         return {
           busPos: [],
           busInfo: [],
@@ -149,7 +153,15 @@ export default async function getBusAndStationData(
 
         // 각 방면 정류장 정보 리턴
         return [busStationName_start, busStationName_end];
+      } else if (response.status === 429) {
+        alert(
+          "금일 데이터 요청 횟수를 초과했습니다. 내일 다시 이용해주세요. 죄송합니다."
+        );
+        return [];
       } else {
+        alert(
+          "예기치못한 오류로 인해 버스 정보가 들어오지 못했습니다. 다시 시도해주세요."
+        );
         return [];
       }
     } catch (error) {

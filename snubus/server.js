@@ -89,8 +89,20 @@ app.get("/proxy", (req, res) => {
           "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"
         )
       ) {
-        // 정류장 관련 정보 배열 send
-        res.status(200).send(JSON.parse(body).msgBody.itemList);
+        // 에러처리
+        switch (JSON.parse(body).msgHeader.headerMsg) {
+          case "Key인증실패: LIMITED NUMBER OF SERVICE REQUESTS EXCEEDS ERROR.[인증모듈 에러코드(22)]":
+            // 데이터 요청 횟수 초과시 429 에러
+            res.status(429).send("Too many requests, please try again later.");
+            break;
+          case "정상적으로 처리되었습니다.":
+            // 정상적으로 처리되면
+            // 정류장 관련 정보 배열 send
+            res.status(200).send(JSON.parse(body).msgBody.itemList);
+            break;
+          default:
+            break;
+        }
       }
     }
   );
