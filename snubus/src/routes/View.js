@@ -79,7 +79,7 @@ function View5511Bus({
           routeId: "120900008",
           NumberOfStations: {
             start: [0, 21],
-            end: [2, 38],
+            end: [22, 38],
           },
         });
         break;

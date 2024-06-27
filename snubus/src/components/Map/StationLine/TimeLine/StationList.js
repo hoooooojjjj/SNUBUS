@@ -722,6 +722,316 @@ export const stationList_start = {
       ),
     },
   ],
+  [`관악02`]: [
+    {
+      id: 0,
+      children: "낙성대역",
+      stid: 120900119,
+      color: "blue",
+      position: [37.47707918, 126.9619752],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 1,
+      children: "낙성대입구",
+      stid: 120900183,
+      color: "blue",
+      position: [37.4775943, 126.9591814],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 2,
+      children: "인헌초등학교",
+      stid: 120900184,
+      color: "blue",
+      position: [37.47652501, 126.9589641],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 3,
+      children: "낙성대현대아파트",
+      stid: 120900131,
+      color: "blue",
+      position: [37.47442505, 126.9590657],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 4,
+      children: "낙성대공원.관악복합평생교육센터",
+      stid: 120900136,
+      color: "blue",
+      position: [37.47170216, 126.9584072],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 5,
+      children: "서울융합과학교육원",
+      stid: 120900140,
+      color: "blue",
+      position: [37.46956436, 126.9579845],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 6,
+      children: "호암교수회관",
+      stid: 120900185,
+      color: "blue",
+      position: [37.46845638, 126.9583385],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 7,
+      children: "인헌아파트",
+      stid: 120900090,
+      color: "blue",
+      position: [37.46802075, 126.9612872],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 8,
+      children: "호암교수회관",
+      stid: 120900153,
+      color: "blue",
+      position: [37.46825784, 126.9578128],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 9,
+      children: "가족생활동",
+      stid: 120900157,
+      color: "blue",
+      position: [37.46636116, 126.9576895],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 10,
+      children: "서울대후문.연구공원",
+      stid: 120900159,
+      color: "blue",
+      position: [37.46510428, 126.9577778],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 11,
+      children: "학부생활관",
+      stid: 120900161,
+      color: "blue",
+      position: [37.46314183, 126.9577174],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 12,
+      children: "대학원생활관",
+      stid: 120900162,
+      color: "blue",
+      position: [37.46197275, 126.9567821],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 13,
+      children: "기숙사삼거리",
+      stid: 120900163,
+      color: "blue",
+      position: [37.46046371, 126.956766],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 14,
+      children: "노천강당",
+      stid: 120900172,
+      color: "blue",
+      position: [37.4587949, 126.955328],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 15,
+      children: "공동기기원",
+      stid: 120000186,
+      color: "blue",
+      position: [37.45511895, 126.9544666],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 16,
+      children: "유전공학연구소.반도체공동연구소",
+      stid: 120000187,
+      color: "blue",
+      position: [37.45374769, 126.9535516],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 17,
+      children: "에너지자원연구소",
+      stid: 120000188,
+      color: "blue",
+      position: [37.45359525, 126.9522142],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 18,
+      children: "신소재",
+      stid: 120000172,
+      color: "blue",
+      position: [37.45349631, 126.9502262],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 19,
+      children: "제2파워플랜트",
+      stid: 120900164,
+      color: "blue",
+      position: [37.44919617, 126.9495359],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 20,
+      children: "건설환경종합연구소",
+      stid: 110000654,
+      color: "blue",
+      position: [37.44720025, 126.9496964],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 21,
+      children: "제2공학관",
+      stid: 120000173,
+      color: "blue",
+      position: [37.4487952, 126.9520773],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+  ],
 };
 
 // 신림2동차고지 방면 정류장 리스트
@@ -1493,6 +1803,246 @@ export const stationList_end = {
       stid: 120000041,
       color: "blue",
       position: [37.47055199, 126.944133],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+  ],
+  [`관악02`]: [
+    {
+      id: 22,
+      children: "유회진학술정보관.제1공학관",
+      stid: 120000174,
+      color: "blue",
+      position: [37.451283, 126.952595],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 23,
+      children: "유전공학연구소.반도체공동연구소",
+      stid: 120000175,
+      color: "blue",
+      position: [37.45401037, 126.9539021],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 24,
+      children: "교수회관입구",
+      stid: 120000176,
+      color: "blue",
+      position: [37.45607086, 126.9553488],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 25,
+      children: "노천강당",
+      stid: 120900172,
+      color: "blue",
+      position: [37.4587949, 126.955328],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 26,
+      children: "관악사삼거리",
+      stid: 120000177,
+      color: "blue",
+      position: [37.46078806, 126.9567263],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 27,
+      children: "대학원생활관",
+      stid: 120900027,
+      color: "blue",
+      position: [37.46233612, 126.9573923],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 28,
+      children: "학부생활관",
+      stid: 120900196,
+      color: "blue",
+      position: [37.46375062, 126.9580725],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 29,
+      children: "BK국제관",
+      stid: 120900009,
+      color: "blue",
+      position: [37.4654239, 126.9578693],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 30,
+      children: "가족생활동",
+      stid: 120900003,
+      color: "blue",
+      position: [37.46697675, 126.9577738],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 31,
+      children: "호암교수회관",
+      stid: 120900185,
+      color: "blue",
+      position: [37.46845638, 126.9583385],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 32,
+      children: "인헌아파트",
+      stid: 120900090,
+      color: "blue",
+      position: [37.46802075, 126.9612872],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 33,
+      children: "서울융합과학교육원",
+      stid: 120900095,
+      color: "blue",
+      position: [37.46872249, 126.9579992],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 34,
+      children: "낙성대공원.관악복합평생교육센터",
+      stid: 120900181,
+      color: "blue",
+      position: [37.4722001, 126.9587715],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 35,
+      children: "낙성대현대아파트",
+      stid: 120900102,
+      color: "blue",
+      position: [37.47487295, 126.9591501],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 36,
+      children: "인헌초등학교",
+      stid: 120900182,
+      color: "blue",
+      position: [37.47658776, 126.9591594],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 37,
+      children: "낙성대입구",
+      stid: 120900110,
+      color: "blue",
+      position: [37.4775169, 126.9594607],
+      dot: (
+        <DownCircleOutlined
+          style={{
+            fontSize: "16px",
+          }}
+        />
+      ),
+    },
+    {
+      id: 38,
+      children: "낙성대역",
+      stid: 120900119,
+      color: "blue",
+      position: [37.47707918, 126.9619752],
       dot: (
         <DownCircleOutlined
           style={{
