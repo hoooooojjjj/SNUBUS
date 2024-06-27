@@ -9,9 +9,10 @@ import {
   InfoTextWrap,
   InfoText,
   InfoTextHeader,
+  PolylineBtn,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, FundOutlined, StockOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
 import { useParams } from "react-router-dom";
@@ -33,8 +34,12 @@ const StationLine = ({ bus_stationData }) => {
   const {
     // infoWindow 열고 닫는 context
     isInfoWindowVisible,
+    setIsInfoWindowVisible,
     // 클릭한 버스 정류장 정류 받아오는 context
     clickedStationInfo,
+    // 폴리라인 끄고 키는 state
+    isPolylinVisible,
+    setIsPolylinVisible,
   } = useContext(ViewContext);
 
   /* redux 코드 */
@@ -45,11 +50,15 @@ const StationLine = ({ bus_stationData }) => {
   // 중앙대학교 방면 버튼을 클릭하면 중앙대학교 방면 정류장 라인으로 전환
   const switchDirectionToStart = () => {
     setIsStart(true);
+    setIsPolylinVisible({ ...isPolylinVisible, visible: false });
+    setIsInfoWindowVisible(false);
   };
 
   // 신림2동차고지 방면 버튼을 클릭하면 신림2동차고지 방면 정류장 라인으로 전환
   const switchDirectionToEnd = () => {
     setIsStart(false);
+    setIsPolylinVisible({ ...isPolylinVisible, visible: false });
+    setIsInfoWindowVisible(false);
   };
 
   // 현재 페이지의 버스 정보만 필터링
@@ -61,6 +70,14 @@ const StationLine = ({ bus_stationData }) => {
   if (window.matchMedia("(max-width: 425px)").matches && isInfoWindowVisible) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;
   }
+
+  /* 함수 코드 */
+  const onPloylineBtnClick = () => {
+    setIsPolylinVisible({
+      isStart: isStart,
+      visible: !isPolylinVisible.visible,
+    });
+  };
 
   return (
     <Container>
@@ -116,6 +133,17 @@ const StationLine = ({ bus_stationData }) => {
           </StationSwitchBtn>
         </BtnWrap>
         <LineWrap>
+          <PolylineBtn onClick={onPloylineBtnClick}>
+            {isPolylinVisible.visible ? (
+              <>
+                <FundOutlined /> 해당 방면 노선 라인 끄기
+              </>
+            ) : (
+              <>
+                <StockOutlined /> 해당 방면 노선 라인 켜기
+              </>
+            )}
+          </PolylineBtn>
           <TimeLines isStart={isStart} />
         </LineWrap>
       </StationLineWrap>

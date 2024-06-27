@@ -60,6 +60,8 @@ function Map({ getData, bus_stationData }) {
     // 클릭한 버스 정류장 정류 받아오는 context
     clickedStationInfo,
     setclickedStationInfo,
+    // 폴리라인 끄고 키는 state
+    isPolylinVisible,
   } = useContext(ViewContext);
 
   /* redux 코드 */
@@ -164,7 +166,7 @@ function Map({ getData, bus_stationData }) {
       path: stationPosArray,
       strokeWeight: 10,
       strokeColor: strokeColor,
-      strokeOpacity: 0.5,
+      strokeOpacity: 1,
       strokeStyle: "solid",
     });
 
@@ -295,9 +297,6 @@ function Map({ getData, bus_stationData }) {
       // 마커 위에 커스텀 오버레이를 표시
       customOverlay.setMap(map, stationMarker);
 
-      // 클릭한 버스 정류장 마커 print
-      stationMarker.setMap(map);
-
       // 모달에서 X버튼 클릭시 모달과 커스텀 오버레이, 마커 닫힘
       if (!isInfoWindowVisible) {
         customOverlay.setMap(null);
@@ -309,14 +308,24 @@ function Map({ getData, bus_stationData }) {
       }
     }
 
-    // 모든 경로 좌표 폴리라인 생성
-    route_start[id].forEach((direction) => {
-      printPolyline(direction, map, "blue");
-    });
-
-    route_end[id].forEach((direction) => {
-      printPolyline(direction, map, "red");
-    });
+    // 각 방면마다
+    if (isPolylinVisible.isStart) {
+      // 폴라라인 켜는 버튼 클릭하면
+      if (isPolylinVisible.visible) {
+        //   좌표 폴리라인 생성
+        route_start[id].forEach((direction) => {
+          printPolyline(direction, map, "blue");
+        });
+      }
+    } else {
+      // 폴라라인 켜는 버튼 클릭하면
+      if (isPolylinVisible.visible) {
+        //  폴리라인 생성
+        route_end[id].forEach((direction) => {
+          printPolyline(direction, map, "red");
+        });
+      }
+    }
   };
 
   // 버스제공시간 평균 계산 함수
@@ -397,7 +406,7 @@ function Map({ getData, bus_stationData }) {
       // 카카오맵 그리기
       printKakaomap();
     }
-  }, [position, curPos, busStationPos, isInfoWindowVisible]);
+  }, [position, curPos, busStationPos, isInfoWindowVisible, isPolylinVisible]);
 
   useEffect(() => {
     // Map 컴포넌트가 언마운트되면 다시 isMapPrint를 false로 바꿈

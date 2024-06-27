@@ -127,7 +127,31 @@ export const LineWrap = styled.div({
   borderTop: "1px solid white",
   overflowY: "scroll",
   marginTop: 10,
-  paddingTop: 20,
+  paddingTop: 10,
+});
+
+export const PolylineBtn = styled.button({
+  width: "100%",
+  marginBottom: 15,
+  fontSize: 18,
+  "@media(max-width: 1024px)": {
+    fontSize: 16,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 14,
+    marginTop: 5,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 13,
+    marginTop: 5,
+  },
+  background: "none",
+  color: "white",
+  "&:hover": {
+    color: "#0c8ce9",
+  },
+  border: "none",
+  borderRadius: 10,
 });
 
 // 버스 이미지

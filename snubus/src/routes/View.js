@@ -44,6 +44,12 @@ function View5511Bus({
   // 클릭한 정류장의 도착 정보 state
   const [clickedStationInfo, setclickedStationInfo] = useState([]);
 
+  // 폴리라인 끄고 키는 state
+  const [isPolylinVisible, setIsPolylinVisible] = useState({
+    isStart: true,
+    visible: false,
+  });
+
   // 현재 라우트에 따라 버스 분류해서 해당 버스 번호 정보 요청
   useEffect(() => {
     switch (id) {
@@ -139,6 +145,8 @@ function View5511Bus({
             setIsInfoWindowVisible,
             clickedStationInfo,
             setclickedStationInfo,
+            isPolylinVisible,
+            setIsPolylinVisible,
           }}
         >
           {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
