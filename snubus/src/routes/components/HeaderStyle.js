@@ -7,6 +7,9 @@ import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponents";
 export const HeaderWrap = styled.header({
   width: "100%",
   height: "10dvh",
+  "@media(max-width: 425px)": {
+    height: "5dvh",
+  },
 });
 
 // 헤더
@@ -14,6 +17,9 @@ export const Header = styled.section({
   // position: "fixed",
   width: "100%",
   height: 72,
+  "@media(max-width: 425px)": {
+    height: 36,
+  },
   ...flex("row", "normal", "center"),
 });
 
@@ -34,8 +40,8 @@ export const LogoText = styled.p({
     marginLeft: 20,
   },
   "@media(max-width: 485px)": {
-    fontSize: 25,
-    marginLeft: 20,
+    fontSize: 22,
+    marginLeft: 10,
   },
   "@media(max-width: 358px)": {
     fontSize: 20,

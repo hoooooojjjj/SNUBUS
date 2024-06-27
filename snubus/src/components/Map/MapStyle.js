@@ -5,7 +5,7 @@ import { keyframes } from "@emotion/react";
 // Map 컴포넌트 컨테이너
 export const Container = styled.div((props) => ({
   width: "70dvw",
-  height: "100dvh",
+  height: "90dvh",
   "@media(max-width: 425px)": {
     width: "100dvw",
     height: props.isInfoWindowVisible ? "70dvh" : "40dvh",
@@ -19,6 +19,12 @@ export const Container = styled.div((props) => ({
 export const Maps = styled.div({
   width: "100%",
   height: "100%",
+  "@media(min-width: 425px)": {
+    border: "3px solid white",
+    borderLeft: "none",
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+  },
 });
 
 // 버스 관련 정보

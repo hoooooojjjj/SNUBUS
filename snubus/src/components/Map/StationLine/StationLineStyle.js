@@ -10,9 +10,10 @@ import {
 export const Container = styled.div({
   margin: "0 auto",
   width: "30dvw",
-  height: "100dvh",
+  height: "80dvh",
   "@media(max-width: 425px)": {
     width: "100dvw",
+    marginTop: 10,
   },
   ...flex("row", "center", "center"),
   ...Font_DoHyeon(),
@@ -28,7 +29,7 @@ export const StationLineWrap = styled.div({
   border: "3px solid white",
   borderRadius: 15,
   padding: "15px 25px",
-  height: "90%",
+  height: "100%",
 });
 
 // 노선 정보 wrap
@@ -211,8 +212,8 @@ export const TimelineStyle = styled(Timeline)`
 
 export const FooterP = styled.p({
   position: "absolute",
-  bottom: 2,
-  right: 10,
+  bottom: 3,
+  right: 5,
   margin: 5,
   color: "white",
   fontSize: 13,

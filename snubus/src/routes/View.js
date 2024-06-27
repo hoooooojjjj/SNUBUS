@@ -7,6 +7,7 @@ import { isMapPrintContext } from "../App";
 import StationLine from "../components/Map/StationLine/StationLine";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import Headers from "./components/Header";
 
 export const ViewContext = React.createContext();
 
@@ -148,6 +149,7 @@ function View5511Bus({
           }}
         >
           {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
+          <Headers isMain={false} />
           <ViewWrap>
             <Map getData={getData}></Map>
             {isMapPrint ? <StationLine /> : <></>}
