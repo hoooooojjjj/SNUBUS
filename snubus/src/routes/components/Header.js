@@ -3,7 +3,7 @@ import { HeaderWrap, Header, LogoText, NavigationWrap } from "./HeaderStyle";
 import Navigation from "./Nav";
 import { useNavigate } from "react-router-dom";
 
-function Headers() {
+function Headers({ isMain }) {
   const nav = useNavigate();
 
   return (
@@ -17,7 +17,7 @@ function Headers() {
           SNUBUS
         </LogoText>
         <NavigationWrap>
-          <Navigation />
+          <Navigation isMain={isMain} />
         </NavigationWrap>
       </Header>
     </HeaderWrap>

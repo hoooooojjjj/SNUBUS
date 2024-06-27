@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import { Li, BusTypeDropDown, BusTypeDropDownWrap, Ul } from "./NavStyle";
 import { imgNumContext } from "../Main";
+import { useNavigate } from "react-router-dom";
 
 const busType = [
   { key: "0", label: "지선 버스" },
   { key: "1", label: "마을 버스" },
 ];
 
-function Navigation() {
+function Navigation({ isMain }) {
+  const nav = useNavigate();
+
   // context API -> imgNum 상태 변화 함수들 가져오기
-  const [imgNum, setImgNum] = useContext(imgNumContext);
+  const [imgNum, setImgNum] = useContext(imgNumContext) || [];
 
   // 드롭다운 메뉴 표시 여부
   const [showDropdown, setShowDropDown] = useState(false);
@@ -26,25 +29,34 @@ function Navigation() {
 
   return (
     <Ul>
-      <Li onClick={onClickBusType}>
-        버스 종류
-        <BusTypeDropDownWrap>
-          {busType.map((bus) => (
-            <BusTypeDropDown
-              key={bus.key}
-              onClickCapture={() => {
-                selectBusType(bus);
-              }}
-              display={showDropdown ? "block" : "none"}
-            >
-              {bus.label}
-            </BusTypeDropDown>
-          ))}
-        </BusTypeDropDownWrap>
-      </Li>
-
+      {isMain ? (
+        <Li onClick={onClickBusType}>
+          버스 종류
+          <BusTypeDropDownWrap>
+            {busType.map((bus) => (
+              <BusTypeDropDown
+                key={bus.key}
+                onClickCapture={() => {
+                  selectBusType(bus);
+                }}
+                display={showDropdown ? "block" : "none"}
+              >
+                {bus.label}
+              </BusTypeDropDown>
+            ))}
+          </BusTypeDropDownWrap>
+        </Li>
+      ) : (
+        <></>
+      )}
       <Li>소개</Li>
-      <Li>문의</Li>
+      <Li
+        onClick={() => {
+          nav("/contact");
+        }}
+      >
+        문의
+      </Li>
     </Ul>
   );
 }

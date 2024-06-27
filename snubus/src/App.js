@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { useState } from "react";
 import { ConfigProvider } from "antd";
 import View from "./routes/View";
+import Contact from "./routes/Contact";
 
 // 카카오맵이 화면에 표시됐는지 판별하는 state를 Context API로 하위 컴포넌트에 전달
 export const isMapPrintContext = React.createContext();
@@ -38,6 +39,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />}></Route>
               <Route path="/:id" element={<View />}></Route>
+              <Route path="/contact" element={<Contact />}></Route>
             </Routes>
           </BrowserRouter>
         </isMapPrintContext.Provider>

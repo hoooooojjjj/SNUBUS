@@ -18,7 +18,7 @@ function Main() {
       <Containers imgNum={imgNum}>
         {/* imgNum이 변경되면(배경 이미지가 전환되면) key를 변경된 imgNum으로 변경시켜 Overlay 컴포넌트를 리렌더링시킨다. */}
         <Overlay key={imgNum}></Overlay>
-        <Headers />
+        <Headers isMain={true} />
         <MainWrap>
           <Articles info={busInfo[imgNum]} />
         </MainWrap>
