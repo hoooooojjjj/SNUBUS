@@ -128,7 +128,6 @@ function Map({ getData, bus_stationData }) {
       const mapTypeControl = new window.kakao.maps.MapTypeControl();
 
       // 지도에 지도타입 컨트롤을 추가
-      // window.kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
       map.addControl(mapTypeControl, window.kakao.maps.ControlPosition.TOPLEFT);
 
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성

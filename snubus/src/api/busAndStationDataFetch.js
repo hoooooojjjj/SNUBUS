@@ -1,7 +1,15 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusAndStationData(busClassification, signal) {
+export default async function getBusAndStationData(
+  busClassification,
+  controller
+) {
+  const signal = controller.signal;
+
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
   const getBusData = async () => {
+    // 타임아웃 설정 - 지정된 시간 후 요청 취소
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     // 데이터 요청
     try {
       const response = await fetch(
@@ -16,6 +24,8 @@ export default async function getBusAndStationData(busClassification, signal) {
 
       // 서버에서 json으로 응답 받기
       const busData = await response.json();
+
+      clearTimeout(timeoutId); // 요청이 성공적으로 완료되면 타이머 취소
 
       // 데이터 요청 횟수 초과 시
       if (response.status === 429) {
@@ -90,8 +100,10 @@ export default async function getBusAndStationData(busClassification, signal) {
         };
       }
     } catch (error) {
+      clearTimeout(timeoutId); // 에러 발생 시 타이머 취소
       if (error.name === "AbortError") {
-        console.log("Fetch aborted");
+        console.log("Fetch aborted. Trying again...");
+        getBusData(); // 요청 재시도
       } else {
         console.error("Fetch error:", error);
       }
@@ -100,16 +112,25 @@ export default async function getBusAndStationData(busClassification, signal) {
 
   // 버스 도착 정보 데이터 요청 함수 -> 각 정류장 관련 정보 fetching
   const getStationData = async () => {
+    // 타임아웃 설정 - 지정된 시간 후 요청 취소
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     // 데이터 요청
     try {
       const response = await fetch(
         `http://localhost:8080/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
-        )}`
+        )}`,
+        {
+          cache: "no-cache",
+          signal: signal, // signal 옵션 추가
+        }
       );
 
       // 서버에서 json으로 응답 받기
       const busStationData = await response.json();
+
+      clearTimeout(timeoutId); // 요청이 성공적으로 완료되면 타이머 취소
 
       if (response.status === 200) {
         // 중앙대학교 방면 정류장들 관련 정보 필터링
@@ -132,7 +153,13 @@ export default async function getBusAndStationData(busClassification, signal) {
         return [];
       }
     } catch (error) {
-      console.error("Fetch error:", error);
+      clearTimeout(timeoutId); // 에러 발생 시 타이머 취소
+      if (error.name === "AbortError") {
+        console.log("Fetch aborted. Trying again...");
+        getBusData(); // 요청 재시도
+      } else {
+        console.error("Fetch error:", error);
+      }
     }
   };
 

@@ -96,12 +96,10 @@ function View5511Bus({
   const getData = () => {
     // 새로운 AbortController 객체 인터페이스를 생성
     const controller = new AbortController();
-    // DOM 요청과 통신하거나 취소하는데 사용되는 AbortSignal 객체 인터페이스
-    const signal = controller.signal;
 
     // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
     const getBSData = async () => {
-      const busData = await getBusAndStationData(busClassification, signal);
+      const busData = await getBusAndStationData(busClassification, controller);
       // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
       getBuspostionXY(busData.busData.busPositionXY);
       getBusInfo(busData.busData.busInfo);
@@ -117,8 +115,8 @@ function View5511Bus({
     getBSData();
 
     return () => {
-      // DOM 요청이 완료되기 전에 취소한다. 이를 통해 fetch 요청, 모든 응답 Body 소비, 스트림을 취소할 수 있다.
-      controller.abort(); // Fetch 요청 취소
+      // 데이터가 들어오기 전에 컴포넌트를 마운트시키면 Fetch 요청 취소
+      controller.abort();
     };
   };
 
