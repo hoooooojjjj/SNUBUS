@@ -4,13 +4,14 @@ import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponents";
 /* header */
 
 // 헤더 wrap
-export const HeaderWrap = styled.header({
+export const HeaderWrap = styled.header((props) => ({
   width: "100%",
   height: "10dvh",
   "@media(max-width: 425px)": {
     height: "5dvh",
   },
-});
+  position: props.fixed || null,
+}));
 
 // 헤더
 export const Header = styled.section({

@@ -3,11 +3,11 @@ import { HeaderWrap, Header, LogoText, NavigationWrap } from "./HeaderStyle";
 import Navigation from "./Nav";
 import { useNavigate } from "react-router-dom";
 
-function Headers({ isMain }) {
+function Headers({ isMain, fixed }) {
   const nav = useNavigate();
 
   return (
-    <HeaderWrap>
+    <HeaderWrap fixed={fixed}>
       <Header>
         <LogoText
           onClick={() => {

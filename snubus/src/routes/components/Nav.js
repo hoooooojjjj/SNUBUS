@@ -49,7 +49,13 @@ function Navigation({ isMain }) {
       ) : (
         <></>
       )}
-      <Li>소개</Li>
+      <Li
+        onClick={() => {
+          nav("/intro");
+        }}
+      >
+        소개
+      </Li>
       <Li
         onClick={() => {
           nav("/contact");
