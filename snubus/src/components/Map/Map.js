@@ -297,6 +297,9 @@ function Map({ getData, bus_stationData }) {
       // 마커 위에 커스텀 오버레이를 표시
       customOverlay.setMap(map, stationMarker);
 
+      // 클릭한 버스 정류장 마커 print
+      stationMarker.setMap(map);
+
       // 모달에서 X버튼 클릭시 모달과 커스텀 오버레이, 마커 닫힘
       if (!isInfoWindowVisible) {
         customOverlay.setMap(null);
