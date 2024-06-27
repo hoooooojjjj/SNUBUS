@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import { flex } from "../../util/publicStyleComponents";
+import { flex, Font_DoHyeon } from "../../util/publicStyleComponents";
 
 /* footer */
 export const Footer = styled.footer({
   width: "100%",
   height: "10dvh",
   ...flex("row", "center", "flex-end"),
+  ...Font_DoHyeon(),
 });
 
 export const FooterPWrap = styled.div({
@@ -14,7 +15,7 @@ export const FooterPWrap = styled.div({
 
 export const FooterP = styled.p({
   zIndex: 11,
-  margin: 0,
+  margin: 5,
   color: "white",
   "@media(max-width: 768px)": {
     fontSize: 13,

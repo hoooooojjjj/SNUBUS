@@ -208,3 +208,17 @@ export const TimelineStyle = styled(Timeline)`
     margin-bottom: 0px;
   }
 `;
+
+export const FooterP = styled.p({
+  position: "absolute",
+  bottom: 2,
+  right: 10,
+  margin: 5,
+  color: "white",
+  fontSize: 13,
+  "@media(max-width: 768px)": {},
+  "@media(max-width: 425px)": {
+    position: "relative",
+  },
+  "@media(max-width: 320px)": {},
+});

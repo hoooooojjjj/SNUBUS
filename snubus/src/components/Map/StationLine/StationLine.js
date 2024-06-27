@@ -10,12 +10,13 @@ import {
   InfoText,
   InfoTextHeader,
   PolylineBtn,
+  FooterP,
 } from "./StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
 import { CheckOutlined, FundOutlined, StockOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import busInfo from "../../../util/busInfo";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 
@@ -80,74 +81,80 @@ const StationLine = ({ bus_stationData }) => {
   };
 
   return (
-    <Container>
-      <StationLineWrap>
-        <StationLineInfoWrap>
-          {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
-          {!window.matchMedia("(max-width: 425px)").matches ? (
-            <InfoTextWrap>
-              <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-              <InfoText>
-                첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
-              </InfoText>
-              <InfoText>
-                <strong>배차간격</strong> : {curBusInfo.interval}
-              </InfoText>
-              <InfoText>
-                <strong>
-                  {busLength > 0 ? (
-                    `현재 ${busLength}대 운행중`
-                  ) : (
-                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-                  )}
-                </strong>
-              </InfoText>
-            </InfoTextWrap>
-          ) : (
-            <InfoTextWrap>
-              <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-              <InfoText>
-                {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
-                <strong>
-                  {busLength > 0 ? (
-                    `  현재 ${busLength}대 운행중`
-                  ) : (
-                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-                  )}
-                </strong>
-              </InfoText>
-              <InfoText>
-                <strong>배차간격</strong> : {curBusInfo.interval}
-              </InfoText>
-            </InfoTextWrap>
-          )}
-        </StationLineInfoWrap>
-        <BtnWrap>
-          <StationSwitchBtn onClick={switchDirectionToStart}>
-            {isStart ? <CheckOutlined style={{ marginRight: 10 }} /> : <></>}
-            {curBusInfo.btnName.start} 방면
-          </StationSwitchBtn>
-          <StationSwitchBtn onClick={switchDirectionToEnd}>
-            {isStart ? <></> : <CheckOutlined style={{ marginRight: 10 }} />}
-            {curBusInfo.btnName.end} 방면
-          </StationSwitchBtn>
-        </BtnWrap>
-        <LineWrap>
-          <PolylineBtn onClick={onPloylineBtnClick}>
-            {isPolylinVisible.visible ? (
-              <>
-                <FundOutlined /> 해당 방면 노선 라인 끄기
-              </>
+    <>
+      <Container>
+        <StationLineWrap>
+          <StationLineInfoWrap>
+            {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+            {!window.matchMedia("(max-width: 425px)").matches ? (
+              <InfoTextWrap>
+                <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
+                <InfoText>
+                  첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
+                </InfoText>
+                <InfoText>
+                  <strong>배차간격</strong> : {curBusInfo.interval}
+                </InfoText>
+                <InfoText>
+                  <strong>
+                    {busLength > 0 ? (
+                      `현재 ${busLength}대 운행중`
+                    ) : (
+                      <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                    )}
+                  </strong>
+                </InfoText>
+              </InfoTextWrap>
             ) : (
-              <>
-                <StockOutlined /> 해당 방면 노선 라인 켜기
-              </>
+              <InfoTextWrap>
+                <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
+                <InfoText>
+                  {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
+                  <strong>
+                    {busLength > 0 ? (
+                      `  현재 ${busLength}대 운행중`
+                    ) : (
+                      <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                    )}
+                  </strong>
+                </InfoText>
+                <InfoText>
+                  <strong>배차간격</strong> : {curBusInfo.interval}
+                </InfoText>
+              </InfoTextWrap>
             )}
-          </PolylineBtn>
-          <TimeLines isStart={isStart} />
-        </LineWrap>
-      </StationLineWrap>
-    </Container>
+          </StationLineInfoWrap>
+          <BtnWrap>
+            <StationSwitchBtn onClick={switchDirectionToStart}>
+              {isStart ? <CheckOutlined style={{ marginRight: 10 }} /> : <></>}
+              {curBusInfo.btnName.start} 방면
+            </StationSwitchBtn>
+            <StationSwitchBtn onClick={switchDirectionToEnd}>
+              {isStart ? <></> : <CheckOutlined style={{ marginRight: 10 }} />}
+              {curBusInfo.btnName.end} 방면
+            </StationSwitchBtn>
+          </BtnWrap>
+          <LineWrap>
+            <PolylineBtn onClick={onPloylineBtnClick}>
+              {isPolylinVisible.visible ? (
+                <>
+                  <FundOutlined /> 해당 방면 노선 라인 끄기
+                </>
+              ) : (
+                <>
+                  <StockOutlined /> 해당 방면 노선 라인 켜기
+                </>
+              )}
+            </PolylineBtn>
+            <TimeLines isStart={isStart} />
+          </LineWrap>
+        </StationLineWrap>
+      </Container>
+      <FooterP>
+        아이콘 출처 :{" "}
+        <Link to="https://www.flaticon.com/kr/free-icons/-">flaticon</Link>
+      </FooterP>
+    </>
   );
 };
 
