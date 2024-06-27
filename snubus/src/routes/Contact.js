@@ -152,7 +152,7 @@ const Contact = () => {
         </InputWrap>
         <br />
         <Label>
-          이미지 첨부 (필요시){" "}
+          이미지{" "}
           <ImgInput
             name="image"
             accept="image/*"
@@ -160,8 +160,7 @@ const Contact = () => {
             type="file"
           />
         </Label>
-
-        <br />
+        <ContextH5 color={"gray"}>이미지는 필요 시 첨부</ContextH5>
         <SubmitBtn type="submit">문의하기</SubmitBtn>
       </Form>
 

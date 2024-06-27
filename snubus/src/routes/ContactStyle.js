@@ -13,16 +13,77 @@ export const ContextH1 = styled.h1({
   ...Font_BlackHanSans(),
   textAlign: "center",
   marginBottom: 30,
+  marginTop: 20,
+  "@media(max-width: 1024px)": {
+    margin: "0 auto",
+    fontSize: 30,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  "@media(max-width: 768px)": {
+    margin: "0 auto",
+    fontSize: 30,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  "@media(max-width: 425px)": {
+    margin: "0 auto",
+    fontSize: 20,
+    marginBottom: 10,
+    marginTop: 20,
+  },
+  "@media(max-width: 320px)": {
+    margin: "0 auto",
+    fontSize: 18,
+    marginBottom: 10,
+    marginTop: 20,
+  },
 });
 
-export const ContextH5 = styled.h5({
+export const ContextH5 = styled.h5((props) => ({
+  color: props.color || "white",
   textAlign: "center",
   marginBottom: 30,
-});
+  "@media(max-width: 1024px)": {
+    margin: "0 auto",
+    fontSize: 18,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  "@media(max-width: 768px)": {
+    margin: "0 auto",
+    fontSize: 15,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  "@media(max-width: 425px)": {
+    margin: "0 auto",
+    fontSize: 13,
+    width: "80%",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  "@media(max-width: 320px)": {
+    margin: "0 auto",
+    fontSize: 13,
+    width: "70%",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+}));
 
 export const Form = styled.form({
   ...flex("column", "center", "center"),
   width: "50%",
+  "@media(max-width: 1024px)": {
+    width: "60%",
+  },
+  "@media(max-width: 768px)": {
+    width: "80%",
+  },
+  "@media(max-width: 425px)": {
+    width: "90%",
+  },
   border: "3px solid white",
   borderRadius: 30,
   padding: 30,
@@ -31,17 +92,38 @@ export const Form = styled.form({
 
 export const InputWrap = styled.div((props) => ({
   ...flex("row", "center", "center"),
-  width: props.width,
+  "@media(max-width: 425px)": {
+    ...flex("column", "center", "center"),
+  },
+  width: "100%",
 }));
 
 export const Label = styled.label({
   width: "100%",
   fontSize: 20,
+  "@media(max-width: 1024px)": {
+    fontSize: 15,
+  },
+
+  "@media(max-width: 425px)": {
+    fontSize: 13,
+  },
   ...flex("row", "space-around", ""),
 });
 
 export const Input = styled.input({
   fontSize: 18,
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 425px)": {
+    width: "80%",
+  },
+  "@media(max-width: 375px)": {},
+  "@media(max-width: 320px)": {},
   width: "70%",
   backgroundColor: "#ededed",
   "&::placeholder": {
@@ -52,6 +134,19 @@ export const Input = styled.input({
 
 export const Textarea = styled.textarea({
   fontSize: 18,
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 475px)": {
+    height: 200,
+  },
+  "@media(max-width: 320px)": {
+    height: 150,
+    width: "75%",
+  },
   width: "80%",
   height: 300,
   backgroundColor: "#ededed",
@@ -63,16 +158,30 @@ export const Textarea = styled.textarea({
 
 export const ImgInput = styled.input({
   fontSize: 18,
+  marginBottom: 20,
+  "@media(max-width: 1024px)": {
+    fontSize: 13,
+    marginBottom: 0,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 425px)": {
+    width: "80%",
+  },
   width: "70%",
 });
 
 export const SubmitBtn = styled.button({
   fontSize: 20,
   width: 200,
-  padding: 5,
-  marginTop: 10,
   "@media(max-width: 1024px)": {
-    fontSize: 16,
+    fontSize: 15,
+    width: 180,
+  },
+  "@media(max-width: 768px)": {
+    width: "80%",
+    width: 150,
   },
   "@media(max-width: 768px)": {
     fontSize: 14,
@@ -82,6 +191,10 @@ export const SubmitBtn = styled.button({
     fontSize: 13,
     marginTop: 5,
   },
+
+  padding: 5,
+  marginTop: 10,
+
   background: "none",
   color: "white",
   "&:hover": {
