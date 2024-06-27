@@ -4,6 +4,7 @@ import {
   flex,
   container,
   Font_ArchivoBlack,
+  Font_DoHyeon,
 } from "../../util/publicStyleComponents";
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div((props) => ({
@@ -73,4 +74,25 @@ export const LogoCover = styled.span({
   width: "100%",
   height: "100%",
   animation: `${blackWave} 0.7s alternate linear infinite`,
+});
+
+export const TMI = styled.p({
+  ...Font_DoHyeon(),
+  fontSize: 20,
+  "@media(max-width: 1024px)": {
+    fontSize: 18,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 16,
+  },
+  "@media(max-width: 425px)": {
+    fontSize: 14,
+    width: "60%",
+    textAlign: "center",
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 13,
+    width: "50%",
+    textAlign: "center",
+  },
 });
