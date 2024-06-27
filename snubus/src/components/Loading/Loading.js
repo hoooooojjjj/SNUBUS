@@ -29,7 +29,7 @@ function Loading({ display }) {
         <TMI>
           <strong>알고 계셨나요 ?</strong>
         </TMI>
-        <TMI>"{SNUTMI[0]}"</TMI>
+        <TMI>"{SNUTMI[Math.floor(Math.random() * (SNUTMI.length - 1))]}"</TMI>
       </LoadingWrap>
     </LoadingContainer>
   );
