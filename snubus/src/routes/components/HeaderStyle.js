@@ -50,10 +50,3 @@ export const LogoText = styled.p({
   },
   cursor: "pointer",
 });
-
-// // 헤더 안 로고 이미지
-// export const HeaderLogo = styled.img({
-//   marginLeft: 70,
-//   height: 50,
-//   cursor: "pointer",
-// });

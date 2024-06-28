@@ -15,6 +15,7 @@ export const isMapPrintContext = React.createContext();
 function App() {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useState(false);
+
   return (
     <div style={{ backgroundColor: "#1a1919" }}>
       {/* antd 커스터마이징 */}

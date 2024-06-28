@@ -13,7 +13,17 @@ const fadeOut = keyframes`
     background-color: transparent;
   }
 `;
-
+const fadein = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 // 메인 페이지 컨테이너
 export const Containers = styled.div`
   position: relative;
@@ -41,6 +51,10 @@ export const Overlay = styled.div`
   bottom: 0;
   animation: ${fadeOut} 3s forwards;
 `;
+
+export const AniMationWrap = styled.div((props) => ({
+  animation: !props.hasVisited ? `${fadein} 0.5s ease-out 0.5s both` : "",
+}));
 
 // ADLeft,ADRight,main,footer wrap
 // export const FloatWrap = styled.div({
