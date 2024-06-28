@@ -11,7 +11,7 @@ export const Container = styled.div({
   margin: "0 auto",
   width: "30dvw",
   height: "80dvh",
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "100dvw",
     marginTop: 10,
   },
@@ -23,7 +23,7 @@ export const Container = styled.div({
 export const StationLineWrap = styled.div({
   width: "90%",
   ...flex("column", "normal", "normal"),
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
   border: "3px solid white",
@@ -41,7 +41,7 @@ export const StationLineInfoWrap = styled.div({
 // 노선 정보 text wrap
 export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
 }));
@@ -55,7 +55,7 @@ export const InfoTextHeader = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 16,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 20,
     marginBottom: 5,
   },
@@ -76,7 +76,7 @@ export const InfoText = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 14,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 15,
     margin: 0,
   },
@@ -93,7 +93,7 @@ export const BtnWrap = styled.div({
   "@media(max-width: 768px)": {
     ...flex("column", "center", "center"),
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     ...flex("row", "space-around", "center"),
   },
   ...Font_BlackHanSans(),
@@ -217,8 +217,7 @@ export const FooterP = styled.p({
   margin: 5,
   color: "white",
   fontSize: 13,
-  "@media(max-width: 768px)": {},
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     position: "relative",
   },
   "@media(max-width: 320px)": {},

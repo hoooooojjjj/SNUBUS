@@ -6,7 +6,7 @@ export const Ul = styled.ul({
   height: "100%",
   margin: 0,
   marginRight: 20,
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     marginRight: 10,
   },
   "@media(max-width: 320px)": {
@@ -36,7 +36,7 @@ export const Li = styled.li({
     marginLeft: 10,
     fontSize: 15,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     marginTop: 3,
     marginLeft: 10,
     fontSize: 15,
@@ -76,7 +76,7 @@ export const BusTypeDropDown = styled.div((props) => ({
   "@media(max-width: 485px)": {
     fontSize: 10,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 10,
   },
   "@media(max-width: 320px)": {

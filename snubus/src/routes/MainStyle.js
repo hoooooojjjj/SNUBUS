@@ -22,7 +22,7 @@ export const Containers = styled.div`
   background: url(${(props) =>
     process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`});
   background-size: cover;
-  @media (max-width: 425px) {
+  @media (max-width: 550px) {
     background: url(${(props) =>
       process.env.PUBLIC_URL +
       `assets/backgroundImg_short${props.imgNum}.jpg`});

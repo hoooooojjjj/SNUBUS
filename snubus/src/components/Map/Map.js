@@ -464,7 +464,7 @@ function Map({ getData, bus_stationData }) {
         <></>
       )}
       {clickedStationInfo.length > 0 &&
-      !window.matchMedia("(max-width: 425px)").matches ? (
+      !window.matchMedia("(max-width: 550px)").matches ? (
         <StationInfoModal curStation={clickedStationInfo} />
       ) : (
         <></>

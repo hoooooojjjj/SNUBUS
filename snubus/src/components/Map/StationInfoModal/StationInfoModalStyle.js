@@ -26,7 +26,7 @@ export const Container = styled.div({
     borderRadius: 10,
     padding: 10,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     margin: "0 auto",
     width: "100dvw",
     height: "30dvh",

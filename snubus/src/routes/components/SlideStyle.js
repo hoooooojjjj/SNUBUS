@@ -4,7 +4,7 @@ import { flex, Font_BlackHanSans } from "../../util/publicStyleComponents";
 
 const SlideItemHeight = "120px";
 const SlideItemHeight_under485 = "100px";
-const SlideItemHeight_under425 = "90px";
+const SlideItemHeight_under550 = "90px";
 
 // Carousel wrap
 export const CarouselWrap = styled.header({
@@ -15,7 +15,7 @@ export const CarouselWrap = styled.header({
 export const StyledCarousel = styled(Carousel)`
   width: 40%;
   margin: 0 auto;
-  @media (max-width: 425px) {
+  @media (max-width: 550px) {
     width: 85%;
   }
 `;
@@ -26,8 +26,8 @@ export const SlideItem = styled.div({
   "@media(max-width: 485px)": {
     height: SlideItemHeight_under485,
   },
-  "@media(max-width: 425px)": {
-    height: SlideItemHeight_under425,
+  "@media(max-width: 550px)": {
+    height: SlideItemHeight_under550,
   },
   background:
     "radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.0) 70%)",
@@ -56,12 +56,12 @@ export const SlideText = styled.p({
     fontSize: 22,
     lineHeight: SlideItemHeight_under485,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 30,
-    lineHeight: SlideItemHeight_under425,
+    lineHeight: SlideItemHeight_under550,
   },
   "@media(max-width: 320px)": {
-    lineHeight: SlideItemHeight_under425,
+    lineHeight: SlideItemHeight_under550,
     fontSize: 25,
   },
 });

@@ -11,7 +11,7 @@ export const Article = styled.article({
     "none" /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */,
   width: "100dvw",
   height: "80%",
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "100dvw",
     height: "80%",
     ...flex("column", "center", "center"),
@@ -25,7 +25,7 @@ export const HeaderWrap = styled.div({
   height: 40,
   margin: "0 auto",
   ...flex("row", "nomal", "nomal"),
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 30,
     width: "100%",
     ...flex("row", "center", "nomal"),
@@ -84,7 +84,7 @@ export const P = styled.p({
     fontSize: 30,
     marginBottom: 0,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     margin: 0,
     textAlign: "center",
     marginLeft: 10,

@@ -26,7 +26,7 @@ export const ContextH1 = styled.h1({
     marginBottom: 20,
     marginTop: 20,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     margin: "0 auto",
     fontSize: 20,
     marginBottom: 10,
@@ -56,7 +56,7 @@ export const ContextH5 = styled.h5((props) => ({
     marginBottom: 20,
     marginTop: 20,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     margin: "0 auto",
     fontSize: 13,
     width: "80%",
@@ -81,7 +81,7 @@ export const Form = styled.form({
   "@media(max-width: 768px)": {
     width: "80%",
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "90%",
   },
   border: "3px solid white",
@@ -92,7 +92,7 @@ export const Form = styled.form({
 
 export const InputWrap = styled.div((props) => ({
   ...flex("row", "center", "center"),
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
   width: "100%",
@@ -105,7 +105,7 @@ export const Label = styled.label({
     fontSize: 15,
   },
 
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 13,
   },
   ...flex("row", "space-around", ""),
@@ -119,7 +119,7 @@ export const Input = styled.input({
   "@media(max-width: 768px)": {
     fontSize: 13,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "80%",
   },
   "@media(max-width: 375px)": {},
@@ -166,7 +166,7 @@ export const ImgInput = styled.input({
   "@media(max-width: 768px)": {
     fontSize: 13,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "80%",
   },
   width: "70%",

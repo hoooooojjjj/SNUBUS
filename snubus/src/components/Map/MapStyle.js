@@ -6,7 +6,7 @@ import { keyframes } from "@emotion/react";
 export const Container = styled.div((props) => ({
   width: "70dvw",
   height: "90dvh",
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     width: "100dvw",
     height: props.isInfoWindowVisible ? "70dvh" : "40dvh",
   },
@@ -19,7 +19,7 @@ export const Container = styled.div((props) => ({
 export const Maps = styled.div({
   width: "100%",
   height: "100%",
-  "@media(min-width: 425px)": {
+  "@media(min-width: 550px)": {
     border: "3px solid white",
     borderLeft: "none",
     borderTopRightRadius: 15,
@@ -42,10 +42,10 @@ export const BusInfo = styled.div({
 // 업데이트 관련 컴포넌트 wrap
 export const UpdateWrap = styled.div({
   position: "absolute",
-  "@media(min-width: 426px)": {
+  "@media(min-width: 551px)": {
     top: 10,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     bottom: -12,
   },
   right: 10,
@@ -77,7 +77,7 @@ export const UpdateBtn = styled.button`
   @media (max-width: 1024px) {
     font-size: 18px;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 550px) {
     font-size: 15px;
   }
 `;
@@ -88,7 +88,7 @@ export const DataTm = styled.p({
   "@media(max-width: 1024px)": {
     fontSize: 13,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 12,
   },
 });

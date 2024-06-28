@@ -33,7 +33,7 @@ export const LogoStyle = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 40,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 30,
   },
 });
@@ -85,7 +85,7 @@ export const TMI = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 16,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 14,
     width: "60%",
     textAlign: "center",

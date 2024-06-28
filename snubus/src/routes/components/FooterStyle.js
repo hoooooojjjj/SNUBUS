@@ -20,7 +20,7 @@ export const FooterP = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 13,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     fontSize: 12,
   },
   "@media(max-width: 320px)": {

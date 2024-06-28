@@ -68,7 +68,7 @@ const StationLine = ({ bus_stationData }) => {
     return bus.buslist.filter((bus) => bus.num === id);
   })[id === "관악02" ? 1 : 0][0];
 
-  if (window.matchMedia("(max-width: 425px)").matches && isInfoWindowVisible) {
+  if (window.matchMedia("(max-width: 550px)").matches && isInfoWindowVisible) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;
   }
 
@@ -86,7 +86,7 @@ const StationLine = ({ bus_stationData }) => {
         <StationLineWrap>
           <StationLineInfoWrap>
             {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
-            {!window.matchMedia("(max-width: 425px)").matches ? (
+            {!window.matchMedia("(max-width: 550px)").matches ? (
               <InfoTextWrap>
                 <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
                 <InfoText>

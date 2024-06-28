@@ -7,7 +7,7 @@ import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponents";
 export const HeaderWrap = styled.header((props) => ({
   width: "100%",
   height: "10dvh",
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     height: "5dvh",
   },
   position: props.fixed || null,
@@ -18,7 +18,7 @@ export const Header = styled.section({
   // position: "fixed",
   width: "100%",
   height: 72,
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     height: 36,
   },
   ...flex("row", "normal", "center"),

@@ -46,7 +46,7 @@ export const StationLineInfoWrap = styled.div({
 // 노선 정보 text wrap
 export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
 }));
@@ -60,7 +60,7 @@ export const InfoTextHeader = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 16,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     marginBottom: 5,
     fontSize: 20,
   },
@@ -77,7 +77,7 @@ export const InfoText = styled.p({
   "@media(max-width: 768px)": {
     fontSize: 14,
   },
-  "@media(max-width: 425px)": {
+  "@media(max-width: 550px)": {
     margin: 0,
     marginRight: 5,
     fontSize: 16,
