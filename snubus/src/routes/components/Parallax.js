@@ -1,25 +1,17 @@
 import React, { useRef } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import styles from "./styles.module.css";
+import { SlopeBeginContainer } from "./ParallaxStyle";
 
 const Page = ({ offset, gradient, onClick }) => (
   <>
-    <ParallaxLayer offset={offset} speed={0.2} onClick={onClick}>
-      <div
-        style={{
-          background: `url(${
-            process.env.PUBLIC_URL + `assets/introImg${offset}.jpg`
-          })`,
-          backgroundSize: "cover",
-          width: `calc(100vw + 300px)`,
-          height: "100dvh",
-        }}
+    <ParallaxLayer offset={offset} speed={0} onClick={onClick}>
+      <SlopeBeginContainer
+        offset={offset}
+        className={styles.slopeBeginContainer}
       >
-        <div
-          style={{ width: `calc(100vw + 300px)` }}
-          className={styles.slopeBegin}
-        />
-      </div>
+        <div className={styles.slopeBegin} />
+      </SlopeBeginContainer>
     </ParallaxLayer>
 
     <ParallaxLayer offset={offset} speed={0.6} onClick={onClick}>
@@ -49,12 +41,11 @@ export default function Parallaxs() {
       <Parallax
         className={styles.container}
         ref={parallax}
-        pages={3}
+        pages={2}
         horizontal
       >
         <Page offset={0} gradient="pink" onClick={() => scroll(1)} />
-        <Page offset={1} gradient="teal" onClick={() => scroll(2)} />
-        <Page offset={2} gradient="tomato" onClick={() => scroll(0)} />
+        <Page offset={1} gradient="teal" onClick={() => scroll(0)} />
       </Parallax>
     </div>
   );

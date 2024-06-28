@@ -44,13 +44,11 @@
 }
 
 .pink {
-  background: linear-gradient(to right, deeppink 0%, coral 100%);
+  background: linear-gradient(to right, #92a8d1ff 0%, #034f84ff 100%);
+  opacity: 0.9;
 }
 
 .teal {
-  background: linear-gradient(to right, SlateBlue 0%, DeepSkyBlue 100%);
-}
-
-.tomato {
-  background: linear-gradient(to right, tomato 0%, gold 100%);
+  background: linear-gradient(to right, #bfd7edff 0%, #6b5b95ff 100%);
+  opacity: 0.9;
 }
