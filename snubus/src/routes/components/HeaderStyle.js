@@ -11,6 +11,7 @@ export const HeaderWrap = styled.header((props) => ({
     height: "5dvh",
   },
   position: props.fixed || null,
+  zIndex: 10,
 }));
 
 // 헤더
@@ -32,6 +33,7 @@ export const NavigationWrap = styled.nav({
 
 // 헤더 안에 로고 폰트
 export const LogoText = styled.p({
+  zIndex: 100,
   ...Font_ArchivoBlack(),
   marginLeft: 30,
   marginBottom: 0,
