@@ -24,11 +24,12 @@ function Main() {
     // 처음 방문이면 Welcome 컴포넌트를 보여주고, 'hasVisited'를 설정
     if (!hasVisited) {
       setShowWelcome(true);
-      sessionStorage.setItem("hasVisited", "true");
 
       const timer = setTimeout(() => {
         setShowWelcome(false);
       }, 3000);
+
+      sessionStorage.setItem("hasVisited", "true");
 
       return () => clearTimeout(timer);
     }
