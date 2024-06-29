@@ -9,9 +9,11 @@ import {
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div((props) => ({
   display: props.display,
-  zIndex: 10,
+  position: "absolute",
+  zIndex: 1000,
   ...container(),
-  backgroundColor: "rgba(26, 25, 25, 0.2)",
+  backgroundColor: "rgba(26, 25, 25, 1)",
+  overflowBlock: "hidden",
 }));
 
 // 로딩 wrap
@@ -21,10 +23,20 @@ export const LoadingWrap = styled.div({
   height: "100%",
   zIndex: 1,
 });
+const rotateInVer = keyframes`
+  0% {
+    transform: perspective(800px) rotateY(-360deg) translateZ(-200px);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(800px) rotateY(0deg) translateZ(0);
+    opacity: 1;
+  }
+`;
 
-// logo 스타일링
 export const LogoStyle = styled.p({
   ...Font_ArchivoBlack(),
+  animation: `${rotateInVer} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite`,
   fontSize: 50,
   position: "relative",
   "@media(max-width: 1024px)": {
@@ -36,44 +48,6 @@ export const LogoStyle = styled.p({
   "@media(max-width: 550px)": {
     fontSize: 30,
   },
-});
-
-// blackWave 애니메이션 정의
-const blackWave = keyframes`
-  0% {
-    width: 0%;
-    border-radius: 0px;
-  }
-  20% {
-    width: 20%;
-    border-radius: 20px;
-  }
-  40% {
-    width: 40%;
-    border-radius: 50px;
-  }
-  60% {
-    width: 60%;
-    border-radius: 50px;
-  }
-  80% {
-    width: 80%;
-    border-radius: 20px;
-  }
-  100% {
-    width: 100%;
-    border-radius: 0px;
-  }
-
-`;
-
-// logo 위에 씌워질 요소
-export const LogoCover = styled.span({
-  backgroundColor: "rgb(26, 25, 25,0.8)",
-  position: "absolute",
-  width: "100%",
-  height: "100%",
-  animation: `${blackWave} 0.7s alternate linear infinite`,
 });
 
 export const TMI = styled.p({

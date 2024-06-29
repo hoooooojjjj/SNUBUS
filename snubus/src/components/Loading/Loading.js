@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  LoadingContainer,
-  LoadingWrap,
-  LogoStyle,
-  LogoCover,
-  TMI,
-} from "./LoadingStyle";
+import { LoadingContainer, LoadingWrap, LogoStyle, TMI } from "./LoadingStyle";
 
 const SNUTMI = [
   "행정관 앞 버스정류장 뒤에 있는 철문은 전쟁났을 때 사용하기 위한 비밀벙커 입구입니다.",
@@ -25,9 +19,7 @@ function Loading({ display }) {
   return (
     <LoadingContainer display={display}>
       <LoadingWrap>
-        <LogoStyle>
-          <LogoCover></LogoCover>SNUBUS
-        </LogoStyle>
+        <LogoStyle>SNUBUS</LogoStyle>
         <br />
         <TMI>
           <strong>알고 계셨나요 ?</strong>
