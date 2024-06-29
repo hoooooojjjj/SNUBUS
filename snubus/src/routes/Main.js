@@ -21,15 +21,16 @@ function Main() {
     // sessionStorage에 'hasVisited' 키가 있는지 확인
     const hasVisited = sessionStorage.getItem("hasVisited");
 
+    console.log(hasVisited);
     // 처음 방문이면 Welcome 컴포넌트를 보여주고, 'hasVisited'를 설정
     if (!hasVisited) {
+      sessionStorage.setItem("hasVisited", "true");
+
       setShowWelcome(true);
 
       const timer = setTimeout(() => {
         setShowWelcome(false);
       }, 3000);
-
-      sessionStorage.setItem("hasVisited", "true");
 
       return () => clearTimeout(timer);
     }
