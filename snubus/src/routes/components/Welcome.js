@@ -1,10 +1,12 @@
 import React from "react";
-import { WelcomeContainer, WelcomeText } from "./WelcomeStyle";
+import { WelcomeContainer, WelcomeHeader, WelcomeText } from "./WelcomeStyle";
 
 function Welcome() {
   return (
     <WelcomeContainer>
-      <WelcomeText>SNUBUS</WelcomeText>
+      <WelcomeHeader>
+        SNUBUS<WelcomeText>"더 편안한 학교생활을 위해"</WelcomeText>
+      </WelcomeHeader>
     </WelcomeContainer>
   );
 }
