@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import {
   flex,
-  Font_BlackHanSans,
   Font_DoHyeon,
+  Font_NanumSquare,
 } from "../../../util/publicStyleComponents";
 
 // StationLine 컴포넌트 컨테이너
@@ -34,7 +34,7 @@ export const CloseBtn = styled.button({
   border: "none",
   cursor: "pointer",
   color: "white",
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
 });
 
 // 노선 정보 wrap
@@ -65,7 +65,7 @@ export const InfoTextHeader = styled.p({
     fontSize: 20,
   },
   color: "white",
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
 });
 
 // 노선 정보 text
@@ -83,5 +83,5 @@ export const InfoText = styled.p({
     fontSize: 16,
   },
   color: "white",
-  ...Font_DoHyeon(),
+  ...Font_NanumSquare(),
 });

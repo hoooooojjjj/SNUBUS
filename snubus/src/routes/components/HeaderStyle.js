@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_ArchivoBlack } from "../../util/publicStyleComponents";
+import { flex, Font_Kanit } from "../../util/publicStyleComponents";
 
 /* header */
 
@@ -12,11 +12,11 @@ export const HeaderWrap = styled.header((props) => ({
   },
   position: props.fixed || null,
   zIndex: 10,
+  borderBottom: "1px solid #e0e0e0",
 }));
 
 // 헤더
 export const Header = styled.section({
-  // position: "fixed",
   width: "100%",
   height: 72,
   "@media(max-width: 550px)": {
@@ -34,9 +34,10 @@ export const NavigationWrap = styled.nav({
 // 헤더 안에 로고 폰트
 export const LogoText = styled.p({
   zIndex: 100,
-  ...Font_ArchivoBlack(),
+  ...Font_Kanit(),
   marginLeft: 30,
   marginBottom: 0,
+  fontWeight: 500,
   fontSize: 35,
   "@media(max-width: 595px)": {
     fontSize: 30,

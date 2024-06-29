@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_BlackHanSans, flex } from "../../util/publicStyleComponents";
+import { Font_DoHyeon, flex } from "../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
 // Map 컴포넌트 컨테이너
@@ -11,7 +11,7 @@ export const Container = styled.div((props) => ({
     height: props.isInfoWindowVisible ? "70dvh" : "40dvh",
   },
   position: "relative",
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   color: "black",
 }));
 

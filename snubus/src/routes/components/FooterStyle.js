@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { flex, Font_DoHyeon } from "../../util/publicStyleComponents";
+import { flex, Font_NanumSquare } from "../../util/publicStyleComponents";
 
 /* footer */
 export const Footer = styled.footer({
   width: "100%",
   height: "10dvh",
   ...flex("row", "center", "flex-end"),
-  ...Font_DoHyeon(),
+  ...Font_NanumSquare(),
 });
 
 export const FooterPWrap = styled.div({

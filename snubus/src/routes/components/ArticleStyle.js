@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_BlackHanSans, flex } from "../../util/publicStyleComponents";
+import { Font_DoHyeon, flex } from "../../util/publicStyleComponents";
 
 // article wrap
 export const Article = styled.article({
@@ -57,7 +57,7 @@ export const Img = styled.img({
 export const H2 = styled.h2({
   marginTop: 3,
   marginLeft: 20,
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   fontSize: 50,
   "@media(max-width: 768px)": {
     fontSize: 40,
@@ -78,7 +78,7 @@ export const P = styled.p({
   width: "90%",
   margin: "0 auto",
   marginBottom: 10,
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   fontSize: 40,
   "@media(max-width: 768px)": {
     fontSize: 30,

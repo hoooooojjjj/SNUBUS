@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Carousel } from "antd";
-import { flex, Font_BlackHanSans } from "../../util/publicStyleComponents";
+import { flex, Font_DoHyeon } from "../../util/publicStyleComponents";
 
 const SlideItemHeight = "120px";
 const SlideItemHeight_under485 = "100px";
@@ -40,7 +40,7 @@ export const SlideText = styled.p({
   margin: "0 auto",
   width: "70%",
   lineHeight: SlideItemHeight,
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   fontSize: 40,
   cursor: "pointer",
   "@media(max-width: 768px)": {

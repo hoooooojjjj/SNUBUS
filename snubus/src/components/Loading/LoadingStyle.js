@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 import {
   flex,
   container,
-  Font_ArchivoBlack,
+  Font_Kanit,
   Font_DoHyeon,
 } from "../../util/publicStyleComponents";
 // 로딩창 컨테이너
@@ -35,7 +35,8 @@ const rotateInVer = keyframes`
 `;
 
 export const LogoStyle = styled.p({
-  ...Font_ArchivoBlack(),
+  ...Font_Kanit(),
+  fontWeight: 500,
   animation: `${rotateInVer} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite`,
   fontSize: 50,
   position: "relative",

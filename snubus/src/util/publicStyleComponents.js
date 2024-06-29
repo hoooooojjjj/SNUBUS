@@ -21,18 +21,9 @@ export const flex = (flex_direction, justify_content, align_items) => {
 
 // 영어
 // Archivo Black 폰트
-export const Font_ArchivoBlack = () => {
+export const Font_Kanit = () => {
   return {
-    fontFamily: "'Archivo Black', sans-serif",
-    fontStyle: "normal",
-    color: "white",
-  };
-};
-
-// 한국어
-export const Font_BlackHanSans = () => {
-  return {
-    fontFamily: "'Black Han Sans', sans-serif",
+    fontFamily: '"Kanit", sans-serif',
     fontStyle: "normal",
     color: "white",
   };
@@ -43,5 +34,15 @@ export const Font_DoHyeon = () => {
     fontFamily: "'Do Hyeon', sans-serif",
     fontStyle: "normal",
     color: "white",
+    fontWeight: 500,
+  };
+};
+
+export const Font_NanumSquare = () => {
+  return {
+    fontFamily: "'NanumSquare', sans-serif",
+    fontStyle: "normal",
+    color: "white",
+    fontWeight: 600,
   };
 };

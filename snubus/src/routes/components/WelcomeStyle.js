@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 import {
   flex,
   container,
-  Font_ArchivoBlack,
+  Font_Kanit,
   Font_DoHyeon,
 } from "../../util/publicStyleComponents";
 
@@ -53,7 +53,7 @@ export const WelcomeContainer = styled.div({
 
 export const WelcomeHeader = styled.p({
   animation: `${slideInEllipticRightBck} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-  ...Font_ArchivoBlack(),
+  ...Font_Kanit(),
   marginBottom: 0,
   fontSize: 60,
   "@media(max-width: 595px)": {

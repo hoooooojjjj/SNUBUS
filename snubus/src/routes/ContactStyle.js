@@ -1,16 +1,16 @@
 import styled from "@emotion/styled";
 import {
   flex,
-  Font_BlackHanSans,
   Font_DoHyeon,
+  Font_NanumSquare,
 } from "../util/publicStyleComponents";
 
 export const ContextContainer = styled.div({
-  ...Font_DoHyeon(),
+  ...Font_NanumSquare(),
 });
 
 export const ContextH1 = styled.h1({
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   textAlign: "center",
   marginBottom: 30,
   marginTop: 20,

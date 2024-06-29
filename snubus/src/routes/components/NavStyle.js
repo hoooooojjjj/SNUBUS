@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_BlackHanSans } from "../../util/publicStyleComponents";
+import { flex, Font_DoHyeon } from "../../util/publicStyleComponents";
 
 // ul 태그
 export const Ul = styled.ul({
@@ -47,7 +47,7 @@ export const Li = styled.li({
     fontSize: 14,
   },
   cursor: "pointer",
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
   position: "relative",
   WebkitUserSelect: "none" /* Safari */,
   MozUserSelect: "none" /* Firefox */,

@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { Timeline } from "antd";
 import {
   flex,
-  Font_BlackHanSans,
   Font_DoHyeon,
+  Font_NanumSquare,
 } from "../../../util/publicStyleComponents";
 
 // StationLine 컴포넌트 컨테이너
@@ -16,7 +16,7 @@ export const Container = styled.div({
     marginTop: 10,
   },
   ...flex("row", "center", "center"),
-  ...Font_DoHyeon(),
+  ...Font_NanumSquare(),
 });
 
 // StationLine 전체 Box Wrap
@@ -64,7 +64,7 @@ export const InfoTextHeader = styled.p({
     marginBottom: 5,
   },
   color: "white",
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
 });
 
 // 노선 정보 text
@@ -96,7 +96,7 @@ export const BtnWrap = styled.div({
   "@media(max-width: 550px)": {
     ...flex("row", "space-around", "center"),
   },
-  ...Font_BlackHanSans(),
+  ...Font_DoHyeon(),
 });
 
 // 방면 전환 버튼
@@ -139,16 +139,16 @@ export const LineWrap = styled.div({
 export const PolylineBtn = styled.button({
   width: "100%",
   marginBottom: 15,
-  fontSize: 18,
+  fontSize: 16,
   "@media(max-width: 1024px)": {
     fontSize: 16,
   },
   "@media(max-width: 768px)": {
-    fontSize: 14,
+    fontSize: 12,
     marginTop: 5,
   },
   "@media(max-width: 320px)": {
-    fontSize: 13,
+    fontSize: 11,
     marginTop: 5,
   },
   background: "none",
@@ -158,6 +158,7 @@ export const PolylineBtn = styled.button({
   },
   border: "none",
   borderRadius: 10,
+  ...Font_NanumSquare(),
 });
 
 // 버스 이미지
@@ -197,6 +198,7 @@ export const TimelineStyle = styled(Timeline)`
     cursor: pointer;
     font-size: 18px;
     font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
     @media (max-width: 1024px) {
       font-size: 16px;
       height: 18px;
