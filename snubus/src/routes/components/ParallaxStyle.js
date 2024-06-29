@@ -2,11 +2,10 @@ import styled from "@emotion/styled";
 
 export const Scene = styled.section`
   height: 100dvh;
+  width: 100%;
   overflow: hidden;
   background-attachment: fixed;
   background-size: cover;
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 200;
   &.one {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg0.jpg`});
   }
@@ -30,15 +29,21 @@ export const Header = styled.header`
 `;
 
 export const SceneHeaderH1 = styled.h1`
-  font-size: 2rem;
+  font-family: "Black han sans", sans-serif;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-weight: 300;
   &:after {
     content: "";
-    border-bottom: 1px solid white;
-    width: 8rem;
+    border-bottom: 3px solid white;
+    width: 10rem;
     display: block;
     margin: 0 auto;
     margin-top: 1rem;
   }
+`;
+
+export const SceneHeaderH2 = styled.h2`
+  font-family: "Do hyeon", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1rem;
 `;

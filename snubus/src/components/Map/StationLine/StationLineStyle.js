@@ -129,6 +129,11 @@ export const LineWrap = styled.div({
   overflowY: "scroll",
   marginTop: 10,
   paddingTop: 10,
+  msOverflowStyle: "none" /* Internet Explorer */,
+  scrollbarWidth: "none" /* Firefox */,
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
 });
 
 export const PolylineBtn = styled.button({

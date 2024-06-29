@@ -3,10 +3,10 @@ import Headers from "./components/Header";
 import Parallax from "./components/Parallax";
 const Intro = () => {
   return (
-    <>
+    <div className="scroll" style={{ scrollbarWidth: "none" }}>
       <Headers isMain={false} fixed={"fixed"} />
       <Parallax />
-    </>
+    </div>
   );
 };
 
