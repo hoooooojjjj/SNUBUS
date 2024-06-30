@@ -4,6 +4,7 @@ import {
   flex,
   Font_DoHyeon,
   Font_NanumSquare,
+  Font_Kanit,
 } from "../../../util/publicStyleComponents";
 
 // StationLine 컴포넌트 컨테이너
@@ -26,8 +27,6 @@ export const StationLineWrap = styled.div({
   "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
-  // border: "3px solid white",
-  // borderRadius: 15,
   height: "95%",
 });
 
@@ -36,6 +35,54 @@ export const StationLineInfoWrap = styled.div({
   ...flex("row", "normal", "normal"),
   position: "relative",
 });
+
+// 로고 폰트
+export const LogoText = styled.p({
+  ...Font_Kanit(),
+  fontWeight: 500,
+  fontSize: 35,
+  "@media(max-width: 595px)": {
+    fontSize: 30,
+  },
+  "@media(max-width: 485px)": {
+    fontSize: 22,
+  },
+  "@media(max-width: 358px)": {
+    fontSize: 20,
+  },
+});
+
+// 정류장 라인 탭 wrap
+export const StationLineTabWrap = styled.div({
+  width: "90%",
+  height: 60,
+  marginBottom: 30,
+  ...flex("row", "center", "center"),
+  "@media(max-width: 550px)": {
+    width: "100%",
+    height: 30,
+  },
+});
+
+// 정보 탭 Btn
+export const InfoTabBtn = styled.button((props) => ({
+  width: "50%",
+  height: "100%",
+  background: "none",
+  color: "white",
+  border: "none",
+  borderBottom: props.isInfoTab ? "2px solid white" : "none",
+}));
+
+// 정류장 탭 Btn
+export const StationTabBtn = styled.button((props) => ({
+  width: "50%",
+  height: "100%",
+  background: "none",
+  color: "white",
+  border: "none",
+  borderBottom: props.isInfoTab ? "none" : "2px solid white",
+}));
 
 // 노선 정보 text wrap
 export const InfoTextWrap = styled.div(() => ({
