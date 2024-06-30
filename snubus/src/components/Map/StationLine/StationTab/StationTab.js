@@ -5,7 +5,7 @@ import {
   LineWrap,
   PolylineBtn,
 } from "../StationLineStyle";
-import TimeLines from "../TimeLine/TimeLines";
+import TimeLines from "./TimeLine/TimeLines";
 import busInfo from "../../../../util/busInfo";
 import { CheckOutlined, FundOutlined, StockOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
@@ -17,8 +17,12 @@ function StationTab({
   // 현재 파라미터 받아와서 버스 번호 확인
   const { id } = useParams();
 
+  /* state 코드 */
+
   // 중앙대학교 방면을 선택했는지 확인하는 state(방면 전환)
   const [isStart, setIsStart] = useState(true);
+
+  /* 함수 코드 */
 
   // 현재 페이지의 버스 정보만 필터링
   const curBusInfo = busInfo.map((bus) => {
@@ -38,12 +42,15 @@ function StationTab({
     setIsPolylinVisible({ ...isPolylinVisible, visible: false });
     setIsInfoWindowVisible(false);
   };
+
+  // 폴리라인 버튼 클릭 시 폴리라인 끄고 키기
   const onPloylineBtnClick = () => {
     setIsPolylinVisible({
       isStart: isStart,
       visible: !isPolylinVisible.visible,
     });
   };
+
   return (
     <>
       <BtnWrap>

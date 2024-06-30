@@ -3,10 +3,6 @@ import {
   Container,
   StationLineWrap,
   LogoText,
-  StationLineInfoWrap,
-  InfoTextWrap,
-  InfoText,
-  InfoTextHeader,
   FooterP,
   StationLineTabWrap,
   InfoTabBtn,
@@ -14,16 +10,13 @@ import {
 } from "./StationLineStyle";
 import { InfoCircleOutlined, DownCircleOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
-import busInfo from "../../../util/busInfo";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 import StationTab from "./StationTab/StationTab";
+import InfoTab from "./InfoTab";
 
 const StationLine = ({ bus_stationData }) => {
-  // 현재 파라미터 받아와서 버스 번호 확인
-  const { id } = useParams();
-
   /* state 코드 */
 
   const [isInfoTab, setIsInfoTab] = useState(true);
@@ -42,11 +35,6 @@ const StationLine = ({ bus_stationData }) => {
     setIsPolylinVisible,
   } = useContext(ViewContext);
 
-  /* redux 코드 */
-
-  // 버스 개수 state
-  const busLength = bus_stationData.busDataReducer.busInfo.length;
-
   /* 함수 코드 */
 
   // 탭 전환 함수
@@ -58,12 +46,6 @@ const StationLine = ({ bus_stationData }) => {
   const switchToStationTab = () => {
     setIsInfoTab(false);
   };
-
-  // 현재 페이지의 버스 정보만 필터링
-
-  const curBusInfo = busInfo.map((bus) => {
-    return bus.buslist.filter((bus) => bus.num === id);
-  })[id === "관악02" ? 1 : 0][0];
 
   if (window.matchMedia("(max-width: 550px)").matches && isInfoWindowVisible) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;
@@ -86,53 +68,15 @@ const StationLine = ({ bus_stationData }) => {
               정류장
             </StationTabBtn>
           </StationLineTabWrap>
-          <StationLineInfoWrap>
-            {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
-            {!window.matchMedia("(max-width: 550px)").matches ? (
-              <>
-                <InfoTextWrap>
-                  <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-                  <InfoText>
-                    첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
-                  </InfoText>
-                  <InfoText>
-                    <strong>배차간격</strong> : {curBusInfo.interval}
-                  </InfoText>
-                  <InfoText>
-                    <strong>
-                      {busLength > 0 ? (
-                        `현재 ${busLength}대 운행중`
-                      ) : (
-                        <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-                      )}
-                    </strong>
-                  </InfoText>
-                </InfoTextWrap>
-              </>
-            ) : (
-              <InfoTextWrap>
-                <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-                <InfoText>
-                  {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
-                  <strong>
-                    {busLength > 0 ? (
-                      `  현재 ${busLength}대 운행중`
-                    ) : (
-                      <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-                    )}
-                  </strong>
-                </InfoText>
-                <InfoText>
-                  <strong>배차간격</strong> : {curBusInfo.interval}
-                </InfoText>
-              </InfoTextWrap>
-            )}
-          </StationLineInfoWrap>
-          <StationTab
-            isPolylinVisible={isPolylinVisible}
-            setIsPolylinVisible={setIsPolylinVisible}
-            setIsInfoWindowVisible={setIsInfoWindowVisible}
-          />
+          {isInfoTab ? (
+            <InfoTab bus_stationData={bus_stationData} />
+          ) : (
+            <StationTab
+              isPolylinVisible={isPolylinVisible}
+              setIsPolylinVisible={setIsPolylinVisible}
+              setIsInfoWindowVisible={setIsInfoWindowVisible}
+            />
+          )}
         </StationLineWrap>
       </Container>
       <FooterP>
