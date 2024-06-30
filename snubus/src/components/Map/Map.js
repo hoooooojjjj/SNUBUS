@@ -435,6 +435,8 @@ function Map({ getData, bus_stationData }) {
     <Container isInfoWindowVisible={isInfoWindowVisible}>
       {isMapPrint ? (
         <UpdateWrap>
+          {" "}
+          <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
           <UpdateBtn
             animate={updateBtnAnimate}
             onClick={() => {
@@ -450,7 +452,6 @@ function Map({ getData, bus_stationData }) {
           >
             <RedoOutlined />
           </UpdateBtn>
-          <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
         </UpdateWrap>
       ) : (
         <></>

@@ -12,7 +12,6 @@ export const HeaderWrap = styled.header((props) => ({
   },
   position: props.fixed || null,
   zIndex: 10,
-  borderBottom: "1px solid #e0e0e0",
 }));
 
 // 헤더

@@ -9,7 +9,7 @@ import {
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({
   margin: "0 auto",
-  width: "30dvw",
+  width: "25dvw",
   height: "80dvh",
   "@media(max-width: 550px)": {
     width: "100dvw",
@@ -21,15 +21,14 @@ export const Container = styled.div({
 
 // StationLine 전체 Box Wrap
 export const StationLineWrap = styled.div({
-  width: "90%",
+  width: "100%",
   ...flex("column", "normal", "normal"),
   "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
-  border: "3px solid white",
-  borderRadius: 15,
-  padding: "15px 25px",
-  height: "100%",
+  // border: "3px solid white",
+  // borderRadius: 15,
+  height: "95%",
 });
 
 // 노선 정보 wrap

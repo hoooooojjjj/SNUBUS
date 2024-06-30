@@ -4,7 +4,7 @@ import { keyframes } from "@emotion/react";
 
 // Map 컴포넌트 컨테이너
 export const Container = styled.div((props) => ({
-  width: "70dvw",
+  width: "75dvw",
   height: "90dvh",
   "@media(max-width: 550px)": {
     width: "100dvw",
@@ -13,25 +13,24 @@ export const Container = styled.div((props) => ({
   position: "relative",
   ...Font_DoHyeon(),
   color: "black",
+  ...flex("row", "center", "center"),
 }));
 
 // 지도
 export const Maps = styled.div({
-  width: "100%",
-  height: "100%",
+  width: "95%",
+  height: "88%",
   "@media(min-width: 550px)": {
-    border: "3px solid white",
-    borderLeft: "none",
-    borderTopRightRadius: 15,
-    borderBottomRightRadius: 15,
+    borderRadius: 15,
   },
 });
 
 // 버스 관련 정보
 export const BusInfo = styled.div({
   position: "absolute",
-  top: 10,
-  left: 10,
+  top: 8,
+  color: "white",
+  left: 30,
   zIndex: 2,
   fontSize: 15,
   "@media(max-width: 1024px)": {
@@ -42,15 +41,15 @@ export const BusInfo = styled.div({
 // 업데이트 관련 컴포넌트 wrap
 export const UpdateWrap = styled.div({
   position: "absolute",
+  color: "white",
   "@media(min-width: 551px)": {
-    top: 10,
+    top: 3,
   },
   "@media(max-width: 550px)": {
     bottom: -12,
   },
-  right: 10,
-  zIndex: 2,
-  ...flex("column", "normal", "flex-end"),
+  right: 20,
+  ...flex("row", "center", "center"),
 });
 
 // rotateOnce 애니메이션 정의
@@ -70,6 +69,7 @@ const rotateOnce = keyframes`
 export const UpdateBtn = styled.button`
   background: none;
   border: none;
+  color: white;
   animation-name: ${(props) => (props.animate ? rotateOnce : "none")};
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
@@ -85,6 +85,8 @@ export const UpdateBtn = styled.button`
 // 데이터 제공 시간
 export const DataTm = styled.p({
   fontSize: 15,
+  margin: 0,
+  marginRight: 5,
   "@media(max-width: 1024px)": {
     fontSize: 13,
   },
