@@ -35,6 +35,9 @@ export const StationLineInfoWrap = styled.div({
   ...flex("row", "normal", "normal"),
   position: "relative",
   height: "100%",
+  "@media(max-width: 550px)": {
+    height: "30%",
+  },
 });
 
 // 로고 폰트
@@ -43,14 +46,17 @@ export const LogoText = styled.p({
   fontWeight: 500,
   fontSize: 40,
   margin: 0,
-  "@media(max-width: 595px)": {
+  "@media(max-width: 1024px)": {
+    fontSize: 35,
+  },
+  "@media(max-width: 768px)": {
     fontSize: 30,
   },
-  "@media(max-width: 485px)": {
-    fontSize: 22,
+  "@media(max-width: 595px)": {
+    fontSize: 35,
   },
-  "@media(max-width: 358px)": {
-    fontSize: 20,
+  "@media(max-width: 320px)": {
+    fontSize: 30,
   },
 });
 
@@ -58,13 +64,12 @@ export const LogoText = styled.p({
 export const StationLineTabWrap = styled.div({
   width: "90%",
   height: 60,
-  marginBottom: 20,
+  "@media(max-width: 550px)": {
+    height: 50,
+  },
+  marginBottom: 10,
   ...flex("row", "center", "center"),
   fontSize: 16,
-  "@media(max-width: 550px)": {
-    width: "100%",
-    height: 30,
-  },
 });
 
 // 정보 탭 Btn
@@ -74,6 +79,10 @@ export const InfoTabBtn = styled.button((props) => ({
   background: "none",
   color: "white",
   border: "none",
+  paddingBottom: 10,
+  "@media(max-width: 550px)": {
+    fontSize: 14,
+  },
   borderBottom: props.isInfoTab ? "2px solid white" : "none",
 }));
 
@@ -84,6 +93,10 @@ export const StationTabBtn = styled.button((props) => ({
   background: "none",
   color: "white",
   border: "none",
+  "@media(max-width: 550px)": {
+    fontSize: 14,
+  },
+  paddingBottom: 10,
   borderBottom: props.isInfoTab ? "none" : "2px solid white",
 }));
 
@@ -91,7 +104,7 @@ export const StationTabBtn = styled.button((props) => ({
 export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
   "@media(max-width: 550px)": {
-    ...flex("column", "center", "center"),
+    ...flex("column", "normal", "normal"),
   },
 }));
 
@@ -106,11 +119,10 @@ export const InfoTextHeader = styled.p({
   },
   "@media(max-width: 550px)": {
     fontSize: 20,
-    marginBottom: 5,
+    marginTop: 5,
   },
   "@media(max-width: 320px)": {
     fontSize: 18,
-    marginBottom: 5,
   },
   color: "white",
   ...Font_DoHyeon(),
@@ -127,11 +139,10 @@ export const InfoText = styled.p({
   },
   "@media(max-width: 550px)": {
     fontSize: 15,
-    margin: 0,
+    marginBottom: 10,
   },
   "@media(max-width: 320px)": {
     fontSize: 14,
-    margin: 0,
   },
   color: "white",
 });
@@ -158,9 +169,11 @@ export const StationSwitchBtn = styled.button({
     fontSize: 14,
     marginTop: 5,
   },
+  "@media(max-width: 550px)": {
+    fontSize: 15,
+  },
   "@media(max-width: 320px)": {
-    fontSize: 13,
-    marginTop: 5,
+    fontSize: 15,
   },
   background: "none",
   color: "white",
@@ -196,9 +209,8 @@ export const PolylineBtn = styled.button({
     fontSize: 12,
     marginTop: 5,
   },
-  "@media(max-width: 320px)": {
-    fontSize: 11,
-    marginTop: 5,
+  "@media(max-width: 550px)": {
+    fontSize: 15,
   },
   background: "none",
   color: "white",
@@ -280,6 +292,23 @@ export const MarkerWrap = styled.div({
 export const MarkerInfoImg = styled.img({
   width: 30,
   height: 30,
+  fontSize: 16,
+  "@media(max-width: 1024px)": {
+    width: 28,
+    height: 28,
+  },
+  "@media(max-width: 768px)": {
+    width: 26,
+    height: 26,
+  },
+  "@media(max-width: 550px)": {
+    width: 30,
+    height: 30,
+  },
+  "@media(max-width: 320px)": {
+    width: 28,
+    height: 28,
+  },
   marginRight: 10,
   backgroundColor: "white",
   borderRadius: 50,
@@ -289,6 +318,19 @@ export const MarkerInfoImg = styled.img({
 export const MarkerInfoText = styled.p({
   fontSize: 16,
   paddingTop: 2,
+  "@media(max-width: 1024px)": {
+    fontSize: 15,
+  },
+  "@media(max-width: 768px)": {
+    fontSize: 14,
+  },
+  "@media(max-width: 550px)": {
+    fontSize: 15,
+    paddingTop: 4,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 14,
+  },
 });
 
 export const FooterP = styled.p({

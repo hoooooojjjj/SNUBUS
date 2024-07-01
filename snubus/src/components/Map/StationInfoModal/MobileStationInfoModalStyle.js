@@ -8,8 +8,12 @@ import {
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({
   margin: "0 auto",
+  marginTop: 10,
   width: "100dvw",
   height: "30dvh",
+  "@media(max-width: 320px)": {
+    height: "35dvh",
+  },
   ...flex("row", "center", "center"),
 });
 
@@ -20,6 +24,9 @@ export const StationLineWrap = styled.div({
   border: "3px solid white",
   borderRadius: 15,
   padding: "15px 25px",
+  "@media(max-width: 320px)": {
+    padding: 0,
+  },
   height: "90%",
   position: "relative",
 });
@@ -64,6 +71,10 @@ export const InfoTextHeader = styled.p({
     marginBottom: 5,
     fontSize: 20,
   },
+  "@media(max-width: 320px)": {
+    marginBottom: 5,
+    fontSize: 18,
+  },
   color: "white",
   ...Font_DoHyeon(),
 });
@@ -81,6 +92,9 @@ export const InfoText = styled.p({
     margin: 0,
     marginRight: 5,
     fontSize: 16,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 14,
   },
   color: "white",
   ...Font_NanumSquare(),

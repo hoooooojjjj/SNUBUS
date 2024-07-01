@@ -8,6 +8,7 @@ export const Container = styled.div({
 });
 
 export const ViewWrap = styled.div({
+  marginTop: 10,
   borderTop: "2px solid #363636",
   ...flex("row", "center", "center"),
   "@media(max-width: 550px)": {

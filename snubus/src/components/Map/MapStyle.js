@@ -46,7 +46,7 @@ export const UpdateWrap = styled.div({
     top: 3,
   },
   "@media(max-width: 550px)": {
-    bottom: -12,
+    bottom: -20,
   },
   right: 20,
   ...flex("row", "center", "center"),
