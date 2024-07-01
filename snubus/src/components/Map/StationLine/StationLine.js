@@ -10,13 +10,16 @@ import {
 } from "./StationLineStyle";
 import { InfoCircleOutlined, DownCircleOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ViewContext } from "../../../routes/View";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 import StationTab from "./StationTab/StationTab";
 import InfoTab from "./InfoTab";
 
 const StationLine = ({ bus_stationData }) => {
+  // 현재 파라미터 받아와서 버스 번호 확인
+  const { id } = useParams();
+
   /* state 코드 */
 
   const [isInfoTab, setIsInfoTab] = useState(true);
@@ -55,7 +58,7 @@ const StationLine = ({ bus_stationData }) => {
     <>
       <Container>
         <StationLineWrap>
-          <LogoText>SNUBUS</LogoText>
+          <LogoText>{id}</LogoText>
           <StationLineTabWrap>
             <InfoTabBtn onClick={switchToInfoTab} isInfoTab={isInfoTab}>
               <InfoCircleOutlined />
