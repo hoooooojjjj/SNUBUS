@@ -4,6 +4,10 @@ import {
   InfoTextWrap,
   InfoText,
   InfoTextHeader,
+  MarkerInfoWrap,
+  MarkerInfoImg,
+  MarkerInfoText,
+  MarkerWrap,
 } from "../StationLine/StationLineStyle";
 import busInfo from "../../../util/busInfo";
 import { useParams } from "react-router-dom";
@@ -22,48 +26,71 @@ function InfoTab({ bus_stationData }) {
   })[id === "관악02" ? 1 : 0][0];
 
   return (
-    <StationLineInfoWrap>
-      {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
-      {!window.matchMedia("(max-width: 550px)").matches ? (
-        <>
+    <>
+      <StationLineInfoWrap>
+        {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+        {!window.matchMedia("(max-width: 550px)").matches ? (
+          <>
+            <InfoTextWrap>
+              <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
+              <InfoText>
+                첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
+              </InfoText>
+              <InfoText>
+                <strong>배차간격</strong> : {curBusInfo.interval}
+              </InfoText>
+              <InfoText>
+                <strong>
+                  {busLength > 0 ? (
+                    `현재 ${busLength}대 운행중`
+                  ) : (
+                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                  )}
+                </strong>
+              </InfoText>
+            </InfoTextWrap>
+          </>
+        ) : (
           <InfoTextWrap>
             <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
             <InfoText>
-              첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
-            </InfoText>
-            <InfoText>
-              <strong>배차간격</strong> : {curBusInfo.interval}
-            </InfoText>
-            <InfoText>
+              {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
               <strong>
                 {busLength > 0 ? (
-                  `현재 ${busLength}대 운행중`
+                  `  현재 ${busLength}대 운행중`
                 ) : (
                   <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
                 )}
               </strong>
             </InfoText>
+            <InfoText>
+              <strong>배차간격</strong> : {curBusInfo.interval}
+            </InfoText>
           </InfoTextWrap>
-        </>
-      ) : (
-        <InfoTextWrap>
-          <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-          <InfoText>
-            {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
-            <strong>
-              {busLength > 0 ? (
-                `  현재 ${busLength}대 운행중`
-              ) : (
-                <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-              )}
-            </strong>
-          </InfoText>
-          <InfoText>
-            <strong>배차간격</strong> : {curBusInfo.interval}
-          </InfoText>
-        </InfoTextWrap>
-      )}
-    </StationLineInfoWrap>
+        )}
+      </StationLineInfoWrap>{" "}
+      <MarkerInfoWrap>
+        <InfoTextHeader>마커 정보</InfoTextHeader>
+        <MarkerWrap>
+          <MarkerInfoImg
+            src={process.env.PUBLIC_URL + "/assets/currentMarker.png"}
+          />
+          <MarkerInfoText>현재 위치</MarkerInfoText>
+        </MarkerWrap>
+        <MarkerWrap>
+          <MarkerInfoImg
+            src={process.env.PUBLIC_URL + "/assets/stationMarker.png"}
+          />
+          <MarkerInfoText>정류장</MarkerInfoText>
+        </MarkerWrap>
+        <MarkerWrap>
+          <MarkerInfoImg
+            src={process.env.PUBLIC_URL + "/assets/busMarker.png"}
+          />
+          <MarkerInfoText>버스</MarkerInfoText>
+        </MarkerWrap>
+      </MarkerInfoWrap>
+    </>
   );
 }
 

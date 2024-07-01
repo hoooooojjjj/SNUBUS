@@ -281,41 +281,45 @@ function Map({ getData, bus_stationData }) {
 
       setclickedStationInfo(curStation);
 
-      let contentStyle =
-        "display: inline-block; text-align: center; height: auto; width: auto; padding: 4px 10px 2px 10px; margin-bottom: 110px; font-size: 20px; background-color:white; border:1px solid black; border-radius: 10px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);";
+      let customOverlay;
 
-      // 반응형 스타일링
-      if (window.matchMedia("(max-width: 1024px)").matches) {
-        contentStyle += "font-size: 16px;";
+      if (window.matchMedia("(max-width: 550px)").matches) {
+        let contentStyle =
+          "display: inline-block; text-align: center; height: auto; width: auto; padding: 4px 10px 2px 10px; margin-bottom: 110px; font-size: 20px; background-color:white; border:1px solid black; border-radius: 10px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);";
+
+        // 반응형 스타일링
+        if (window.matchMedia("(max-width: 1024px)").matches) {
+          contentStyle += "font-size: 16px;";
+        }
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          contentStyle += "font-size: 14px; margin-bottom: 100px;";
+        }
+
+        // 커스텀 오버레이 컨텐츠
+        const content = `<span style="${contentStyle}">${curStation[0].stNm}</span>`;
+
+        // 커스텀 오버레이가 표시될 위치
+        const OverlayPosition = new window.kakao.maps.LatLng(
+          busStationPos.pos[0],
+          busStationPos.pos[1]
+        );
+
+        // 커스텀 오버레이를 생성
+        customOverlay = new window.kakao.maps.CustomOverlay({
+          position: OverlayPosition,
+          content: content,
+        });
+
+        // 마커 위에 커스텀 오버레이를 표시
+        customOverlay.setMap(map, stationMarker);
       }
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        contentStyle += "font-size: 14px; margin-bottom: 100px;";
-      }
-
-      // 커스텀 오버레이 컨텐츠
-      const content = `<span style="${contentStyle}">${curStation[0].stNm}</span>`;
-
-      // 커스텀 오버레이가 표시될 위치
-      const OverlayPosition = new window.kakao.maps.LatLng(
-        busStationPos.pos[0],
-        busStationPos.pos[1]
-      );
-
-      // 커스텀 오버레이를 생성
-      const customOverlay = new window.kakao.maps.CustomOverlay({
-        position: OverlayPosition,
-        content: content,
-      });
-
-      // 마커 위에 커스텀 오버레이를 표시
-      customOverlay.setMap(map, stationMarker);
 
       // 클릭한 버스 정류장 마커 print
       stationMarker.setMap(map);
 
       // 모달에서 X버튼 클릭시 모달과 커스텀 오버레이, 마커 닫힘
       if (!isInfoWindowVisible) {
-        customOverlay.setMap(null);
+        customOverlay?.setMap(null);
         stationMarker.setMap(null);
         // 클릭한 정류장 좌표로 중심좌표 이동 풀기
         map.setCenter(

@@ -53,6 +53,17 @@ function StationTab({
 
   return (
     <>
+      <PolylineBtn onClick={onPloylineBtnClick}>
+        {isPolylinVisible.visible ? (
+          <>
+            <FundOutlined /> 해당 방면 노선 라인 끄기
+          </>
+        ) : (
+          <>
+            <StockOutlined /> 해당 방면 노선 라인 켜기
+          </>
+        )}
+      </PolylineBtn>
       <BtnWrap>
         <StationSwitchBtn onClick={switchToDirectionToStart}>
           {isStart ? <CheckOutlined style={{ marginRight: 10 }} /> : <></>}
@@ -64,17 +75,6 @@ function StationTab({
         </StationSwitchBtn>
       </BtnWrap>
       <LineWrap>
-        <PolylineBtn onClick={onPloylineBtnClick}>
-          {isPolylinVisible.visible ? (
-            <>
-              <FundOutlined /> 해당 방면 노선 라인 끄기
-            </>
-          ) : (
-            <>
-              <StockOutlined /> 해당 방면 노선 라인 켜기
-            </>
-          )}
-        </PolylineBtn>
         <TimeLines isStart={isStart} />
       </LineWrap>
     </>

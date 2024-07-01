@@ -34,13 +34,15 @@ export const StationLineWrap = styled.div({
 export const StationLineInfoWrap = styled.div({
   ...flex("row", "normal", "normal"),
   position: "relative",
+  height: "100%",
 });
 
 // 로고 폰트
 export const LogoText = styled.p({
   ...Font_Kanit(),
   fontWeight: 500,
-  fontSize: 35,
+  fontSize: 40,
+  margin: 0,
   "@media(max-width: 595px)": {
     fontSize: 30,
   },
@@ -56,8 +58,9 @@ export const LogoText = styled.p({
 export const StationLineTabWrap = styled.div({
   width: "90%",
   height: 60,
-  marginBottom: 30,
+  marginBottom: 20,
   ...flex("row", "center", "center"),
+  fontSize: 16,
   "@media(max-width: 550px)": {
     width: "100%",
     height: 30,
@@ -170,11 +173,11 @@ export const StationSwitchBtn = styled.button({
 
 // StationLine wrap
 export const LineWrap = styled.div({
-  width: "100%",
-  borderTop: "1px solid white",
+  width: "95%",
+  borderTop: "2px solid #363636",
   overflowY: "scroll",
   marginTop: 10,
-  paddingTop: 10,
+  paddingTop: 15,
   msOverflowStyle: "none" /* Internet Explorer */,
   scrollbarWidth: "none" /* Firefox */,
   "&::-webkit-scrollbar": {
@@ -262,6 +265,31 @@ export const TimelineStyle = styled(Timeline)`
     margin-bottom: 0px;
   }
 `;
+
+export const MarkerInfoWrap = styled.div({
+  ...flex("column", "normal", "normal"),
+  borderTop: "2px solid #363636",
+  width: "85%",
+  paddingTop: 10,
+});
+
+export const MarkerWrap = styled.div({
+  ...flex("row", "normal", "normal"),
+});
+
+export const MarkerInfoImg = styled.img({
+  width: 30,
+  height: 30,
+  marginRight: 10,
+  backgroundColor: "white",
+  borderRadius: 50,
+  padding: 3,
+});
+
+export const MarkerInfoText = styled.p({
+  fontSize: 16,
+  paddingTop: 2,
+});
 
 export const FooterP = styled.p({
   position: "absolute",
