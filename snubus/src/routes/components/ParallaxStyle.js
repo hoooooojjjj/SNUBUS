@@ -1,4 +1,9 @@
 import styled from "@emotion/styled";
+import {
+  flex,
+  Font_Kanit,
+  Font_NanumSquare,
+} from "../../util/publicStyleComponents";
 
 export const Scene = styled.section`
   height: 100dvh;
@@ -12,8 +17,8 @@ export const Scene = styled.section`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 300dvh;
-    background-color: rgba(0, 0, 0, 0.2);
+    height: 700dvh;
+    background-color: rgba(0, 0, 0, 0.15);
   }
   &.one {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg1.jpg`});
@@ -23,6 +28,18 @@ export const Scene = styled.section`
   }
   &.three {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg2.jpg`});
+  }
+  &.four {
+    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg3.jpg`});
+  }
+  &.five {
+    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg4.jpg`});
+  }
+  &.six {
+    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg5.jpg`});
+  }
+  &.seven {
+    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg6.jpg`});
   }
 `;
 
@@ -108,3 +125,44 @@ export const GridHeader = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
 `;
+
+export const ExplainWrap = styled.div((props) => ({
+  ...flex("column", "center", props.alignItems),
+  zIndex: 2,
+}));
+
+export const ExplainHeader = styled.h1({
+  color: "white",
+  ...Font_Kanit(),
+  width: "100%",
+  textAlign: "center",
+  zIndex: 2,
+  marginTop: "1rem",
+  marginBottom: "1rem",
+});
+
+export const ExplainFlex = styled.h1({
+  ...flex("row", "center", "center"),
+  zIndex: 2,
+  fontSize: "1.5rem",
+});
+
+export const ExplainImg = styled.img({
+  width: "60%",
+  zIndex: 2,
+  border: "2px solid white",
+  borderRadius: 15,
+  marginBottom: "0.2rem",
+});
+
+export const ExplainText = styled.p({
+  margin: 15,
+  zIndex: 2,
+  width: "95%",
+  fontSize: "1.4rem",
+  ...Font_NanumSquare(),
+  color: "#f0f0f0",
+});
+export const ViewImgWrap = styled.div({
+  ...flex("row", "space-evenly", "center"),
+});

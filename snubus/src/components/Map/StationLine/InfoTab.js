@@ -9,11 +9,14 @@ import {
   MarkerInfoText,
   MarkerWrap,
 } from "../StationLine/StationLineStyle";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import busInfo from "../../../util/busInfo";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function InfoTab({ bus_stationData }) {
   // 현재 파라미터 받아와서 버스 번호 확인
   const { id } = useParams();
+
+  const nav = useNavigate();
 
   /* redux 코드 */
 
@@ -27,7 +30,7 @@ function InfoTab({ bus_stationData }) {
 
   return (
     <>
-      <StationLineInfoWrap>
+      <StationLineInfoWrap style={{ textAlign: "left" }}>
         {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
         {!window.matchMedia("(max-width: 550px)").matches ? (
           <>
@@ -90,6 +93,17 @@ function InfoTab({ bus_stationData }) {
           <MarkerInfoText>버스</MarkerInfoText>
         </MarkerWrap>
       </MarkerInfoWrap>
+      <InfoText
+        onClick={() => {
+          nav("/intro");
+        }}
+        style={{ textAlign: "right", marginRight: 15, cursor: "pointer" }}
+      >
+        <strong>
+          <QuestionCircleOutlined />{" "}
+        </strong>
+        도움말
+      </InfoText>
     </>
   );
 }

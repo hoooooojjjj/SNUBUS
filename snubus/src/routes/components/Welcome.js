@@ -5,7 +5,7 @@ function Welcome() {
   return (
     <WelcomeContainer>
       <WelcomeHeader>SNUBUS</WelcomeHeader>
-      <WelcomeText>"더 편안한 학교생활을 위해"</WelcomeText>
+      <WelcomeText>"서울대에서 당신의 이동이 '더 -' 하도록"</WelcomeText>
     </WelcomeContainer>
   );
 }
