@@ -15,8 +15,11 @@ import {
   ExplainText,
   ExplainFlex,
   ViewImgWrap,
+  Wrapper,
+  Words,
+  Span,
 } from "./ParallaxStyle";
-import { Overlay } from "../MainStyle";
+import { Overlay } from "../../MainStyle";
 import { useNavigate } from "react-router-dom";
 
 const Parallax = () => {
@@ -28,7 +31,22 @@ const Parallax = () => {
       <Scene className="one">
         <Header>
           <Scene1HeaderH1>
-            To make your movement <strong>' More - '</strong> in SNU
+            To make your movement
+            <strong>
+              <Wrapper>
+                <p>More</p>
+                <Words>
+                  <Span></Span>
+                  <Span>customized</Span>
+                  <Span>trendy</Span>
+                  <Span>Useful</Span>
+                  <Span>Usable</Span>
+                  <Span>Affective</Span>
+                  <Span>Customer Oriented</Span>
+                </Words>
+                <p>in SNU</p>
+              </Wrapper>
+            </strong>
           </Scene1HeaderH1>
           <Scene1HeaderH2>
             서울대에서 당신의 이동이 <strong>'더 -'</strong> 하도록
@@ -52,21 +70,21 @@ const Parallax = () => {
               <p>더 트렌디한 디자인</p>
             </GridItem>
             <GridItem>
-              <GridHeader>Usefulness</GridHeader>
+              <GridHeader>Useful</GridHeader>
               <p>당신이 원하는 목적을 더 확실하게</p>
               <p>목적에 맞는 정보 제공</p>
             </GridItem>
             <GridItem>
-              <GridHeader>Usability</GridHeader>
+              <GridHeader>Usable</GridHeader>
               <p>더 효율적이고 편리하게</p>
               <p>바쁜 당신의 시간을 절약할 수 있게</p>
             </GridItem>
             <GridItem>
-              <GridHeader>Affect</GridHeader>
+              <GridHeader>Affective</GridHeader>
               <p>부드럽게 이어지는 인터랙션</p>
             </GridItem>
             <GridItem>
-              <GridHeader>Customer Orientation</GridHeader>
+              <GridHeader>Customer Oriented</GridHeader>
               <p>빠른 피드백 수용과 반영</p>
             </GridItem>
           </GridContainer>

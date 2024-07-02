@@ -3,7 +3,8 @@ import {
   flex,
   Font_Kanit,
   Font_NanumSquare,
-} from "../../util/publicStyleComponents";
+} from "../../../util/publicStyleComponents";
+import { keyframes } from "@emotion/react";
 
 export const Scene = styled.section`
   height: 100dvh;
@@ -63,10 +64,9 @@ export const Scene1HeaderH1 = styled.h1`
   font-family: "Kanit", sans-serif;
   font-size: 3rem;
   margin-bottom: 1rem;
+  width: 100%;
   &:after {
     content: "";
-    border-bottom: ${(props) => (props.isLast ? "none" : "3px solid white")};
-    width: 12rem;
     display: block;
     margin: 0 auto;
     margin-top: 1rem;
@@ -76,8 +76,8 @@ export const Scene1HeaderH1 = styled.h1`
 export const Scene1HeaderH2 = styled.h2`
   z-index: 2;
   font-family: "Do hyeon", sans-serif;
-  font-size: 1.5rem;
-  margin-top: 1rem;
+  font-size: 2rem;
+  margin-top: 2rem;
 `;
 
 export const Scene2Wrap = styled.div`
@@ -166,3 +166,68 @@ export const ExplainText = styled.p({
 export const ViewImgWrap = styled.div({
   ...flex("row", "space-evenly", "center"),
 });
+
+export const Wrapper = styled.div`
+  height: 60px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+`;
+
+export const Words = styled.div`
+  overflow: hidden;
+  border-bottom: 3px solid white;
+  margin: 0px 10px;
+`;
+
+const spin_words = keyframes` 
+  0% {
+    transform: translateY(-112%);
+  }
+  8.33% {
+    transform: translateY(-100%);
+  }
+  16.67% {
+    transform: translateY(-212%);
+  }
+  25% {
+    transform: translateY(-200%);
+  }
+  33.33% {
+    transform: translateY(-312%);
+  }
+  41.67% {
+    transform: translateY(-300%);
+  }
+  50% {
+    transform: translateY(-412%);
+  }
+  58.33% {
+    transform: translateY(-400%);
+  }
+  66.67% {
+    transform: translateY(-512%);
+  }
+  75% {
+    transform: translateY(-500%);
+  }
+  83.33% {
+    transform: translateY(-612%);
+  }
+  91.67% {
+    transform: translateY(-600%);
+  }
+  100% {
+    transform: translateY(-712%);
+  }
+`;
+
+export const Span = styled.span`
+  display: block;
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  animation: ${spin_words} 7s infinite;
+`;
