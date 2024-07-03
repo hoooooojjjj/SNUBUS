@@ -46,11 +46,10 @@ const fadeOut = keyframes`
 `;
 
 export const WelcomeContainer = styled.div({
+  zIndex: 100,
   ...container(),
   ...flex("column", "center", "center"),
-  backgroundImage: `url(${
-    process.env.PUBLIC_URL + `assets/backgroundImg0.jpg`
-  })`,
+  backgroundImage: `url(${process.env.PUBLIC_URL + `assets/introImg0.jpg`})`,
   backgroundSize: "cover",
   "::before": {
     position: "absolute",
@@ -65,7 +64,7 @@ export const WelcomeContainer = styled.div({
 });
 
 export const WelcomeHeader = styled.p({
-  zIndex: 1,
+  zIndex: 100,
   animation: `${slideInEllipticRightBck} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
   ...Font_Kanit(),
   marginBottom: 0,
@@ -80,7 +79,7 @@ export const WelcomeHeader = styled.p({
 });
 
 export const WelcomeText = styled.p({
-  zIndex: 1,
+  zIndex: 100,
   animation: `${slideInEllipticLeftBck} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
   ...Font_DoHyeon(),
   fontSize: 25,

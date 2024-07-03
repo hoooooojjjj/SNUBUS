@@ -18,7 +18,7 @@ export const Scene = styled.section`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 700dvh;
+    height: 600dvh;
     background-color: rgba(0, 0, 0, 0.15);
   }
   &.one {
@@ -39,9 +39,6 @@ export const Scene = styled.section`
   &.six {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg5.jpg`});
   }
-  &.seven {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg6.jpg`});
-  }
 `;
 
 export const Header = styled.header`
@@ -57,9 +54,6 @@ export const Header = styled.header`
 `;
 
 export const Scene1HeaderH1 = styled.h1`
-  &:hover {
-    color: ${(props) => (props.isLast ? "#0c8ce9" : "white")};
-  }
   z-index: 2;
   font-family: "Kanit", sans-serif;
   font-size: 3rem;
@@ -74,6 +68,9 @@ export const Scene1HeaderH1 = styled.h1`
 `;
 
 export const Scene1HeaderH2 = styled.h2`
+  &:hover {
+    color: ${(props) => (props.isLast ? "#0c8ce9" : "white")};
+  }
   z-index: 2;
   font-family: "Do hyeon", sans-serif;
   font-size: 2rem;

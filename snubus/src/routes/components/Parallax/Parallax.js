@@ -51,6 +51,15 @@ const Parallax = () => {
           <Scene1HeaderH2>
             서울대에서 당신의 이동이 <strong>'더 -'</strong> 하도록
           </Scene1HeaderH2>
+          <Scene1HeaderH2
+            isLast={true}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Click to Get started
+          </Scene1HeaderH2>
         </Header>
       </Scene>
       <Scene className="two">
@@ -191,19 +200,6 @@ const Parallax = () => {
             방면의 노선 라인이 표시된 모습입니다.
           </ExplainText>
         </ExplainWrap>
-      </Scene>
-      <Scene className="seven">
-        <Header>
-          <Scene1HeaderH1
-            isLast={true}
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Click to Get started
-          </Scene1HeaderH1>
-        </Header>
       </Scene>
     </>
   );
