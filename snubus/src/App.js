@@ -23,7 +23,7 @@ function App() {
         theme={{
           components: {
             Carousel: {
-              arrowSize: 30,
+              arrowSize: 40,
               dotActiveWidth: 40,
               dotWidth: 50,
               dotHeight: 7,
