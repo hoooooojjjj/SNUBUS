@@ -30,8 +30,8 @@ export const SlideItem = styled.div({
     height: SlideItemHeight_under550,
   },
   background:
-    "radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.0) 70%)",
-  borderRadius: 10,
+    "radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.0) 70%)",
+  borderRadius: 20,
 });
 
 // 슬라이드 안에 텍스트 컴포넌트

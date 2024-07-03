@@ -48,10 +48,24 @@ const fadeOut = keyframes`
 export const WelcomeContainer = styled.div({
   ...container(),
   ...flex("column", "center", "center"),
+  backgroundImage: `url(${
+    process.env.PUBLIC_URL + `assets/backgroundImg0.jpg`
+  })`,
+  backgroundSize: "cover",
+  "::before": {
+    position: "absolute",
+    content: '""',
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+  },
   animation: `${fadeOut} 1s ease-out 3s both`,
 });
 
 export const WelcomeHeader = styled.p({
+  zIndex: 1,
   animation: `${slideInEllipticRightBck} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
   ...Font_Kanit(),
   marginBottom: 0,
@@ -66,6 +80,7 @@ export const WelcomeHeader = styled.p({
 });
 
 export const WelcomeText = styled.p({
+  zIndex: 1,
   animation: `${slideInEllipticLeftBck} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
   ...Font_DoHyeon(),
   fontSize: 25,
