@@ -348,14 +348,23 @@ export const FooterP = styled.p({
 });
 
 // 다른 버스로 이동할 수 있는 dropdown
-
 export const BusSwitchBtn = styled.div({
   position: "absolute",
-  top: 18,
+  top: 0,
   right: 20,
   cursor: "pointer",
-  width: "35%",
+  width: "auto",
   textAlign: "center",
+  fontSize: 15,
+  "@media(max-width: 768px)": {
+    fontSize: 15,
+  },
+  "@media(max-width: 375px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 11,
+  },
 });
 
 export const BusSelectWrap = styled.div({
@@ -363,16 +372,19 @@ export const BusSelectWrap = styled.div({
   backgroundColor: "#1a1919",
   padding: 5,
   position: "absolute",
-  top: 15,
+  top: 0,
   right: 20,
   width: "35%",
   borderRadius: 10,
   ...Font_NanumSquare(),
+  fontSize: 15,
   border: "1px solid white",
-  // "@media(max-width: 550px)": {
-  //   width: "100%",
-  //   height: 40,
-  // },
+  "@media(max-width: 768px)": {
+    width: "45%",
+  },
+  "@media(max-width: 550px)": {
+    width: "25%",
+  },
 });
 
 export const BusSelectBtn = styled.button({
@@ -385,12 +397,27 @@ export const BusSelectBtn = styled.button({
   "&:hover": {
     color: "#0c8ce9",
   },
+  "@media(max-width: 768px)": {
+    fontSize: 15,
+  },
+  "@media(max-width: 375px)": {
+    fontSize: 13,
+  },
+  "@media(max-width: 320px)": {
+    fontSize: 13,
+  },
 });
 
 export const BusSelectCloseBtn = styled.div({
   position: "absolute",
-  top: 5,
-  right: 8,
+  top: 3,
+  right: 3,
   cursor: "pointer",
   ...Font_NanumSquare(),
+  "@media(max-width: 768px)": {
+    fontSize: 15,
+  },
+  "@media(max-width: 375px)": {
+    fontSize: 13,
+  },
 });
