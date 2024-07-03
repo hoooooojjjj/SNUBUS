@@ -35,8 +35,8 @@ export const Container = styled.div({
 
 export const CloseBtn = styled.button({
   position: "absolute",
-  top: 5,
-  right: 5,
+  top: 2,
+  right: 0,
   fontSize: 20,
   background: "none",
   border: "none",

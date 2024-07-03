@@ -22,6 +22,7 @@ export const Container = styled.div({
 
 // StationLine 전체 Box Wrap
 export const StationLineWrap = styled.div({
+  position: "relative",
   width: "100%",
   ...flex("column", "normal", "normal"),
   "@media(max-width: 550px)": {
@@ -344,4 +345,52 @@ export const FooterP = styled.p({
     position: "relative",
   },
   "@media(max-width: 320px)": {},
+});
+
+// 다른 버스로 이동할 수 있는 dropdown
+
+export const BusSwitchBtn = styled.div({
+  position: "absolute",
+  top: 18,
+  right: 20,
+  cursor: "pointer",
+  width: "35%",
+  textAlign: "center",
+});
+
+export const BusSelectWrap = styled.div({
+  ...flex("column", "center", "flex-start"),
+  backgroundColor: "#1a1919",
+  padding: 5,
+  position: "absolute",
+  top: 15,
+  right: 20,
+  width: "35%",
+  borderRadius: 10,
+  ...Font_NanumSquare(),
+  border: "1px solid white",
+  // "@media(max-width: 550px)": {
+  //   width: "100%",
+  //   height: 40,
+  // },
+});
+
+export const BusSelectBtn = styled.button({
+  width: "100%",
+  height: "100%",
+  background: "none",
+  border: "none",
+  color: "white",
+  ...Font_NanumSquare(),
+  "&:hover": {
+    color: "#0c8ce9",
+  },
+});
+
+export const BusSelectCloseBtn = styled.div({
+  position: "absolute",
+  top: 5,
+  right: 8,
+  cursor: "pointer",
+  ...Font_NanumSquare(),
 });

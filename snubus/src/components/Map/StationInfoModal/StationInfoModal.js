@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Container, CloseBtn, Header, Text } from "./StationInfoModalStyle";
 import { ViewContext } from "../../../routes/View";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, CloseOutlined } from "@ant-design/icons";
 
 const StationInfoModal = ({ curStation }) => {
   // view 페이지에서 받아온 context
@@ -65,7 +65,7 @@ const StationInfoModal = ({ curStation }) => {
           setIsInfoWindowVisible(false);
         }}
       >
-        X
+        <CloseOutlined />
       </CloseBtn>
       <Header>{curStation[0].stNm}</Header>
       <Text>

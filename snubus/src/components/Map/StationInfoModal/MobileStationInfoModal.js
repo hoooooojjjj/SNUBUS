@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ViewContext } from "../../../routes/View";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   StationLineWrap,
   Container,
@@ -67,7 +67,7 @@ const MobileStationInfoModal = ({ curStation }) => {
             setIsInfoWindowVisible(false);
           }}
         >
-          X
+          <CloseOutlined />
         </CloseBtn>
         <StationLineInfoWrap>
           <InfoTextWrap>
