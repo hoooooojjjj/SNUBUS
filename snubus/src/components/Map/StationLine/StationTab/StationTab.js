@@ -6,7 +6,7 @@ import {
   PolylineBtn,
 } from "../StationLineStyle";
 import TimeLines from "./TimeLine/TimeLines";
-import busInfo from "../../../../util/busInfo";
+import busInfo from "../../../../json/busInfo";
 import { CheckOutlined, FundOutlined, StockOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 function StationTab({

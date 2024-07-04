@@ -3,7 +3,7 @@ import { Containers, Overlay, MainWrap } from "./MainStyle";
 import Headers from "./components/Header";
 import Footers from "./components/Footer";
 import Articles from "./components/Article";
-import busInfo from "../util/busInfo";
+import busInfo from "../json/busInfo";
 import { useNavigate } from "react-router-dom";
 import { hasVisitedContext } from "../App";
 

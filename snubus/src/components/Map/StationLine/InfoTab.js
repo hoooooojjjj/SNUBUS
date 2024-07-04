@@ -10,8 +10,9 @@ import {
   MarkerWrap,
 } from "../StationLine/StationLineStyle";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import busInfo from "../../../util/busInfo";
+import busInfo from "../../../json/busInfo.json";
 import { useNavigate, useParams } from "react-router-dom";
+
 function InfoTab({ bus_stationData }) {
   // 현재 파라미터 받아와서 버스 번호 확인
   const { id } = useParams();

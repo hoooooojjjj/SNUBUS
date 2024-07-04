@@ -11,7 +11,8 @@ import { isMapPrintContext } from "../../App";
 import { ViewContext } from "../../routes/View";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
-import { route_start, route_end } from "../../util/busStationPos";
+import route_start from "../../json/PolylineCoor_start.json";
+import route_end from "../../json/PolylineCoor_end.json";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
