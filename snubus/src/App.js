@@ -24,10 +24,8 @@ function App() {
 
   useEffect(() => {
     // sessionStorage에 'hasVisited' 키가 있는지 확인
-    console.log(hasVisited);
     // 처음 방문이면 'hasVisited'를 설정
     if (hasVisited === null) {
-      console.log("first visit");
       sessionStorage.setItem("hasVisited", "true");
     }
   });

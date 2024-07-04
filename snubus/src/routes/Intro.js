@@ -18,7 +18,6 @@ const Intro = () => {
         setShowWelcome(false);
       }, 3000);
       setHasVisited(sessionStorage.getItem("hasVisited"));
-      console.log("hasVisited : " + sessionStorage.getItem("hasVisited"));
       return () => clearTimeout(timer);
     }
   }, []);

@@ -64,9 +64,7 @@ const Parallax = () => {
       </Scene>
       <Scene className="two">
         <Scene2Wrap>
-          <Scene2HeaderH1>
-            SNUBUS, <span style={{ fontSize: "2.5rem" }}>is More -</span>
-          </Scene2HeaderH1>
+          <Scene2HeaderH1>SNUBUS, is More -</Scene2HeaderH1>
           <GridContainer>
             <GridItem>
               <GridHeader>customized</GridHeader>
@@ -102,11 +100,31 @@ const Parallax = () => {
       <Scene className="three">
         <ExplainWrap alignItems={"flex-end"}>
           <ExplainHeader>SNUBUS Main Page</ExplainHeader>
-          <ExplainFlex>
-            <ExplainImg
-              src={`${process.env.PUBLIC_URL + `assets/Explain0.png`}`}
-            ></ExplainImg>
-            <div>
+          {!window.matchMedia("(max-width: 550px)").matches ? (
+            <ExplainFlex>
+              <ExplainImg
+                src={`${process.env.PUBLIC_URL + `assets/Explain0.png`}`}
+              ></ExplainImg>
+              <div>
+                <ExplainText>
+                  1️⃣ <strong>버스 종류</strong> : 찾으시는 버스 종류를 선택하실
+                  수 있는 탭입니다.
+                </ExplainText>
+                <ExplainText>
+                  2️⃣ <strong>소개</strong> : SNUBUS에 대한 소개 및 설명이
+                  적혀있는 페이지로 이동할 수 있는 탭입니다.
+                </ExplainText>
+                <ExplainText>
+                  3️⃣ <strong>문의</strong> : SNUBUS에 대해 어떤 문의든 이메일로
+                  보내실 수 있는 탭입니다.
+                </ExplainText>
+              </div>
+            </ExplainFlex>
+          ) : (
+            <>
+              <ExplainImg
+                src={`${process.env.PUBLIC_URL + `assets/Explain0.png`}`}
+              ></ExplainImg>
               <ExplainText>
                 1️⃣ <strong>버스 종류</strong> : 찾으시는 버스 종류를 선택하실 수
                 있는 탭입니다.
@@ -119,8 +137,9 @@ const Parallax = () => {
                 3️⃣ <strong>문의</strong> : SNUBUS에 대해 어떤 문의든 이메일로
                 보내실 수 있는 탭입니다.
               </ExplainText>
-            </div>
-          </ExplainFlex>
+            </>
+          )}
+
           <ExplainText>
             4️⃣ <strong>해당 버스 정보</strong> : 선택하신 버스 종류(1️⃣)에 대한
             설명입니다. 어떤 버스 노선을 찾아보실 수 있는지 확인해보세요.
@@ -154,15 +173,22 @@ const Parallax = () => {
         </ExplainWrap>
       </Scene>
       <Scene className="five">
-        <ExplainWrap alignItems={"center"}>
-          <ExplainHeader>SNUBUS View Page</ExplainHeader>
+        <ExplainWrap style={{ paddingTop: 70 }} alignItems={"center"}>
           <ViewImgWrap>
             <ExplainImg
-              style={{ width: "49%" }}
+              style={{
+                width: !window.matchMedia("(max-width: 550px)").matches
+                  ? "49%"
+                  : "98%",
+              }}
               src={`${process.env.PUBLIC_URL + `assets/Explain2.png`}`}
             ></ExplainImg>
             <ExplainImg
-              style={{ width: "49%" }}
+              style={{
+                width: !window.matchMedia("(max-width: 550px)").matches
+                  ? "49%"
+                  : "98%",
+              }}
               src={`${process.env.PUBLIC_URL + `assets/Explain3.png`}`}
             ></ExplainImg>
           </ViewImgWrap>
@@ -187,7 +213,6 @@ const Parallax = () => {
       <Scene className="six">
         {" "}
         <ExplainWrap alignItems={"center"}>
-          <ExplainHeader>SNUBUS View Page</ExplainHeader>
           <ExplainImg
             src={`${process.env.PUBLIC_URL + `assets/Explain4.png`}`}
           ></ExplainImg>
