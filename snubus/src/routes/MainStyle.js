@@ -14,18 +14,6 @@ const fadeOut = keyframes`
   }
 `;
 
-const fadein = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
 // kenburns-bottom 애니메이션 정의
 const kenburnsBottom = keyframes`
   0% {
@@ -81,10 +69,6 @@ export const Overlay = styled.div`
   bottom: 0;
   animation: ${fadeOut} 3s forwards;
 `;
-
-export const AniMationWrap = styled.div((props) => ({
-  animation: !props.hasVisited ? `${fadein} 0.5s ease-out 0.5s both` : "",
-}));
 
 /* main */
 

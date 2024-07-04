@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Main from "./routes/Main";
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
 import View from "./routes/View";
 import Contact from "./routes/Contact";
@@ -12,9 +12,25 @@ import Intro from "./routes/Intro";
 // 카카오맵이 화면에 표시됐는지 판별하는 state를 Context API로 하위 컴포넌트에 전달
 export const isMapPrintContext = React.createContext();
 
+export const hasVisitedContext = React.createContext();
+
 function App() {
   // 카카오맵이 화면에 표시됐는지 판별하는 state
   const [isMapPrint, setIsMapPrint] = useState(false);
+
+  const [hasVisited, setHasVisited] = useState(
+    sessionStorage.getItem("hasVisited")
+  );
+
+  useEffect(() => {
+    // sessionStorage에 'hasVisited' 키가 있는지 확인
+    console.log(hasVisited);
+    // 처음 방문이면 'hasVisited'를 설정
+    if (hasVisited === null) {
+      console.log("first visit");
+      sessionStorage.setItem("hasVisited", "true");
+    }
+  });
 
   return (
     <div style={{ backgroundColor: "#1a1919" }}>
@@ -38,15 +54,17 @@ function App() {
         }}
       >
         <isMapPrintContext.Provider value={[isMapPrint, setIsMapPrint]}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="*" element={<NotFound />}></Route>
-              <Route path="/" element={<Main />}></Route>
-              <Route path="/view/:id" element={<View />}></Route>
-              <Route path="/contact" element={<Contact />}></Route>
-              <Route path="/intro" element={<Intro />}></Route>
-            </Routes>
-          </BrowserRouter>
+          <hasVisitedContext.Provider value={[hasVisited, setHasVisited]}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="*" element={<NotFound />}></Route>
+                <Route path="/" element={<Main />}></Route>
+                <Route path="/view/:id" element={<View />}></Route>
+                <Route path="/contact" element={<Contact />}></Route>
+                <Route path="/intro" element={<Intro />}></Route>
+              </Routes>
+            </BrowserRouter>
+          </hasVisitedContext.Provider>
         </isMapPrintContext.Provider>
       </ConfigProvider>
     </div>
