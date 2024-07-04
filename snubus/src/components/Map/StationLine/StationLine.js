@@ -71,15 +71,9 @@ const StationLine = ({ bus_stationData }) => {
     // 지선버스일 때만
     if (["5511", "5513", "5516"].includes(id)) {
       let busNumList = ["5511", "5513", "5516"];
-      setBusNumList(
-        busNumList.map((busNum) => {
-          if (busNum !== id) {
-            return busNum;
-          }
-        })
-      );
+      setBusNumList(busNumList.filter((busNum) => busNum !== id));
     }
-  }, []);
+  }, [id]);
 
   if (window.matchMedia("(max-width: 550px)").matches && isInfoWindowVisible) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;

@@ -73,7 +73,7 @@ export const Text = styled.p({
   "@media(max-width: 1024px)": {
     fontSize: 15,
   },
-  "@media(max-width: 1024px)": {
+  "@media(max-width: 768px)": {
     fontSize: 13,
   },
 });
