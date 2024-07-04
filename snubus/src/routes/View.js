@@ -90,8 +90,10 @@ function View5511Bus({
           },
         });
         break;
+      default:
+        break;
     }
-  }, []);
+  }, [id]);
 
   // 버스 / 정류장 정보 데이터 fetching 함수
   const getData = () => {

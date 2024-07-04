@@ -180,10 +180,9 @@ export const SubmitBtn = styled.button({
     width: 180,
   },
   "@media(max-width: 768px)": {
-    width: "80%",
     width: 150,
   },
-  "@media(max-width: 768px)": {
+  "@media(max-width: 550px)": {
     fontSize: 14,
     marginTop: 5,
   },

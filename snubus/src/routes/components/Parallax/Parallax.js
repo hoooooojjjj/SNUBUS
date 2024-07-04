@@ -34,7 +34,7 @@ const Parallax = () => {
             To make your movement
             <strong>
               <Wrapper>
-                <p>More</p>
+                More
                 <Words>
                   <Span></Span>
                   <Span>customized</Span>
@@ -44,7 +44,7 @@ const Parallax = () => {
                   <Span>Affective</Span>
                   <Span>Customer Oriented</Span>
                 </Words>
-                <p>in SNU</p>
+                in SNU
               </Wrapper>
             </strong>
           </Scene1HeaderH1>
@@ -173,21 +173,21 @@ const Parallax = () => {
         </ExplainWrap>
       </Scene>
       <Scene className="five">
-        <ExplainWrap style={{ paddingTop: 70 }} alignItems={"center"}>
+        <ExplainWrap style={{ paddingTop: 10 }} alignItems={"center"}>
           <ViewImgWrap>
             <ExplainImg
               style={{
                 width: !window.matchMedia("(max-width: 550px)").matches
-                  ? "49%"
-                  : "98%",
+                  ? "48%"
+                  : "90%",
               }}
               src={`${process.env.PUBLIC_URL + `assets/Explain2.png`}`}
             ></ExplainImg>
             <ExplainImg
               style={{
                 width: !window.matchMedia("(max-width: 550px)").matches
-                  ? "49%"
-                  : "98%",
+                  ? "48%"
+                  : "90%",
               }}
               src={`${process.env.PUBLIC_URL + `assets/Explain3.png`}`}
             ></ExplainImg>
@@ -212,7 +212,7 @@ const Parallax = () => {
       </Scene>
       <Scene className="six">
         {" "}
-        <ExplainWrap alignItems={"center"}>
+        <ExplainWrap style={{ paddingTop: 10 }} alignItems={"center"}>
           <ExplainImg
             src={`${process.env.PUBLIC_URL + `assets/Explain4.png`}`}
           ></ExplainImg>

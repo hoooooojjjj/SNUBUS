@@ -115,7 +115,7 @@ function TimeLines({ isStart, bus_stationData }) {
 
     // newBuseStationSlice를 state에 업데이트
     setBusStationSlice(newBuseStationSlice);
-  }, [isStart]);
+  }, [isStart, id]);
 
   // 현재 운행 중인 버스가 어느 snubus 정류장에 위치하고 있는지(지나가고 있는지) 찾기
   useEffect(() => {
@@ -168,7 +168,7 @@ function TimeLines({ isStart, bus_stationData }) {
         };
       }),
     });
-  }, [busesInStation]);
+  }, [busesInStation, id]);
 
   return busStationSlice ? (
     // 각 분할한 정류장마다 정류장 라인 생성

@@ -111,7 +111,7 @@ export const Scene2Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 7rem;
+  padding-top: 1rem;
   height: 90%;
 `;
 
@@ -250,6 +250,10 @@ export const ExplainImg = styled.img({
   border: "2px solid white",
   borderRadius: 15,
   marginBottom: "0.2rem",
+  "@media(max-width: 768px)": {
+    width: "70%",
+    marginBottom: "0.5rem",
+  },
   "@media(max-width: 550px)": {
     width: "98%",
     margin: "0 auto",
@@ -286,7 +290,7 @@ export const ViewImgWrap = styled.div({
 });
 
 export const Wrapper = styled.div`
-  height: 60px;
+  height: 65px;
   @media (max-width: 1024px) {
     height: 55px;
   }
