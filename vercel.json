@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "http://localhost:8080/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/snubus/$1",
+      "build": {
+        "src": "/snubus",
+        "use": "@vercel/static-build"
+      }
+    }
+  ]
+}

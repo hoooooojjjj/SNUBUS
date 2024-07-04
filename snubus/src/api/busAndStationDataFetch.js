@@ -13,7 +13,7 @@ export default async function getBusAndStationData(
     // 데이터 요청
     try {
       const response = await fetch(
-        `http://localhost:8080/proxy?url=${encodeURIComponent(
+        `api/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`,
         {
@@ -122,7 +122,7 @@ export default async function getBusAndStationData(
     // 데이터 요청
     try {
       const response = await fetch(
-        `http://localhost:8080/proxy?url=${encodeURIComponent(
+        `api/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`,
         {
