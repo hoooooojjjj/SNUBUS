@@ -13,7 +13,7 @@ export default async function getBusAndStationData(
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://localhost:8080/proxy?url=${encodeURIComponent(
+        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`,
         {
@@ -127,7 +127,7 @@ export default async function getBusAndStationData(
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://localhost:8080/proxy?url=${encodeURIComponent(
+        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/proxy?url=${encodeURIComponent(
           `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
         )}`,
         {
@@ -143,7 +143,6 @@ export default async function getBusAndStationData(
 
       // 서버에서 json으로 응답 받기
       const busStationData = await response.json();
-      console.log(busStationData);
 
       clearTimeout(timeoutId); // 요청이 성공적으로 완료되면 타이머 취소
 
