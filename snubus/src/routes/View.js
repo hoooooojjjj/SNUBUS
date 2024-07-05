@@ -103,15 +103,17 @@ function View5511Bus({
     // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
     const getBSData = async () => {
       const busData = await getBusAndStationData(busClassification, controller);
-      // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
-      getBuspostionXY(busData.busData.busPositionXY);
-      getBusInfo(busData.busData.busInfo);
-      getBuses(
-        busData.busData.busPositionInStation.DirectionToStart,
-        busData.busData.busPositionInStation.DirectionToEnd
-      );
-      getStationToStart(busData.stationData.DirectionToStart);
-      getStationToEnd(busData.stationData.DirectionToEnd);
+      if (busData) {
+        // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
+        getBuspostionXY(busData.busData.busPositionXY);
+        getBusInfo(busData.busData.busInfo);
+        getBuses(
+          busData.busData.busPositionInStation.DirectionToStart,
+          busData.busData.busPositionInStation.DirectionToEnd
+        );
+        getStationToStart(busData.stationData.DirectionToStart);
+        getStationToEnd(busData.stationData.DirectionToEnd);
+      }
     };
 
     // 데이터 요청 함수 실행
