@@ -75,7 +75,11 @@ const StationLine = ({ bus_stationData }) => {
     }
   }, [id]);
 
-  if (window.matchMedia("(max-width: 550px)").matches && isInfoWindowVisible) {
+  if (
+    window.matchMedia("(max-width: 550px)").matches &&
+    isInfoWindowVisible &&
+    clickedStationInfo.length > 0
+  ) {
     return <MobileStationInfoModal curStation={clickedStationInfo} />;
   }
 
