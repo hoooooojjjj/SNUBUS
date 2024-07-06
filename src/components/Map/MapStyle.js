@@ -6,14 +6,14 @@ import { keyframes } from "@emotion/react";
 export const Container = styled.div((props) => ({
   width: "75dvw",
   height: "90dvh",
+  ...flex("row", "center", "center"),
   "@media(max-width: 550px)": {
     width: "100dvw",
-    height: props.isInfoWindowVisible ? "70dvh" : "40dvh",
+    height: props.isInfoWindowVisible ? "58dvh" : "48dvh",
   },
   position: "relative",
   ...Font_DoHyeon(),
   color: "black",
-  ...flex("row", "center", "center"),
 }));
 
 // 지도
@@ -22,6 +22,11 @@ export const Maps = styled.div({
   height: "88%",
   "@media(min-width: 550px)": {
     borderRadius: 15,
+  },
+  "@media(max-width: 550px)": {
+    width: "98%",
+    height: "100%",
+    marginBottom: 15,
   },
 });
 
@@ -91,6 +96,10 @@ export const DataTm = styled.p({
     fontSize: 13,
   },
   "@media(max-width: 550px)": {
-    fontSize: 12,
+    fontSize: 15,
+    marginRight: 0,
+  },
+  "@media(max-width: 550px)": {
+    fontSize: 13,
   },
 });

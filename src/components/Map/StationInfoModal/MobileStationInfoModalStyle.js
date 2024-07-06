@@ -8,8 +8,8 @@ import {
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({
   margin: "0 auto",
-  marginTop: 10,
-  width: "100dvw",
+  marginTop: 20,
+  width: "98dvw",
   height: "30dvh",
   "@media(max-width: 320px)": {
     height: "35dvh",
@@ -23,7 +23,6 @@ export const StationLineWrap = styled.div({
   ...flex("column", "center", "center"),
   border: "3px solid white",
   borderRadius: 15,
-  padding: "15px 25px",
   "@media(max-width: 320px)": {
     padding: 0,
   },

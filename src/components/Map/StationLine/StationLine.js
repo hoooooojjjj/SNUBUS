@@ -145,9 +145,8 @@ const StationLine = ({ bus_stationData }) => {
           )}
         </StationLineWrap>
       </Container>
-      <FooterP>
-        아이콘 출처 :{" "}
-        <Link to="https://www.flaticon.com/kr/free-icons/-">flaticon</Link>
+      <FooterP style={{ width: "100%", textAlign: "right" }}>
+        <Link to="https://www.flaticon.com/kr/free-icons/-">아이콘 출처</Link>
       </FooterP>
     </>
   );

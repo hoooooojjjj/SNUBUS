@@ -98,7 +98,11 @@ function InfoTab({ bus_stationData }) {
         onClick={() => {
           nav("/intro");
         }}
-        style={{ textAlign: "right", marginRight: 15, cursor: "pointer" }}
+        style={{
+          textAlign: "right",
+          cursor: "pointer",
+          width: "90%",
+        }}
       >
         <strong>
           <QuestionCircleOutlined />{" "}

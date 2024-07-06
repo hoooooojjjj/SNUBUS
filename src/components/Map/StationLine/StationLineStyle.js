@@ -36,7 +36,7 @@ export const LogoText = styled.p({
   ...Font_Kanit(),
   fontWeight: 500,
   fontSize: 40,
-  height: "10%",
+  height: "15%",
   margin: 0,
   "@media(max-width: 1024px)": {
     fontSize: 35,
@@ -94,11 +94,12 @@ export const StationTabBtn = styled.button((props) => ({
 
 // 노선 정보 wrap
 export const StationLineInfoWrap = styled.div({
-  ...flex("row", "normal", "normal"),
+  ...flex("column", "normal", "normal"),
   position: "relative",
+  width: "85%",
   height: "40%",
   "@media(max-width: 550px)": {
-    height: "30%",
+    height: "27%",
   },
 });
 
@@ -254,8 +255,8 @@ export const TimelineStyle = styled(Timeline)`
   @media (max-width: 1024px) {
     height: 68px;
   }
-  @media (max-width: 768px) {
-    height: 58px;
+  @media (max-width: 1024px) {
+    height: 78px;
   }
   & > li > .ant-timeline-item-content {
     height: 28px;
@@ -267,9 +268,9 @@ export const TimelineStyle = styled(Timeline)`
       font-size: 16px;
       height: 18px;
     }
-    @media (max-width: 768px) {
-      font-size: 14px;
-      height: 8px;
+    @media (max-width: 1024px) {
+      font-size: 18px;
+      height: 28px;
     }
     &:hover {
       color: #0c8ce9;
