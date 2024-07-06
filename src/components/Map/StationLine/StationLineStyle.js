@@ -215,6 +215,7 @@ export const PolylineBtn = styled.button({
   },
   "@media(max-width: 550px)": {
     fontSize: 15,
+    height: "10%",
   },
   background: "none",
   color: "white",
