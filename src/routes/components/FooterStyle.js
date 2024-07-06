@@ -5,7 +5,10 @@ import { flex, Font_NanumSquare } from "../../util/publicStyleComponents";
 export const Footer = styled.footer({
   width: "100%",
   height: "10dvh",
-  ...flex("row", "center", "flex-end"),
+  "@media(max-width: 550px)": {
+    height: "15dvh",
+  },
+  ...flex("column", "flex-end", "center"),
   ...Font_NanumSquare(),
 });
 

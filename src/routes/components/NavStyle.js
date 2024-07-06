@@ -29,22 +29,17 @@ export const Li = styled.li({
   "@media(max-width: 595px)": {
     marginTop: 3,
     marginLeft: 20,
-    fontSize: 18,
-  },
-  "@media(max-width: 485px)": {
-    marginTop: 3,
-    marginLeft: 10,
-    fontSize: 15,
+    fontSize: 20,
   },
   "@media(max-width: 550px)": {
     marginTop: 3,
     marginLeft: 10,
-    fontSize: 15,
+    fontSize: 20,
   },
   "@media(max-width: 320px)": {
     marginTop: 2,
     marginLeft: 10,
-    fontSize: 14,
+    fontSize: 18,
   },
   cursor: "pointer",
   ...Font_DoHyeon(),
