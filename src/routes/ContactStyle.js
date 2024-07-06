@@ -82,7 +82,10 @@ export const Form = styled.form({
     width: "80%",
   },
   "@media(max-width: 550px)": {
-    width: "90%",
+    width: "80%",
+  },
+  "@media(max-width: 375px)": {
+    width: "75%",
   },
   border: "3px solid white",
   borderRadius: 30,

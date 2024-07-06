@@ -52,7 +52,7 @@ function StationTab({
   };
 
   return (
-    <>
+    <div style={{ width: "95%", height: "60%" }}>
       <PolylineBtn onClick={onPloylineBtnClick}>
         {isPolylinVisible.visible ? (
           <>
@@ -77,7 +77,7 @@ function StationTab({
       <LineWrap>
         <TimeLines isStart={isStart} />
       </LineWrap>
-    </>
+    </div>
   );
 }
 

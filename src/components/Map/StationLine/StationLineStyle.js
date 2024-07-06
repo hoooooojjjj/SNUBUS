@@ -28,17 +28,7 @@ export const StationLineWrap = styled.div({
   "@media(max-width: 550px)": {
     ...flex("column", "center", "center"),
   },
-  height: "95%",
-});
-
-// 노선 정보 wrap
-export const StationLineInfoWrap = styled.div({
-  ...flex("row", "normal", "normal"),
-  position: "relative",
-  height: "100%",
-  "@media(max-width: 550px)": {
-    height: "30%",
-  },
+  height: "90%",
 });
 
 // 로고 폰트
@@ -46,6 +36,7 @@ export const LogoText = styled.p({
   ...Font_Kanit(),
   fontWeight: 500,
   fontSize: 40,
+  height: "10%",
   margin: 0,
   "@media(max-width: 1024px)": {
     fontSize: 35,
@@ -64,7 +55,7 @@ export const LogoText = styled.p({
 // 정류장 라인 탭 wrap
 export const StationLineTabWrap = styled.div({
   width: "90%",
-  height: 60,
+  height: "10%",
   "@media(max-width: 550px)": {
     height: 50,
   },
@@ -101,16 +92,24 @@ export const StationTabBtn = styled.button((props) => ({
   borderBottom: props.isInfoTab ? "none" : "2px solid white",
 }));
 
+// 노선 정보 wrap
+export const StationLineInfoWrap = styled.div({
+  ...flex("row", "normal", "normal"),
+  position: "relative",
+  height: "40%",
+  "@media(max-width: 550px)": {
+    height: "30%",
+  },
+});
+
 // 노선 정보 text wrap
 export const InfoTextWrap = styled.div(() => ({
   ...flex("column", "normal", "normal"),
-  "@media(max-width: 550px)": {
-    ...flex("column", "normal", "normal"),
-  },
 }));
 
 // 노선 정보 text header
 export const InfoTextHeader = styled.p({
+  margin: "10px 0px 0px 0px",
   fontSize: 20,
   "@media(max-width: 1024px)": {
     fontSize: 18,
@@ -150,6 +149,7 @@ export const InfoText = styled.p({
 
 // 방면 전환 버튼 wrap
 export const BtnWrap = styled.div({
+  height: "15%",
   ...flex("row", "space-around", "center"),
   "@media(max-width: 768px)": {
     ...flex("column", "center", "center"),
@@ -188,6 +188,7 @@ export const StationSwitchBtn = styled.button({
 // StationLine wrap
 export const LineWrap = styled.div({
   width: "95%",
+  height: "100%",
   borderTop: "2px solid #363636",
   overflowY: "scroll",
   marginTop: 10,
@@ -201,6 +202,7 @@ export const LineWrap = styled.div({
 
 export const PolylineBtn = styled.button({
   width: "100%",
+  height: "5%",
   marginBottom: 15,
   fontSize: 16,
   "@media(max-width: 1024px)": {
@@ -283,11 +285,11 @@ export const MarkerInfoWrap = styled.div({
   ...flex("column", "normal", "normal"),
   borderTop: "2px solid #363636",
   width: "85%",
-  paddingTop: 10,
+  height: "30%",
 });
 
 export const MarkerWrap = styled.div({
-  ...flex("row", "normal", "normal"),
+  ...flex("row", "normal", "center"),
 });
 
 export const MarkerInfoImg = styled.img({
@@ -318,7 +320,6 @@ export const MarkerInfoImg = styled.img({
 
 export const MarkerInfoText = styled.p({
   fontSize: 16,
-  paddingTop: 2,
   "@media(max-width: 1024px)": {
     fontSize: 15,
   },
@@ -327,7 +328,6 @@ export const MarkerInfoText = styled.p({
   },
   "@media(max-width: 550px)": {
     fontSize: 15,
-    paddingTop: 4,
   },
   "@media(max-width: 320px)": {
     fontSize: 14,

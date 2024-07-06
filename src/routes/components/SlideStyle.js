@@ -10,6 +10,10 @@ const SlideItemHeight_under550 = "90px";
 export const CarouselWrap = styled.header({
   width: "100dvw",
   height: "35%",
+  "@media (max-width: 550px)": {
+    height: "30%",
+  },
+
   background:
     "radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.2) 70%)",
 });
