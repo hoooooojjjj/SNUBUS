@@ -18,6 +18,7 @@ export const HeaderWrap = styled.header((props) => ({
 export const Header = styled.section({
   width: "100%",
   height: 72,
+
   "@media(max-width: 550px)": {
     height: 36,
   },
@@ -35,6 +36,7 @@ export const LogoText = styled.p({
   zIndex: 100,
   ...Font_Kanit(),
   marginLeft: 30,
+  marginTop: 0,
   marginBottom: 0,
   fontWeight: 500,
   fontSize: 35,

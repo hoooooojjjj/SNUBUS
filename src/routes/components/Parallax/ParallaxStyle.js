@@ -151,8 +151,7 @@ export const GridContainer = styled.div`
     padding: 10px;
   }
   @media (max-width: 550px) {
-    grid-template-columns: repeat(1, 1fr);
-    overflow: scroll;
+    grid-template-columns: repeat(2, 1fr);
   }
   color: white;
   font-family: "Do hyeon", sans-serif;
@@ -160,16 +159,19 @@ export const GridContainer = styled.div`
 
 export const GridItem = styled.div`
   padding: 20px;
+  width: 90%;
   @media (max-width: 1024px) {
     padding: 15px;
   }
   @media (max-width: 768px) {
-    padding: 10px;
-  }
-  @media (max-width: 768px) {
     padding: 15px;
   }
-  width: 90%;
+  @media (max-width: 550px) {
+    padding: 0px;
+    padding-top: 10px;
+    width: 100%;
+  }
+
   text-align: center;
   border-top: 2px solid rgba(255, 255, 255, 0.5);
   p {
@@ -181,10 +183,10 @@ export const GridItem = styled.div`
       font-size: 0.8em;
     }
     @media (max-width: 550px) {
-      font-size: 1em;
+      font-size: 0.8em;
     }
     @media (max-width: 320px) {
-      font-size: 0.8em;
+      font-size: 0.68em;
     }
     margin-bottom: 5px;
   }
@@ -199,10 +201,10 @@ export const GridHeader = styled.div`
     font-size: 1.5em;
   }
   @media (max-width: 550px) {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   @media (max-width: 320px) {
-    font-size: 1.8em;
+    font-size: 1.4em;
   }
   font-weight: bold;
   margin-bottom: 10px;
@@ -211,7 +213,8 @@ export const GridHeader = styled.div`
 export const ExplainWrap = styled.div((props) => ({
   ...flex("column", "center", props.alignItems),
   zIndex: 2,
-  overflow: "scroll",
+
+  overflow: "hidden",
   height: "100dvh",
 }));
 
@@ -222,8 +225,8 @@ export const ExplainHeader = styled.h1({
   textAlign: "center",
   zIndex: 2,
   fontSize: "3rem",
-  marginTop: "1rem",
-  marginBottom: "1rem",
+  marginTop: 0,
+  marginBottom: "0.2rem",
   "@media(max-width: 1024px)": {
     fontSize: "2.5rem",
   },
@@ -231,14 +234,16 @@ export const ExplainHeader = styled.h1({
     fontSize: "2rem",
   },
   "@media(max-width: 550px)": {
-    fontSize: "1.4rem",
+    fontSize: "2rem",
+    marginBottom: "2rem",
   },
   "@media(max-width: 320px) ": {
-    fontSize: "1.2rem",
+    fontSize: "1.8rem",
+    marginBottom: "1.5rem",
   },
 });
 
-export const ExplainFlex = styled.h1({
+export const ExplainFlex = styled.div({
   ...flex("row", "center", "center"),
   zIndex: 2,
 });
@@ -255,7 +260,7 @@ export const ExplainImg = styled.img({
     marginBottom: "0.5rem",
   },
   "@media(max-width: 550px)": {
-    width: "98%",
+    width: "96%",
     margin: "0 auto",
     marginBottom: "0.5rem",
   },
