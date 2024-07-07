@@ -10,8 +10,11 @@ export const Scene = styled.section`
   height: 100dvh;
   width: 100%;
   overflow: hidden;
-  background-attachment: fixed;
   background-size: cover;
+  background-attachment: fixed;
+  @media (max-width: 550px) {
+    background-attachment: scroll;
+  }
   ::before {
     position: absolute;
     content: "";
@@ -23,21 +26,45 @@ export const Scene = styled.section`
   }
   &.one {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg1.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short0.jpg`});
+    }
   }
   &.two {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg0.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short1.jpg`});
+    }
   }
   &.three {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg2.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short2.jpg`});
+    }
   }
   &.four {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg3.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short3.jpg`});
+    }
   }
   &.five {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg4.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short4.jpg`});
+    }
   }
   &.six {
     background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg5.jpg`});
+    @media (max-width: 550px) {
+      background-image: url(${process.env.PUBLIC_URL +
+      `assets/introImg_short5.jpg`});
+    }
   }
 `;
 
