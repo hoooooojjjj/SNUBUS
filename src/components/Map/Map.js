@@ -83,15 +83,25 @@ function Map({ getData, bus_stationData }) {
     // HTML5의 geolocation으로 사용할 수 있는지 확인
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옴
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const curLat = position.coords.latitude, // 위도
-          curLlon = position.coords.longitude; // 경도
-
-        setCurPos([curLat, curLlon]);
-      });
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const curLat = position.coords.latitude; // 위도
+          const curLlon = position.coords.longitude; // 경도
+          setCurPos([curLat, curLlon]);
+        },
+        function (error) {
+          if (error.code === error.PERMISSION_DENIED) {
+            alert(`위치 추적을 허용하지 않으시면, 
+현재 위치가 서울대학교 정류장으로 표시됩니다.`);
+            setCurPos([37.46674146, 126.9479523]);
+          }
+        }
+      );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때
-      alert("현재 위치를 표시하기 위해 위치 정보 제공을 허용해주세요");
+      alert(`현재 브라우저는 위치 추적을 지원하지 않습니다,
+현재 위치가 서울대학교 정류장으로 표시됩니다.`);
+      setCurPos([37.46674146, 126.9479523]);
     }
   };
 
