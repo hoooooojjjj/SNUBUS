@@ -22,22 +22,22 @@ export const Scene = styled.section`
     background-color: rgba(0, 0, 0, 0.15);
   }
   &.one {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg1.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg1.jpg`});
   }
   &.two {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg0.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg0.jpg`});
   }
   &.three {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg2.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg2.jpg`});
   }
   &.four {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg3.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg3.jpg`});
   }
   &.five {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg4.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg4.jpg`});
   }
   &.six {
-    background-image: url(${process.env.PUBLIC_URL + `assets/IntroImg5.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg5.jpg`});
   }
 `;
 
