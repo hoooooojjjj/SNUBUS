@@ -23,13 +23,17 @@ export const LoadingWrap = styled.div({
   height: "100%",
   zIndex: 1,
 });
-const rotateInVer = keyframes`
+
+const trackingInContract = keyframes`
   0% {
-    transform: perspective(800px) rotateY(-360deg) translateZ(-200px);
+    letter-spacing: 1em;
     opacity: 0;
   }
+  40% {
+    opacity: 0.6;
+  }
   100% {
-    transform: perspective(800px) rotateY(0deg) translateZ(0);
+    letter-spacing: normal;
     opacity: 1;
   }
 `;
@@ -37,7 +41,7 @@ const rotateInVer = keyframes`
 export const LogoStyle = styled.p({
   ...Font_Kanit(),
   fontWeight: 500,
-  animation: `${rotateInVer} 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite`,
+  animation: `${trackingInContract} 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both infinite alternate`,
   fontSize: 50,
   position: "relative",
   "@media(max-width: 1024px)": {
@@ -48,6 +52,7 @@ export const LogoStyle = styled.p({
   },
   "@media(max-width: 550px)": {
     fontSize: 50,
+    animation: `${trackingInContract} 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both infinite alternate`,
   },
   "@media(max-width: 320px)": {
     fontSize: 45,
