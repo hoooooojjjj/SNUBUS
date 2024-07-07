@@ -36,7 +36,6 @@ export const Containers = styled.div`
   width: 100dvw;
   height: 100dvh;
   overflow: hidden;
-
   &:before {
     content: "";
     position: absolute;
@@ -48,7 +47,6 @@ export const Containers = styled.div`
       process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`});
     background-size: cover;
     animation: ${kenburnsBottom} 5s ease-out both;
-
     @media (max-width: 550px) {
       background: url(${(props) =>
         process.env.PUBLIC_URL +
