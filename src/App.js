@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import Main from "./routes/Main";
 import React, { useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
@@ -7,6 +6,7 @@ import View from "./routes/View";
 import Contact from "./routes/Contact";
 import NotFound from "./routes/NotFound";
 import Intro from "./routes/Intro";
+import { Analytics } from "@vercel/analytics/react";
 
 // 카카오맵이 화면에 표시됐는지 판별하는 state를 Context API로 하위 컴포넌트에 전달
 export const isMapPrintContext = React.createContext();
@@ -31,6 +31,7 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "#1a1919" }}>
+      <Analytics />
       {/* antd 커스터마이징 */}
       <ConfigProvider
         theme={{
