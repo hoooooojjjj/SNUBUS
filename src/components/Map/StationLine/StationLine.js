@@ -11,6 +11,8 @@ import {
   BusSelectBtn,
   BusSwitchBtn,
   BusSelectCloseBtn,
+  InfoText,
+  Lisense,
 } from "./StationLineStyle";
 import {
   InfoCircleOutlined,
@@ -87,6 +89,7 @@ const StationLine = ({ bus_stationData }) => {
     <>
       <Container>
         <StationLineWrap>
+          <Lisense>서울시 제공</Lisense>
           {!isBusSwitchBtnClicked ? (
             busNumList.length > 0 ? (
               <BusSwitchBtn
@@ -120,8 +123,8 @@ const StationLine = ({ bus_stationData }) => {
                   </BusSelectBtn>
                 ))}
             </BusSelectWrap>
-          )}
-          <LogoText>{id}</LogoText>
+          )}{" "}
+          <LogoText>{id} </LogoText>
           <StationLineTabWrap>
             <InfoTabBtn onClick={switchToInfoTab} isInfoTab={isInfoTab}>
               <InfoCircleOutlined />

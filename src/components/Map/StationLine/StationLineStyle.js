@@ -157,6 +157,7 @@ export const BtnWrap = styled.div({
   },
   "@media(max-width: 550px)": {
     ...flex("row", "space-around", "center"),
+    height: "13%",
   },
   ...Font_DoHyeon(),
 });
@@ -336,17 +337,16 @@ export const MarkerInfoText = styled.p({
   },
 });
 
-export const FooterP = styled.p({
+export const FooterP = styled.div({
   position: "absolute",
   bottom: 3,
   right: 5,
-  margin: 5,
+  margin: 0,
   color: "white",
   fontSize: 13,
   "@media(max-width: 550px)": {
     position: "relative",
   },
-  "@media(max-width: 320px)": {},
 });
 
 // 다른 버스로 이동할 수 있는 dropdown
@@ -422,4 +422,18 @@ export const BusSelectCloseBtn = styled.div({
   "@media(max-width: 375px)": {
     fontSize: 13,
   },
+});
+
+export const Lisense = styled.span({
+  position: "absolute",
+  top: -10,
+  fontSize: 13,
+  "@media(max-width: 550px)": {
+    top: 5,
+    left: 20,
+    fontSize: 11,
+  },
+
+  textAlign: "left",
+  width: "100%",
 });
