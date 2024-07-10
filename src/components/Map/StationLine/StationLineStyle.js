@@ -254,26 +254,12 @@ export const TimelineStyle = styled(Timeline)`
   height: 78px;
   padding-left: 10px;
   color: white;
-  @media (max-width: 1024px) {
-    height: 68px;
-  }
-  @media (max-width: 1024px) {
-    height: 78px;
-  }
   & > li > .ant-timeline-item-content {
     height: 28px;
     cursor: pointer;
     font-size: 18px;
     font-family: "Do Hyeon", sans-serif;
     font-weight: 400;
-    @media (max-width: 1024px) {
-      font-size: 16px;
-      height: 18px;
-    }
-    @media (max-width: 1024px) {
-      font-size: 18px;
-      height: 28px;
-    }
     &:hover {
       color: #0c8ce9;
     }

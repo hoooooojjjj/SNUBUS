@@ -80,9 +80,9 @@ function TimeLines({ isStart, bus_stationData }) {
     const busImages = passingBusStation.map((passingBus) => {
       if (passingBus.id === busStation[0].id) {
         // 다음 정류장까지 간 비율을 css에 대입하기 위한 계산
-        // 한 라인의 길이가 70(-5부터 65까지) => passingBus.remainingDist를 -5부터 65까지의 비율로 계산
+        // 한 라인의 길이가 78(-5부터 73까지) => passingBus.remainingDist를 -5부터 73까지의 비율로 계산
         const remainingDistMatchingCSS =
-          -5 + 70 * (passingBus.remainingDist * 0.01);
+          -5 + 78 * (passingBus.remainingDist * 0.01);
         return (
           <BusImg
             key={passingBus.id}
