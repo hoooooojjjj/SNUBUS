@@ -234,14 +234,6 @@ export const BusImg = styled.img((props) => ({
   top: props.remainingDist,
   left: 2,
   width: 25,
-  "@media(max-width: 1024px)": {
-    left: 3,
-    width: 23,
-  },
-  "@media(max-width: 768px)": {
-    left: 4,
-    width: 21,
-  },
 }));
 
 // 각 정류장 별 라인 wrap

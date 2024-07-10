@@ -87,7 +87,10 @@ function TimeLines({ isStart, bus_stationData }) {
           <BusImg
             key={passingBus.id}
             remainingDist={remainingDistMatchingCSS}
-            src={process.env.PUBLIC_URL + `/assets/FeederBus.png`}
+            src={
+              process.env.PUBLIC_URL +
+              `/assets/${id === "관악02" ? "ViligeBus" : "FeederBus"}.png`
+            }
           ></BusImg>
         );
       } else {
