@@ -122,7 +122,7 @@ function View5511Bus({
     // 새로운 AbortController 객체 인터페이스를 생성
     const controller = new AbortController();
     if (busClassification.routeId) {
-      // getData()함수 실행 및 AbortController 객체 인터페이스 받기
+      // getData()함수 실행
       getData(controller);
       return () => {
         // 데이터가 들어오기 전에 컴포넌트를 마운트시키면 Fetch 요청 취소

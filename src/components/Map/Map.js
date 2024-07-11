@@ -47,6 +47,11 @@ function Map({ getData, bus_stationData }) {
   // 업데이트 버튼 클릭 여부 state
   const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
 
+  // 위치추적 허용/비허용 설정 여부
+  const [setGeolocationPermit, setSetGeolocationPermit] = useState(
+    sessionStorage.getItem("setGeolocationPermit")
+  );
+
   /* Context API 코드 */
 
   // 카카오맵이 화면에 표시됐는지 판별하는 context
@@ -90,9 +95,16 @@ function Map({ getData, bus_stationData }) {
           setCurPos([curLat, curLlon]);
         },
         function (error) {
+          // 위치추적 비허용시
           if (error.code === error.PERMISSION_DENIED) {
-            alert(`위치 추적을 허용하지 않으시면, 
-현재 위치가 서울대학교 정류장으로 표시됩니다.`);
+            // 이전에 위치추적 설정 안했으면 alert 띄우기
+            if (setGeolocationPermit === null) {
+              sessionStorage.setItem("setGeolocationPermit", "true");
+              setSetGeolocationPermit(true);
+              alert(`위치 추적을 허용하지 않으시면,
+            현재 위치가 서울대학교 정류장으로 표시됩니다.`);
+            }
+
             setCurPos([37.46674146, 126.9479523]);
           }
         }
