@@ -96,10 +96,7 @@ function View5511Bus({
   }, [id]);
 
   // 버스 / 정류장 정보 데이터 fetching 함수
-  const getData = () => {
-    // 새로운 AbortController 객체 인터페이스를 생성
-    const controller = new AbortController();
-
+  const getData = (controller) => {
     // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
     const getBSData = async () => {
       const busData = await getBusAndStationData(busClassification, controller);
@@ -118,23 +115,24 @@ function View5511Bus({
 
     // 데이터 요청 함수 실행
     getBSData();
-
-    return () => {
-      // 데이터가 들어오기 전에 컴포넌트를 마운트시키면 Fetch 요청 취소
-      controller.abort();
-    };
   };
 
   // 버스 위치 정보 데이터 fetching
   useEffect(() => {
+    // 새로운 AbortController 객체 인터페이스를 생성
+    const controller = new AbortController();
     if (busClassification.routeId) {
-      getData();
+      // getData()함수 실행 및 AbortController 객체 인터페이스 받기
+      getData(controller);
+      return () => {
+        // 데이터가 들어오기 전에 컴포넌트를 마운트시키면 Fetch 요청 취소
+        controller.abort();
+      };
     }
   }, [busClassification]);
 
   return (
     <Container>
-      {" "}
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Loading 컴포넌트가 렌더링되고 true일 때 사라짐 */}
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* isMapPrint가 false일 때(카카오맵이 다 그려졌을 때) Map 컴포넌트가 안보이고 true일 때 보이게 함 */}
