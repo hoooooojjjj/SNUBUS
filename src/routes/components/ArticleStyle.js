@@ -56,20 +56,17 @@ export const Img = styled.img({
 // article header
 export const H2 = styled.h2({
   marginTop: 3,
-  marginLeft: 20,
+  marginLeft: 5,
   ...Font_DoHyeon(),
   fontSize: 50,
   "@media(max-width: 768px)": {
     fontSize: 40,
-    marginLeft: 10,
   },
   "@media(max-width: 595px)": {
     fontSize: 35,
-    marginLeft: 10,
   },
   "@media(max-width: 320px)": {
     fontSize: 30,
-    marginLeft: 10,
   },
 });
 
@@ -77,6 +74,7 @@ export const H2 = styled.h2({
 export const P = styled.p({
   width: "90%",
   margin: "0 auto",
+  marginTop: 10,
   marginBottom: 10,
   ...Font_DoHyeon(),
   fontSize: 40,
