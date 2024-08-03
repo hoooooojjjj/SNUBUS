@@ -77,19 +77,19 @@ function InfoTab({ bus_stationData }) {
         <InfoTextHeader>마커 정보</InfoTextHeader>
         <MarkerWrap>
           <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/currentMarker.png"}
+            src={process.env.PUBLIC_URL + "/assets/currentMarker.webp"}
           />
           <MarkerInfoText>현재 위치</MarkerInfoText>
         </MarkerWrap>
         <MarkerWrap>
           <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/stationMarker.png"}
+            src={process.env.PUBLIC_URL + "/assets/stationMarker.webp"}
           />
           <MarkerInfoText>정류장</MarkerInfoText>
         </MarkerWrap>
         <MarkerWrap>
           <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/busMarker.png"}
+            src={process.env.PUBLIC_URL + "/assets/busMarker.webp"}
           />
           <MarkerInfoText>버스</MarkerInfoText>
         </MarkerWrap>

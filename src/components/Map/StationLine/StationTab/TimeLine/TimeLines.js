@@ -89,7 +89,7 @@ function TimeLines({ isStart, bus_stationData }) {
             remainingDist={remainingDistMatchingCSS}
             src={
               process.env.PUBLIC_URL +
-              `/assets/${id === "관악02" ? "ViligeBus" : "FeederBus"}.png`
+              `/assets/${id === "관악02" ? "ViligeBus" : "FeederBus"}.webp`
             }
           ></BusImg>
         );

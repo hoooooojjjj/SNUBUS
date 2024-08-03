@@ -103,7 +103,7 @@ const Parallax = () => {
           {!window.matchMedia("(max-width: 550px)").matches ? (
             <ExplainFlex>
               <ExplainImg
-                src={`${process.env.PUBLIC_URL + `assets/Explain0.png`}`}
+                src={`${process.env.PUBLIC_URL + `assets/Explain0.webp`}`}
               ></ExplainImg>
               <div>
                 <ExplainText>
@@ -123,7 +123,7 @@ const Parallax = () => {
           ) : (
             <>
               <ExplainImg
-                src={`${process.env.PUBLIC_URL + `assets/Explain0.png`}`}
+                src={`${process.env.PUBLIC_URL + `assets/Explain0.webp`}`}
               ></ExplainImg>
               <ExplainText>
                 1️⃣ <strong>버스 종류</strong> : 찾으시는 버스 종류를 선택하실 수
@@ -155,7 +155,7 @@ const Parallax = () => {
         <ExplainWrap alignItems={"center"}>
           <ExplainHeader>SNUBUS View Page</ExplainHeader>
           <ExplainImg
-            src={`${process.env.PUBLIC_URL + `assets/Explain1.png`}`}
+            src={`${process.env.PUBLIC_URL + `assets/Explain1.webp`}`}
           ></ExplainImg>
           <ExplainText>
             1️⃣ <strong>지도</strong> : 해당 버스 노선의 위치, 정류장 위치, 현재
@@ -181,7 +181,7 @@ const Parallax = () => {
                   ? "48%"
                   : "90%",
               }}
-              src={`${process.env.PUBLIC_URL + `assets/Explain2.png`}`}
+              src={`${process.env.PUBLIC_URL + `assets/Explain2.webp`}`}
             ></ExplainImg>
             <ExplainImg
               style={{
@@ -189,7 +189,7 @@ const Parallax = () => {
                   ? "48%"
                   : "90%",
               }}
-              src={`${process.env.PUBLIC_URL + `assets/Explain3.png`}`}
+              src={`${process.env.PUBLIC_URL + `assets/Explain3.webp`}`}
             ></ExplainImg>
           </ViewImgWrap>
           <ExplainText>
@@ -214,7 +214,7 @@ const Parallax = () => {
         {" "}
         <ExplainWrap style={{ paddingTop: 10 }} alignItems={"center"}>
           <ExplainImg
-            src={`${process.env.PUBLIC_URL + `assets/Explain4.png`}`}
+            src={`${process.env.PUBLIC_URL + `assets/Explain4.webp`}`}
           ></ExplainImg>
           <ExplainText>
             1️⃣ <strong>노선 라인 켜기/끄기 버튼</strong> : 해당 방면의 노선

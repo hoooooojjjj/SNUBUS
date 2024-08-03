@@ -49,7 +49,7 @@ export const WelcomeContainer = styled.div({
   zIndex: 100,
   ...container(),
   ...flex("column", "center", "center"),
-  backgroundImage: `url(${process.env.PUBLIC_URL + `assets/introImg0.jpg`})`,
+  backgroundImage: `url(${process.env.PUBLIC_URL + `assets/introImg0.webp`})`,
   backgroundSize: "cover",
   "::before": {
     position: "absolute",

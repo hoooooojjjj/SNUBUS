@@ -15,9 +15,10 @@
   - 3. 기능
   - 4. 의미
   - 5. 기술 스택
-    - 1. 프론트엔드 : HTML, CSS, JavaScript, React, Emotion, Ant Design, Jest,
-    - 2. 배포 : vercel, koyeb
-  - 6. OpenAPI : kakaoMaps, 서울특별시\_버스위치정보조회 API(공공데이터), 서울특별시\_버스도착정보조회 API(공공데이터)
+    - 1. 프론트엔드 : HTML, CSS, JavaScript, React, React-query(TanStack-query), Emotion, Jest, React-Testing-Library, Cypress
+    - 2. 프록시 서버 : node.js, express
+    - 3. 배포 : vercel(프론트), koyeb(프록시 서버)
+  - 6. API : kakaoMaps, 서울특별시\_버스위치정보조회 API(공공데이터), 서울특별시\_버스도착정보조회 API(공공데이터)
 - **링크**
   - 깃허브 : https://github.com/hoooooojjjj/SNUBUS
-  - URL :
+  - URL : https://snubus.vercel.app/

@@ -25,45 +25,45 @@ export const Scene = styled.section`
     background-color: rgba(0, 0, 0, 0.15);
   }
   &.one {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg1.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg1.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short0.jpg`});
+      `assets/introImg_short0.webp`});
     }
   }
   &.two {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg0.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg0.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short1.jpg`});
+      `assets/introImg_short1.webp`});
     }
   }
   &.three {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg2.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg2.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short2.jpg`});
+      `assets/introImg_short2.webp`});
     }
   }
   &.four {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg3.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg3.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short3.jpg`});
+      `assets/introImg_short3.webp`});
     }
   }
   &.five {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg4.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg4.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short4.jpg`});
+      `assets/introImg_short4.webp`});
     }
   }
   &.six {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg5.jpg`});
+    background-image: url(${process.env.PUBLIC_URL + `assets/introImg5.webp`});
     @media (max-width: 550px) {
       background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short5.jpg`});
+      `assets/introImg_short5.webp`});
     }
   }
 `;

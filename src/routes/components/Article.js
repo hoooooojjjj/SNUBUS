@@ -12,7 +12,7 @@ function Articles({ info }) {
   return (
     <Article id={info.id}>
       <HeaderWrap>
-        <Img src={process.env.PUBLIC_URL + `assets/${info.id}.png`} />
+        <Img src={process.env.PUBLIC_URL + `assets/${info.id}.webp`} />
         <H2>{info.name}</H2>
       </HeaderWrap>
       <P>

@@ -44,13 +44,13 @@ export const Containers = styled.div`
     width: 100%;
     height: 100%;
     background: url(${(props) =>
-      process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.jpg`});
+      process.env.PUBLIC_URL + `assets/backgroundImg${props.imgNum}.webp`});
     background-size: cover;
     animation: ${kenburnsBottom} 5s ease-out both;
     @media (max-width: 550px) {
       background: url(${(props) =>
         process.env.PUBLIC_URL +
-        `assets/backgroundImg_short${props.imgNum}.jpg`});
+        `assets/backgroundImg_short${props.imgNum}.webp`});
       background-size: cover;
     }
   }

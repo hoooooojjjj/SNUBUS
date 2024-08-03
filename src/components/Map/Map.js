@@ -173,7 +173,7 @@ function Map({ getData, bus_stationData }) {
   // 마커 이미지 커스터마이징
   const MakeMarkerImage = (imageUrl) => {
     //  마커 이미지 정보
-    const ImageSrc = process.env.PUBLIC_URL + `/assets/${imageUrl}.png`, // 마커이미지의 주소
+    const ImageSrc = process.env.PUBLIC_URL + `/assets/${imageUrl}.webp`, // 마커이미지의 주소
       ImageSize = new window.kakao.maps.Size(40), // 마커이미지의 크기
       ImageOption = { offset: new window.kakao.maps.Point(20, 35) };
 
