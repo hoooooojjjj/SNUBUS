@@ -8,6 +8,12 @@ import StationLine from "../components/Map/StationLine/StationLine";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Headers from "./components/Header";
+import {
+  skipToken,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const ViewContext = React.createContext();
 
@@ -50,6 +56,9 @@ function View5511Bus({
     isStart: true,
     visible: false,
   });
+
+  // 버스 정보 업데이트 완료 유무
+  const [isBusInfoUpdated, setIsBusInfoUpdated] = useState(true);
 
   // 현재 라우트에 따라 버스 분류해서 해당 버스 번호 정보 요청
   useEffect(() => {
@@ -95,41 +104,60 @@ function View5511Bus({
     }
   }, [id]);
 
-  // 버스 / 정류장 정보 데이터 fetching 함수
-  const getData = (controller) => {
-    // getBusAndStationData에게 버스 / 정류장 데이터 요청 함수
-    const getBSData = async () => {
-      const busData = await getBusAndStationData(busClassification, controller);
-      if (busData) {
-        // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
-        getBuspostionXY(busData.busData.busPositionXY);
-        getBusInfo(busData.busData.busInfo);
-        getBuses(
-          busData.busData.busPositionInStation.DirectionToStart,
-          busData.busData.busPositionInStation.DirectionToEnd
-        );
-        getStationToStart(busData.stationData.DirectionToStart);
-        getStationToEnd(busData.stationData.DirectionToEnd);
-      }
-    };
+  const queryClient = useQueryClient();
 
-    // 데이터 요청 함수 실행
-    getBSData();
-  };
+  // 리액트 쿼리로 버스 / 정류장 정보 데이터 fetching
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ["getBusAndStationData"],
+    queryFn: busClassification.routeId
+      ? async ({ signal }) => {
+          // getBusAndStationData에게 버스 / 정류장 데이터 받기
+          const busData = await getBusAndStationData(busClassification, signal);
+          // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
+          getBuspostionXY(busData.busData.busPositionXY);
+          getBusInfo(busData.busData.busInfo);
+          getBuses(
+            busData.busData.busPositionInStation.DirectionToStart,
+            busData.busData.busPositionInStation.DirectionToEnd
+          );
+          getStationToStart(busData.stationData.DirectionToStart);
+          getStationToEnd(busData.stationData.DirectionToEnd);
+          return busData;
+        }
+      : skipToken,
+  });
 
-  // 버스 위치 정보 데이터 fetching
-  useEffect(() => {
-    // 새로운 AbortController 객체 인터페이스를 생성
-    const controller = new AbortController();
-    if (busClassification.routeId) {
-      // getData()함수 실행
-      getData(controller);
-      return () => {
-        // 데이터가 들어오기 전에 컴포넌트를 마운트시키면 Fetch 요청 취소
-        controller.abort();
-      };
-    }
-  }, [busClassification]);
+  const mutation = useMutation({
+    mutationFn: () =>
+      busClassification.routeId
+        ? async () => {
+            // getBusAndStationData에게 버스 / 정류장 데이터 받기
+            const busData = await getBusAndStationData(busClassification);
+            // 버스/정류장 데이터를 받아와서 Redux에 저장(state update)
+            getBuspostionXY(busData.busData.busPositionXY);
+            getBusInfo(busData.busData.busInfo);
+            getBuses(
+              busData.busData.busPositionInStation.DirectionToStart,
+              busData.busData.busPositionInStation.DirectionToEnd
+            );
+            getStationToStart(busData.stationData.DirectionToStart);
+            getStationToEnd(busData.stationData.DirectionToEnd);
+            return busData;
+          }
+        : skipToken,
+    retry: 3,
+    onSuccess: () => {
+      // 채팅 기록 다시 fetch
+      setIsBusInfoUpdated(false);
+      queryClient.invalidateQueries("getBusAndStationData").then((res) => {
+        setIsBusInfoUpdated(true);
+      });
+    },
+
+    onError: (error) => {
+      console.error("Error adding chat", error.message);
+    },
+  });
 
   return (
     <Container>
@@ -153,9 +181,8 @@ function View5511Bus({
           {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
           <Headers isMain={false} />
           <ViewWrap>
-            <Map getData={getData}></Map>
+            <Map mutation={mutation} isBusInfoUpdated={isBusInfoUpdated}></Map>
             {isMapPrint ? <StationLine /> : <></>}
-            {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
           </ViewWrap>
         </ViewContext.Provider>
       ) : (

@@ -16,7 +16,7 @@ import route_end from "../../json/PolylineCoor_end.json";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
-function Map({ getData, bus_stationData }) {
+function Map({ mutation, bus_stationData, isBusInfoUpdated }) {
   // 현재 파라미터 받아와서 버스 번호 확인
   const { id } = useParams();
 
@@ -43,9 +43,6 @@ function Map({ getData, bus_stationData }) {
 
   // 버스 데이터 제공 시각
   const [dataTm, setDataTm] = useState(0);
-
-  // 업데이트 버튼 클릭 여부 state
-  const [updateBtnAnimate, setUpdateBtnAnimate] = useState(false);
 
   // 위치추적 허용/비허용 설정 여부
   const [setGeolocationPermit, setSetGeolocationPermit] = useState(
@@ -425,13 +422,6 @@ function Map({ getData, bus_stationData }) {
     }
   };
 
-  // 업데이트 버튼 클릭 시 UpdateBtnAnimate를 0.5초동안 true로
-  const handleUpdateBtnClick = () => {
-    setUpdateBtnAnimate(true);
-    // 애니메이션 리셋
-    setTimeout(() => setUpdateBtnAnimate(false), 500);
-  };
-
   /* useEffect() 코드 */
 
   // 맵 컴포넌트가 처음 마운트 되었을 때
@@ -477,16 +467,14 @@ function Map({ getData, bus_stationData }) {
           {" "}
           <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
           <UpdateBtn
-            animate={updateBtnAnimate}
+            isBusInfoUpdated={isBusInfoUpdated}
             onClick={() => {
               // 클릭하면 버스 관련 정보 요청
-              getData();
+              mutation.mutate();
               // 현재 위치 다시 가져오기
               getCurrentPosition();
               // 제공 시간 계산
               calculateAvgDataTm();
-              // 클릭 시 updateBtnAnimate가 0.5초 동안 true로 바뀌어 0.5초 간 애니메이션 실행
-              handleUpdateBtnClick();
             }}
           >
             <RedoOutlined />

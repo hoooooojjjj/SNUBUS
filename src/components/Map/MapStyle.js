@@ -75,9 +75,9 @@ export const UpdateBtn = styled.button`
   background: none;
   border: none;
   color: white;
-  animation-name: ${(props) => (props.animate ? rotateOnce : "none")};
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+  animation-name: ${(props) => (props.isBusInfoUpdated ? "none" : rotateOnce)};
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
   font-size: 20px;
   @media (max-width: 1024px) {
     font-size: 18px;

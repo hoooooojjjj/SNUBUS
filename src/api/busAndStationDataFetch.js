@@ -1,10 +1,5 @@
 // 버스 관련 데이터 주기적 요청 함수
-export default async function getBusAndStationData(
-  busClassification,
-  controller
-) {
-  const signal = controller?.signal;
-
+export default async function getBusAndStationData(busClassification, signal) {
   // 버스 위치 정보 데이터 요청 함수 -> 버스 위치 정보 fetching
   const getBusData = async () => {
     // 데이터 요청
