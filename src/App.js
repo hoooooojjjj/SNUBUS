@@ -2,19 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./routes/Main/Main";
 import React, { useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
-import View from "./routes/View";
+import View from "./routes/View/View";
 import Contact from "./routes/Contact/Contact";
-import NotFound from "./routes/NotFound";
+import NotFound from "./routes/NotFound/NotFound";
 import Intro from "./routes/Intro/Intro";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
 const queryClient = new QueryClient();

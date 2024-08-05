@@ -8,7 +8,7 @@ import {
   UpdateWrap,
 } from "./MapStyle";
 import { isMapPrintContext } from "../../App";
-import { ViewContext } from "../../routes/View";
+import { ViewContext } from "../../routes/View/components/ViewContextProvider";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import route_start from "../../json/PolylineCoor_start.json";

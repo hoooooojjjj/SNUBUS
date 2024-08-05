@@ -5,7 +5,7 @@ import {
   container,
   Font_Kanit,
   Font_DoHyeon,
-} from "../../util/publicStyleComponents";
+} from "../../../../util/publicStyleComponents";
 // 로딩창 컨테이너
 export const LoadingContainer = styled.div((props) => ({
   display: props.display,

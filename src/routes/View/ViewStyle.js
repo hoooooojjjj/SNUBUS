@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex } from "../util/publicStyleComponents";
+import { flex } from "../../util/publicStyleComponents";
 
 export const Container = styled.div({
   width: "100dvw",
