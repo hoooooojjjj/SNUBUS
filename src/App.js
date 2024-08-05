@@ -3,7 +3,7 @@ import Main from "./routes/Main/Main";
 import React, { useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
 import View from "./routes/View";
-import Contact from "./routes/Contact";
+import Contact from "./routes/Contact/Contact";
 import NotFound from "./routes/NotFound";
 import Intro from "./routes/Intro";
 import { Analytics } from "@vercel/analytics/react";

@@ -1,34 +1,38 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import {
-  ContextContainer,
-  ContextH1,
   Form,
   Input,
   Label,
   InputWrap,
   Textarea,
-  ContextH5,
+  ContextH4,
   ImgInput,
   SubmitBtn,
-  ModalContainer,
-  Modal,
   ModalContent,
   ModalCloseBtn,
-} from "./ContactStyle";
-import Headers from "./components/Header/Header";
-import Footers from "./components/Footers/Footer";
+  ModalContainer,
+  Modal,
+} from "../ContactStyle";
 
-const Contact = () => {
+const useModal = () => {
+  const [modalContent, setModalContent] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  return { modalContent, setModalContent, modalOpen, toggleModal };
+};
+
+const useFormInputChange = () => {
   const [formData, setFormData] = useState({
     from_name: "",
     user_email: "",
     message: "",
     image: null, // 이미지 파일을 저장할 변수
   });
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState("");
 
   // Input 값 입력 시
   const handleChange = (e) => {
@@ -48,6 +52,10 @@ const Contact = () => {
     }
   };
 
+  return { formData, setFormData, handleChange };
+};
+
+const useFormSubmit = (formData, setFormData, toggleModal, setModalContent) => {
   // 폼 제출 시
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,22 +104,36 @@ const Contact = () => {
       );
   };
 
-  // 모달 열고 닫는 함수
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
+  return handleSubmit;
+};
+
+// Contact 페이지 모달 컴포넌트
+const ContactModal = ({ modalContent, toggleModal }) => {
+  return (
+    <ModalContainer>
+      <Modal>
+        <ModalContent>{modalContent}</ModalContent>
+        <ModalCloseBtn onClick={toggleModal}>닫기</ModalCloseBtn>
+      </Modal>
+    </ModalContainer>
+  );
+};
+
+// Contact 페이지 폼 컴포넌트
+function ContactFormAndModal() {
+  const { modalContent, setModalContent, modalOpen, toggleModal } = useModal();
+
+  const { formData, setFormData, handleChange } = useFormInputChange();
+
+  const handleSubmit = useFormSubmit(
+    formData,
+    setFormData,
+    toggleModal,
+    setModalContent
+  );
 
   return (
-    <ContextContainer>
-      <Headers isMain={false} />
-      <ContextH1>SNUBUS 문의 페이지</ContextH1>
-      <ContextH5>
-        SNUBUS 이용 중 궁금하신 점, 추가했으면 하시는 기능, 문제 상황 등에 대해
-        문의해주세요.
-      </ContextH5>
-      <ContextH5>
-        작성해주신 이메일로 빠른 시일 내에 답변드리겠습니다.
-      </ContextH5>
+    <>
       <Form onSubmit={handleSubmit}>
         <InputWrap width={"100%"}>
           <Label>
@@ -160,23 +182,14 @@ const Contact = () => {
             type="file"
           />
         </Label>
-        <ContextH5 color={"gray"}>이미지는 필요 시 첨부</ContextH5>
+        <ContextH4 color={"gray"}>이미지는 필요 시 첨부</ContextH4>
         <SubmitBtn type="submit">문의하기</SubmitBtn>
       </Form>
-
-      {/* 모달 */}
       {modalOpen && (
-        <ModalContainer>
-          <Modal>
-            <ModalContent>{modalContent}</ModalContent>
-            <ModalCloseBtn onClick={toggleModal}>닫기</ModalCloseBtn>
-          </Modal>
-        </ModalContainer>
+        <ContactModal modalContent={modalContent} toggleModal={toggleModal} />
       )}
-      <Footers />
-      <br />
-    </ContextContainer>
+    </>
   );
-};
+}
 
-export default Contact;
+export default ContactFormAndModal;

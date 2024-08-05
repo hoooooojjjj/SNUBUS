@@ -3,7 +3,7 @@ import {
   flex,
   Font_DoHyeon,
   Font_NanumSquare,
-} from "../util/publicStyleComponents";
+} from "../../util/publicStyleComponents";
 
 export const ContextContainer = styled.div({
   ...Font_NanumSquare(),
@@ -40,7 +40,7 @@ export const ContextH1 = styled.h1({
   },
 });
 
-export const ContextH5 = styled.h5((props) => ({
+export const ContextH4 = styled.h4((props) => ({
   color: props.color || "white",
   textAlign: "center",
   marginBottom: 30,
