@@ -5,7 +5,7 @@ import {
   container,
   Font_Kanit,
   Font_DoHyeon,
-} from "../../util/publicStyleComponents";
+} from "../../../../util/publicStyleComponents";
 
 const slideInEllipticLeftBck = keyframes`
   0% {

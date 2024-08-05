@@ -3,7 +3,7 @@ import {
   flex,
   Font_Kanit,
   Font_NanumSquare,
-} from "../../../util/publicStyleComponents";
+} from "../../../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
 export const Scene = styled.section`

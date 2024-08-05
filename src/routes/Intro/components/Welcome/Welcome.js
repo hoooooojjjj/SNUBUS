@@ -1,6 +1,7 @@
 import React from "react";
 import { WelcomeContainer, WelcomeHeader, WelcomeText } from "./WelcomeStyle";
 
+// Welcome 컴포넌트(Intro 컴포넌트 하위)
 function Welcome() {
   return (
     <WelcomeContainer>
