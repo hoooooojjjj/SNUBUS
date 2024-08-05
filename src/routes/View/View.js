@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import getBusAndStationData from "../../api/busAndStationDataFetch";
+import getBusAndStationData from "./api/busAndStationDataFetch";
 import Loading from "./components/Loading/Loading";
-import { Container, ViewWrap } from "./ViewStyle";
+import { Container } from "./ViewStyle";
 import { isMapPrintContext } from "../../App";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";

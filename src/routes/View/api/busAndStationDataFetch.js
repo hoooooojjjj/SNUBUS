@@ -5,9 +5,9 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
-        )}`,
+        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/api/busData?routeId=${
+          busClassification.routeId
+        }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
         signal
           ? {
@@ -26,9 +26,6 @@ export default async function getBusAndStationData(busClassification, signal) {
               cache: "no-cache",
             }
       );
-
-      // 서버에서 json으로 응답 받기
-      const busData = await response.json();
 
       // 데이터 요청 횟수 초과 시
       if (response.status === 429) {
@@ -53,58 +50,23 @@ export default async function getBusAndStationData(busClassification, signal) {
         };
         // 데이터가 정상적으로 처리되었다면
       } else if (response.status === 200) {
-        // 각 버스의 위치 좌표 리턴
-        const getPosBuses = busData.map((bus) => {
-          return [bus.gpsY, bus.gpsX];
-        });
-
-        // 각 버스의 정보 (버스 ID, 차량번호, 차량유형, 제공시간)
-        const getBusInfo = busData.map((bus) => {
-          return {
-            vehId: bus.vehId,
-            plainNo: bus.plainNo,
-            busType: bus.busType,
-            dataTm: bus.dataTm,
-          };
-        });
-
-        // 중앙대학교 방면 snubus 정류장 지나는 버스만 추출
-        const busStationDirectionToStart = busData.filter(
-          (busPos) =>
-            parseInt(busPos.sectOrd) >=
-              busClassification.NumberOfStations.start[0] &&
-            parseInt(busPos.sectOrd) <=
-              busClassification.NumberOfStations.start[1]
-        );
-
-        // 신림2동차고지 방면 snubus 정류장 지나는 버스만 출력
-        const busStationDirectionToEnd = busData.filter(
-          (busPos) =>
-            parseInt(busPos.sectOrd) >=
-              busClassification.NumberOfStations.end[0] &&
-            parseInt(busPos.sectOrd) <=
-              busClassification.NumberOfStations.end[1]
-        );
+        // 서버에서 json으로 응답 받기
+        const busData = await response.json();
 
         return {
           // 버스 좌표 배열
-          busPos: getPosBuses,
-          busInfo: getBusInfo,
+          busPos: busData.getPosBuses,
+          busInfo: busData.getBusInfo,
           // 중앙대학교 방면 snubus 정류장에 위치한 버스들 배열
-          DirectionToStart: busStationDirectionToStart,
+          DirectionToStart: busData.busStationDirectionToStart,
           // 신림2동차고지 방면 snubus 정류장에 위치한 버스들 배열
-          DirectionToEnd: busStationDirectionToEnd,
+          DirectionToEnd: busData.busStationDirectionToEnd,
         };
       } else {
         alert(
           "예기치못한 오류로 인해 버스 정보가 들어오지 못했습니다. 다시 시도해주세요."
         );
-        return {
-          busPos: [],
-          busInfo: [],
-          DirectionToStart: [],
-          DirectionToEnd: [],
-        };
+        return null;
       }
     } catch (error) {
       if (error.name === "AbortError") {
@@ -112,6 +74,7 @@ export default async function getBusAndStationData(busClassification, signal) {
       } else {
         console.error("Fetch error:", error);
       }
+      return null;
     }
   };
 
@@ -120,9 +83,9 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/proxy?url=${encodeURIComponent(
-          `http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?ServiceKey=${process.env.REACT_APP_BUS_API_KEY}&busRouteId=${busClassification.routeId}&resultType=json`
-        )}`,
+        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/api/stationData?routeId=${
+          busClassification.routeId
+        }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
         signal
           ? {
@@ -142,26 +105,16 @@ export default async function getBusAndStationData(busClassification, signal) {
             }
       );
 
-      // 서버에서 json으로 응답 받기
-      const busStationData = await response.json();
-
+      // 데이터가 정상적으로 처리되었다면
       if (response.status === 200) {
-        // 중앙대학교 방면 정류장들 관련 정보 필터링
-        const busStationName_start = busStationData.filter(
-          (busStationInfo, i) =>
-            i >= busClassification.NumberOfStations.start[0] &&
-            i <= busClassification.NumberOfStations.start[1]
-        );
-
-        // 신림2동차고지 방면 정류장들 관련 정보 필터링
-        const busStationName_end = busStationData.filter(
-          (busStationInfo, i) =>
-            i >= busClassification.NumberOfStations.end[0] &&
-            i <= busClassification.NumberOfStations.end[1]
-        );
+        // 서버에서 json으로 응답 받기
+        const busStationData = await response.json();
 
         // 각 방면 정류장 정보 리턴
-        return [busStationName_start, busStationName_end];
+        return [
+          busStationData.busStationName_start,
+          busStationData.busStationName_end,
+        ];
       } else if (response.status === 429) {
         alert(
           "금일 데이터 요청 횟수를 초과했습니다. 내일 다시 이용해주세요. 죄송합니다."
@@ -169,7 +122,7 @@ export default async function getBusAndStationData(busClassification, signal) {
         return [];
       } else {
         alert(
-          "예기치못한 오류로 인해 버스 정보가 들어오지 못했습니다. 다시 시도해주세요."
+          "예기치못한 오류로 인해 정류장 정보가 들어오지 못했습니다. 다시 시도해주세요."
         );
         return [];
       }
@@ -179,6 +132,7 @@ export default async function getBusAndStationData(busClassification, signal) {
       } else {
         console.error("Fetch error:", error);
       }
+      return null;
     }
   };
 
