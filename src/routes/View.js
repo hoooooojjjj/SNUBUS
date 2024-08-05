@@ -7,7 +7,7 @@ import { isMapPrintContext } from "../App";
 import StationLine from "../components/Map/StationLine/StationLine";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import Headers from "./Main/components/Header/Header";
+import Headers from "./components/Header/Header";
 import {
   skipToken,
   useMutation,

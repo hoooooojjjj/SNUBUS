@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Containers, Overlay, MainWrap } from "./MainStyle";
-import Headers from "./components/Header/Header";
-import Footers from "./components/Footers/Footer";
+import Headers from "../components/Header/Header";
+import Footers from "../components/Footers/Footer";
 import Articles from "./components/Articles/Article";
 import busInfo from "../../json/busInfo.json";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ function useHasVisited() {
 // imgNum state를 전달하는 context API
 export const imgNumContext = React.createContext();
 
-// 메인 페이지
+// 메인 페이지 컴포넌트
 function Main() {
   // 처음 방문인지 아닌지 판단하는 커스텀 훅
   useHasVisited();

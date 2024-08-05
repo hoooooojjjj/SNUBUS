@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_Kanit } from "../../../../util/publicStyleComponents";
+import { flex, Font_Kanit } from "../../../util/publicStyleComponents";
 
 /* header */
 

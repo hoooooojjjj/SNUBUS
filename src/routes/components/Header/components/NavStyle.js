@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_DoHyeon } from "../../../../../util/publicStyleComponents";
+import { flex, Font_DoHyeon } from "../../../../util/publicStyleComponents";
 
 // ul 태그
 export const Ul = styled.ul({

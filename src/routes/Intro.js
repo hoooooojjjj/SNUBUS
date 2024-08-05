@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Headers from "./Main/components/Header/Header";
+import Headers from "./components/Header/Header";
 import Parallax from "./components/Parallax/Parallax";
 import Welcome from "./Welcome/Welcome";
 import { hasVisitedContext } from "../App";
