@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Li, BusTypeDropDown, BusTypeDropDownWrap, Ul } from "./NavStyle";
-import { imgNumContext } from "../Main";
+import { imgNumContext } from "../../../Main";
 import { useNavigate } from "react-router-dom";
 
 const busType = [

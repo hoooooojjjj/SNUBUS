@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flex, Font_NanumSquare } from "../../util/publicStyleComponents";
+import { flex, Font_NanumSquare } from "../../../../util/publicStyleComponents";
 
 /* footer */
 export const Footer = styled.footer({

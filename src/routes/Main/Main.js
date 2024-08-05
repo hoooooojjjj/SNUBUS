@@ -1,22 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Containers, Overlay, MainWrap } from "./MainStyle";
-import Headers from "./components/Header";
-import Footers from "./components/Footer";
-import Articles from "./components/Article";
-import busInfo from "../json/busInfo";
+import Headers from "./components/Header/Header";
+import Footers from "./components/Footers/Footer";
+import Articles from "./components/Articles/Article";
+import busInfo from "../../json/busInfo.json";
 import { useNavigate } from "react-router-dom";
-import { hasVisitedContext } from "../App";
+import { hasVisitedContext } from "../../App";
 
-// imgNum state를 전달하는 context API
-export const imgNumContext = React.createContext();
-
-// 메인 페이지
-function Main() {
+// 처음 방문인지 아닌지 판단하는 커스텀 훅
+function useHasVisited() {
   const nav = useNavigate();
 
+  // 처음 방문인지 아닌지 판단하는 context API
   const [hasVisited, setHasVisited] = useContext(hasVisitedContext);
-  // 배경이미지를 변경할 때 배경이미지 번호 state
-  const [imgNum, setImgNum] = useState(0);
 
   useEffect(() => {
     // 처음 방문이면 intro 페이지로 이동
@@ -24,6 +20,18 @@ function Main() {
       nav("/intro");
     }
   }, []);
+}
+
+// imgNum state를 전달하는 context API
+export const imgNumContext = React.createContext();
+
+// 메인 페이지
+function Main() {
+  // 처음 방문인지 아닌지 판단하는 커스텀 훅
+  useHasVisited();
+
+  // 배경이미지를 변경할 때 배경이미지 번호 state
+  const [imgNum, setImgNum] = useState(0);
 
   return (
     <imgNumContext.Provider value={[imgNum, setImgNum]}>

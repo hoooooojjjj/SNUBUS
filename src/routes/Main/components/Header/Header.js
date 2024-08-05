@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderWrap, Header, LogoText, NavigationWrap } from "./HeaderStyle";
-import Navigation from "./Nav";
+import Navigation from "./components/Nav";
 import { useNavigate } from "react-router-dom";
 
 function Headers({ isMain, fixed }) {

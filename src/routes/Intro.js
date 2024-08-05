@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import Headers from "./components/Header";
+import Headers from "./Main/components/Header/Header";
 import Parallax from "./components/Parallax/Parallax";
-import Welcome from "./components/Welcome";
+import Welcome from "./Welcome/Welcome";
 import { hasVisitedContext } from "../App";
 const Intro = () => {
   // Welcome 컴포넌트를 처음에만 보여줄 state

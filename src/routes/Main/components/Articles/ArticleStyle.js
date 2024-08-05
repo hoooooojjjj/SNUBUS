@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_DoHyeon, flex } from "../../util/publicStyleComponents";
+import { Font_DoHyeon, flex } from "../../../../util/publicStyleComponents";
 
 // article wrap
 export const Article = styled.article({

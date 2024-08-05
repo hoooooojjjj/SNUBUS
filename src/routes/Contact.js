@@ -16,8 +16,8 @@ import {
   ModalContent,
   ModalCloseBtn,
 } from "./ContactStyle";
-import Headers from "./components/Header";
-import Footers from "./components/Footer";
+import Headers from "./Main/components/Header/Header";
+import Footers from "./Main/components/Footers/Footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

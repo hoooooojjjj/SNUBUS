@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { flex } from "../util/publicStyleComponents";
+import { flex } from "../../util/publicStyleComponents";
 
 // fadeOut 애니메이션 정의
 const fadeOut = keyframes`

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "./routes/Main";
+import Main from "./routes/Main/Main";
 import React, { useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
 import View from "./routes/View";

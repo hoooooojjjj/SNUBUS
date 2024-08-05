@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Article, H2, Img, HeaderWrap, P } from "./ArticleStyle";
-import Slide from "./Slide";
+import Slide from "../../../components/Slide";
 
 function Articles({ info }) {
   const [showOver4, setShowOver4] = useState(false);

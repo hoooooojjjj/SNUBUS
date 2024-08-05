@@ -19,7 +19,7 @@ import {
   Words,
   Span,
 } from "./ParallaxStyle";
-import { Overlay } from "../../MainStyle";
+import { Overlay } from "../../Main/MainStyle";
 import { useNavigate } from "react-router-dom";
 
 const Parallax = () => {
