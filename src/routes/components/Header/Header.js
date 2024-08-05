@@ -3,7 +3,7 @@ import { HeaderWrap, Header, LogoText, NavigationWrap } from "./HeaderStyle";
 import Navigation from "./components/Nav";
 import { useNavigate } from "react-router-dom";
 
-/* - Headers 컴포넌트 (Main 페이지 하위)
+/* - Headers 컴포넌트 
     1. 이 컴포넌트가 하는 일
         1. isMain props로 메인 페이지인지 아닌지 판단하여 Navigation에 props로 넘겨줌
         2. fixed Props를 받아 이에 따라 HeaderWrap에 fixed 속성을 줌
