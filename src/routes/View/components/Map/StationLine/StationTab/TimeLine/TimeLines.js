@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimelineStyle, BusImg, TimeLinesWrap } from "../../StationLineStyle";
-import { ViewContext } from "../../../../../routes/View/components/ViewContextProvider";
+import { ViewContext } from "../../../../ViewContextProvider";
 import { stationList_end, stationList_start } from "./StationList";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";

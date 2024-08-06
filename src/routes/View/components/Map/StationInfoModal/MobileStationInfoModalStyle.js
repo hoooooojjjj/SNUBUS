@@ -3,7 +3,7 @@ import {
   flex,
   Font_DoHyeon,
   Font_NanumSquare,
-} from "../../../util/publicStyleComponents";
+} from "../../../../../util/publicStyleComponents";
 
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({

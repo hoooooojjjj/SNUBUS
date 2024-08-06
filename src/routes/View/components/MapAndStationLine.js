@@ -2,8 +2,8 @@ import { skipToken, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getBSData } from "../View";
 import { useState } from "react";
 import { ViewWrap } from "../ViewStyle";
-import Map from "../../../components/Map/Map";
-import StationLine from "../../../components/Map/StationLine/StationLine";
+import Map from "../components/Map/Map";
+import StationLine from "../components/Map/StationLine/StationLine";
 
 // 버스/정류장 데이터 mutate 커스텀 훅
 const useBSMutation = (busClassification, reduxProps, setIsBusInfoUpdated) => {

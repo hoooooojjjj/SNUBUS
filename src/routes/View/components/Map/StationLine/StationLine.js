@@ -21,7 +21,7 @@ import {
 } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ViewContext } from "../../../routes/View/components/ViewContextProvider";
+import { ViewContext } from "../../ViewContextProvider";
 import MobileStationInfoModal from "../StationInfoModal/MobileStationInfoModal";
 import StationTab from "./StationTab/StationTab";
 import InfoTab from "./InfoTab";

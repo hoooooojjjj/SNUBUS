@@ -10,7 +10,7 @@ import {
   MarkerWrap,
 } from "../StationLine/StationLineStyle";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import busInfo from "../../../json/busInfo.json";
+import busInfo from "../../../../../json/busInfo.json";
 import { useNavigate, useParams } from "react-router-dom";
 
 function InfoTab({ bus_stationData }) {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_DoHyeon, flex } from "../../util/publicStyleComponents";
+import { Font_DoHyeon, flex } from "../../../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
 // Map 컴포넌트 컨테이너
@@ -99,7 +99,7 @@ export const DataTm = styled.p({
     fontSize: 15,
     marginRight: 0,
   },
-  "@media(max-width: 550px)": {
+  "@media(max-width: 320px)": {
     fontSize: 13,
   },
 });

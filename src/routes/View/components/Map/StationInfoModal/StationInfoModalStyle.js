@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Font_NanumSquare } from "../../../util/publicStyleComponents";
+import { Font_NanumSquare } from "../../../../../util/publicStyleComponents";
 export const Container = styled.div({
   zIndex: 2,
   position: "absolute",

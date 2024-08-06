@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ViewContext } from "../../../routes/View/components/ViewContextProvider";
+import { ViewContext } from "../../ViewContextProvider";
 import { CaretDownOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   StationLineWrap,
