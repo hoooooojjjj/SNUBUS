@@ -365,19 +365,7 @@ function PrintMap({
   useEffect(() => {
     //  Maps 컴포넌트가 존재할 때
     if (kakaoMap.current && curPos.length) {
-      // cdn 방식 대신 동적으로 스크립트 추가 -> Map 컴포넌트가 렌더링될 때만 카카오맵 api 요청
-      const script = document.createElement("script");
-      // 동적으로 스크립트 만들땐 autoload=false 파라미터 추가
-      // 공식문서 참조
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP_API_KEY}&autoload=false`;
-      document.head.appendChild(script);
-      // onload: 스크립트가 로딩이 완료 되었을때 실행
-      script.onload = () => {
-        window.kakao.maps.load(() => {
-          // 카카오맵 그리기
-          printKakaomap();
-        });
-      };
+      printKakaomap();
     }
   }, [
     kakaoMap,
