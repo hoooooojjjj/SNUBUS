@@ -106,37 +106,37 @@ export const getBSData = async (busClassification, signal, reduxProps) => {
   return busData;
 };
 
-// Refetch까지 남은 시간 컴포넌트
-function LeftTime({ isRefetching }) {
-  // 남은 시간 state
+// fetch까지 남은 시간 컴포넌트
+function LeftTime({ isFetching }) {
+  // fetch까지 남은 시간 state
   const [timeLeft, setTimeLeft] = useState(null);
 
-  // refetch 여부 state (initial fetch 일 때는 false)
-  const [isRefetch, setIsRefetch] = useState(false);
-
-  // refetch setInterval 함수 저장하는 변수
-  let intervalId;
-
-  // refetch까지 남은 시간 계산
-  let refetchInterval;
+  // fetch 완료 여부 state
+  const [isFetch, setIsFetch] = useState(false);
 
   useEffect(() => {
-    // refetching 중이면
-    if (isRefetching) {
-      // refetch까지 남은 시간 15초로 설정
-      refetchInterval = 15;
+    // fetch setInterval 함수 저장하는 변수
+    let intervalId;
+
+    // fetch까지 남은 시간 계산
+    let fetchInterval;
+
+    // fetching 중이면
+    if (isFetching) {
+      // fetch까지 남은 시간 15초로 설정
+      fetchInterval = 15;
       // timeLeft state에 refetchInterval 저장
-      setTimeLeft(refetchInterval);
-      // refetch 여부 true로 설정
-      setIsRefetch(true);
-      // refetching 중이 아니면
-    } else if (isRefetch) {
+      setTimeLeft(fetchInterval);
+      // fetch 여부 true로 설정
+      setIsFetch(true);
+      // fetching 중이 아니면
+    } else if (isFetch) {
       // 1초 간격으로 timeLeft state 업데이트
       intervalId = setInterval(() => {
         setTimeLeft((prevTime) => {
-          // timeLeft이 1이면 refetchInterval로 설정
+          // timeLeft이 1이면 fetchInterval로 설정
           if (prevTime === 1) {
-            return refetchInterval;
+            return fetchInterval;
           }
           // timeLeft이 1보다 크면 1초씩 감소
           return prevTime - 1;
@@ -145,15 +145,15 @@ function LeftTime({ isRefetching }) {
     }
     // 컴포넌트 언마운트 시 clearInterval
     return () => clearInterval(intervalId);
-  }, [isRefetching, refetchInterval]);
+  }, [isFetching, isFetch]);
 
-  return <p>{timeLeft}</p>;
+  return <p style={{ color: "white" }}>{timeLeft}</p>;
 }
 
 // 버스/정류장 데이터 fetching 커스텀 훅
 const useBSQuery = (busClassification, reduxProps) => {
   // 리액트 쿼리로 버스 / 정류장 정보 데이터 fetching
-  const { isPending, isError, data, error, isRefetching } = useQuery({
+  const { isPending, isError, data, error, isFetching } = useQuery({
     queryKey: ["getBusAndStationData"],
     queryFn: busClassification.routeId
       ? async ({ signal }) => getBSData(busClassification, signal, reduxProps)
@@ -161,9 +161,7 @@ const useBSQuery = (busClassification, reduxProps) => {
     refetchInterval: 15000,
   });
 
-  console.log(" isRefetching : " + isRefetching);
-
-  return { isPending, isError, data, error, isRefetching };
+  return { isPending, isError, data, error, isFetching };
 };
 
 // view 페이지 컴포넌트
@@ -194,7 +192,7 @@ function View({
   const [isMapPrint, setIsMapPrint] = useContext(isMapPrintContext);
 
   // 마운트 시 버스/정류장 데이터 fetching 후 redux에 저장
-  const { isPending, isError, error, isRefetching } = useBSQuery(
+  const { isPending, isError, error, isFetching } = useBSQuery(
     busClassification,
     reduxProps
   );
@@ -208,17 +206,17 @@ function View({
     <Container>
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-      {!isPending && bus_stationData.busDataReducer.busPositionXY && (
-        <ViewContextProvider>
-          <Headers isMain={false} />
-          <LeftTime isRefetching={isRefetching} />
+      <ViewContextProvider>
+        <Headers isMain={false} />
+        <LeftTime isFetching={isFetching} />
+        {!isPending && bus_stationData.busDataReducer.busPositionXY && (
           <MapAndStationLine
             busClassification={busClassification}
             isMapPrint={isMapPrint}
             reduxProps={reduxProps}
           />
-        </ViewContextProvider>
-      )}
+        )}
+      </ViewContextProvider>
     </Container>
   );
 }
