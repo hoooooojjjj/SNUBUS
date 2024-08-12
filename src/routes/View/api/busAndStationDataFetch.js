@@ -5,7 +5,7 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/api/busData?routeId=${
+        `http://3.34.142.21:8080/api/busData?routeId=${
           busClassification.routeId
         }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
@@ -83,7 +83,7 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://convenient-arlene-sono12-78cd3ebf.koyeb.app/api/stationData?routeId=${
+        `http://3.34.142.21:8080/api/stationData?routeId=${
           busClassification.routeId
         }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
@@ -104,6 +104,8 @@ export default async function getBusAndStationData(busClassification, signal) {
               cache: "no-cache",
             }
       );
+
+      console.log(response);
 
       // 데이터가 정상적으로 처리되었다면
       if (response.status === 200) {
