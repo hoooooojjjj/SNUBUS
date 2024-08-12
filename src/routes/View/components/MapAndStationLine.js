@@ -1,6 +1,6 @@
 import { skipToken, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getBSData } from "../View";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ViewWrap } from "../ViewStyle";
 import Map from "../components/Map/Map";
 import StationLine from "../components/Map/StationLine/StationLine";

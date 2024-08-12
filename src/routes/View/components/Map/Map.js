@@ -136,6 +136,7 @@ function Map({ mutation, bus_stationData, isBusInfoUpdated }) {
     isInfoWindowVisible,
     // 클릭한 버스 정류장 정류 받아오는 context
     clickedStationInfo,
+    timeLeft,
   } = useContext(ViewContext);
 
   // 각 버스 관련 정보(버스 ID, 차량번호, 차량유형, 제공시간) state
@@ -174,6 +175,7 @@ function Map({ mutation, bus_stationData, isBusInfoUpdated }) {
           >
             <RedoOutlined />
           </UpdateBtn>
+          <span>{timeLeft}</span>
         </UpdateWrap>
       ) : (
         <></>

@@ -20,6 +20,8 @@ import MapAndStationLine from "./components/MapAndStationLine";
             1. Component 기능으로 분리 →  Loading 컴포넌트
         4. 버스 정류장 좌표, InfoWindow 열고 닫는 state, 클릭한 정류장의 도착 정보 state, 폴리라인 끄고 키는 state를 관리하는 컨텍스트 프로바이더
             1. Component 기능으로 분리 →  ViewContextProvider 컴포넌트
+                1. fetch까지 남은 시간 계산
+                    1. Hooks 기능으로 분리 → useLeftTime() 커스텀 훅으로 분리
         5. 지도와 정류장 라인을 렌더링 및 mutation 이벤트
             1. Component 기능으로 분리 →  MapAndStationLine 컴포넌트
                 1. 업데이트 버튼 클릭 시 버스/정류장 데이터 mutate 후 redux에 저장
@@ -106,50 +108,6 @@ export const getBSData = async (busClassification, signal, reduxProps) => {
   return busData;
 };
 
-// fetch까지 남은 시간 컴포넌트
-function LeftTime({ isFetching }) {
-  // fetch까지 남은 시간 state
-  const [timeLeft, setTimeLeft] = useState(null);
-
-  // fetch 완료 여부 state
-  const [isFetch, setIsFetch] = useState(false);
-
-  useEffect(() => {
-    // fetch setInterval 함수 저장하는 변수
-    let intervalId;
-
-    // fetch까지 남은 시간 계산
-    let fetchInterval;
-
-    // fetching 중이면
-    if (isFetching) {
-      // fetch까지 남은 시간 15초로 설정
-      fetchInterval = 15;
-      // timeLeft state에 refetchInterval 저장
-      setTimeLeft(fetchInterval);
-      // fetch 여부 true로 설정
-      setIsFetch(true);
-      // fetching 중이 아니면
-    } else if (isFetch) {
-      // 1초 간격으로 timeLeft state 업데이트
-      intervalId = setInterval(() => {
-        setTimeLeft((prevTime) => {
-          // timeLeft이 1이면 fetchInterval로 설정
-          if (prevTime === 1) {
-            return fetchInterval;
-          }
-          // timeLeft이 1보다 크면 1초씩 감소
-          return prevTime - 1;
-        });
-      }, 1000);
-    }
-    // 컴포넌트 언마운트 시 clearInterval
-    return () => clearInterval(intervalId);
-  }, [isFetching, isFetch]);
-
-  return <p style={{ color: "white" }}>{timeLeft}</p>;
-}
-
 // 버스/정류장 데이터 fetching 커스텀 훅
 const useBSQuery = (busClassification, reduxProps) => {
   // 리액트 쿼리로 버스 / 정류장 정보 데이터 fetching
@@ -206,9 +164,8 @@ function View({
     <Container>
       <Loading display={isMapPrint ? "none" : "block"} />
       {/* 데이터가 들어왔을 때 Map 컴포넌트 렌더링 */}
-      <ViewContextProvider>
+      <ViewContextProvider isFetching={isFetching}>
         <Headers isMain={false} />
-        <LeftTime isFetching={isFetching} />
         {!isPending && bus_stationData.busDataReducer.busPositionXY && (
           <MapAndStationLine
             busClassification={busClassification}
