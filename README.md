@@ -14,7 +14,7 @@
   - 5. 기술 스택
     - 1. 프론트엔드 : HTML, CSS, JavaScript, React, React-query(TanStack-query), Emotion, Jest, React-Testing-Library, Cypress
     - 2. 백엔드 : node.js, express
-    - 3. 배포 : vercel(프론트), koyeb(백)
+    - 3. 배포 : vercel(프론트), AWS E2C(백)
   - 6. API : kakaoMaps, 서울특별시\_버스위치정보조회 API(공공데이터), 서울특별시\_버스도착정보조회 API(공공데이터)
 - **링크**
   - 깃허브 : https://github.com/hoooooojjjj/SNUBUS
