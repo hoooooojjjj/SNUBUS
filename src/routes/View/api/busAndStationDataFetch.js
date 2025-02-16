@@ -5,7 +5,7 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://api.snubus-server.digital/api/busData?routeId=${
+        `http://3.39.139.237/api/busData?routeId=${
           busClassification.routeId
         }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
@@ -83,7 +83,7 @@ export default async function getBusAndStationData(busClassification, signal) {
     // 데이터 요청
     try {
       const response = await fetch(
-        `https://api.snubus-server.digital/api/stationData?routeId=${
+        `http://3.39.139.237/api/stationData?routeId=${
           busClassification.routeId
         }&busClassification=${JSON.stringify(busClassification)}`,
         // signal이 존재하면, signal을 추가하고 아니면 추가하지 않음
