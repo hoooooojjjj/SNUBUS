@@ -31,9 +31,6 @@ const Contact = () => {
         SNUBUS 이용 중 궁금하신 점, 추가했으면 하시는 기능, 문제 상황 등에 대해
         문의해주세요.
       </ContextH4>
-      <ContextH4>
-        작성해주신 이메일로 빠른 시일 내에 답변드리겠습니다.
-      </ContextH4>
       <ContactFormAndModal />
       <Footers />
     </ContextContainer>
