@@ -30,6 +30,9 @@ export const NavigationWrap = styled.nav({
 // 헤더 안에 로고 폰트
 export const LogoText = styled.p({
   zIndex: 100,
+  fontWeight: 700,
+  color: "#fff",
+  textShadow: "0 0 15px rgba(255, 255, 255, 0.34)",
   ...Font_Kanit(),
   marginLeft: 30,
   marginTop: 0,

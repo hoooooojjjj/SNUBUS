@@ -27,7 +27,7 @@ function useHasVisited() {
   useEffect(() => {
     // 처음 방문이면 intro 페이지로 이동
     if (hasVisited === null) {
-      nav("/intro");
+      // nav("/intro");
     }
   }, []);
 }

@@ -14,17 +14,17 @@ const SNUTMI = [
 
 function Loading({ display }) {
   const [randomIndex, setRandomIndex] = useState(
-    Math.floor(Math.random() * (SNUTMI.length - 1))
+    Math.floor(Math.random() * SNUTMI.length)
   );
+
   return (
     <LoadingContainer display={display}>
       <LoadingWrap>
         <LogoStyle>SNUBUS</LogoStyle>
-        <br />
         <TMI>
-          <strong>알고 계셨나요 ?</strong>
+          <strong>서울대 TMI</strong>
         </TMI>
-        <TMI>"{SNUTMI[randomIndex]}"</TMI>
+        <TMI>{SNUTMI[randomIndex]}</TMI>
       </LoadingWrap>
     </LoadingContainer>
   );
