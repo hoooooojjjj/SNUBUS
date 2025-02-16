@@ -6,7 +6,7 @@ import StationInfoModal from "./StationInfoModal/StationInfoModal";
 import { RedoOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import PrintMap from "./\bPrintMap/PrintMap";
+import PrintMap from "./PrintMap/PrintMap";
 
 // 현재 위치 좌표 가져오는 커스텀 훅
 const useCurrentPosition = () => {

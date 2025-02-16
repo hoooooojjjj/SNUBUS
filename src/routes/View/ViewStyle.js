@@ -5,6 +5,7 @@ export const Container = styled.div({
   width: "100dvw",
   height: "auto",
   overflow: "hidden",
+  background: "linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.6))",
 });
 
 export const ViewWrap = styled.div({
