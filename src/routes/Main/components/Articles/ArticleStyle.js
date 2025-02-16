@@ -272,3 +272,32 @@ export const InfoValue = styled.div`
     gap: 10px;
   }
 `;
+
+export const BusTypeTag = styled.div`
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+  }
+  @media (max-width: 550px) {
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+  }
+  padding: 8px 16px;
+  background-color: rgba(34, 197, 94, 0.2);
+  border-radius: 9999px;
+  border: 2px solid rgba(116, 252, 166, 0.3);
+  color: rgb(74, 222, 128);
+  font-weight: 700;
+  font-size: 1.2rem;
+  @media (max-width: 550px) {
+    font-size: 1.1rem;
+  }
+`;

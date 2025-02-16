@@ -6,7 +6,6 @@ import { flex, Font_Kanit } from "../../../util/publicStyleComponents";
 // 헤더 wrap
 export const HeaderWrap = styled.header((props) => ({
   width: "100%",
-
   position: props.fixed || null,
   zIndex: 10,
 }));

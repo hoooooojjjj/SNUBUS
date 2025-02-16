@@ -26,7 +26,7 @@ const fadeIn = keyframes`
 export const Containers = styled.div`
   position: relative;
   width: 100dvw;
-  height: 100dvh;
+  min-height: 100dvh;
   overflow: hidden;
   background-color: #111827;
   color: white;
@@ -35,7 +35,6 @@ export const Containers = styled.div`
 // 배경 전환 시 애니메이션 재실행될 요소
 export const Overlay = styled.div`
   width: 100dvw;
-  height: 100dvh;
   position: absolute;
   top: 0;
   left: 0;
@@ -56,7 +55,6 @@ export const Overlay = styled.div`
 export const MainWrap = styled.main({
   position: "relative",
   // width: "100%",
-  height: "100dvh",
   animation: `${fadeIn} 1s ease-out`,
   ...flex("column", "flex-start", "center"),
   padding: "0 20px",

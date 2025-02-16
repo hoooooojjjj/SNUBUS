@@ -1,11 +1,13 @@
 import React from "react";
-import { Footer, FooterP, FooterPWrap } from "./FooterStyle";
+import { Footer, FooterPWrap, FooterP, GradientSpan } from "./FooterStyle";
 
 function Footers() {
   return (
     <Footer>
-      <FooterPWrap>
-        <FooterP>ⓒSONO. All rights reserved.</FooterP>
+      <FooterPWrap href="https://github.com/hoooooojjjj">
+        <FooterP>
+          Made by <GradientSpan>sono</GradientSpan>
+        </FooterP>
       </FooterPWrap>
     </Footer>
   );

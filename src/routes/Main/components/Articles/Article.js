@@ -14,6 +14,8 @@ import {
   InfoBox,
   InfoLabel,
   InfoValue,
+  BusTypeTag,
+  BusTypeText,
 } from "./ArticleStyle";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftRight, ArrowRightFromLine } from "lucide-react";
@@ -28,15 +30,11 @@ import { ArrowLeftRight, ArrowRightFromLine } from "lucide-react";
             1. Component 기능으로 분리 →  Slide 컴포넌트 */
 
 // ArticleHeader 컴포넌트
-function ArticleHeader({ info, selectedBus }) {
+function ArticleHeader({ selectedBus }) {
   return (
     <HeaderContainer>
       <HeaderWrap>
         <InfoContainer>
-          {/* <InfoBox>
-            <Img src={process.env.PUBLIC_URL + `assets/${info.id}.svg`} />
-            <H2>{info.name}</H2>
-          </InfoBox> */}
           <InfoBox>
             <InfoLabel>운행 지역</InfoLabel>
             <InfoValue isRoute={true}>
@@ -55,7 +53,9 @@ function ArticleHeader({ info, selectedBus }) {
           </InfoBox>
           <InfoBox>
             <InfoLabel>배차 간격</InfoLabel>
-            <InfoValue>{selectedBus.interval}</InfoValue>
+            <InfoValue style={{ whiteSpace: "wrap" }}>
+              {selectedBus.interval}
+            </InfoValue>
           </InfoBox>
         </InfoContainer>
       </HeaderWrap>
@@ -78,7 +78,11 @@ function BusRouteList({ info }) {
     return busList;
   };
 
-  return <P>{PreprocessingBusList()}</P>;
+  return (
+    <>
+      <P>{PreprocessingBusList()}</P>
+    </>
+  );
 }
 
 // 해당 버스 노선 선택할 수 있는 슬라이드 컴포넌트
@@ -125,6 +129,7 @@ function Articles({ info }) {
 
   return (
     <Article>
+      <BusTypeTag>{info.name}</BusTypeTag>
       <BusRouteList info={info} />
       <Slide
         info={info}
