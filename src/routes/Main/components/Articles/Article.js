@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Article,
   H2,
@@ -9,8 +9,14 @@ import {
   CarouselWrap,
   SlideItem,
   SlideText,
+  HeaderContainer,
+  InfoContainer,
+  InfoBox,
+  InfoLabel,
+  InfoValue,
 } from "./ArticleStyle";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeftRight, ArrowRightFromLine } from "lucide-react";
 
 /* - Articles 컴포넌트 (Headers 컴포넌트  하위)
     - 이 컴포넌트가 하는 일
@@ -22,12 +28,38 @@ import { useNavigate } from "react-router-dom";
             1. Component 기능으로 분리 →  Slide 컴포넌트 */
 
 // ArticleHeader 컴포넌트
-function ArticleHeader({ info }) {
+function ArticleHeader({ info, selectedBus }) {
   return (
-    <HeaderWrap>
-      <Img src={process.env.PUBLIC_URL + `assets/${info.id}.svg`} />
-      <H2>{info.name}</H2>
-    </HeaderWrap>
+    <HeaderContainer>
+      <HeaderWrap>
+        <InfoContainer>
+          {/* <InfoBox>
+            <Img src={process.env.PUBLIC_URL + `assets/${info.id}.svg`} />
+            <H2>{info.name}</H2>
+          </InfoBox> */}
+          <InfoBox>
+            <InfoLabel>운행 지역</InfoLabel>
+            <InfoValue isRoute={true}>
+              <span>{selectedBus.btnName.end}</span>
+              <ArrowLeftRight />
+              <span>{selectedBus.btnName.start}</span>
+            </InfoValue>
+          </InfoBox>
+          <InfoBox>
+            <InfoLabel>운행 시간</InfoLabel>
+            <InfoValue>
+              <span>{selectedBus.firstTm}</span>
+              <ArrowRightFromLine />
+              <span>{selectedBus.lastTm}</span>
+            </InfoValue>
+          </InfoBox>
+          <InfoBox>
+            <InfoLabel>배차 간격</InfoLabel>
+            <InfoValue>{selectedBus.interval}</InfoValue>
+          </InfoBox>
+        </InfoContainer>
+      </HeaderWrap>
+    </HeaderContainer>
   );
 }
 
@@ -50,20 +82,34 @@ function BusRouteList({ info }) {
 }
 
 // 해당 버스 노선 선택할 수 있는 슬라이드 컴포넌트
-function Slide({ info }) {
+function Slide({ info, selectedBus, setSelectedBus }) {
   const nav = useNavigate();
 
-  // 해당 버스 노선 클릭 시 해당 노선 페이지로 이동
+  const handleSlideChange = (currentSlide) => {
+    // 현재 보이는 슬라이드의 버스 정보로 상태 업데이트
+    const currentBus = info.buslist[currentSlide];
+    setSelectedBus(currentBus);
+  };
+
   const onBusNumClick = (bus) => {
     nav(`/view/${bus.num}`);
   };
 
   return (
     <CarouselWrap>
-      <StyledCarousel arrows={true}>
+      <StyledCarousel
+        arrows={true}
+        afterChange={handleSlideChange} // 슬라이드 변경 후 호출되는 콜백
+      >
         {info.buslist.map((bus) => (
           <SlideItem key={bus.num}>
-            <SlideText onClick={() => onBusNumClick(bus)}>
+            <SlideText
+              onClick={() => onBusNumClick(bus)}
+              style={{
+                fontWeight: selectedBus.num === bus.num ? "bold" : "normal",
+                color: selectedBus.num === bus.num ? "#007bff" : "inherit",
+              }}
+            >
               {bus.num}번 버스
             </SlideText>
           </SlideItem>
@@ -75,11 +121,17 @@ function Slide({ info }) {
 
 // Articles 컴포넌트(Main 컴포넌트 하위)
 function Articles({ info }) {
+  const [selectedBus, setSelectedBus] = React.useState(info.buslist[0]);
+
   return (
     <Article>
-      <ArticleHeader info={info} />
       <BusRouteList info={info} />
-      <Slide info={info} />
+      <Slide
+        info={info}
+        selectedBus={selectedBus}
+        setSelectedBus={setSelectedBus}
+      />
+      <ArticleHeader info={info} selectedBus={selectedBus} />
     </Article>
   );
 }
