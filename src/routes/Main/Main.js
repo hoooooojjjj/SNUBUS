@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Containers, Overlay, MainWrap } from "./MainStyle";
 import Headers from "../components/Header/Header";
 import Footers from "../components/Footers/Footer";

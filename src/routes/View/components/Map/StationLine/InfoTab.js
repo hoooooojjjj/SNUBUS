@@ -96,7 +96,7 @@ function InfoTab({ bus_stationData }) {
       </MarkerInfoWrap>
       <InfoText
         onClick={() => {
-          nav("/intro");
+          nav("/");
         }}
         style={{
           textAlign: "right",

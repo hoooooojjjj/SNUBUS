@@ -379,3 +379,105 @@ export const Span = styled.span`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
+
+const slideFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const slideFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const ChatBubbleContainer = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: ${(props) =>
+    props.isInterviewer ? "flex-start" : "flex-end"};
+  width: 100%;
+  padding: 0 20px;
+  opacity: 0;
+  animation: ${(props) =>
+      props.isInterviewer ? slideFromLeft : slideFromRight}
+    0.8s ease-out forwards;
+  animation-play-state: paused;
+
+  .visible & {
+    animation-play-state: running;
+  }
+`;
+
+export const ChatBubbleContent = styled.div`
+  max-width: 80%;
+`;
+
+export const ChatBubbleSpeaker = styled.div`
+  color: #4fd1c5;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: "Do hyeon", sans-serif;
+  text-align: ${(props) => (props.isInterviewer ? "left" : "right")};
+`;
+
+export const ChatBubbleText = styled.div`
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  background-color: ${(props) => (props.isInterviewer ? "#1A1F2E" : "#4FD1C5")};
+  color: ${(props) => (props.isInterviewer ? "white" : "#0B0F17")};
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+
+  p {
+    margin: 0;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
+`;
+
+const bounce = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+`;
+
+export const ScrollIndicator = styled.div`
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #4fd1c5;
+  font-size: 2rem;
+  animation: ${bounce} 2s infinite;
+  cursor: pointer;
+  z-index: 10;
+
+  &:hover {
+    color: #38b2ac;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    bottom: 20px;
+  }
+`;

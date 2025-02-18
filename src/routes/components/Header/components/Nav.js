@@ -70,7 +70,7 @@ function Navigation({ isMain }) {
   return (
     <Ul>
       <DropDown isMain={isMain} />
-      <NavLi path={"/intro"} name={"소개"} />
+      <NavLi path={"/"} name={"소개"} />
       <NavLi path={"/contact"} name={"문의"} />
     </Ul>
   );

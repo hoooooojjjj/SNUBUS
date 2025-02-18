@@ -9,7 +9,7 @@ function useLogoClick() {
 
   // 로고 클릭 시 메인 페이지로 이동하는 함수
   const onClickLogo = () => {
-    nav("/");
+    nav("/main");
   };
 
   return onClickLogo;
