@@ -31,22 +31,50 @@ function InfoTab({ bus_stationData }) {
 
   return (
     <>
-      <StationLineInfoWrap style={{ textAlign: "left" }}>
-        {/* 데스크탑,랩탑 <-> 모바일에 따라 jsx 구조 변경 */}
+      <StationLineInfoWrap>
         {!window.matchMedia("(max-width: 550px)").matches ? (
           <>
             <InfoTextWrap>
               <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-              <InfoText>
-                첫차 {curBusInfo.firstTm} | 막차 {curBusInfo.lastTm}
+              <InfoText
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
+              >
+                <span>첫차 {curBusInfo.firstTm}</span>
+                <span
+                  style={{
+                    width: "1px",
+                    height: "20px",
+                    background: "rgba(255,255,255,0.2)",
+                    margin: "0 15px",
+                  }}
+                ></span>
+                <span>막차 {curBusInfo.lastTm}</span>
               </InfoText>
               <InfoText>
-                <strong>배차간격</strong> : {curBusInfo.interval}
+                <strong style={{ color: "#0c8ce9" }}>배차간격</strong>
+                <span style={{ marginLeft: "10px" }}>
+                  {curBusInfo.interval}
+                </span>
               </InfoText>
-              <InfoText>
+              <InfoText
+                style={{
+                  background:
+                    busLength > 0
+                      ? "rgba(12,140,233,0.2)"
+                      : "rgba(253,151,39,0.2)",
+                  border:
+                    busLength > 0
+                      ? "1px solid rgba(12,140,233,0.3)"
+                      : "1px solid rgba(253,151,39,0.3)",
+                }}
+              >
                 <strong>
                   {busLength > 0 ? (
-                    `현재 ${busLength}대 운행중`
+                    `🚌 현재 ${busLength}대 운행중`
                   ) : (
                     <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
                   )}
@@ -57,56 +85,94 @@ function InfoTab({ bus_stationData }) {
         ) : (
           <InfoTextWrap>
             <InfoTextHeader>{curBusInfo.route}</InfoTextHeader>
-            <InfoText>
-              {curBusInfo.firstTm} ~ {curBusInfo.lastTm} |{" "}
-              <strong>
-                {busLength > 0 ? (
-                  `  현재 ${busLength}대 운행중`
-                ) : (
-                  <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
-                )}
-              </strong>
+            <InfoText
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  marginTop: 10,
+                }}
+              >
+                <span>첫차 {curBusInfo.firstTm}</span>
+                <span
+                  style={{
+                    width: "1px",
+                    height: "20px",
+                    background: "rgba(255,255,255,0.2)",
+                    margin: "0 15px",
+                  }}
+                ></span>
+                <span>막차 {curBusInfo.lastTm}</span>
+              </div>
+              <div
+                style={{
+                  background:
+                    busLength > 0
+                      ? "rgba(12,140,233,0.2)"
+                      : "rgba(253,151,39,0.2)",
+                  padding: "5px 10px",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                }}
+              >
+                <strong>
+                  {busLength > 0 ? (
+                    `🚌 현재 ${busLength}대 운행중`
+                  ) : (
+                    <span style={{ color: "#fd9727" }}>⚠️ 운행종료</span>
+                  )}
+                </strong>
+              </div>
             </InfoText>
             <InfoText>
-              <strong>배차간격</strong> : {curBusInfo.interval}
+              <strong style={{ color: "#0c8ce9" }}>배차간격</strong>
+              <span style={{ marginLeft: "10px" }}>{curBusInfo.interval}</span>
             </InfoText>
           </InfoTextWrap>
         )}
-      </StationLineInfoWrap>{" "}
+      </StationLineInfoWrap>
+
       <MarkerInfoWrap>
         <InfoTextHeader>마커 정보</InfoTextHeader>
-        <MarkerWrap>
-          <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/currentMarker.webp"}
-          />
-          <MarkerInfoText>현재 위치</MarkerInfoText>
-        </MarkerWrap>
-        <MarkerWrap>
-          <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/stationMarker.webp"}
-          />
-          <MarkerInfoText>정류장</MarkerInfoText>
-        </MarkerWrap>
-        <MarkerWrap>
-          <MarkerInfoImg
-            src={process.env.PUBLIC_URL + "/assets/busMarker.webp"}
-          />
-          <MarkerInfoText>버스</MarkerInfoText>
-        </MarkerWrap>
+        {[
+          { img: "/assets/currentMarker.webp", text: "현재 위치" },
+          { img: "/assets/stationMarker.webp", text: "정류장" },
+          { img: "/assets/busMarker.webp", text: "버스" },
+        ].map((marker, index) => (
+          <MarkerWrap key={index}>
+            <MarkerInfoImg
+              src={process.env.PUBLIC_URL + marker.img}
+              alt={marker.text}
+            />
+            <MarkerInfoText>{marker.text}</MarkerInfoText>
+          </MarkerWrap>
+        ))}
       </MarkerInfoWrap>
+
       <InfoText
-        onClick={() => {
-          nav("/");
-        }}
+        onClick={() => nav("/")}
         style={{
           textAlign: "right",
           cursor: "pointer",
           width: "90%",
+          padding: "10px 15px",
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: "8px",
+          transition: "all 0.2s ease",
+          "&:hover": {
+            background: "rgba(255,255,255,0.1)",
+            transform: "translateX(-5px)",
+          },
         }}
       >
-        <strong>
-          <QuestionCircleOutlined />{" "}
-        </strong>
+        <QuestionCircleOutlined style={{ marginRight: "8px" }} />
         도움말
       </InfoText>
     </>

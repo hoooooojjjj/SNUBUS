@@ -4,7 +4,7 @@ import { keyframes } from "@emotion/react";
 
 // Map 컴포넌트 컨테이너
 export const Container = styled.div((props) => ({
-  width: "75dvw",
+  width: "70dvw",
   height: "90dvh",
   ...flex("row", "center", "center"),
   "@media(max-width: 550px)": {

@@ -124,7 +124,7 @@ const StationLine = ({ bus_stationData }) => {
             </BusSelectWrap>
           )}{" "}
           <LogoText>{id} </LogoText>
-          <StationLineTabWrap>
+          <StationLineTabWrap isInfoTab={isInfoTab}>
             <InfoTabBtn onClick={switchToInfoTab} isInfoTab={isInfoTab}>
               <InfoCircleOutlined />
               <br />

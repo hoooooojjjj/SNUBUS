@@ -10,11 +10,13 @@ import {
 // StationLine 컴포넌트 컨테이너
 export const Container = styled.div({
   margin: "0 auto",
-  width: "25dvw",
+  width: "30dvw",
   height: "80dvh",
+  marginRight: 15,
   "@media(max-width: 550px)": {
     width: "100dvw",
     marginTop: 10,
+    height: "100dvh",
   },
   ...flex("row", "center", "center"),
   ...Font_NanumSquare(),
@@ -53,8 +55,8 @@ export const LogoText = styled.p({
 });
 
 // 정류장 라인 탭 wrap
-export const StationLineTabWrap = styled.div({
-  width: "90%",
+export const StationLineTabWrap = styled.div((props) => ({
+  width: "100%",
   height: "10%",
   "@media(max-width: 550px)": {
     height: 50,
@@ -62,7 +64,7 @@ export const StationLineTabWrap = styled.div({
   marginBottom: 10,
   ...flex("row", "center", "center"),
   fontSize: 16,
-});
+}));
 
 // 정보 탭 Btn
 export const InfoTabBtn = styled.button((props) => ({
@@ -72,6 +74,7 @@ export const InfoTabBtn = styled.button((props) => ({
   color: "white",
   border: "none",
   paddingBottom: 10,
+
   "@media(max-width: 550px)": {
     fontSize: 14,
   },
@@ -96,10 +99,22 @@ export const StationTabBtn = styled.button((props) => ({
 export const StationLineInfoWrap = styled.div({
   ...flex("column", "normal", "normal"),
   position: "relative",
-  width: "85%",
-  height: "40%",
+  width: "90%",
+  marginTop: 10,
+  // minHeight: "40%",
+  background: "rgba(255,255,255,0.05)",
+  borderRadius: "15px",
+  padding: "20px",
+  backdropFilter: "blur(10px)",
+  transition: "all 0.3s ease",
+  "@media(max-width: 768px)": {
+    width: "95%",
+    padding: "15px",
+  },
   "@media(max-width: 550px)": {
-    height: "27%",
+    minHeight: "27%",
+    padding: "12px",
+    // margin: "10px",
   },
 });
 
@@ -110,40 +125,49 @@ export const InfoTextWrap = styled.div(() => ({
 
 // 노선 정보 text header
 export const InfoTextHeader = styled.p({
-  margin: "10px 0px 0px 0px",
-  fontSize: 20,
+  margin: "0 0 15px 0",
+  fontSize: "28px",
+  fontWeight: "bold",
+  background: "linear-gradient(45deg, #fff, #0c8ce9)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
   "@media(max-width: 1024px)": {
-    fontSize: 18,
+    fontSize: "24px",
   },
   "@media(max-width: 768px)": {
-    fontSize: 16,
+    fontSize: "22px",
   },
   "@media(max-width: 550px)": {
-    fontSize: 20,
-    marginTop: 5,
+    fontSize: "20px",
+    marginBottom: "10px",
   },
   "@media(max-width: 320px)": {
-    fontSize: 18,
+    fontSize: "18px",
   },
-  color: "white",
   ...Font_DoHyeon(),
 });
 
 // 노선 정보 text
 export const InfoText = styled.p({
-  fontSize: 16,
+  fontSize: "16px",
+  padding: "8px 12px",
+  margin: "8px 0",
+  borderRadius: "8px",
+  transition: "all 0.2s ease",
+  background: "rgba(255,255,255,0.03)",
+  "&:hover": {
+    background: "rgba(255,255,255,0.08)",
+  },
   "@media(max-width: 1024px)": {
-    fontSize: 15,
+    fontSize: "15px",
+    padding: "6px 10px",
   },
   "@media(max-width: 768px)": {
-    fontSize: 14,
+    fontSize: "14px",
   },
   "@media(max-width: 550px)": {
-    fontSize: 15,
-    marginBottom: 10,
-  },
-  "@media(max-width: 320px)": {
-    fontSize: 14,
+    fontSize: "13px",
+    margin: "5px 0",
   },
   color: "white",
 });
@@ -264,54 +288,74 @@ export const TimelineStyle = styled(Timeline)`
 
 export const MarkerInfoWrap = styled.div({
   ...flex("column", "normal", "normal"),
-  borderTop: "2px solid #363636",
-  width: "85%",
-  height: "30%",
+  background: "rgba(12,140,233,0.1)",
+  backdropFilter: "blur(5px)",
+  borderRadius: "15px",
+  padding: "20px",
+  width: "90%",
+  margin: "15px 0",
+  transition: "all 0.3s ease",
+  "@media(max-width: 768px)": {
+    width: "95%",
+    padding: "15px",
+  },
+  "@media(max-width: 550px)": {
+    padding: "12px",
+    margin: "5px 0",
+  },
 });
 
 export const MarkerWrap = styled.div({
   ...flex("row", "normal", "center"),
+  padding: "10px",
+  margin: "5px 0",
+  borderRadius: "10px",
+  transition: "all 0.2s ease",
+  cursor: "default",
+  "&:hover": {
+    background: "rgba(255,255,255,0.1)",
+    transform: "translateX(5px)",
+  },
 });
 
 export const MarkerInfoImg = styled.img({
-  width: 30,
-  height: 30,
-  fontSize: 16,
+  width: "35px",
+  height: "35px",
+  padding: "5px",
+  marginRight: "15px",
+  backgroundColor: "rgba(255,255,255,0.9)",
+  borderRadius: "50%",
+  transition: "all 0.2s ease",
+  "&:hover": {
+    transform: "scale(1.1)",
+  },
   "@media(max-width: 1024px)": {
-    width: 28,
-    height: 28,
+    width: "30px",
+    height: "30px",
   },
   "@media(max-width: 768px)": {
-    width: 26,
-    height: 26,
+    width: "28px",
+    height: "28px",
   },
   "@media(max-width: 550px)": {
-    width: 30,
-    height: 30,
+    width: "25px",
+    height: "25px",
+    marginRight: "10px",
   },
-  "@media(max-width: 320px)": {
-    width: 28,
-    height: 28,
-  },
-  marginRight: 10,
-  backgroundColor: "white",
-  borderRadius: 50,
-  padding: 3,
 });
 
 export const MarkerInfoText = styled.p({
-  fontSize: 16,
+  fontSize: "16px",
+  fontWeight: "500",
+  transition: "all 0.2s ease",
   "@media(max-width: 1024px)": {
-    fontSize: 15,
+    fontSize: "15px",
   },
   "@media(max-width: 768px)": {
-    fontSize: 14,
+    fontSize: "14px",
   },
   "@media(max-width: 550px)": {
-    fontSize: 15,
-  },
-  "@media(max-width: 320px)": {
-    fontSize: 14,
+    fontSize: "13px",
   },
 });
 
