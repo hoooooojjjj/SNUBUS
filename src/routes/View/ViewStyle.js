@@ -9,6 +9,13 @@ export const Container = styled.div({
 });
 
 export const ViewWrap = styled.div({
+  overflowY: "scroll",
+  msOverflowStyle: "none" /* Internet Explorer */,
+  scrollbarWidth: "none" /* Firefox */,
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+
   marginTop: 10,
   borderTop: "2px solid #363636",
   ...flex("row", "center", "center"),
