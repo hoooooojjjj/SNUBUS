@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BusInfo, Container, DataTm, UpdateBtn, UpdateWrap } from "./MapStyle";
+import {
+  BusInfo,
+  Container,
+  DataTm,
+  MapHeader,
+  UpdateBtn,
+  UpdateWrap,
+} from "./MapStyle";
 import { isMapPrintContext } from "../../../../App";
 import { ViewContext } from "../ViewContextProvider";
 import StationInfoModal from "./StationInfoModal/StationInfoModal";
@@ -157,35 +164,37 @@ function Map({ mutation, bus_stationData, isBusInfoUpdated }) {
 
   return (
     <Container isInfoWindowVisible={isInfoWindowVisible}>
-      {isMapPrint ? (
-        <UpdateWrap>
-          {" "}
-          <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
-          <UpdateBtn
-            isBusInfoUpdated={isBusInfoUpdated}
-            onClick={() => {
-              // 클릭하면 버스 관련 정보 요청
-              mutation.mutate();
-              // 현재 위치 다시 가져오기
-              getCurrentPosition();
-              // 제공 시간 계산
-              calculateAvgDataTm();
-            }}
-          >
-            <RedoOutlined />
-          </UpdateBtn>
-        </UpdateWrap>
-      ) : (
-        <></>
-      )}
-      {clickedBusInfo.vehId && isBusInfoVisible ? (
-        <BusInfo>
-          차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
-          {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
-        </BusInfo>
-      ) : (
-        <></>
-      )}
+      <MapHeader className="map-header">
+        {isMapPrint ? (
+          <UpdateWrap>
+            {" "}
+            <DataTm>데이터 제공 시간 : {dataTm}</DataTm>
+            <UpdateBtn
+              isBusInfoUpdated={isBusInfoUpdated}
+              onClick={() => {
+                // 클릭하면 버스 관련 정보 요청
+                mutation.mutate();
+                // 현재 위치 다시 가져오기
+                getCurrentPosition();
+                // 제공 시간 계산
+                calculateAvgDataTm();
+              }}
+            >
+              <RedoOutlined />
+            </UpdateBtn>
+          </UpdateWrap>
+        ) : (
+          <></>
+        )}
+        {clickedBusInfo.vehId && isBusInfoVisible ? (
+          <BusInfo>
+            차량 정보 = 버스 ID : {clickedBusInfo.vehId} | 차량 번호 :{" "}
+            {clickedBusInfo.plainNo} | 차량 유형 : {clickedBusInfo.busType}
+          </BusInfo>
+        ) : (
+          <></>
+        )}
+      </MapHeader>
       {clickedStationInfo.length > 0 &&
       !window.matchMedia("(max-width: 550px)").matches ? (
         <StationInfoModal curStation={clickedStationInfo} />
