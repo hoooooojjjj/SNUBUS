@@ -18,6 +18,7 @@ import {
   Wrapper,
   Words,
   Span,
+  ParallaxContainer,
 } from "./ParallaxStyle";
 import { Overlay } from "../../../Main/MainStyle";
 import { useNavigate } from "react-router-dom";
@@ -251,7 +252,7 @@ const Scene6 = () => {
 // Parallax 컴포넌트(Intro 컴포넌트 하위)
 const Parallax = () => {
   return (
-    <>
+    <ParallaxContainer>
       <Overlay />
       <Scene1 />
       <Scene2 />
@@ -259,7 +260,7 @@ const Parallax = () => {
       <Scene4 />
       <Scene5 />
       <Scene6 />
-    </>
+    </ParallaxContainer>
   );
 };
 

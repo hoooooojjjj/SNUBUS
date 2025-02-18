@@ -6,24 +6,39 @@ import {
 } from "../../../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
-export const Scene = styled.section`
-  height: 100dvh;
+export const ParallaxContainer = styled.div`
   width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  // scroll-snap-points-y: repeat(100vh);
+  margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+`;
+
+export const Scene = styled.section`
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
   overflow: hidden;
-  background-size: cover;
-  background-attachment: fixed;
   background-color: rgba(17, 24, 39, 0.98);
-  @media (max-width: 550px) {
-    background-attachment: scroll;
-  }
-  ::before {
-    position: absolute;
-    content: "";
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 600dvh;
-  }
+  margin: 0 auto;
+  position: relative;
 `;
 
 export const Header = styled.header`
