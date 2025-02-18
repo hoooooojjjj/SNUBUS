@@ -15,7 +15,7 @@ export const Article = styled.article({
   backdropFilter: "blur(16px)",
   borderRadius: "16px",
   padding: "30px",
-
+  minHeight: "80dvh",
   "@media(max-width: 550px)": {
     width: "100%",
     height: "85%",

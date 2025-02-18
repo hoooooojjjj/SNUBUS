@@ -20,15 +20,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftRight, ArrowRightFromLine } from "lucide-react";
 
-/* - Articles 컴포넌트 (Headers 컴포넌트  하위)
-    - 이 컴포넌트가 하는 일
-        1. 해당 버스 이름 헤더 렌더링
-            1. Component 기능으로 분리 →  ArticleHeader 컴포넌트
-        2. 해당 버스 노선들 전처리 후 렌더링
-            1. Component 기능으로 분리 →  BusRouteList 컴포넌트
-        3. 해당 버스 노선 선택할 수 있는 슬라이드 렌더링
-            1. Component 기능으로 분리 →  Slide 컴포넌트 */
-
 // ArticleHeader 컴포넌트
 function ArticleHeader({ selectedBus }) {
   return (

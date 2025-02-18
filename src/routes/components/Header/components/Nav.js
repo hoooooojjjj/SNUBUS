@@ -3,16 +3,6 @@ import { Li, BusTypeDropDown, BusTypeDropDownWrap, Ul } from "./NavStyle";
 import { imgNumContext } from "../../../Main/Main";
 import { useNavigate } from "react-router-dom";
 
-/* - Navigation 컴포넌트 (Headers 컴포넌트 하위)
-    1. 이 컴포넌트가 하는 일
-        1. isMain props로 메인 페이지인지 아닌지 판단하여 버스 종류 드롭다운 메뉴 렌더링
-            1. Component 기능으로 분리 →  DropDown 컴포넌트
-        2. 버스 종류 클릭 시 드롭다운 메뉴 표시 및 버스 종류 선택 시 배경 이미지 변경
-            1. Component 기능으로 분리 →  DropDownList 컴포넌트
-        3. 소개, 문의 버튼 렌더링, 소개, 문의 버튼 클릭 시 각 페이지로 이동
-            1. Component 기능으로 분리 →  NavLi 컴포넌트
-*/
-
 const busType = [
   { key: "0", label: "지선 버스" },
   { key: "1", label: "마을 버스" },

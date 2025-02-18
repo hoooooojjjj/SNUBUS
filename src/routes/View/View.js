@@ -10,21 +10,6 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import ViewContextProvider from "./components/ViewContextProvider";
 import MapAndStationLine from "./components/MapAndStationLine";
 
-/* - View 컴포넌트
-    - 이 컴포넌트가 하는 일 나열
-        1. 현재 라우트에 따라 버스 분류해서 현재 버스 노선 정보 반환
-            1. Hooks 기능으로 분리 → useBusClassification() 커스텀 훅으로 분리
-        2. 마운트 시 버스/정류장 데이터 fetching 후 redux에 저장
-            1. Hooks 기능으로 분리 → useBSQuery() 커스텀 훅으로 분리
-        3. 카카오맵이 그려지기 전에는 Loading 컴포넌트 렌더링
-            1. Component 기능으로 분리 →  Loading 컴포넌트
-        4. 버스 정류장 좌표, InfoWindow 열고 닫는 state, 클릭한 정류장의 도착 정보 state, 폴리라인 끄고 키는 state를 관리하는 컨텍스트 프로바이더
-            1. Component 기능으로 분리 →  ViewContextProvider 컴포넌트
-        5. 지도와 정류장 라인을 렌더링 및 mutation 이벤트
-            1. Component 기능으로 분리 →  MapAndStationLine 컴포넌트
-                1. 업데이트 버튼 클릭 시 버스/정류장 데이터 mutate 후 redux에 저장
-                    1. Hooks 기능으로 분리 → useBSMutation() 커스텀 훅으로 분리*/
-
 // 버스 분류하는 커스텀 훅 -> 현재 라우트에 따라 버스 분류해서 현재 버스 노선 정보 반환
 const useBusClassification = (id) => {
   // 버스 분류 state

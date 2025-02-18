@@ -16,7 +16,7 @@ export const Header = styled.section({
   height: 72,
 
   "@media(max-width: 550px)": {
-    height: 36,
+    height: 50,
   },
   ...flex("row", "normal", "center"),
 });

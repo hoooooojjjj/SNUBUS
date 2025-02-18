@@ -54,7 +54,6 @@ export const Overlay = styled.div`
 // main wrap
 export const MainWrap = styled.main({
   position: "relative",
-  // width: "100%",
   animation: `${fadeIn} 1s ease-out`,
   ...flex("column", "flex-start", "center"),
   padding: "0 20px",
