@@ -54,11 +54,7 @@ function Scene1() {
         <Scene1HeaderH2>
           서울대에서 당신의 이동이 <strong>'더 -'</strong> 하도록
         </Scene1HeaderH2>
-        <Scene1HeaderH2
-          isLast={true}
-          style={{ cursor: "pointer" }}
-          onClick={handleGoMain}
-        >
+        <Scene1HeaderH2 isLast={true} onClick={handleGoMain}>
           Click to Get started
         </Scene1HeaderH2>
       </Header>

@@ -12,6 +12,7 @@ export const Scene = styled.section`
   overflow: hidden;
   background-size: cover;
   background-attachment: fixed;
+  background-color: rgba(17, 24, 39, 0.98);
   @media (max-width: 550px) {
     background-attachment: scroll;
   }
@@ -22,49 +23,6 @@ export const Scene = styled.section`
     left: 0px;
     width: 100%;
     height: 600dvh;
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-  &.one {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg1.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short0.webp`});
-    }
-  }
-  &.two {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg0.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short1.webp`});
-    }
-  }
-  &.three {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg2.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short2.webp`});
-    }
-  }
-  &.four {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg3.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short3.webp`});
-    }
-  }
-  &.five {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg4.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short4.webp`});
-    }
-  }
-  &.six {
-    background-image: url(${process.env.PUBLIC_URL + `assets/introImg5.webp`});
-    @media (max-width: 550px) {
-      background-image: url(${process.env.PUBLIC_URL +
-      `assets/introImg_short5.webp`});
-    }
   }
 `;
 
@@ -107,13 +65,16 @@ export const Scene1HeaderH1 = styled.h1`
 `;
 
 export const Scene1HeaderH2 = styled.h2`
+  cursor: pointer;
+  color: ${(props) => (props.isLast ? "rgba(74, 222, 128, 0.9)" : "white")};
   &:hover {
-    color: ${(props) => (props.isLast ? "#0c8ce9" : "white")};
+    transform: ${(props) => (props.isLast ? "scale(1.05)" : "scale(1)")};
+    transition: all 0.3s ease-in-out;
   }
   z-index: 2;
   font-family: "Do hyeon", sans-serif;
   font-size: 2rem;
-  margin-top: 2rem;
+  margin-top: ${(props) => (props.isLast ? "5rem" : "3rem")};
   @media (max-width: 1024px) {
     font-size: 1.8rem;
     margin-top: 1.8rem;
@@ -221,6 +182,9 @@ export const GridItem = styled.div`
 
 export const GridHeader = styled.div`
   font-size: 2.5em;
+  background: linear-gradient(to right, #60a5fa, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   @media (max-width: 1024px) {
     font-size: 1.9em;
   }
@@ -396,4 +360,7 @@ export const Span = styled.span`
   padding-right: 10px;
   color: white;
   animation: ${spin_words} 7s infinite;
+  background: linear-gradient(to right, #60a5fa, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
