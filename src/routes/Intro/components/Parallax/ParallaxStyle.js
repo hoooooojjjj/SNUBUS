@@ -6,6 +6,28 @@ import {
 } from "../../../../util/publicStyleComponents";
 import { keyframes } from "@emotion/react";
 
+export const SceneCommonStyle = styled.div({
+  maxWidth: "70%",
+  padding: "20px",
+  margin: "0 auto",
+  "@media(max-width: 768px)": {
+    maxWidth: "90%",
+    margin: "0",
+    marginRight: "15px",
+  },
+  "@media(max-width: 550px)": {
+    maxWidth: "85%",
+    padding: "10px",
+    margin: "0",
+    marginRight: "15px",
+  },
+
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+});
+
 export const ParallaxContainer = styled.div`
   width: 100%;
   height: 100vh;

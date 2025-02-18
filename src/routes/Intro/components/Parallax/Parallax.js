@@ -14,6 +14,7 @@ import {
   Span,
   ParallaxContainer,
   ScrollIndicator,
+  SceneCommonStyle,
 } from "./ParallaxStyle";
 import { Overlay } from "../../../Main/MainStyle";
 import { useNavigate } from "react-router-dom";
@@ -106,16 +107,6 @@ const Scene2 = () => {
   );
 };
 
-const commonSceneStyle = {
-  maxWidth: "1200px",
-  margin: "0 auto",
-  padding: "20px",
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-};
-
 const Scene3 = () => {
   const sceneRef = useRef(null);
 
@@ -148,7 +139,7 @@ const Scene3 = () => {
 
   return (
     <Scene className="three">
-      <div style={commonSceneStyle} ref={sceneRef}>
+      <SceneCommonStyle ref={sceneRef}>
         <ChatBubble
           speaker="인터뷰어"
           text="안녕하세요! SNUBUS 서비스를 개발하셨다고 들었는데요, 어떻게 시작하게 되셨나요?"
@@ -159,7 +150,7 @@ const Scene3 = () => {
           text="안녕하세요! 서울대학교 캠퍼스가 워낙 넓다 보니, 학생들이 이동에 불편을 겪는다는 이야기를 많이 들었어요. 셔틀버스도 있지만 모든 경로를 커버하지 못하고, 배차 간격도 길어서 불편하다는 의견이 많았죠. 그래서 더 편리한 이동 방법을 고민하다가 SNUBUS를 개발하게 되었습니다."
           isInterviewer={false}
         />
-      </div>
+      </SceneCommonStyle>
       <ScrollIndicator>
         <ChevronsDown size={40} />
       </ScrollIndicator>
@@ -199,7 +190,7 @@ const Scene4 = () => {
 
   return (
     <Scene className="four">
-      <div style={commonSceneStyle} ref={sceneRef}>
+      <SceneCommonStyle ref={sceneRef}>
         <ChatBubble
           speaker="인터뷰어"
           text="그렇군요! SNUBUS는 어떤 기능을 제공하나요?"
@@ -210,7 +201,7 @@ const Scene4 = () => {
           text="SNUBUS는 서울대학교를 지나는 버스들의 실시간 위치, 배차 간격, 정류장 위치, 혼잡도, 경로 등 다양한 정보를 한눈에 확인할 수 있도록 했습니다. 이를 통해 학생들이 더 효율적으로 이동할 수 있도록 도와주고자 합니다."
           isInterviewer={false}
         />
-      </div>
+      </SceneCommonStyle>
       <ScrollIndicator>
         <ChevronsDown size={40} />
       </ScrollIndicator>
@@ -250,7 +241,7 @@ const Scene5 = () => {
 
   return (
     <Scene className="five">
-      <div style={commonSceneStyle} ref={sceneRef}>
+      <SceneCommonStyle ref={sceneRef}>
         <ChatBubble
           speaker="인터뷰어"
           text="정말 유용한 서비스네요! 개발하면서 재미있는 에피소드가 있었나요?"
@@ -261,7 +252,7 @@ const Scene5 = () => {
           text="처음에는 버스 노선을 저도 잘 알지 못했는데, 개발하면서 모든 버스 노선을 외워버렸습니다;;"
           isInterviewer={false}
         />
-      </div>
+      </SceneCommonStyle>
       <ScrollIndicator>
         <ChevronsDown size={40} />
       </ScrollIndicator>
@@ -301,7 +292,7 @@ const Scene6 = () => {
 
   return (
     <Scene className="six">
-      <div style={commonSceneStyle} ref={sceneRef}>
+      <SceneCommonStyle ref={sceneRef}>
         <ChatBubble
           speaker="인터뷰어"
           text="앞으로의 계획은 어떻게 되시나요?"
@@ -312,7 +303,7 @@ const Scene6 = () => {
           text="아직 완전히 완성된 것은 아니지만, 지속적으로 개발하여 더 많은 학생들이 편리하게 사용할 수 있도록 노력하고 있습니다. 사용자 피드백을 반영하여 기능을 개선하고, 더 다양한 정보를 제공할 수 있도록 업데이트를 진행할 예정입니다."
           isInterviewer={false}
         />
-      </div>
+      </SceneCommonStyle>
     </Scene>
   );
 };

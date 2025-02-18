@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LoadingContainer, LoadingWrap, LogoStyle, TMI } from "./LoadingStyle";
 
 const SNUTMI = [
@@ -16,6 +16,16 @@ function Loading({ display }) {
   const [randomIndex, setRandomIndex] = useState(
     Math.floor(Math.random() * SNUTMI.length)
   );
+
+  // 로딩 컴포넌트가 마운트될 때 body 스크롤 방지
+  useEffect(() => {
+    if (display === "flex") {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [display]);
 
   return (
     <LoadingContainer display={display}>
