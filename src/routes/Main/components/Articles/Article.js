@@ -98,13 +98,7 @@ function Slide({ info, selectedBus, setSelectedBus }) {
       >
         {info.buslist.map((bus) => (
           <SlideItem key={bus.num}>
-            <SlideText
-              onClick={() => onBusNumClick(bus)}
-              style={{
-                fontWeight: selectedBus.num === bus.num ? "bold" : "normal",
-                color: selectedBus.num === bus.num ? "#007bff" : "inherit",
-              }}
-            >
+            <SlideText onClick={() => onBusNumClick(bus)}>
               {bus.num}번 버스
             </SlideText>
           </SlideItem>
